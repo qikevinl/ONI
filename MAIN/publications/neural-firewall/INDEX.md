@@ -39,7 +39,7 @@ By treating the neural gateway as an untrusted boundary — regardless of whethe
 
 | Type | Document | Description |
 |------|----------|-------------|
-| Medium | [Medium-Neural_Firewall.md](Medium-Neural_Firewall.md) | Accessible overview of zero-trust neural security |
+| Blog | [Blog-Neural_Firewall.md](Blog-Neural_Firewall.md) | Accessible overview of zero-trust neural security ([Original on Medium](https://medium.com/@qikevinl/your-brain-needs-a-firewall-heres-what-it-would-look-like-87b46d292219)) |
 | TechDoc | [TechDoc-Neural_Firewall_Architecture.md](TechDoc-Neural_Firewall_Architecture.md) | Complete architecture specification and threat model |
 
 ---

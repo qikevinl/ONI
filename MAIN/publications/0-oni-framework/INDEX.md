@@ -42,7 +42,7 @@ By providing a common vocabulary across neuroscience, security engineering, and 
 
 | Type | Document | Description |
 |------|----------|-------------|
-| Medium | [Medium-ONI_Framework.md](Medium-ONI_Framework.md) | Accessible introduction with real-world context |
+| Blog | [Blog-ONI_Framework.md](Blog-ONI_Framework.md) | Accessible introduction with real-world context ([Original on Medium](https://medium.com/@qikevinl/the-osi-of-mind-securing-human-ai-interfaces-3ca381b95c29)) |
 | TechDoc | [TechDoc-ONI_Framework.md](TechDoc-ONI_Framework.md) | Complete layer specifications and academic methodology |
 
 ---

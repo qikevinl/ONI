@@ -38,7 +38,7 @@ For BCI security, this invariant establishes expectations for legitimate signals
 
 | Type | Document | Description |
 |------|----------|-------------|
-| Medium | [Medium-Scale_Frequency.md](Medium-Scale_Frequency.md) | Accessible introduction to neural scaling laws |
+| Blog | [Blog-Scale_Frequency.md](Blog-Scale_Frequency.md) | Accessible introduction to neural scaling laws ([Original on Medium](https://medium.com/@qikevinl/the-hidden-equation-your-brain-runs-on-and-why-it-matters-5be5598eac1f)) |
 | TechDoc | [TechDoc-Scale_Frequency.md](TechDoc-Scale_Frequency.md) | Mathematical derivation and empirical validation |
 
 ---

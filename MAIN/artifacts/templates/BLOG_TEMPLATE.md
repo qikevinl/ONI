@@ -1,8 +1,8 @@
-# Medium Post Template for ONI Framework
+# Blog Post Template for ONI Framework
 
 ## Usage Instructions
 
-Use this template for all Medium-style posts in the ONI Framework series. This format is optimized for web readability, engagement, and maximum audience reach.
+Use this template for all blog posts in the ONI Framework series. This format is optimized for web readability, engagement, and maximum audience reach. Posts originally published on Medium should include the original Medium URL in the front matter.
 
 ---
 
@@ -13,7 +13,7 @@ Use this template for all Medium-style posts in the ONI Framework series. This f
 title: "[Compelling Title - Use Questions or Bold Statements]"
 subtitle: "[Expand the hook - make readers curious]"
 date_posted: [Publication date in RFC 2822 format, e.g., Fri, 16 Jan 2026 23:37:28 GMT]
-url: [Medium URL after publishing]
+original_url: [Original Medium URL if applicable]
 tags: ['tag1', 'tag2', 'tag3', 'tag4', 'tag5']
 ---
 

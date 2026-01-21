@@ -40,7 +40,7 @@ The goal is proactive defense: by understanding potential attack patterns before
 
 | Type | Document | Description |
 |------|----------|-------------|
-| Medium | [Medium-Neural_Ransomware.md](Medium-Neural_Ransomware.md) | Accessible threat landscape overview |
+| Blog | [Blog-Neural_Ransomware.md](Blog-Neural_Ransomware.md) | Accessible threat landscape overview ([Original on Medium](https://medium.com/@qikevinl/neural-ransomware-isnt-science-fiction-e3f9efe4ffb1)) |
 | TechDoc | [TechDoc-Neural_Ransomware.md](TechDoc-Neural_Ransomware.md) | Detailed attack taxonomy and defense analysis |
 
 ---

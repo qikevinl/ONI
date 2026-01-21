@@ -54,21 +54,21 @@ The **Organic Neural Interface (ONI) Framework** extends the OSI networking mode
 
 | Topic | Purpose | Documents | Status |
 |-------|---------|-----------|--------|
-| [ONI Framework](MAIN/publications/0-oni-framework/INDEX.md) | 14-layer biological extension of OSI model | [Medium](MAIN/publications/0-oni-framework/Medium-ONI_Framework.md) · [TechDoc](MAIN/publications/0-oni-framework/TechDoc-ONI_Framework.md) | Published |
+| [ONI Framework](publications/0-oni-framework/INDEX.md) | 14-layer biological extension of OSI model | [Blog](publications/0-oni-framework/Blog-ONI_Framework.md) · [TechDoc](publications/0-oni-framework/TechDoc-ONI_Framework.md) | Published |
 
 ### Signal Processing
 
 | Topic | Purpose | Documents | Status |
 |-------|---------|-----------|--------|
-| [Coherence Metric](MAIN/publications/coherence-metric/INDEX.md) | Mathematical framework for signal trust scoring | [Medium](MAIN/publications/coherence-metric/Medium-Coherence_Metric.md) · [TechDoc](MAIN/publications/coherence-metric/TechDoc-Coherence_Metric_Detailed.md) | Published |
-| [Scale-Frequency](MAIN/publications/scale-frequency/INDEX.md) | Cross-scale frequency invariants (f × S ≈ k) | [Medium](MAIN/publications/scale-frequency/Medium-Scale_Frequency.md) · [TechDoc](MAIN/publications/scale-frequency/TechDoc-Scale_Frequency.md) | Published |
+| [Coherence Metric](publications/coherence-metric/INDEX.md) | Mathematical framework for signal trust scoring | [Blog](publications/coherence-metric/Blog-Coherence_Metric.md) · [TechDoc](publications/coherence-metric/TechDoc-Coherence_Metric_Detailed.md) | Published |
+| [Scale-Frequency](publications/scale-frequency/INDEX.md) | Cross-scale frequency invariants (f × S ≈ k) | [Blog](publications/scale-frequency/Blog-Scale_Frequency.md) · [TechDoc](publications/scale-frequency/TechDoc-Scale_Frequency.md) | Published |
 
 ### Security Architecture
 
 | Topic | Purpose | Documents | Status |
 |-------|---------|-----------|--------|
-| [Neural Firewall](MAIN/publications/neural-firewall/INDEX.md) | Zero-trust security at the neural gateway (L8) | [Medium](MAIN/publications/neural-firewall/Medium-Neural_Firewall.md) · [TechDoc](MAIN/publications/neural-firewall/TechDoc-Neural_Firewall_Architecture.md) | Published |
-| [Neural Ransomware](MAIN/publications/neural-ransomware/INDEX.md) | Threat analysis and defensive architectures | [Medium](MAIN/publications/neural-ransomware/Medium-Neural_Ransomware.md) · [TechDoc](MAIN/publications/neural-ransomware/TechDoc-Neural_Ransomware.md) | Published |
+| [Neural Firewall](publications/neural-firewall/INDEX.md) | Zero-trust security at the neural gateway (L8) | [Blog](publications/neural-firewall/Blog-Neural_Firewall.md) · [TechDoc](publications/neural-firewall/TechDoc-Neural_Firewall_Architecture.md) | Published |
+| [Neural Ransomware](publications/neural-ransomware/INDEX.md) | Threat analysis and defensive architectures | [Blog](publications/neural-ransomware/Blog-Neural_Ransomware.md) · [TechDoc](publications/neural-ransomware/TechDoc-Neural_Ransomware.md) | Published |
 
 ---
 
@@ -135,14 +135,14 @@ mkdir MAIN/publications/[topic-name]/
 ```
 
 ### 2. Create Topic INDEX.md
-Use the [INDEX template](MAIN/artifacts/templates/INDEX_TEMPLATE.md) with:
+Use the [INDEX template](artifacts/templates/INDEX_TEMPLATE.md) with:
 - Topic summary
 - Dependency list (what this topic builds on)
 - Document inventory
 - Related topics
 
 ### 3. Add Publications
-- `Medium-[Topic_Name].md` — Accessible narrative
+- `Blog-[Topic_Name].md` — Accessible narrative (includes original Medium link)
 - `TechDoc-[Topic_Name].md` — Academic depth
 
 ### 4. Update This Wiki
@@ -158,17 +158,17 @@ Add keywords for research monitoring integration.
 ## Resources
 
 ### Templates
-- [TechDoc Template (APA)](MAIN/artifacts/templates/TECHDOC_TEMPLATE_APA.md)
-- [Medium Template](MAIN/artifacts/templates/MEDIUM_TEMPLATE.md)
-- [Topic INDEX Template](MAIN/artifacts/templates/INDEX_TEMPLATE.md)
+- [TechDoc Template (APA)](artifacts/templates/TECHDOC_TEMPLATE_APA.md)
+- [Blog Template](artifacts/templates/BLOG_TEMPLATE.md)
+- [Topic INDEX Template](artifacts/templates/INDEX_TEMPLATE.md)
 
 ### Processes
-- [Publishing Instructions](MAIN/artifacts/processes/PUBLISHING_INSTRUCTIONS.md)
-- [Process Improvements](MAIN/artifacts/processes/PROCESS_IMPROVEMENTS.md)
+- [Publishing Instructions](artifacts/processes/PUBLISHING_INSTRUCTIONS.md)
+- [Process Improvements](artifacts/processes/PROCESS_IMPROVEMENTS.md)
 
 ### Research Pipeline
-- [Keywords Registry](MAIN/artifacts/cicd-pipeline/continuous-research-delivery/scripts/keywords.json)
-- [Research Monitor](MAIN/artifacts/cicd-pipeline/continuous-research-delivery/scripts/research_monitor.py)
+- [Keywords Registry](artifacts/cicd-pipeline/continuous-research-delivery/scripts/keywords.json)
+- [Research Monitor](artifacts/cicd-pipeline/continuous-research-delivery/scripts/research_monitor.py)
 
 ---
 
@@ -178,7 +178,7 @@ Add keywords for research monitoring integration.
 |--------|-------|
 | Total Topics | 5 |
 | Published Documents | 10 |
-| Medium Posts | 5 |
+| Blog Posts | 5 |
 | Technical Documents | 5 |
 | Planned Topics | 5 |
 
@@ -186,13 +186,13 @@ Add keywords for research monitoring integration.
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for collaboration guidelines. The ONI Framework welcomes contributions from neuroscience, security, hardware, and ethics disciplines.
+See [CONTRIBUTING.md](../CONTRIBUTING.md) for collaboration guidelines. The ONI Framework welcomes contributions from neuroscience, security, hardware, and ethics disciplines.
 
 ---
 
 ## License
 
-Apache 2.0 — See [LICENSE](LICENSE)
+Apache 2.0 — See [LICENSE](../LICENSE)
 
 ---
 

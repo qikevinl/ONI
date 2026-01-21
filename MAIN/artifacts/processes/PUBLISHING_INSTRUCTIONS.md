@@ -23,7 +23,7 @@ ONI/
 └── MAIN/
     ├── publications/                   # CONTENT ONLY
     │   ├── 0-oni-framework/            # Base/foundational content (sorted first)
-    │   │   ├── Medium-ONI_Framework.md
+    │   │   ├── Blog-ONI_Framework.md
     │   │   └── TechDoc-ONI_Framework.md
     │   ├── coherence-metric/
     │   ├── neural-firewall/
@@ -33,7 +33,7 @@ ONI/
     └── artifacts/                      # NON-CONTENT (infrastructure)
         ├── templates/                  # Formatting templates
         │   ├── TECHDOC_TEMPLATE_APA.md
-        │   └── MEDIUM_TEMPLATE.md
+        │   └── BLOG_TEMPLATE.md
         │
         ├── processes/                  # Workflow documentation
         │   ├── PUBLISHING_INSTRUCTIONS.md  # This file
@@ -55,8 +55,8 @@ ONI/
 | Folder | Purpose | What Goes Here |
 |--------|---------|----------------|
 | `publications/0-oni-framework/` | **Base content** | Foundational ONI Framework publications |
-| `publications/` | **Content only** | Medium posts, technical documents |
-| `artifacts/templates/` | Formatting templates | APA template, Medium template |
+| `publications/` | **Content only** | Blog posts, technical documents |
+| `artifacts/templates/` | Formatting templates | APA template, Blog template |
 | `artifacts/processes/` | Workflow documentation | Publishing instructions, improvements |
 | `artifacts/cicd-pipeline/` | Research pipeline | Incoming papers, processed, scripts, keywords |
 
@@ -67,7 +67,7 @@ ONI/
 ### Publications (Content)
 | Type | Format | Example |
 |------|--------|---------|
-| Medium Posts | `Medium-[Topic_Name].md` | `Medium-Coherence_Metric.md` |
+| Blog Posts | `Blog-[Topic_Name].md` | `Blog-Coherence_Metric.md` |
 | Technical Documents | `TechDoc-[Topic_Name].md` | `TechDoc-Neural_Ransomware.md` |
 | Detailed TechDocs | `TechDoc-[Topic_Name]_Detailed.md` | `TechDoc-Coherence_Metric_Detailed.md` |
 
@@ -75,7 +75,7 @@ ONI/
 | Type | Format | Example |
 |------|--------|---------|
 | TechDoc Templates | `[TYPE]_TEMPLATE_[FORMAT].md` | `TECHDOC_TEMPLATE_APA.md` |
-| Post Templates | `[TYPE]_TEMPLATE.md` | `MEDIUM_TEMPLATE.md` |
+| Post Templates | `[TYPE]_TEMPLATE.md` | `BLOG_TEMPLATE.md` |
 
 ### CICD Research
 | Type | Format | Example |
@@ -92,9 +92,9 @@ ONI/
 
 ## Content Types
 
-### 1. Medium Posts (`Medium-*.md`)
+### 1. Blog Posts (`Blog-*.md`)
 **Location:** `MAIN/publications/[topic]/`
-**Template:** `MAIN/artifacts/templates/MEDIUM_TEMPLATE.md`
+**Template:** `MAIN/artifacts/templates/BLOG_TEMPLATE.md`
 
 **Characteristics:**
 - Conversational tone
@@ -108,7 +108,7 @@ ONI/
 ---
 title: "Article Title"
 date_posted: [Publication date in RFC 2822 format]
-url: [Medium URL if published]
+original_url: [Original Medium URL if applicable]
 tags: ['tag1', 'tag2', 'tag3']
 ---
 ```
@@ -121,7 +121,7 @@ tags: ['tag1', 'tag2', 'tag3']
 *Originally published on [Medium](URL) on [Month Day, Year] at [HH:MM:SS GMT]*
 ```
 
-**Note:** Use `date_posted` (not `date`) in front matter. Use `Sub-Tags:` (not `Tags:`) for the hashtag line at the bottom.
+**Note:** Use `date_posted` (not `date`) in front matter. Use `Sub-Tags:` (not `Tags:`) for the hashtag line at the bottom. Include original Medium URL if the post was originally published there.
 
 ### 2. Technical Documents (`*_TechDoc.md`)
 **Location:** `MAIN/publications/[topic]/`
@@ -207,8 +207,8 @@ When extracting content from a new source:
 
 ### Step 2: Formatting
 
-**For Medium Posts:**
-- Reference: `MAIN/artifacts/templates/MEDIUM_TEMPLATE.md`
+**For Blog Posts:**
+- Reference: `MAIN/artifacts/templates/BLOG_TEMPLATE.md`
 
 **For Technical Documents:**
 - Reference: `MAIN/artifacts/templates/TECHDOC_TEMPLATE_APA.md`
@@ -236,7 +236,7 @@ Before committing:
    - Scripts → `artifacts/cicd-pipeline/continuous-research-delivery/scripts/`
 
 2. **Verify file naming:**
-   - Medium files: `Medium-[Topic].md`
+   - Blog files: `Blog-[Topic].md`
    - TechDocs: `TechDoc-[Topic].md`
 
 3. **Check formatting consistency:**
@@ -309,7 +309,7 @@ python research_monitor.py --days 7 --sources all
 ### Adding a New Topic
 
 1. Create folder: `MAIN/publications/[topic-name]/`
-2. Add Medium post: `Medium-[Topic_Name].md`
+2. Add blog post: `Blog-[Topic_Name].md` (include original Medium URL if applicable)
 3. Add technical document: `TechDoc-[Topic_Name].md`
 4. **Extract keywords and update keywords.json**
 5. Update README.md with new links
@@ -336,9 +336,9 @@ python research_monitor.py --days 7 --sources all
 
 - [ ] Content extracted and cleaned
 - [ ] Placed in correct folder (content only in publications/)
-- [ ] File named correctly (`Medium-*.md` or `TechDoc-*.md`)
-- [ ] Front matter/metadata complete (date_posted, not date)
-- [ ] Footer complete (Sub-Tags, Originally published with datetime)
+- [ ] File named correctly (`Blog-*.md` or `TechDoc-*.md`)
+- [ ] Front matter/metadata complete (date_posted, original_url if applicable)
+- [ ] Footer complete (Sub-Tags, Originally published with datetime and link)
 - [ ] Formatting consistent with existing publications
 - [ ] Tables numbered with bold numbers, italic titles
 - [ ] References in APA format (TechDocs only)
@@ -349,6 +349,6 @@ python research_monitor.py --days 7 --sources all
 
 ---
 
-*Instructions Version: 3.0*
+*Instructions Version: 3.1*
 *Last Updated: January 2026*
 *Series: ONI Framework Publications*

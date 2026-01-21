@@ -160,7 +160,7 @@ Signal validation mathematics, trust scoring algorithms, and biological plausibi
 
 | Document | Summary |
 |----------|----------|
-| [Medium-Coherence_Metric](MAIN/publications/coherence-metric/Medium-Coherence_Metric.md) | *Inside the math that could protect your mind from neural hackers.* |
+| [Blog-Coherence_Metric](MAIN/publications/coherence-metric/Blog-Coherence_Metric.md) | *Inside the math that could protect your mind from neural hackers.* |
 | [TechDoc-Coherence_Metric_Detailed](MAIN/publications/coherence-metric/TechDoc-Coherence_Metric_Detailed.md) | *A Mathematical Framework for Quantifying Trustworthiness.* |
 
 ### 🛡️ Neural Firewall — [INDEX](MAIN/publications/neural-firewall/INDEX.md)
@@ -169,7 +169,7 @@ Hardware and software firewall design for neural interfaces, signal filtering, a
 
 | Document | Summary |
 |----------|----------|
-| [Medium-Neural_Firewall](MAIN/publications/neural-firewall/Medium-Neural_Firewall.md) | *The same security principles that protect your computer will soon need to protect your mind.* |
+| [Blog-Neural_Firewall](MAIN/publications/neural-firewall/Blog-Neural_Firewall.md) | *The same security principles that protect your computer will soon need to protect your mind.* |
 | [TechDoc-Neural_Firewall_Architecture](MAIN/publications/neural-firewall/TechDoc-Neural_Firewall_Architecture.md) | *A Zero-Trust Security Model for Neural Interfaces.* |
 
 ### 🔓 Neural Ransomware — [INDEX](MAIN/publications/neural-ransomware/INDEX.md)
@@ -178,7 +178,7 @@ Threat analysis, attack vectors, kill chains, and defensive architectures.
 
 | Document | Summary |
 |----------|----------|
-| [Medium-Neural_Ransomware](MAIN/publications/neural-ransomware/Medium-Neural_Ransomware.md) | *The technical threat model for holding a brain implant hostage.* |
+| [Blog-Neural_Ransomware](MAIN/publications/neural-ransomware/Blog-Neural_Ransomware.md) | *The technical threat model for holding a brain implant hostage.* |
 | [TechDoc-Neural_Ransomware](MAIN/publications/neural-ransomware/TechDoc-Neural_Ransomware.md) | *Attack Vectors and Defensive Architectures for Brain-Computer Interfaces.* |
 
 ### 🏗️ ONI Framework (Base) — [INDEX](MAIN/publications/0-oni-framework/INDEX.md)
@@ -187,7 +187,7 @@ Core ONI architecture, 14-layer model extending OSI into biological territory. *
 
 | Document | Summary |
 |----------|----------|
-| [Medium-ONI_Framework](MAIN/publications/0-oni-framework/Medium-ONI_Framework.md) | *If you've worked in IT, you know the OSI model.* |
+| [Blog-ONI_Framework](MAIN/publications/0-oni-framework/Blog-ONI_Framework.md) | *If you've worked in IT, you know the OSI model.* |
 | [TechDoc-ONI_Framework](MAIN/publications/0-oni-framework/TechDoc-ONI_Framework.md) | *A Unified Neuro-Computational Stack for Secure Bio-Digital Integration.* |
 
 ### 🔬 Scale-Frequency — [INDEX](MAIN/publications/scale-frequency/INDEX.md)
@@ -196,7 +196,7 @@ Cross-scale neural patterns, frequency invariants, and information compression.
 
 | Document | Summary |
 |----------|----------|
-| [Medium-Scale_Frequency](MAIN/publications/scale-frequency/Medium-Scale_Frequency.md) | *From millisecond spikes to lifetime memories.* |
+| [Blog-Scale_Frequency](MAIN/publications/scale-frequency/Blog-Scale_Frequency.md) | *From millisecond spikes to lifetime memories.* |
 | [TechDoc-Scale_Frequency](MAIN/publications/scale-frequency/TechDoc-Scale_Frequency.md) | *Mathematical Foundations for Hierarchical Neural Processing in the ONI Framework.* |
 
 ---

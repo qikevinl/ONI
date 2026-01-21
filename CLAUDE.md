@@ -11,7 +11,7 @@
 | **ONI Wiki** | `MAIN/ONI_WIKI.md` | **Central hub - start here for navigation** |
 | Topic INDEX Template | `MAIN/artifacts/templates/INDEX_TEMPLATE.md` | Template for topic-level indexes |
 | APA Template | `MAIN/artifacts/templates/TECHDOC_TEMPLATE_APA.md` | Formatting for technical documents |
-| Medium Template | `MAIN/artifacts/templates/MEDIUM_TEMPLATE.md` | Formatting for Medium posts |
+| Blog Template | `MAIN/artifacts/templates/BLOG_TEMPLATE.md` | Formatting for blog posts |
 | Publishing Instructions | `MAIN/artifacts/processes/PUBLISHING_INSTRUCTIONS.md` | Step-by-step publishing workflow |
 | Research Monitor | `MAIN/artifacts/cicd-pipeline/continuous-research-delivery/scripts/research_monitor.py` | Fetch new academic papers |
 | Keywords File | `MAIN/artifacts/cicd-pipeline/continuous-research-delivery/scripts/keywords.json` | Research search terms |
@@ -34,7 +34,7 @@ ONI/
     ├── publications/                   # CONTENT ONLY
     │   ├── 0-oni-framework/            # Base/foundational content (sorted first)
     │   │   ├── INDEX.md                # Topic index (each topic has one)
-    │   │   ├── Medium-ONI_Framework.md
+    │   │   ├── Blog-ONI_Framework.md
     │   │   └── TechDoc-ONI_Framework.md
     │   ├── coherence-metric/
     │   │   └── INDEX.md
@@ -49,7 +49,7 @@ ONI/
         ├── templates/                  # Formatting templates
         │   ├── INDEX_TEMPLATE.md       # Template for topic indexes
         │   ├── TECHDOC_TEMPLATE_APA.md
-        │   └── MEDIUM_TEMPLATE.md
+        │   └── BLOG_TEMPLATE.md
         │
         ├── processes/                  # Workflow documentation
         │   ├── PUBLISHING_INSTRUCTIONS.md
@@ -71,8 +71,8 @@ ONI/
 | Folder | Purpose | What Goes Here |
 |--------|---------|----------------|
 | `publications/0-oni-framework/` | **Base content** | Foundational ONI Framework publications |
-| `publications/` | **Content only** | Medium posts, technical documents |
-| `artifacts/templates/` | Formatting templates | APA template, Medium template |
+| `publications/` | **Content only** | Blog posts, technical documents |
+| `artifacts/templates/` | Formatting templates | APA template, Blog template |
 | `artifacts/processes/` | Workflow documentation | Publishing instructions, improvements |
 | `artifacts/cicd-pipeline/` | Research pipeline | Incoming papers, processed, scripts, keywords |
 
@@ -93,7 +93,7 @@ ONI/
 
 | Type | Format | Example |
 |------|--------|---------|
-| Medium Posts | `Medium-[Topic_Name].md` | `Medium-Coherence_Metric.md` |
+| Blog Posts | `Blog-[Topic_Name].md` | `Blog-Coherence_Metric.md` |
 | Technical Documents | `TechDoc-[Topic_Name].md` | `TechDoc-Neural_Ransomware.md` |
 | Detailed TechDocs | `TechDoc-[Topic_Name]_Detailed.md` | `TechDoc-Coherence_Metric_Detailed.md` |
 | Templates | `[NAME]_TEMPLATE_[TYPE].md` | `TECHDOC_TEMPLATE_APA.md` |
@@ -115,7 +115,7 @@ ONI/
 1. **Read the templates first:**
    ```
    Read: MAIN/artifacts/templates/TECHDOC_TEMPLATE_APA.md
-   Read: MAIN/artifacts/templates/MEDIUM_TEMPLATE.md
+   Read: MAIN/artifacts/templates/BLOG_TEMPLATE.md
    Read: MAIN/artifacts/processes/PUBLISHING_INSTRUCTIONS.md
    ```
 
@@ -125,11 +125,11 @@ ONI/
    ```
 
 3. **Create files with correct naming:**
-   - Medium post: `Medium-[Topic_Name].md`
+   - Blog post: `Blog-[Topic_Name].md` (include original Medium URL if applicable)
    - Technical document: `TechDoc-[Topic_Name].md`
 
 4. **Apply proper formatting:**
-   - Medium: Conversational, storytelling, web-optimized
+   - Blog: Conversational, storytelling, web-optimized
    - TechDoc: APA 7th edition, formal, with references
 
 5. **Extract keywords and update keywords.json** (see below)
@@ -204,7 +204,7 @@ For each topic, maintain this format:
 
 | Document | Summary |
 |----------|----------|
-| [Medium-Topic_Name](MAIN/publications/topic-folder/Medium-Topic_Name.md) | *One-line description* |
+| [Blog-Topic_Name](MAIN/publications/topic-folder/Blog-Topic_Name.md) | *One-line description* |
 | [TechDoc-Topic_Name](MAIN/publications/topic-folder/TechDoc-Topic_Name.md) | *One-line description* |
 ```
 
@@ -273,8 +273,8 @@ Before committing, verify:
 - [ ] Folder naming follows conventions
 - [ ] Content files are in `publications/` only
 - [ ] Non-content files are in `artifacts/` only
-- [ ] Medium posts have proper front matter (title, date_posted, url, tags)
-- [ ] Medium posts have proper footer (Sub-Tags, Originally published with datetime)
+- [ ] Blog posts have proper front matter (title, date_posted, original_url, tags)
+- [ ] Blog posts have proper footer (Sub-Tags, Originally published with datetime and link)
 - [ ] TechDocs follow APA template structure
 - [ ] Tables use bold numbers (`**Table 1**`) and italic titles
 - [ ] References are in APA format
@@ -295,8 +295,8 @@ Before committing, verify:
 2. Extract title, date_posted, URL, tags for front matter
 3. Clean formatting artifacts
 4. Rename bottom `Tags:` section to `Sub-Tags:`
-5. Update "Originally published" line with full datetime
-6. Save as `Medium-[Topic_Name].md` in `publications/[topic]/`
+5. Update "Originally published" line with full datetime and Medium link
+6. Save as `Blog-[Topic_Name].md` in `publications/[topic]/`
 7. **Extract keywords and update keywords.json**
 
 ### Convert Draft to TechDoc
@@ -321,7 +321,7 @@ mkdir MAIN/publications/[topic-name]/
 - Link back to `MAIN/ONI_WIKI.md`
 
 **Step 3: Create publications**
-- `Medium-[Topic_Name].md` — Accessible narrative
+- `Blog-[Topic_Name].md` — Accessible narrative (include original Medium URL if applicable)
 - `TechDoc-[Topic_Name].md` — Academic depth
 
 **Step 4: Extract keywords and update keywords.json**
@@ -355,7 +355,7 @@ mkdir MAIN/publications/[topic-name]/
 
 ### Common Mistakes to Avoid
 1. **Wrong location:** Don't put templates or instructions in `publications/` - use `artifacts/`
-2. **Wrong naming:** Don't use dates in publication filenames (use `Medium-*` or `TechDoc-*` prefix)
+2. **Wrong naming:** Don't use dates in publication filenames (use `Blog-*` or `TechDoc-*` prefix)
 3. **Missing README updates:** Always update README.md after ANY major change (topics, structure, navigation)
 4. **Missing WIKI updates:** Always update ONI_WIKI.md when adding topics or changing dependencies
 5. **Missing keywords:** Always extract and add keywords to keywords.json
@@ -371,6 +371,6 @@ mkdir MAIN/publications/[topic-name]/
 
 ---
 
-*Version: 3.2*
+*Version: 3.3*
 *Last Updated: January 2026*
 *For: Claude AI Assistant*

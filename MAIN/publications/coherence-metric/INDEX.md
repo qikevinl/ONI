@@ -39,7 +39,7 @@ This approach enables the Neural Firewall to make real-time decisions about sign
 
 | Type | Document | Description |
 |------|----------|-------------|
-| Medium | [Medium-Coherence_Metric.md](Medium-Coherence_Metric.md) | Accessible introduction to signal trust scoring |
+| Blog | [Blog-Coherence_Metric.md](Blog-Coherence_Metric.md) | Accessible introduction to signal trust scoring ([Original on Medium](https://medium.com/@qikevinl/your-brain-has-a-spam-filter-can-we-reverse-engineer-it-799da714238e)) |
 | TechDoc | [TechDoc-Coherence_Metric_Detailed.md](TechDoc-Coherence_Metric_Detailed.md) | Full mathematical framework and implementation details |
 
 ---
