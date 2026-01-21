@@ -3,17 +3,22 @@
 ## Current State Analysis
 
 ### What's Working
-1. **Clear folder structure** - Topic-based organization makes content discoverable
-2. **Naming conventions** - Consistent `Medium-*` and `*_Paper.md` patterns
-3. **Templates exist** - APA and Medium templates provide formatting guidance
-4. **README.AI.md** - Claude has clear instructions to follow
+1. **Clear folder structure** - Topic-based organization with `MAIN/publications/` and `MAIN/artifacts/` separation
+2. **Naming conventions** - Consistent `Medium-*` and `TechDoc-*` patterns across all 10 publications
+3. **Templates exist** - APA, Medium (v2), and INDEX templates provide comprehensive formatting guidance
+4. **CLAUDE.md** - Comprehensive AI instructions with file trees, workflows, and quality checklists
+5. **ONI_NEXUS.md** - Cross-reference registry with dependency maps and publication matrix
+6. **Research Pipeline** - Automated research monitoring via `keywords.json` and `research_monitor.py`
+7. **YAML front-matter** - Implemented on all publications with title, date, URL, and tags
 
 ### Gaps Identified
-1. No automated validation of file naming
-2. README.md updates are manual and error-prone
-3. No version tracking for individual documents
-4. Cross-references between papers not systematically maintained
+1. ~~No automated validation of file naming~~ → Checklist documented, automation pending
+2. ~~README.md updates are manual and error-prone~~ → Process documented in CLAUDE.md
+3. ~~No version tracking for individual documents~~ → Partial (front-matter on publications)
+4. ~~Cross-references between papers not systematically maintained~~ → **RESOLVED: ONI_NEXUS.md**
 5. No content calendar or publishing schedule tracking
+6. INDEX.md only deployed to 1 of 5 topic folders
+7. No CHANGELOG.md at repository root
 
 ---
 
@@ -123,15 +128,17 @@ For each document, track:
 ## Template Inventory
 
 ### Current Templates
-| Template | Purpose | Location |
-|----------|---------|----------|
-| PAPER_TEMPLATE_APA.md | Technical papers | MAIN/publications/ |
-| MEDIUM_TEMPLATE.md | Medium posts | MAIN/publications/ |
-| PUBLISHING_INSTRUCTIONS.md | Workflow guide | MAIN/publications/ |
+| Template | Purpose | Location | Status |
+|----------|---------|----------|--------|
+| TECHDOC_TEMPLATE_APA.md | Technical papers | MAIN/artifacts/templates/ | ✓ Active |
+| MEDIUM_TEMPLATE.md | Medium posts (v2) | MAIN/artifacts/templates/ | ✓ Active |
+| medium_template_v2.py | Python template generator | MAIN/artifacts/templates/ | ✓ Active |
+| INDEX_TEMPLATE.md | Topic folder indexes | MAIN/artifacts/templates/ | ✓ Active |
+| PUBLISHING_INSTRUCTIONS.md | Workflow guide | MAIN/artifacts/processes/ | ✓ Active |
 
 ### Proposed Additional Templates
 
-#### 1. Research Note Template
+#### 1. Research Note Template (NOT YET IMPLEMENTED)
 For shorter, less formal research notes that may become papers later:
 
 ```markdown
@@ -159,7 +166,8 @@ For shorter, less formal research notes that may become papers later:
 [Unstructured notes, quotes, references]
 ```
 
-#### 2. Topic Index Template
+#### 2. Topic Index Template — ✓ IMPLEMENTED
+Template exists at `MAIN/artifacts/templates/INDEX_TEMPLATE.md`. Deployed to `0-oni-framework/INDEX.md`.
 For each topic folder, create an INDEX.md:
 
 ```markdown
@@ -216,72 +224,111 @@ After editing any paper:
 
 ---
 
-## Proposed File Tree (Future State)
+## Current File Tree (Implemented)
 
 ```
 ONI/
 ├── README.md
-├── README.AI.md
+├── CLAUDE.md                       # ✓ AI instructions (was README.AI.md)
+├── ONI_NEXUS.md                    # ✓ Cross-reference registry
 ├── ABOUT.md
-├── CHANGELOG.md                    # NEW: Version history
+├── CHANGELOG.md                    # ✗ PENDING
 ├── CONTRIBUTING.md
 ├── LICENSE
 │
 └── MAIN/
+    ├── artifacts/
+    │   ├── templates/
+    │   │   ├── TECHDOC_TEMPLATE_APA.md
+    │   │   ├── MEDIUM_TEMPLATE.md
+    │   │   ├── medium_template_v2.py
+    │   │   └── INDEX_TEMPLATE.md
+    │   ├── processes/
+    │   │   ├── PUBLISHING_INSTRUCTIONS.md
+    │   │   └── PROCESS_IMPROVEMENTS.md   # This file
+    │   └── CICD-Pipeline/
+    │       └── continuous-research-delivery/
+    │           └── scripts/
+    │               ├── keywords.json
+    │               └── research_monitor.py
+    │
     └── publications/
-        ├── PAPER_TEMPLATE_APA.md
-        ├── MEDIUM_TEMPLATE.md
-        ├── PUBLISHING_INSTRUCTIONS.md
-        ├── PROCESS_IMPROVEMENTS.md   # This file
+        ├── 0-oni-framework/
+        │   ├── INDEX.md              # ✓ COMPLETE
+        │   ├── Medium-ONI_Framework.md
+        │   └── TechDoc-ONI_Framework.md
         │
         ├── coherence-metric/
-        │   ├── INDEX.md              # NEW: Topic index
+        │   ├── INDEX.md              # ✗ PENDING
         │   ├── Medium-Coherence_Metric.md
-        │   └── Coherence_Metric_Detailed_Paper.md
+        │   └── TechDoc-Coherence_Metric_Detailed.md
         │
         ├── neural-firewall/
-        │   ├── INDEX.md
+        │   ├── INDEX.md              # ✗ PENDING
         │   ├── Medium-Neural_Firewall.md
-        │   └── Neural_Firewall_Architecture_Paper.md
+        │   └── TechDoc-Neural_Firewall_Architecture.md
         │
         ├── neural-ransomware/
-        │   ├── INDEX.md
+        │   ├── INDEX.md              # ✗ PENDING
         │   ├── Medium-Neural_Ransomware.md
-        │   └── Neural_Ransomware_Paper.md
-        │
-        ├── oni-framework/
-        │   ├── INDEX.md
-        │   ├── Medium-ONI_Framework.md
-        │   └── ONI_Framework_Paper.md
+        │   └── TechDoc-Neural_Ransomware.md
         │
         └── scale-frequency/
-            ├── INDEX.md
+            ├── INDEX.md              # ✗ PENDING
             ├── Medium-Scale_Frequency.md
-            └── Scale_Frequency_Paper.md
+            └── TechDoc-Scale_Frequency.md
 ```
 
 ---
 
 ## Implementation Priority
 
-### Phase 1 (Immediate)
-- [x] Create README.AI.md
-- [x] Create MEDIUM_TEMPLATE.md
-- [x] Standardize file naming
-- [x] Update all file trees in documentation
+### Phase 1 (Immediate) — ✓ COMPLETE
+- [x] Create README.AI.md → **Implemented as CLAUDE.md** (11KB, comprehensive instructions)
+- [x] Create MEDIUM_TEMPLATE.md → **v2 with Python generator**
+- [x] Standardize file naming → **`Medium-*` and `TechDoc-*` patterns**
+- [x] Update all file trees in documentation → **MAIN/publications + artifacts structure**
 
-### Phase 2 (Next Session)
-- [ ] Create CHANGELOG.md
-- [ ] Add INDEX.md to each topic folder
-- [ ] Create Research Note template
+### Phase 2 (Next Session) — 🔄 IN PROGRESS
+- [ ] Create CHANGELOG.md at repository root
+- [x] Create INDEX_TEMPLATE.md → **Implemented**
+- [ ] Deploy INDEX.md to topic folders (1 of 5 complete):
+  - [x] `0-oni-framework/INDEX.md`
+  - [ ] `coherence-metric/INDEX.md`
+  - [ ] `neural-firewall/INDEX.md`
+  - [ ] `neural-ransomware/INDEX.md`
+  - [ ] `scale-frequency/INDEX.md`
+- [ ] Create Research Note template file
 
-### Phase 3 (Future)
-- [ ] Build cross-reference registry
-- [ ] Implement pre-commit checklist as standard practice
-- [ ] Add document metadata to all files
+### Phase 3 (Future) — 🔄 PARTIALLY COMPLETE
+- [x] Build cross-reference registry → **ONI_NEXUS.md with dependency map & matrix**
+- [x] Document pre-commit checklist → **In CLAUDE.md (lines 239-256)**
+- [ ] Automate pre-commit checklist as `.git/hooks/pre-commit`
+- [x] Add document metadata to publications → **YAML front-matter on all 10 publications**
+- [ ] Add consistent metadata to infrastructure files (templates, processes)
 
 ---
 
-*Strategy Version: 1.0*
+## Next Steps (Recommended Actions)
+
+### Immediate Priority
+1. **Create CHANGELOG.md** at repository root with semantic versioning history
+2. **Deploy INDEX.md** to remaining 4 topic folders using INDEX_TEMPLATE.md:
+   - `coherence-metric/`
+   - `neural-firewall/`
+   - `neural-ransomware/`
+   - `scale-frequency/`
+
+### Short-Term
+3. **Create Research Note template** as `MAIN/artifacts/templates/RESEARCH_NOTE_TEMPLATE.md`
+4. **Add YAML metadata** to all infrastructure files in `artifacts/`
+
+### Medium-Term
+5. **Create pre-commit hook** (`.git/hooks/pre-commit`) to automate validation
+6. **Implement content calendar** for publishing schedule tracking
+
+---
+
+*Strategy Version: 2.0*
 *Last Updated: January 21, 2026*
 *Author: Kevin L. Qi with Claude (Anthropic)*

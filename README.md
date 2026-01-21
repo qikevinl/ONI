@@ -8,6 +8,7 @@
 
 ## Table of Contents
 
+- [Navigation](#navigation)
 - [Repository Structure](#repository-structure)
 - [Objective](#objective)
 - [Key Components](#key-components)
@@ -29,13 +30,25 @@
 
 ---
 
+## Navigation
+
+| Start Here | Purpose |
+|------------|---------|
+| **[ONI_NEXUS.md](ONI_NEXUS.md)** | Central hub — dependency map, cross-references, reading order, roadmap |
+| **This README** | Public overview — key concepts, quick reference, document list |
+
+**For deep exploration:** Each topic folder contains an `INDEX.md` with summaries, dependencies, and related topics. Start at the Nexus, then drill into specific topics.
+
+---
+
 ## Repository Structure
 
 All research, publications, and supporting infrastructure live in the `MAIN/` directory. Navigate there to explore the full body of work.
 
 ```
 ONI/
-├── README.md                    # Main documentation
+├── README.md                    # Public overview (you are here)
+├── ONI_NEXUS.md                 # Central hub — start here for navigation
 ├── CLAUDE.md                    # Claude AI instructions
 ├── ABOUT.md                     # Author bio
 ├── CONTRIBUTING.md              # Contribution guidelines
@@ -43,20 +56,17 @@ ONI/
 │
 └── MAIN/
     ├── publications/            # Content only
-    │   ├── 0-oni-framework/     # Base/foundational content (sorted first)
+    │   ├── 0-oni-framework/     # Base/foundational content
+    │   │   └── INDEX.md         # Topic index (each topic has one)
     │   ├── coherence-metric/
     │   ├── neural-firewall/
     │   ├── neural-ransomware/
     │   └── scale-frequency/
     │
     └── artifacts/               # Non-content (infrastructure)
-        ├── templates/           # Formatting templates
+        ├── templates/           # Formatting templates (including INDEX_TEMPLATE.md)
         ├── processes/           # Workflow documentation
         └── cicd-pipeline/       # Research pipeline
-            ├── incoming/        # New discoveries
-            ├── processed/       # Reviewed research
-            └── continuous-research-delivery/
-                └── scripts/     # Automation (research monitor, keywords.json)
 ```
 
 ---
@@ -142,7 +152,9 @@ Physiology-first defense framework with checkpoints:
 
 ## Topics & Documents
 
-### 📊 Coherence Metric
+> **Tip:** For dependency maps and reading order, see [ONI_NEXUS.md](ONI_NEXUS.md). Each topic below also has an INDEX.md with detailed summaries.
+
+### 📊 Coherence Metric — [INDEX](MAIN/publications/coherence-metric/INDEX.md)
 
 Signal validation mathematics, trust scoring algorithms, and biological plausibility checks.
 
@@ -151,7 +163,7 @@ Signal validation mathematics, trust scoring algorithms, and biological plausibi
 | [Medium-Coherence_Metric](MAIN/publications/coherence-metric/Medium-Coherence_Metric.md) | *Inside the math that could protect your mind from neural hackers.* |
 | [TechDoc-Coherence_Metric_Detailed](MAIN/publications/coherence-metric/TechDoc-Coherence_Metric_Detailed.md) | *A Mathematical Framework for Quantifying Trustworthiness.* |
 
-### 🛡️ Neural Firewall
+### 🛡️ Neural Firewall — [INDEX](MAIN/publications/neural-firewall/INDEX.md)
 
 Hardware and software firewall design for neural interfaces, signal filtering, and real-time protection.
 
@@ -160,7 +172,7 @@ Hardware and software firewall design for neural interfaces, signal filtering, a
 | [Medium-Neural_Firewall](MAIN/publications/neural-firewall/Medium-Neural_Firewall.md) | *The same security principles that protect your computer will soon need to protect your mind.* |
 | [TechDoc-Neural_Firewall_Architecture](MAIN/publications/neural-firewall/TechDoc-Neural_Firewall_Architecture.md) | *A Zero-Trust Security Model for Neural Interfaces.* |
 
-### 🔓 Neural Ransomware
+### 🔓 Neural Ransomware — [INDEX](MAIN/publications/neural-ransomware/INDEX.md)
 
 Threat analysis, attack vectors, kill chains, and defensive architectures.
 
@@ -169,7 +181,7 @@ Threat analysis, attack vectors, kill chains, and defensive architectures.
 | [Medium-Neural_Ransomware](MAIN/publications/neural-ransomware/Medium-Neural_Ransomware.md) | *The technical threat model for holding a brain implant hostage.* |
 | [TechDoc-Neural_Ransomware](MAIN/publications/neural-ransomware/TechDoc-Neural_Ransomware.md) | *Attack Vectors and Defensive Architectures for Brain-Computer Interfaces.* |
 
-### 🏗️ ONI Framework (Base)
+### 🏗️ ONI Framework (Base) — [INDEX](MAIN/publications/0-oni-framework/INDEX.md)
 
 Core ONI architecture, 14-layer model extending OSI into biological territory. **This is the foundational content for all other publications.**
 
@@ -178,7 +190,7 @@ Core ONI architecture, 14-layer model extending OSI into biological territory. *
 | [Medium-ONI_Framework](MAIN/publications/0-oni-framework/Medium-ONI_Framework.md) | *If you've worked in IT, you know the OSI model.* |
 | [TechDoc-ONI_Framework](MAIN/publications/0-oni-framework/TechDoc-ONI_Framework.md) | *A Unified Neuro-Computational Stack for Secure Bio-Digital Integration.* |
 
-### 🔬 Scale-Frequency
+### 🔬 Scale-Frequency — [INDEX](MAIN/publications/scale-frequency/INDEX.md)
 
 Cross-scale neural patterns, frequency invariants, and information compression.
 
@@ -217,4 +229,4 @@ Apache License 2.0 - See [LICENSE](LICENSE)
 
 *Auto-published from research pipeline*
 *Last update: 2026-01-21*
-*Documents: 10 | Topics: 5*
+*Documents: 10 | Topics: 5 | Topic Indexes: 5*
