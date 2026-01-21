@@ -1,4 +1,4 @@
-# APA 7th Edition Paper Template for ONI Framework Publications
+# APA 7th Edition TechDoc Template for ONI Framework Publications
 
 ## Usage Instructions
 
@@ -120,7 +120,7 @@ The author wishes to acknowledge the support of colleagues and mentors in the de
 - Use numerals for 10 and above
 - Use numerals with units (e.g., 5 mW, 100 Hz)
 
-### Required Sections for ONI Papers
+### Required Sections for ONI TechDocs
 1. Abstract (with keywords)
 2. Introduction
 3. [Methods/Framework/Analysis sections as appropriate]

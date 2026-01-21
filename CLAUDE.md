@@ -8,7 +8,7 @@
 
 | Resource | Location | Purpose |
 |----------|----------|---------|
-| APA Template | `MAIN/artifacts/templates/PAPER_TEMPLATE_APA.md` | Formatting for technical papers |
+| APA Template | `MAIN/artifacts/templates/TECHDOC_TEMPLATE_APA.md` | Formatting for technical documents |
 | Medium Template | `MAIN/artifacts/templates/MEDIUM_TEMPLATE.md` | Formatting for Medium posts |
 | Publishing Instructions | `MAIN/artifacts/processes/PUBLISHING_INSTRUCTIONS.md` | Step-by-step publishing workflow |
 | Research Monitor | `MAIN/artifacts/scripts/continuous-research-delivery/research_monitor.py` | Fetch new academic papers |
@@ -31,7 +31,7 @@ ONI/
     ├── publications/                   # CONTENT ONLY
     │   ├── 0-oni-framework/            # Base/foundational content (sorted first)
     │   │   ├── Medium-ONI_Framework.md
-    │   │   └── ONI_Framework_Paper.md
+    │   │   └── ONI_Framework_TechDoc.md
     │   ├── coherence-metric/
     │   ├── neural-firewall/
     │   ├── neural-ransomware/
@@ -39,7 +39,7 @@ ONI/
     │
     └── artifacts/                      # NON-CONTENT (infrastructure)
         ├── templates/                  # Formatting templates
-        │   ├── PAPER_TEMPLATE_APA.md
+        │   ├── TECHDOC_TEMPLATE_APA.md
         │   └── MEDIUM_TEMPLATE.md
         │
         ├── processes/                  # Workflow documentation
@@ -63,7 +63,7 @@ ONI/
 | Folder | Purpose | What Goes Here |
 |--------|---------|----------------|
 | `publications/0-oni-framework/` | **Base content** | Foundational ONI Framework publications |
-| `publications/` | **Content only** | Medium posts, technical papers |
+| `publications/` | **Content only** | Medium posts, technical documents |
 | `artifacts/templates/` | Formatting templates | APA template, Medium template |
 | `artifacts/processes/` | Workflow documentation | Publishing instructions, improvements |
 | `artifacts/scripts/` | Automation scripts | Research monitoring, CI/CD pipelines |
@@ -87,9 +87,9 @@ ONI/
 | Type | Format | Example |
 |------|--------|---------|
 | Medium Posts | `Medium-[Topic_Name].md` | `Medium-Coherence_Metric.md` |
-| Technical Papers | `[Topic_Name]_Paper.md` | `Neural_Ransomware_Paper.md` |
-| Detailed Papers | `[Topic_Name]_Detailed_Paper.md` | `Coherence_Metric_Detailed_Paper.md` |
-| Templates | `[NAME]_TEMPLATE_[TYPE].md` | `PAPER_TEMPLATE_APA.md` |
+| Technical Documents | `[Topic_Name]_TechDoc.md` | `Neural_Ransomware_TechDoc.md` |
+| Detailed TechDocs | `[Topic_Name]_Detailed_TechDoc.md` | `Coherence_Metric_Detailed_TechDoc.md` |
+| Templates | `[NAME]_TEMPLATE_[TYPE].md` | `TECHDOC_TEMPLATE_APA.md` |
 | CICD Research | `YYYY-MM-DD_[source]_[title].md` | `2026-01-21_arxiv_neural-security.md` |
 
 ### Topic Name Rules
@@ -107,7 +107,7 @@ ONI/
 
 1. **Read the templates first:**
    ```
-   Read: MAIN/artifacts/templates/PAPER_TEMPLATE_APA.md
+   Read: MAIN/artifacts/templates/TECHDOC_TEMPLATE_APA.md
    Read: MAIN/artifacts/templates/MEDIUM_TEMPLATE.md
    Read: MAIN/artifacts/processes/PUBLISHING_INSTRUCTIONS.md
    ```
@@ -119,11 +119,11 @@ ONI/
 
 3. **Create files with correct naming:**
    - Medium post: `Medium-[Topic_Name].md`
-   - Technical paper: `[Topic_Name]_Paper.md`
+   - Technical document: `[Topic_Name]_TechDoc.md`
 
 4. **Apply proper formatting:**
    - Medium: Conversational, storytelling, web-optimized
-   - Paper: APA 7th edition, formal, with references
+   - TechDoc: APA 7th edition, formal, with references
 
 5. **Extract keywords and update keywords.json** (see below)
 
@@ -192,7 +192,7 @@ For each topic, maintain this format:
 | Document | Summary |
 |----------|----------|
 | [Medium-Topic_Name](MAIN/publications/topic-folder/Medium-Topic_Name.md) | *One-line description* |
-| [Topic_Name Paper](MAIN/publications/topic-folder/Topic_Name_Paper.md) | *One-line description* |
+| [Topic_Name TechDoc](MAIN/publications/topic-folder/Topic_Name_TechDoc.md) | *One-line description* |
 ```
 
 ### Step 3: Update Footer Stats
@@ -210,7 +210,7 @@ Update the document count at the bottom:
 
 ## Standard Acknowledgments
 
-Use this text in all technical papers:
+Use this text in all technical documents:
 
 > The author wishes to acknowledge the support of colleagues and mentors in the development of this work. Initial research validation was conducted through LMArena (LMSYS, 2024-2025), enabling cross-model verification of hypotheses and findings to mitigate single-model bias. Deep research synthesis and writing assistance was provided by Claude (Anthropic, 2025). All original ideas, theoretical frameworks, analyses, and conclusions are the author's own.
 
@@ -248,10 +248,10 @@ Before committing, verify:
 - [ ] Non-content files are in `artifacts/` only
 - [ ] Medium posts have proper front matter (title, date_posted, url, tags)
 - [ ] Medium posts have proper footer (Sub-Tags, Originally published with datetime)
-- [ ] Papers follow APA template structure
+- [ ] TechDocs follow APA template structure
 - [ ] Tables use bold numbers (`**Table 1**`) and italic titles
 - [ ] References are in APA format
-- [ ] Acknowledgments section included (papers only)
+- [ ] Acknowledgments section included (TechDocs only)
 - [ ] **Keywords extracted and added to keywords.json**
 - [ ] README.md updated with new links
 - [ ] Document count updated in README.md footer
@@ -270,8 +270,8 @@ Before committing, verify:
 6. Save as `Medium-[Topic_Name].md` in `publications/[topic]/`
 7. **Extract keywords and update keywords.json**
 
-### Convert Draft to Paper
-1. Apply `MAIN/artifacts/templates/PAPER_TEMPLATE_APA.md` structure
+### Convert Draft to TechDoc
+1. Apply `MAIN/artifacts/templates/TECHDOC_TEMPLATE_APA.md` structure
 2. Add Abstract with keywords
 3. Number sections
 4. Format tables (bold numbers, italic titles)
@@ -282,7 +282,7 @@ Before committing, verify:
 ### Add New Topic
 1. Create folder: `MAIN/publications/[topic-name]/`
 2. Create Medium file: `Medium-[Topic_Name].md`
-3. Create Paper file: `[Topic_Name]_Paper.md`
+3. Create TechDoc file: `[Topic_Name]_TechDoc.md`
 4. **Extract keywords and update keywords.json**
 5. Add section to README.md Topics & Documents
 6. Update document count

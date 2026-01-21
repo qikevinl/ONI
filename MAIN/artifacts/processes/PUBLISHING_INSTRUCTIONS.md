@@ -24,7 +24,7 @@ ONI/
     ├── publications/                   # CONTENT ONLY
     │   ├── 0-oni-framework/            # Base/foundational content (sorted first)
     │   │   ├── Medium-ONI_Framework.md
-    │   │   └── ONI_Framework_Paper.md
+    │   │   └── ONI_Framework_TechDoc.md
     │   ├── coherence-metric/
     │   ├── neural-firewall/
     │   ├── neural-ransomware/
@@ -32,7 +32,7 @@ ONI/
     │
     └── artifacts/                      # NON-CONTENT (infrastructure)
         ├── templates/                  # Formatting templates
-        │   ├── PAPER_TEMPLATE_APA.md
+        │   ├── TECHDOC_TEMPLATE_APA.md
         │   └── MEDIUM_TEMPLATE.md
         │
         ├── processes/                  # Workflow documentation
@@ -56,7 +56,7 @@ ONI/
 | Folder | Purpose | What Goes Here |
 |--------|---------|----------------|
 | `publications/0-oni-framework/` | **Base content** | Foundational ONI Framework publications |
-| `publications/` | **Content only** | Medium posts, technical papers |
+| `publications/` | **Content only** | Medium posts, technical documents |
 | `artifacts/templates/` | Formatting templates | APA template, Medium template |
 | `artifacts/processes/` | Workflow documentation | Publishing instructions, improvements |
 | `artifacts/scripts/` | Automation scripts | Research monitoring, CI/CD pipelines |
@@ -70,13 +70,13 @@ ONI/
 | Type | Format | Example |
 |------|--------|---------|
 | Medium Posts | `Medium-[Topic_Name].md` | `Medium-Coherence_Metric.md` |
-| Technical Papers | `[Topic_Name]_Paper.md` | `Neural_Ransomware_Paper.md` |
-| Detailed Papers | `[Topic_Name]_Detailed_Paper.md` | `Coherence_Metric_Detailed_Paper.md` |
+| Technical Documents | `[Topic_Name]_TechDoc.md` | `Neural_Ransomware_TechDoc.md` |
+| Detailed TechDocs | `[Topic_Name]_Detailed_TechDoc.md` | `Coherence_Metric_Detailed_TechDoc.md` |
 
 ### Templates
 | Type | Format | Example |
 |------|--------|---------|
-| Paper Templates | `[TYPE]_TEMPLATE_[FORMAT].md` | `PAPER_TEMPLATE_APA.md` |
+| TechDoc Templates | `[TYPE]_TEMPLATE_[FORMAT].md` | `TECHDOC_TEMPLATE_APA.md` |
 | Post Templates | `[TYPE]_TEMPLATE.md` | `MEDIUM_TEMPLATE.md` |
 
 ### CICD Research
@@ -125,9 +125,9 @@ tags: ['tag1', 'tag2', 'tag3']
 
 **Note:** Use `date_posted` (not `date`) in front matter. Use `Sub-Tags:` (not `Tags:`) for the hashtag line at the bottom.
 
-### 2. Technical Papers (`*_Paper.md`)
+### 2. Technical Documents (`*_TechDoc.md`)
 **Location:** `MAIN/publications/[topic]/`
-**Template:** `MAIN/artifacts/templates/PAPER_TEMPLATE_APA.md`
+**Template:** `MAIN/artifacts/templates/TECHDOC_TEMPLATE_APA.md`
 
 **Characteristics:**
 - Formal academic tone
@@ -212,8 +212,8 @@ When extracting content from a new source:
 **For Medium Posts:**
 - Reference: `MAIN/artifacts/templates/MEDIUM_TEMPLATE.md`
 
-**For Technical Papers:**
-- Reference: `MAIN/artifacts/templates/PAPER_TEMPLATE_APA.md`
+**For Technical Documents:**
+- Reference: `MAIN/artifacts/templates/TECHDOC_TEMPLATE_APA.md`
 - Use bold table numbers: `**Table 1**`
 - Use italic table titles: `*Table Title*`
 - Include standard acknowledgments
@@ -239,7 +239,7 @@ Before committing:
 
 2. **Verify file naming:**
    - Medium files: `Medium-[Topic].md`
-   - Papers: `[Topic]_Paper.md`
+   - TechDocs: `[Topic]_TechDoc.md`
 
 3. **Check formatting consistency:**
    - Tables formatted correctly
@@ -261,7 +261,7 @@ git add .
 git commit -m "Add [Topic] publication
 
 - [Brief description of content]
-- [Type: Medium/Paper/Both]
+- [Type: Medium/TechDoc/Both]
 - Updated keywords.json
 
 Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>"
@@ -273,7 +273,7 @@ git push
 
 ## Standard Acknowledgments
 
-Include this in all technical papers:
+Include this in all technical documents:
 
 > The author wishes to acknowledge the support of colleagues and mentors in the development of this work. Initial research validation was conducted through LMArena (LMSYS, 2024-2025), enabling cross-model verification of hypotheses and findings to mitigate single-model bias. Deep research synthesis and writing assistance was provided by Claude (Anthropic, 2025). All original ideas, theoretical frameworks, analyses, and conclusions are the author's own.
 
@@ -312,7 +312,7 @@ python research_monitor.py --days 7 --sources all
 
 1. Create folder: `MAIN/publications/[topic-name]/`
 2. Add Medium post: `Medium-[Topic_Name].md`
-3. Add technical paper: `[Topic_Name]_Paper.md`
+3. Add technical document: `[Topic_Name]_TechDoc.md`
 4. **Extract keywords and update keywords.json**
 5. Update README.md with new links
 
@@ -338,13 +338,13 @@ python research_monitor.py --days 7 --sources all
 
 - [ ] Content extracted and cleaned
 - [ ] Placed in correct folder (content only in publications/)
-- [ ] File named correctly (`Medium-*.md` or `*_Paper.md`)
+- [ ] File named correctly (`Medium-*.md` or `*_TechDoc.md`)
 - [ ] Front matter/metadata complete (date_posted, not date)
 - [ ] Footer complete (Sub-Tags, Originally published with datetime)
 - [ ] Formatting consistent with existing publications
 - [ ] Tables numbered with bold numbers, italic titles
-- [ ] References in APA format (papers only)
-- [ ] Acknowledgments included (papers only)
+- [ ] References in APA format (TechDocs only)
+- [ ] Acknowledgments included (TechDocs only)
 - [ ] **Keywords extracted and added to keywords.json**
 - [ ] README.md updated if needed
 - [ ] Committed with proper message format
