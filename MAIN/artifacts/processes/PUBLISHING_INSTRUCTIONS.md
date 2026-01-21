@@ -39,14 +39,13 @@ ONI/
         │   ├── PUBLISHING_INSTRUCTIONS.md  # This file
         │   └── PROCESS_IMPROVEMENTS.md
         │
-        ├── scripts/                    # Automation scripts
-        │   └── continuous-research-delivery/
-        │       └── research_monitor.py
-        │
-        └── CICD/                       # Continuous Research Delivery
+        └── CICD-Pipeline/              # Continuous Research Delivery
             ├── keywords.json           # Auto-generated research keywords
             ├── incoming/               # New research discoveries
-            └── processed/              # Reviewed and integrated
+            ├── processed/              # Reviewed and integrated
+            └── scripts/                # Automation scripts
+                └── continuous-research-delivery/
+                    └── research_monitor.py
 ```
 
 ---
@@ -59,8 +58,7 @@ ONI/
 | `publications/` | **Content only** | Medium posts, technical documents |
 | `artifacts/templates/` | Formatting templates | APA template, Medium template |
 | `artifacts/processes/` | Workflow documentation | Publishing instructions, improvements |
-| `artifacts/scripts/` | Automation scripts | Research monitoring, CI/CD pipelines |
-| `artifacts/CICD/` | Research pipeline | Keywords, incoming papers, processed |
+| `artifacts/CICD-Pipeline/` | Research pipeline | Keywords, incoming papers, processed, scripts |
 
 ---
 
@@ -164,7 +162,7 @@ After creating a new publication, extract keywords in these categories:
 
 ### Step 2: Update keywords.json
 
-Add keywords to `MAIN/artifacts/CICD/keywords.json`:
+Add keywords to `MAIN/artifacts/CICD-Pipeline/keywords.json`:
 
 ```json
 {
@@ -224,7 +222,7 @@ When extracting content from a new source:
 
 1. Read the complete publication
 2. Extract keywords by category
-3. Update `MAIN/artifacts/CICD/keywords.json`
+3. Update `MAIN/artifacts/CICD-Pipeline/keywords.json`
 4. This ensures the research monitor finds relevant new papers
 
 ### Step 4: Quality Checks
@@ -235,7 +233,7 @@ Before committing:
    - Content → `publications/`
    - Templates → `artifacts/templates/`
    - Process docs → `artifacts/processes/`
-   - Scripts → `artifacts/scripts/`
+   - Scripts → `artifacts/CICD-Pipeline/scripts/`
 
 2. **Verify file naming:**
    - Medium files: `Medium-[Topic].md`
@@ -286,7 +284,7 @@ The research monitor script uses keywords from publications to find relevant new
 ### Running the Monitor
 
 ```bash
-cd MAIN/artifacts/scripts/continuous-research-delivery
+cd MAIN/artifacts/CICD-Pipeline/scripts/continuous-research-delivery
 python research_monitor.py --days 7 --sources all
 ```
 
@@ -318,10 +316,10 @@ python research_monitor.py --days 7 --sources all
 
 ### Processing CICD Incoming Research
 
-1. Review files in `MAIN/artifacts/CICD/incoming/`
+1. Review files in `MAIN/artifacts/CICD-Pipeline/incoming/`
 2. Determine relevance to ONI Framework
 3. If relevant: Extract key findings, create summary
-4. Move processed file to `MAIN/artifacts/CICD/processed/`
+4. Move processed file to `MAIN/artifacts/CICD-Pipeline/processed/`
 5. Update publications if new content warranted
 
 ### Updating Existing Content

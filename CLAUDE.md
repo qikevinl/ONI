@@ -11,8 +11,8 @@
 | APA Template | `MAIN/artifacts/templates/TECHDOC_TEMPLATE_APA.md` | Formatting for technical documents |
 | Medium Template | `MAIN/artifacts/templates/MEDIUM_TEMPLATE.md` | Formatting for Medium posts |
 | Publishing Instructions | `MAIN/artifacts/processes/PUBLISHING_INSTRUCTIONS.md` | Step-by-step publishing workflow |
-| Research Monitor | `MAIN/artifacts/scripts/continuous-research-delivery/research_monitor.py` | Fetch new academic papers |
-| Keywords File | `MAIN/artifacts/CICD/keywords.json` | Research search terms |
+| Research Monitor | `MAIN/artifacts/CICD-Pipeline/scripts/continuous-research-delivery/research_monitor.py` | Fetch new academic papers |
+| Keywords File | `MAIN/artifacts/CICD-Pipeline/keywords.json` | Research search terms |
 | This File | `CLAUDE.md` | Claude-specific instructions |
 
 ---
@@ -46,14 +46,13 @@ ONI/
         │   ├── PUBLISHING_INSTRUCTIONS.md
         │   └── PROCESS_IMPROVEMENTS.md
         │
-        ├── scripts/                    # Automation scripts
-        │   └── continuous-research-delivery/
-        │       └── research_monitor.py
-        │
-        └── CICD/                       # Continuous Research Delivery
+        └── CICD-Pipeline/              # Continuous Research Delivery
             ├── keywords.json           # Research keywords from publications
             ├── incoming/               # New research discoveries
-            └── processed/              # Reviewed and integrated
+            ├── processed/              # Reviewed and integrated
+            └── scripts/                # Automation scripts
+                └── continuous-research-delivery/
+                    └── research_monitor.py
 ```
 
 ---
@@ -66,8 +65,7 @@ ONI/
 | `publications/` | **Content only** | Medium posts, technical documents |
 | `artifacts/templates/` | Formatting templates | APA template, Medium template |
 | `artifacts/processes/` | Workflow documentation | Publishing instructions, improvements |
-| `artifacts/scripts/` | Automation scripts | Research monitoring, CI/CD pipelines |
-| `artifacts/CICD/` | Research pipeline | Keywords, incoming papers, processed |
+| `artifacts/CICD-Pipeline/` | Research pipeline | Keywords, incoming papers, processed, scripts |
 
 **IMPORTANT:**
 - The `0-oni-framework/` folder inside `publications/` contains the base/foundational content and sorts first alphabetically.
@@ -141,7 +139,7 @@ ONI/
    - **Biological Terms** (5-8): Neuroscience terms
    - **Security Terms** (5-8): Cybersecurity terms
 
-2. Update `MAIN/artifacts/CICD/keywords.json`:
+2. Update `MAIN/artifacts/CICD-Pipeline/keywords.json`:
    ```json
    {
      "publications": {
@@ -161,7 +159,7 @@ ONI/
 ### When Running Research Monitor
 
 ```bash
-cd MAIN/artifacts/scripts/continuous-research-delivery
+cd MAIN/artifacts/CICD-Pipeline/scripts/continuous-research-delivery
 python research_monitor.py --days 7 --sources all
 ```
 
@@ -288,10 +286,10 @@ Before committing, verify:
 6. Update document count
 
 ### Process CICD Incoming Research
-1. Review files in `MAIN/artifacts/CICD/incoming/`
+1. Review files in `MAIN/artifacts/CICD-Pipeline/incoming/`
 2. Determine relevance to ONI Framework
 3. If relevant: Extract key findings, create summary
-4. Move processed file to `MAIN/artifacts/CICD/processed/`
+4. Move processed file to `MAIN/artifacts/CICD-Pipeline/processed/`
 5. Update publications if new content warranted
 
 ### Rename/Reorganize Files

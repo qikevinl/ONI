@@ -2,7 +2,7 @@
 
 # ONI Framework
 
-> An extensible framework for monitoring and securing neural communications, designed for transparency and interoperability across bio-digital systems.
+> An extensible framework for monitoring and securing neural communications, designed for transparency and interoperability across brain-computer interfaces (BCIs).
 
 ---
 
@@ -29,11 +29,11 @@ ONI/
     └── artifacts/               # Non-content (infrastructure)
         ├── templates/           # Formatting templates
         ├── processes/           # Workflow documentation
-        ├── scripts/             # Automation (research monitor)
-        └── CICD/                # Research pipeline
+        └── CICD-Pipeline/       # Research pipeline
             ├── keywords.json    # Publication keywords for research
             ├── incoming/        # New discoveries
-            └── processed/       # Reviewed research
+            ├── processed/       # Reviewed research
+            └── scripts/         # Automation (research monitor)
 ```
 
 ---
