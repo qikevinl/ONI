@@ -139,10 +139,25 @@ ONI/
 ├── ABOUT.md                     # Author bio
 ├── CONTRIBUTING.md              # Contribution guidelines
 ├── LICENSE                      # Apache 2.0
+│
 └── MAIN/
-    └── publications/
-        ├── PAPER_TEMPLATE_APA.md
-        ├── PUBLISHING_INSTRUCTIONS.md
+    ├── templates/               # Formatting templates
+    │   ├── PAPER_TEMPLATE_APA.md
+    │   └── MEDIUM_TEMPLATE.md
+    │
+    ├── processes/               # Workflow documentation
+    │   ├── PUBLISHING_INSTRUCTIONS.md
+    │   └── PROCESS_IMPROVEMENTS.md
+    │
+    ├── scripts/                 # Automation
+    │   └── continuous-research-delivery/
+    │       └── research_monitor.py
+    │
+    ├── CICD/                    # Research pipeline
+    │   ├── incoming/            # New discoveries
+    │   └── processed/           # Reviewed research
+    │
+    └── publications/            # Content only
         ├── coherence-metric/
         ├── neural-firewall/
         ├── neural-ransomware/

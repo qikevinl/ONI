@@ -8,9 +8,11 @@
 
 | Resource | Location | Purpose |
 |----------|----------|---------|
-| APA Template | `MAIN/publications/PAPER_TEMPLATE_APA.md` | Formatting for technical papers |
-| Publishing Instructions | `MAIN/publications/PUBLISHING_INSTRUCTIONS.md` | Step-by-step publishing workflow |
-| This File | `README.AI.md` | Claude-specific instructions |
+| APA Template | `MAIN/templates/PAPER_TEMPLATE_APA.md` | Formatting for technical papers |
+| Medium Template | `MAIN/templates/MEDIUM_TEMPLATE.md` | Formatting for Medium posts |
+| Publishing Instructions | `MAIN/processes/PUBLISHING_INSTRUCTIONS.md` | Step-by-step publishing workflow |
+| Research Monitor | `MAIN/scripts/continuous-research-delivery/research_monitor.py` | Fetch new academic papers |
+| This File | `CLAUDE.md` | Claude-specific instructions |
 
 ---
 
@@ -18,17 +20,30 @@
 
 ```
 ONI/
-├── README.md                          # Main repository documentation
-├── README.AI.md                       # Claude AI instructions (this file)
-├── ABOUT.md                           # Author bio
-├── CONTRIBUTING.md                    # Contribution guidelines
-├── LICENSE                            # Apache 2.0 License
+├── README.md                           # Main repository documentation
+├── CLAUDE.md                           # Claude AI instructions (this file)
+├── ABOUT.md                            # Author bio
+├── CONTRIBUTING.md                     # Contribution guidelines
+├── LICENSE                             # Apache 2.0 License
 │
 └── MAIN/
-    └── publications/
-        ├── PAPER_TEMPLATE_APA.md      # APA 7th edition template
-        ├── PUBLISHING_INSTRUCTIONS.md # Publishing workflow guide
-        │
+    ├── templates/                      # Formatting templates
+    │   ├── PAPER_TEMPLATE_APA.md       # APA 7th edition template
+    │   └── MEDIUM_TEMPLATE.md          # Medium post template
+    │
+    ├── processes/                      # Workflow documentation
+    │   ├── PUBLISHING_INSTRUCTIONS.md  # Publishing workflow guide
+    │   └── PROCESS_IMPROVEMENTS.md     # Improvement strategies
+    │
+    ├── scripts/                        # Automation scripts
+    │   └── continuous-research-delivery/
+    │       └── research_monitor.py     # Academic paper monitoring
+    │
+    ├── CICD/                           # Continuous Research Delivery
+    │   ├── incoming/                   # New research discoveries
+    │   └── processed/                  # Reviewed and integrated
+    │
+    └── publications/                   # CONTENT ONLY
         ├── coherence-metric/
         │   ├── Medium-Coherence_Metric.md
         │   └── Coherence_Metric_Detailed_Paper.md
@@ -52,6 +67,21 @@ ONI/
 
 ---
 
+## Folder Purposes
+
+| Folder | Purpose | What Goes Here |
+|--------|---------|----------------|
+| `templates/` | Formatting templates | APA template, Medium template, future templates |
+| `processes/` | Workflow documentation | Publishing instructions, improvement strategies |
+| `scripts/` | Automation scripts | Research monitoring, CI/CD pipelines |
+| `CICD/incoming/` | New research discoveries | Auto-fetched papers, pending review |
+| `CICD/processed/` | Reviewed research | Archived after integration |
+| `publications/` | **Content only** | Medium posts, technical papers |
+
+**IMPORTANT:** The `publications/` folder is for **content only**. Never put templates, instructions, or scripts in this folder.
+
+---
+
 ## Naming Conventions
 
 ### Folder Names
@@ -66,7 +96,7 @@ ONI/
 | Technical Papers | `[Topic_Name]_Paper.md` | `Neural_Ransomware_Paper.md` |
 | Detailed Papers | `[Topic_Name]_Detailed_Paper.md` | `Coherence_Metric_Detailed_Paper.md` |
 | Templates | `[NAME]_TEMPLATE_[TYPE].md` | `PAPER_TEMPLATE_APA.md` |
-| Instructions | `[NAME]_INSTRUCTIONS.md` | `PUBLISHING_INSTRUCTIONS.md` |
+| CICD Research | `YYYY-MM-DD_[source]_[title].md` | `2026-01-21_arxiv_neural-security.md` |
 
 ### Topic Name Rules
 - Use PascalCase with underscores between words
@@ -81,10 +111,11 @@ ONI/
 
 ### When Adding New Content
 
-1. **Read the template first:**
+1. **Read the templates first:**
    ```
-   Read: MAIN/publications/PAPER_TEMPLATE_APA.md
-   Read: MAIN/publications/PUBLISHING_INSTRUCTIONS.md
+   Read: MAIN/templates/PAPER_TEMPLATE_APA.md
+   Read: MAIN/templates/MEDIUM_TEMPLATE.md
+   Read: MAIN/processes/PUBLISHING_INSTRUCTIONS.md
    ```
 
 2. **Create topic folder (if new topic):**
@@ -103,6 +134,19 @@ ONI/
 5. **Update README.md** (see section below)
 
 6. **Commit with proper message format**
+
+### When Running Research Monitor
+
+```bash
+cd MAIN/scripts/continuous-research-delivery
+python research_monitor.py --days 7 --sources all
+```
+
+Options:
+- `--days N` - Look back N days (default: 7)
+- `--sources arxiv,pubmed,biorxiv` - Specific sources or "all"
+- `--quiet` - Suppress progress output
+- `--summary-only` - Print summary without saving files
 
 ---
 
@@ -175,6 +219,9 @@ Before committing, verify:
 
 - [ ] File naming follows conventions
 - [ ] Folder naming follows conventions
+- [ ] Content files are in `publications/` only
+- [ ] Templates are in `templates/` only
+- [ ] Process docs are in `processes/` only
 - [ ] Medium posts have proper front matter (title, date, tags)
 - [ ] Papers follow APA template structure
 - [ ] Tables use bold numbers (`**Table 1**`) and italic titles
@@ -192,10 +239,10 @@ Before committing, verify:
 1. Fetch content from RSS feed URL
 2. Extract title, date, URL, tags
 3. Clean formatting artifacts
-4. Save as `Medium-[Topic_Name].md`
+4. Save as `Medium-[Topic_Name].md` in `publications/[topic]/`
 
 ### Convert Draft to Paper
-1. Apply `PAPER_TEMPLATE_APA.md` structure
+1. Apply `MAIN/templates/PAPER_TEMPLATE_APA.md` structure
 2. Add Abstract with keywords
 3. Number sections
 4. Format tables (bold numbers, italic titles)
@@ -209,6 +256,13 @@ Before committing, verify:
 4. Add section to README.md Topics & Documents
 5. Update document count
 
+### Process CICD Incoming Research
+1. Review files in `MAIN/CICD/incoming/`
+2. Determine relevance to ONI Framework
+3. If relevant: Extract key findings, create summary
+4. Move processed file to `MAIN/CICD/processed/`
+5. Update publications if new content warranted
+
 ### Rename/Reorganize Files
 1. Use git mv for tracked files
 2. Update all links in README.md
@@ -220,19 +274,20 @@ Before committing, verify:
 ## Error Prevention
 
 ### Common Mistakes to Avoid
-1. **Wrong naming:** Don't use dates in filenames (use `Medium-*` prefix instead)
-2. **Missing updates:** Always update README.md after adding content
-3. **Inconsistent formatting:** Always check template before writing
-4. **Broken links:** Use relative paths from repository root
-5. **Wrong table format:** Numbers are BOLD, titles are ITALIC
+1. **Wrong location:** Don't put templates or instructions in `publications/`
+2. **Wrong naming:** Don't use dates in publication filenames (use `Medium-*` prefix)
+3. **Missing updates:** Always update README.md after adding content
+4. **Inconsistent formatting:** Always check template before writing
+5. **Broken links:** Use relative paths from repository root
+6. **Wrong table format:** Numbers are BOLD, titles are ITALIC
 
 ### If Unsure
-1. Read `MAIN/publications/PUBLISHING_INSTRUCTIONS.md`
+1. Read `MAIN/processes/PUBLISHING_INSTRUCTIONS.md`
 2. Check existing files for examples
 3. Ask user for clarification before proceeding
 
 ---
 
-*Version: 1.0*
-*Last Updated: January 21, 2026*
+*Version: 2.0*
+*Last Updated: January 2026*
 *For: Claude AI Assistant*
