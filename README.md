@@ -135,7 +135,7 @@ Cross-scale neural patterns, frequency invariants, and information compression.
 ```
 ONI/
 ├── README.md                    # Main documentation
-├── README.AI.md                 # Claude AI instructions
+├── CLAUDE.md                    # Claude AI instructions
 ├── ABOUT.md                     # Author bio
 ├── CONTRIBUTING.md              # Contribution guidelines
 ├── LICENSE                      # Apache 2.0
