@@ -10,6 +10,8 @@
 |----------|----------|---------|
 | **Main Wiki (INDEX)** | `MAIN/INDEX.md` | **Central hub - navigation, dependencies, cross-references** |
 | **Python Package** | `MAIN/oni-framework/` | **pip install oni-framework** |
+| **Transparency Statement** | `TRANSPARENCY.md` | **Human-AI collaboration audit trail** |
+| **Neuroethics Alignment** | `MAIN/NEUROETHICS_ALIGNMENT.md` | **Framework-to-ethics principle mapping** |
 | Topic README Template | `MAIN/resources/templates/README_TEMPLATE.md` | Template for topic-level overviews |
 | APA Template | `MAIN/resources/templates/TECHDOC_TEMPLATE_APA.md` | Formatting for technical documents |
 | Blog Template | `MAIN/resources/templates/BLOG_TEMPLATE.md` | Formatting for blog posts |
@@ -35,12 +37,14 @@
 ONI/
 ├── README.md                           # Public entry point
 ├── CLAUDE.md                           # Claude AI instructions (this file)
+├── TRANSPARENCY.md                     # Human-AI collaboration audit trail
 ├── ABOUT.md                            # Author bio
 ├── CONTRIBUTING.md                     # Contribution guidelines
 ├── LICENSE                             # Apache 2.0 License
 │
 └── MAIN/
     ├── INDEX.md                        # MAIN WIKI — navigation, dependencies, cross-references
+    ├── NEUROETHICS_ALIGNMENT.md        # Framework-to-ethics principle mapping
     │
     ├── oni-framework/                  # Python library (pip install oni-framework)
     │   ├── oni/                        # Source code
@@ -262,6 +266,75 @@ Use this text in all technical documents:
 
 ---
 
+## Transparency Documentation (REQUIRED)
+
+> **CRITICAL:** The ONI Framework maintains a transparency standard for Human-AI collaboration. This documentation supports academic review, Responsible AI principles, and neuroethics alignment.
+
+### Key Documents
+
+| Document | Location | Purpose |
+|----------|----------|---------|
+| `TRANSPARENCY.md` | Repository root | Audit trail of Human-AI cognitive boundary |
+| `NEUROETHICS_ALIGNMENT.md` | `MAIN/` | Maps framework components to ethical principles |
+
+### When to Update TRANSPARENCY.md
+
+Update `TRANSPARENCY.md` whenever:
+
+1. **New publications are added** — Add to contribution matrix if significant AI assistance used
+2. **Code changes with AI assistance** — Document any AI suggestions that were rejected/modified
+3. **New modules or features** — Categorize human vs AI contributions
+4. **Corrections to AI output** — Add to "Documented Corrections" section as examples
+
+### Transparency Update Checklist
+
+For each publishing session, verify:
+
+- [ ] Any AI corrections/overrides documented in TRANSPARENCY.md "Refinement Loop" section
+- [ ] Contribution matrix updated if new content domains added
+- [ ] "Last Updated" date changed in TRANSPARENCY.md header
+- [ ] Commit includes `Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>` tag
+
+### Cognitive Boundary Documentation Format
+
+When documenting significant AI interactions, use this format:
+
+```markdown
+#### Example N: [Brief Title]
+- **AI Initial Output**: [What AI suggested]
+- **Human Override/Correction**: [What was changed and why]
+- **Action Taken**: [Where the correction was implemented]
+- **Ethical/Technical Reasoning**: [Why this decision matters]
+```
+
+### NEUROETHICS_ALIGNMENT.md Updates
+
+Update `MAIN/NEUROETHICS_ALIGNMENT.md` when:
+
+1. **New framework components added** — Map to ethical principles
+2. **Security features modified** — Update ethical reasoning
+3. **New ethical considerations identified** — Add to gaps/future work
+
+### Enhanced Commit Message Format (For Significant Contributions)
+
+For major features or content, use extended format:
+
+```
+[Action] [Topic/Scope]: Brief description
+
+Original conception: Human/AI/Joint
+Implementation: Human/AI-assisted
+Verification: Human (method used)
+
+- Detailed changes
+- Human decisions noted
+- AI suggestions accepted/rejected noted
+
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
+```
+
+---
+
 ## Commit Message Format
 
 ```
@@ -288,6 +361,7 @@ Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
 
 Before committing, verify:
 
+### Content Quality
 - [ ] File naming follows conventions
 - [ ] Folder naming follows conventions
 - [ ] Content files are in `publications/` only
@@ -298,12 +372,21 @@ Before committing, verify:
 - [ ] Tables use bold numbers (`**Table 1**`) and italic titles
 - [ ] References are in APA format
 - [ ] Acknowledgments section included (TechDocs only)
+
+### Repository Updates
 - [ ] **Keywords extracted and added to keywords.json**
 - [ ] README.md updated with new links
 - [ ] Document count updated in README.md footer
 - [ ] Date updated in README.md footer
 - [ ] **Topic README.md created** (for new topics — auto-rendered by GitHub)
 - [ ] **MAIN/INDEX.md updated** (main wiki: dependency map, tables, metrics)
+
+### Transparency Documentation (REQUIRED)
+- [ ] **TRANSPARENCY.md updated** if significant AI assistance used
+- [ ] **AI corrections/overrides documented** in Refinement Loop section
+- [ ] **Contribution matrix updated** if new content domains added
+- [ ] **Commit includes Co-Authored-By tag** for AI-assisted work
+- [ ] **NEUROETHICS_ALIGNMENT.md updated** if new framework components added
 
 ---
 
@@ -391,6 +474,6 @@ mkdir MAIN/publications/[topic-name]/
 
 ---
 
-*Version: 4.0*
-*Last Updated: January 2026*
+*Version: 5.0*
+*Last Updated: 2026-01-22*
 *For: Claude AI Assistant*

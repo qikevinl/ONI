@@ -16,13 +16,14 @@ This document provides standardized instructions for Claude to follow when extra
 ONI/
 ├── README.md                           # Main documentation
 ├── CLAUDE.md                           # Claude AI instructions
+├── TRANSPARENCY.md                     # Human-AI collaboration audit trail
 ├── ABOUT.md                            # Author bio
 ├── CONTRIBUTING.md                     # Contribution guidelines
 ├── LICENSE                             # Apache 2.0
 │
 └── MAIN/
-    ├── INDEX.md                        # Master index
-    ├── INDEX.md                     # Central hub
+    ├── INDEX.md                        # Central hub
+    ├── NEUROETHICS_ALIGNMENT.md        # Framework-to-ethics mapping
     ├── publications/                   # CONTENT ONLY
     │   ├── 0-oni-framework/
     │   ├── coherence-metric/
@@ -338,6 +339,7 @@ python research_monitor.py --days 7 --sources all
 
 ## Checklist for New Publications
 
+### Content Quality
 - [ ] Content extracted and cleaned
 - [ ] Placed in correct folder (content only in publications/)
 - [ ] File named correctly (`Blog-*.md` or `TechDoc-*.md`)
@@ -347,12 +349,57 @@ python research_monitor.py --days 7 --sources all
 - [ ] Tables numbered with bold numbers, italic titles
 - [ ] References in APA format (TechDocs only)
 - [ ] Acknowledgments included (TechDocs only)
+
+### Repository Updates
 - [ ] **Keywords extracted and added to keywords.json**
 - [ ] README.md updated if needed
-- [ ] Committed with proper message format
+- [ ] INDEX.md updated with new topics/documents
+
+### Transparency Documentation (REQUIRED)
+- [ ] **TRANSPARENCY.md updated** — Document AI contributions for this session
+- [ ] **AI corrections documented** — Any overrides/rejections added to Refinement Loop section
+- [ ] **Commit includes Co-Authored-By tag** — For AI-assisted work
+- [ ] **NEUROETHICS_ALIGNMENT.md updated** — If new framework components affect ethics mapping
 
 ---
 
-*Instructions Version: 4.0*
-*Last Updated: January 2026*
+## Transparency Documentation Workflow
+
+> **CRITICAL:** The ONI Framework maintains Responsible AI standards. Every publishing session involving AI assistance must update transparency documentation.
+
+### When to Update TRANSPARENCY.md
+
+Update `TRANSPARENCY.md` (repository root) whenever:
+
+1. **New publications are added** with significant AI assistance
+2. **AI suggestions were rejected or modified** — Document in "Refinement Loop" section
+3. **New content domains added** — Update contribution matrix
+4. **Methodology changes** — Document new verification approaches
+
+### TRANSPARENCY.md Update Steps
+
+1. **Update "Last Updated" date** in document header
+2. **Add to Contribution Matrix** if new domain (e.g., new topic area)
+3. **Add to "Documented Corrections"** if you corrected any AI output:
+   ```markdown
+   #### Example N: [Brief Title]
+   - **AI Initial Output**: [What AI suggested]
+   - **Human Override/Correction**: [What was changed]
+   - **Action Taken**: [Where implemented]
+   - **Reasoning**: [Why this matters]
+   ```
+4. **Update statistics** if correction/rejection rate changed significantly
+
+### NEUROETHICS_ALIGNMENT.md Updates
+
+Update `MAIN/NEUROETHICS_ALIGNMENT.md` when:
+
+- New framework components are added
+- Security features are modified
+- New ethical considerations are identified
+
+---
+
+*Instructions Version: 5.0*
+*Last Updated: 2026-01-22*
 *Series: ONI Framework Publications*

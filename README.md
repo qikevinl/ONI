@@ -40,6 +40,13 @@
 | **[INDEX.md](MAIN/INDEX.md)** | **Main Wiki** — central hub for navigation, dependencies, cross-references, roadmap |
 | **This README** | Public overview — key concepts, quick reference |
 
+### Transparency & Ethics
+
+| Document | Purpose |
+|----------|---------|
+| **[TRANSPARENCY.md](TRANSPARENCY.md)** | Human-AI collaboration audit trail — documents cognitive boundary, HITL methodology |
+| **[NEUROETHICS_ALIGNMENT.md](MAIN/NEUROETHICS_ALIGNMENT.md)** | Maps framework components to neuroethics principles |
+
 ### Naming Convention
 
 | File | Location | Purpose |

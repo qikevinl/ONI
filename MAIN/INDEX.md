@@ -2,7 +2,7 @@
 
 > **The central navigation hub for all ONI Framework research, publications, and development.**
 
-**Version:** 1.1
+**Version:** 1.2
 **Last Updated:** 2026-01-22
 **Status:** Active Development
 
@@ -156,6 +156,17 @@ The ONI Framework extends OSI's 7 layers to 14, bridging silicon and biology:
 | Project | Description |
 |---------|-------------|
 | [ONI Visualizations](oni-visualizations/README.md) | Interactive web apps for ONI concepts |
+
+---
+
+## Transparency & Ethics
+
+The ONI Framework maintains Responsible AI standards and documents alignment with neuroethics principles.
+
+| Document | Purpose |
+|----------|---------|
+| [TRANSPARENCY.md](../TRANSPARENCY.md) | Human-AI collaboration audit trail — cognitive boundary documentation, HITL methodology |
+| [NEUROETHICS_ALIGNMENT.md](NEUROETHICS_ALIGNMENT.md) | Maps framework components to cognitive liberty, mental privacy, mental integrity principles |
 
 ---
 
