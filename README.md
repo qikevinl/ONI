@@ -9,6 +9,7 @@
 ## Table of Contents
 
 - [Navigation](#navigation)
+  - [Transparency & Ethics](#transparency--ethics)
 - [Python Library](#python-library)
 - [Repository Structure](#repository-structure)
 - [Objective](#objective)
@@ -108,6 +109,7 @@ All research, publications, and supporting infrastructure live in the `MAIN/` di
 ```
 ONI/
 ├── README.md                    # Public overview (you are here)
+├── TRANSPARENCY.md              # Human-AI collaboration audit trail
 ├── CLAUDE.md                    # Claude AI instructions
 ├── ABOUT.md                     # Author bio
 ├── CONTRIBUTING.md              # Contribution guidelines
@@ -115,6 +117,7 @@ ONI/
 │
 └── MAIN/
     ├── INDEX.md                 # Central hub — navigation, dependencies, cross-references
+    ├── NEUROETHICS_ALIGNMENT.md # Framework-to-ethics principle mapping
     │
     ├── oni-framework/           # Python library (pip install oni-framework)
     │   ├── oni/                 # Source code
@@ -122,7 +125,7 @@ ONI/
     │   │   ├── layers.py        # 14-layer model
     │   │   ├── firewall.py      # Neural Firewall
     │   │   └── scale_freq.py    # f × S ≈ k invariant
-    │   └── tests/               # Unit tests
+    │   └── tests/               # Unit tests (77 tests)
     │
     ├── publications/            # Research content
     │   ├── 0-oni-framework/     # Base/foundational content

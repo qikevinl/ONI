@@ -249,6 +249,7 @@ Planned research areas for framework expansion:
 ```
 MAIN/
 ├── INDEX.md                    # This file (central hub)
+├── NEUROETHICS_ALIGNMENT.md    # Framework-to-ethics principle mapping
 │
 ├── oni-framework/              # Python library (pip install oni-framework)
 │   ├── oni/                    # Source modules

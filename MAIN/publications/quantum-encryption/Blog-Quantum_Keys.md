@@ -2,7 +2,7 @@
 title: "From Macroscopic Quantum Tunneling to Quantum Keys: How the Nobel Prize Will Secure BCIs"
 subtitle: "Inspired by Martinis, Clarke, and Devoret's Nobel-winning work on Macroscopic Quantum Tunneling, a deep dive into where physics meets network security"
 date_posted: Wed, 22 Jan 2026 01:49:08 GMT
-original_url:
+original_url: https://cybersecuritywriteups.com/from-macroscopic-quantum-tunneling-to-quantum-keys-how-the-nobel-prize-will-secure-bcis-300f943faea1
 tags: ['quantum-computing', 'cybersecurity', 'VPN', 'neuroscience', 'brain-computer-interface', 'QKD']
 ---
 
@@ -56,7 +56,7 @@ That quote is why this article exists.
 
 Listening to Neil interview John Martinis on StarTalk, I found myself identifying dots between quantum tunneling and network security — between Josephson junctions and VPN protocols — between macroscopic quantum effects and the neural security frameworks I've been developing. The connections felt compelling. Maybe too compelling.
 
-I've spent considerable time developing the ONI (Organic Neural Interface) framework for neural security — exploring coherence breaches, the Scale-Frequency Invariant, and threats to brain-computer interfaces. I know enough about quantum mechanics to see tantalizing connections. But do I know enough to know where I'm wrong?
+I've spent considerable time developing the [ONI (Organic Neural Interface) framework](https://github.com/qikevinl/ONI) for neural security — exploring coherence breaches, the Scale-Frequency Invariant, and threats to brain-computer interfaces. I know enough about quantum mechanics to see tantalizing connections. But do I know enough to know where I'm wrong?
 
 This is my attempt to find out. To map the boundaries of what quantum tunneling can and cannot do for network security. To identify where the physics supports my intuitions — and where it doesn't. To strategize future directions for the ONI project by understanding, honestly, what we're working with.
 
@@ -72,7 +72,7 @@ For decades, physicists assumed quantum tunneling only happened at subatomic sca
 
 Using Josephson junctions — two superconducting metals separated by a thin insulator, cooled to 15 millikelvin — they demonstrated that billions of electrons, behaving as Cooper pairs, could tunnel coherently through barriers as a single quantum entity.
 
-The shared universal language that transcends barriers. The same Cooper pairs and Josephson junctions I stumbled across in my research in circumventing the challenges of modern Cardiac diagnostic devices.
+The shared universal language that transcends barriers. The same Cooper pairs and Josephson junctions I stumbled across in my research in circumventing the challenges of modern Cardiac diagnostic devices. [[Link]](https://medium.com/@qikevinl/my-moms-heart-attack-went-undetected-for-20-days-ec8d113a26e1)
 
 The Royal Swedish Academy called it "the first clear demonstration of macroscopic quantum tunnelling."
 
@@ -90,7 +90,7 @@ The answer is no. And the physics of why is crucial.
 
 There's a traversal. There's a duration. There's something happening inside the barrier.
 
-In the ONI framework, we call this the **liminal phase** — the state between states, where the system is neither here nor there. And it's governed by physics I'll return to shortly.
+In the [ONI framework](https://github.com/qikevinl/ONI/blob/main/MAIN/publications/0-oni-framework/Blog-ONI_Framework.md), we call this the **liminal phase** — the state between states, where the system is neither here nor there. And it's governed by physics I'll return to shortly.
 
 · · ·
 
@@ -128,6 +128,8 @@ The parallel between quantum tunneling and VPN tunneling isn't just linguistic. 
 - **Quantum:** Build channels the enemy cannot observe without destroying
 
 The future of secure network integration depends on which side of that boundary we build on. The overarching reason why ONI supports classical security today, quantum security tomorrow.
+
+*Time is key. Read more about this [here](https://medium.com/@qikevinl/can-hackers-attack-quantum-computers-across-time-and-space-the-truth-is-far-more-terrifying-d74e41a2223a).*
 
 · · ·
 
