@@ -18,9 +18,36 @@ This prototype suite demonstrates 5 interactive web applications designed to mak
 
 ## Quick Start
 
-1. Open `index.html` in a modern browser
-2. Click any application card to launch
-3. No build step required - pure HTML/CSS/JS
+### Option A: Download and Run (Easiest)
+
+1. **Download the project**
+   - Click the green **"Code"** button at the top of this page
+   - Select **"Download ZIP"**
+   - Save the file to your computer (e.g., your Downloads folder)
+
+2. **Unzip the folder**
+   - **Windows:** Right-click the ZIP file → "Extract All"
+   - **Mac:** Double-click the ZIP file
+
+3. **Find the visualizations**
+   - Open the unzipped folder
+   - Navigate to: `MAIN` → `prototypes` → `oni-visualizations`
+
+4. **Launch the app**
+   - Double-click `index.html`
+   - Your web browser will open with the application launcher
+   - Click any card to explore that visualization
+
+### Option B: For Developers
+
+```bash
+git clone https://github.com/qikevinl/ONI.git
+cd ONI/MAIN/prototypes/oni-visualizations
+open index.html    # Mac
+start index.html   # Windows
+```
+
+No build step required - pure HTML/CSS/JS
 
 ## File Structure
 
