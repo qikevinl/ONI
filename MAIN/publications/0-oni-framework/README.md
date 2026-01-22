@@ -62,20 +62,20 @@ By providing a common vocabulary across neuroscience, security engineering, and 
 
 | Layer | Name | Domain |
 |:-----:|------|--------|
-| L1 | Molecular | Biology |
-| L2 | Cellular | Biology |
-| L3 | Microcircuit | Biology |
-| L4 | Regional | Biology |
-| L5 | Systems | Biology |
-| L6 | Whole-Brain | Biology |
-| L7 | Behavioral | Biology |
+| L1 | Physical Carrier | Silicon |
+| L2 | Link Framing | Silicon |
+| L3 | Network Routing | Silicon |
+| L4 | Transport Flow | Silicon |
+| L5 | Session State | Silicon |
+| L6 | Data Encoding | Silicon |
+| L7 | Application Interface | Silicon |
 | **L8** | **Neural Gateway** | **Bridge** |
-| L9 | Signal Processing | Silicon |
-| L10 | Protocol | Silicon |
-| L11 | Transport | Silicon |
-| L12 | Session | Silicon |
-| L13 | Presentation | Silicon |
-| L14 | Application | Silicon |
+| L9 | Ion Channel Encoding | Biology |
+| L10 | Oscillatory Synchronization | Biology |
+| L11 | Cognitive Session | Biology |
+| L12 | Semantic Assembly | Biology |
+| L13 | Intent & Agency | Biology |
+| L14 | Identity & Ethics | Biology |
 
 ---
 
