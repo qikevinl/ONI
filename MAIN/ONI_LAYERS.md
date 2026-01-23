@@ -17,10 +17,6 @@ The ONI Framework extends the classical OSI 7-layer networking model with 7 addi
 - This is where the ONI Firewall operates
 - Most attacked, least standardized, most dangerous layer
 
-<p align="center">
-  <img src="resources/images/oni-14-layer-hourglass.png" alt="ONI Framework 14-Layer Model" width="700">
-</p>
-
 ---
 
 ## Privacy & Ethics Statement
@@ -40,6 +36,10 @@ The framework provides security without requiring surveillance. Signal integrity
 ---
 
 ## Complete 14-Layer Model
+
+<p align="center">
+  <img src="resources/images/oni-14-layer-hourglass.png" alt="ONI Framework 14-Layer Model" width="700">
+</p>
 
 ### OSI Stack — Classical Networking (L1-L7)
 
