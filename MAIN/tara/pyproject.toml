@@ -3,9 +3,9 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "tara-neural"
-version = "0.3.0"
-description = "TARA - Telemetry Awareness and Response Analyzer. A neural security platform for brain-computer interfaces."
+name = "oni-tara"
+version = "0.4.0"
+description = "TARA - Telemetry Awareness and Response Analyzer. A neural security platform for brain-computer interfaces with Kohno threat taxonomy and BCI privacy filtering."
 readme = "README.md"
 license = {text = "Apache-2.0"}
 requires-python = ">=3.9"
@@ -28,6 +28,10 @@ keywords = [
     "oni-framework",
     "blue-team",
     "defensive-security",
+    "neurosecurity",
+    "bci-privacy",
+    "kohno",
+    "erp-filtering",
 ]
 classifiers = [
     "Development Status :: 4 - Beta",

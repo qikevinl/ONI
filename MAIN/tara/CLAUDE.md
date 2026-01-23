@@ -62,6 +62,10 @@ tara/
 │   ├── bci_nodes.py       # BCI node network models
 │   └── export/            # Export functionality (placeholder)
 │
+├── neurosecurity/         # Neurosecurity (Kohno 2009, Bonaci 2015)
+│   ├── __init__.py        # ONI neurosecurity wrapper
+│   └── integration.py     # Kohno rules, NeurosecurityMonitor
+│
 ├── visualization/         # Real-time visualization
 │   ├── components/
 │   │   ├── brain_topology.py      # 3D brain visualization
@@ -293,6 +297,41 @@ When making changes to TARA, ensure:
 1. Create render function: `render_new_page()`
 2. Add to `render_sidebar()` navigation
 3. Add routing in `main()` function
+
+### Using Neurosecurity Module
+
+The neurosecurity module integrates Kohno (2009) threat taxonomy and Bonaci et al. (2015) BCI privacy research.
+
+**Loading Kohno Rules:**
+```python
+from tara import NeurosecurityMonitor
+from tara.nsam import RuleEngine
+
+monitor = NeurosecurityMonitor()
+engine = RuleEngine()
+rules_loaded = monitor.load_kohno_rules(engine)
+```
+
+**Privacy Score Calculation:**
+```python
+score = monitor.calculate_privacy_score(
+    signal_data=signal,
+    detected_erps=["P300", "N170"]
+)
+# score['score']: 0-1 (higher = more risk)
+# score['interpretation']: Human-readable risk level
+```
+
+**Threat Classification:**
+```python
+threat = monitor.classify_threat(metrics)
+# Returns: Alteration (integrity), Blocking (availability), Eavesdropping (confidentiality)
+```
+
+**Adding New Kohno Rules:**
+1. Add to `neurosecurity/integration.py` in `_build_kohno_rules()`
+2. Include `kohno_category` and `cia_mapping` in metadata
+3. Tag with "kohno" and the appropriate category
 4. Update UI Pages Reference in this file
 
 ---
@@ -359,9 +398,10 @@ pytest tests/ -v
 | 0.1.0 | 2026-01 | Initial release with core, simulation, attacks, NSAM |
 | 0.2.0 | 2026-01 | Added visualization, brain topology, firewall pipeline |
 | 0.3.0 | 2026-01 | Added Neural Simulator with region security analysis |
+| 0.4.0 | 2026-01 | Added neurosecurity module (Kohno 2009, Bonaci 2015) |
 
 ---
 
-*Version: 1.0*
-*Last Updated: 2026-01-22*
+*Version: 1.1*
+*Last Updated: 2026-01-23*
 *For: Claude AI Assistant*

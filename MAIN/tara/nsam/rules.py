@@ -530,3 +530,60 @@ def list_rules() -> List[str]:
 def rules_by_tag(tag: str) -> List[DetectionRule]:
     """Get all rules with a specific tag."""
     return [r for r in PREDEFINED_RULES.values() if tag in r.tags]
+
+
+def register_kohno_rules() -> int:
+    """
+    Register Kohno-based neurosecurity detection rules.
+
+    Adds rules based on Kohno et al. (2009) threat taxonomy:
+    - ALTERATION (Integrity)
+    - BLOCKING (Availability)
+    - EAVESDROPPING (Confidentiality)
+
+    Returns:
+        Number of rules registered.
+
+    Reference:
+        Denning, T., Matsuoka, Y., & Kohno, T. (2009). Neurosecurity: Security
+        and privacy for neural devices. Neurosurgical Focus, 27(1), E7.
+    """
+    try:
+        from ..neurosecurity import create_kohno_rules, KOHNO_DETECTION_RULES
+
+        count = 0
+        for rule_id, rule in KOHNO_DETECTION_RULES.items():
+            if rule_id not in PREDEFINED_RULES:
+                PREDEFINED_RULES[rule_id] = rule
+                count += 1
+
+        return count
+    except ImportError:
+        # Neurosecurity module not available
+        return 0
+
+
+def get_kohno_rules() -> List[DetectionRule]:
+    """
+    Get all Kohno-based detection rules.
+
+    Returns:
+        List of Kohno rules (empty if neurosecurity module unavailable).
+    """
+    return [r for r in PREDEFINED_RULES.values() if "kohno" in r.tags]
+
+
+def rules_by_cia_category(category: str) -> List[DetectionRule]:
+    """
+    Get rules by CIA triad category.
+
+    Args:
+        category: One of "integrity", "availability", "confidentiality"
+
+    Returns:
+        List of rules targeting that CIA property.
+    """
+    return [
+        r for r in PREDEFINED_RULES.values()
+        if r.metadata.get("cia_mapping") == category
+    ]

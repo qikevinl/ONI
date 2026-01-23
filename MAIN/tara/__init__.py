@@ -41,7 +41,7 @@ License: Apache 2.0
 Repository: https://github.com/qikevinl/ONI
 """
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 __author__ = "Kevin L. Qi"
 __name_full__ = "Telemetry Awareness and Response Analyzer"  # TARA
 
@@ -73,6 +73,35 @@ from .nsam import (
     EventStore,
 )
 
+# Neurosecurity (Kohno 2009, Bonaci et al. 2015)
+from .neurosecurity import (
+    NeurosecurityMonitor,
+    create_kohno_rules,
+    KOHNO_DETECTION_RULES,
+    _ONI_AVAILABLE as ONI_NEUROSECURITY_AVAILABLE,
+)
+
+# Conditionally export ONI components if available
+try:
+    from .neurosecurity import (
+        ThreatType,
+        KohnoThreatModel,
+        BCIAnonymizer,
+        PrivacyScoreCalculator,
+        ERPType,
+        PrivacySensitivity,
+    )
+    _neurosecurity_exports = [
+        "ThreatType",
+        "KohnoThreatModel",
+        "BCIAnonymizer",
+        "PrivacyScoreCalculator",
+        "ERPType",
+        "PrivacySensitivity",
+    ]
+except (ImportError, TypeError):
+    _neurosecurity_exports = []
+
 __all__ = [
     # Version info
     "__version__",
@@ -96,4 +125,9 @@ __all__ = [
     "DetectionRule",
     "AnomalyDetector",
     "EventStore",
-]
+    # Neurosecurity
+    "NeurosecurityMonitor",
+    "create_kohno_rules",
+    "KOHNO_DETECTION_RULES",
+    "ONI_NEUROSECURITY_AVAILABLE",
+] + _neurosecurity_exports

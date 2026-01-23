@@ -20,6 +20,7 @@ TARA provides:
 - **Neural Simulator**: Interactive brain region security analysis with attack vectors and defenses
 - **BCI Node Network**: Monitoring and connectivity visualization for distributed firewall nodes
 - **Unified Dashboard**: Streamlit-based web interface for monitoring, testing, and analysis
+- **Neurosecurity Module**: Kohno threat taxonomy (2009) and BCI privacy filtering (Bonaci et al. 2015)
 
 ---
 
@@ -68,7 +69,7 @@ The dashboard opens at `http://localhost:8501` with these pages:
 ### Python API
 
 ```python
-from tara import NeuralNSAM, AttackSimulator, NeuralFirewall
+from tara import NeuralNSAM, AttackSimulator, NeuralFirewall, NeurosecurityMonitor
 from tara.simulation import LayeredNetwork
 
 # Create ONI-aligned neural network
@@ -197,6 +198,10 @@ tara/
 │   ├── brain_regions.py   # Brain region definitions (10 regions)
 │   └── bci_nodes.py       # BCI node network models
 │
+├── neurosecurity/         # Neurosecurity integration
+│   ├── __init__.py        # ONI neurosecurity wrapper
+│   └── integration.py     # Kohno rules, NeurosecurityMonitor
+│
 ├── visualization/         # Real-time visualization
 │   ├── components/
 │   │   ├── brain_topology.py      # 3D brain visualization
@@ -291,6 +296,88 @@ Predefined NSAM detection rules:
 
 ---
 
+## Neurosecurity Module
+
+TARA includes a neurosecurity module implementing foundational BCI security research:
+
+### Kohno Threat Taxonomy (2009)
+
+Based on Denning, Matsuoka, & Kohno's seminal neurosecurity research, TARA detects three fundamental threat categories:
+
+| Category | CIA Property | Description | Example Attacks |
+|----------|--------------|-------------|-----------------|
+| **Alteration** | Integrity | Unauthorized signal modification | Signal injection, command tampering, stimulation manipulation |
+| **Blocking** | Availability | Denial or suppression of signals | DoS flooding, signal suppression, jamming, motor lockout |
+| **Eavesdropping** | Confidentiality | Unauthorized information extraction | Cognitive leakage, memory extraction, face recognition probes |
+
+### Kohno Detection Rules
+
+| Rule | Category | Severity | Description |
+|------|----------|----------|-------------|
+| `kohno_signal_injection` | Alteration | Critical | Detects unauthorized signal injection |
+| `kohno_command_modification` | Alteration | Critical | Detects tampering with motor commands |
+| `kohno_stimulation_tampering` | Alteration | Critical | Detects unsafe stimulation parameters |
+| `kohno_neural_dos` | Blocking | Critical | Detects signal flooding attacks |
+| `kohno_signal_suppression` | Blocking | High | Detects malicious signal blocking |
+| `kohno_jamming` | Blocking | Critical | Detects RF/EM jamming |
+| `kohno_motor_lockout` | Blocking | Critical | Detects motor signal suppression |
+| `kohno_cognitive_leakage` | Eavesdropping | Critical | Detects cognitive state extraction |
+| `kohno_memory_extraction` | Eavesdropping | Critical | Detects memory content extraction |
+| `kohno_face_recognition_probe` | Eavesdropping | High | Detects N170-based face probes |
+| `kohno_emotional_inference` | Eavesdropping | High | Detects emotional state extraction |
+| `kohno_side_channel` | Eavesdropping | High | Detects timing/power side channels |
+
+### BCI Privacy Filtering
+
+Inspired by Bonaci et al. (2015) research on BCI privacy, TARA includes:
+
+- **Privacy Score Calculator**: Quantifies information leakage risk (0-1 scale)
+- **BCI Anonymizer**: Filters privacy-sensitive ERP components while preserving motor commands
+- **ERP Classification**: P300, N170, N400, ERN, LRP, CNV component identification
+
+### Usage Example
+
+```python
+from tara import NeurosecurityMonitor, create_kohno_rules
+from tara.nsam import RuleEngine
+
+# Initialize neurosecurity monitor
+monitor = NeurosecurityMonitor()
+
+# Load Kohno rules into NSAM
+engine = RuleEngine()
+rules_loaded = monitor.load_kohno_rules(engine)
+print(f"Loaded {rules_loaded} Kohno rules")
+
+# Calculate privacy score
+score = monitor.calculate_privacy_score(
+    signal_data=[0.1, 0.2, 0.3, ...],
+    detected_erps=["P300", "N170"]
+)
+if score:
+    print(f"Privacy Risk: {score['score']:.2f}")
+    print(f"Interpretation: {score['interpretation']}")
+
+# Classify threat based on metrics
+threat = monitor.classify_threat({
+    "spike_rate": 600,
+    "coherence": 0.2,
+    "signal_entropy": 0.95,
+})
+if threat and threat['threats_detected']:
+    for t in threat['threats']:
+        print(f"Detected: {t['type']} ({t['category']})")
+```
+
+### References
+
+- Denning, T., Matsuoka, Y., & Kohno, T. (2009). Neurosecurity: Security and privacy for neural devices. *Neurosurgical Focus*, 27(1), E7.
+- Bonaci, T., Calo, R., & Chizeck, H. J. (2015). App stores for the brain: Privacy and security in brain-computer interfaces. *IEEE Technology and Society Magazine*, 34(2), 32-39.
+
+**Note on BCI Anonymizer Patent:** The related patent application (US20140228701A1) was **abandoned** and never granted. The concepts from the academic research are freely available for implementation.
+
+---
+
 ## API Reference
 
 ### Core Classes
@@ -313,6 +400,11 @@ simulator = AttackSimulator(dt=0.1, seed=42)
 from tara import NeuralNSAM, AlertLevel
 nsam = NeuralNSAM()
 nsam.on_alert(lambda a: print(f"Alert: {a.title}"))
+
+# Neurosecurity (Kohno + Privacy)
+from tara import NeurosecurityMonitor, create_kohno_rules
+monitor = NeurosecurityMonitor()
+privacy = monitor.calculate_privacy_score(signal_data, detected_erps=["P300"])
 ```
 
 ### Simulation Classes
@@ -432,6 +524,14 @@ If you use TARA in your research, please cite:
 
 ## Changelog
 
+### v0.4.0 (2026-01-23)
+- Added neurosecurity module with Kohno threat taxonomy (2009)
+- Added 12 Kohno-based detection rules for NSAM
+- Added BCI privacy filtering (Bonaci et al. 2015)
+- Added NeurosecurityMonitor for real-time threat classification
+- Added Privacy Score Calculator for information leakage risk assessment
+- Integrated ONI Framework neurosecurity components
+
 ### v0.3.0 (2026-01-22)
 - Added Neural Simulator with brain region security analysis
 - Added region-specific attack vectors and defenses
@@ -457,5 +557,5 @@ If you use TARA in your research, please cite:
 ---
 
 *Documents: README.md, CLAUDE.md, AGENTS.md*
-*Modules: 8 | Sub-modules: 14 | Lines of Code: ~16,000*
-*Last Updated: 2026-01-22*
+*Modules: 9 | Sub-modules: 16 | Lines of Code: ~17,000*
+*Last Updated: 2026-01-23*
