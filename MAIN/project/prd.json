@@ -166,6 +166,39 @@
       "priority": "high"
     },
     {
+      "id": "moabb-adapter-implementation",
+      "description": "Create MOABB adapter for testing against real EEG datasets",
+      "status": "complete",
+      "exit_condition": "tara/data/moabb_adapter.py exists; exports in __init__.py; pyproject.toml has [moabb] optional dependency",
+      "completed_at": "2026-01-24",
+      "priority": "high",
+      "learnings": "BSD 3-Clause license allows full integration. Created MOABBAdapter class with dataset loading, signal extraction, attack injection, and coherence benchmarking. Citation required: Jayaram & Barachant (2018)."
+    },
+    {
+      "id": "moabb-coherence-benchmark",
+      "description": "Benchmark coherence metric (Cₛ) accuracy against real MOABB EEG data",
+      "status": "pending",
+      "exit_condition": "Benchmark results documented with precision, recall, F1 scores for attack detection",
+      "priority": "medium",
+      "depends_on": ["moabb-adapter-implementation"]
+    },
+    {
+      "id": "moabb-attack-scenarios",
+      "description": "Create real-signal attack scenarios using MOABB data",
+      "status": "pending",
+      "exit_condition": "At least 3 attack scenarios tested with real EEG: spike injection, frequency hijacking, noise masking",
+      "priority": "medium",
+      "depends_on": ["moabb-adapter-implementation"]
+    },
+    {
+      "id": "brainflow-integration",
+      "description": "Add BrainFlow integration for real-time hardware support",
+      "status": "pending",
+      "exit_condition": "tara/data/brainflow_adapter.py exists with OpenBCI Cyton support",
+      "priority": "low",
+      "rationale": "Enables real-time security testing with physical OpenBCI hardware"
+    },
+    {
       "id": "neurosecurity-implementation",
       "description": "Implement Kohno (2009) neurosecurity principles and BCI Anonymizer (2014) patent in ONI codebase",
       "status": "complete",
@@ -250,10 +283,10 @@
   ],
 
   "metrics": {
-    "total_tasks": 19,
-    "completed": 17,
+    "total_tasks": 23,
+    "completed": 18,
     "in_progress": 0,
-    "pending": 2,
-    "completion_rate": "89%"
+    "pending": 5,
+    "completion_rate": "78%"
   }
 }

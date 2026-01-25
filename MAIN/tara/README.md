@@ -36,7 +36,10 @@ pip install oni-tara[ui]
 # With simulation features
 pip install oni-tara[simulation]
 
-# Full installation
+# With MOABB datasets (real EEG for security testing)
+pip install oni-tara[moabb]
+
+# Full installation (includes MOABB)
 pip install oni-tara[full]
 
 # Development installation (from source)
@@ -65,6 +68,51 @@ The dashboard opens at `http://localhost:8501` with these pages:
 | **Neural Simulator** | Testing | Brain region security analysis |
 | **Attack Testing** | Testing | Execute attack scenarios |
 | **Settings** | Configuration | Thresholds, rules, system parameters |
+
+### Test with Real EEG Data (MOABB)
+
+TARA integrates with [MOABB](https://github.com/NeuroTechX/moabb) (BSD 3-Clause) for testing against real BCI data:
+
+```python
+from tara.data import MOABBAdapter, is_moabb_available
+from tara import NeuralFirewall, CoherenceMetric
+
+# Check if MOABB is installed
+if not is_moabb_available():
+    print("Install with: pip install oni-tara[moabb]")
+else:
+    # Load real EEG dataset
+    adapter = MOABBAdapter()
+    dataset = adapter.load_dataset("BNCI2014_001")  # Motor imagery
+    signals = adapter.get_signals(dataset, subject=1, max_epochs=10)
+
+    # Test coherence metric on real signals
+    coherence = CoherenceMetric()
+    firewall = NeuralFirewall()
+
+    for signal in signals:
+        cs_score = coherence.calculate(signal.data)
+        result = firewall.process_signal(signal.to_tara_format())
+        print(f"Signal: {signal.label}, Cₛ={cs_score:.3f}, Passed={result}")
+
+    # Inject attack and test detection
+    attacked = adapter.inject_attack(signals[0], "spike", intensity=2.0)
+    attack_cs = coherence.calculate(attacked.attacked)
+    print(f"Attack injected: Cₛ dropped from {cs_score:.3f} to {attack_cs:.3f}")
+```
+
+**Available Datasets:**
+| Dataset | Paradigm | Subjects | ONI Relevance |
+|---------|----------|----------|---------------|
+| BNCI2014_001 | Motor Imagery | 9 | Motor cortex (L13) attack detection |
+| BNCI2014_002 | Motor Imagery | 14 | Longitudinal firewall validation |
+| EPFLP300 | P300 | 8 | Privacy-sensitive ERP (Kohno threats) |
+| SSVEP_Exo | SSVEP | 12 | Frequency injection attack vectors |
+
+**Citation:** When publishing results using MOABB data, cite:
+> Jayaram, V., & Barachant, A. (2018). MOABB: Trustworthy algorithm benchmarking for BCIs. *J Neural Eng*, 15(6), 066011.
+
+---
 
 ### Python API
 

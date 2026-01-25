@@ -64,12 +64,23 @@ simulation = [
     "matplotlib>=3.5.0",
     "pandas>=1.4.0",
 ]
+moabb = [
+    # Mother of All BCI Benchmarks - BSD 3-Clause License
+    # Provides standardized EEG datasets for security testing
+    # Citation: Jayaram & Barachant (2018), J Neural Eng 15(6)
+    "moabb>=0.5.0",
+    "mne>=1.0.0",
+    "scikit-learn>=1.0.0",
+    "pandas>=1.4.0",
+]
 full = [
     "streamlit>=1.28.0",
     "plotly>=5.17.0",
     "matplotlib>=3.5.0",
     "pandas>=1.4.0",
     "scikit-learn>=1.0.0",
+    "moabb>=0.5.0",
+    "mne>=1.0.0",
 ]
 dev = [
     "pytest>=7.0.0",

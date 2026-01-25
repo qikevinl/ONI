@@ -57,9 +57,10 @@ tara/
 │   ├── alerts.py          # Alert management
 │   └── monitor.py         # Real-time monitoring service
 │
-├── data/                  # Data models
+├── data/                  # Data models & external datasets
 │   ├── brain_regions.py   # Brain region definitions (10 regions)
 │   ├── bci_nodes.py       # BCI node network models
+│   ├── moabb_adapter.py   # MOABB dataset integration (BSD 3-Clause)
 │   └── export/            # Export functionality (placeholder)
 │
 ├── neurosecurity/         # Neurosecurity (Kohno 2009, Bonaci 2015)
@@ -334,6 +335,71 @@ threat = monitor.classify_threat(metrics)
 3. Tag with "kohno" and the appropriate category
 4. Update UI Pages Reference in this file
 
+### Using MOABB Adapter (Real EEG Data)
+
+TARA integrates with [MOABB](https://github.com/NeuroTechX/moabb) (BSD 3-Clause License) for testing against real EEG datasets.
+
+**Installation:**
+```bash
+pip install oni-tara[moabb]
+```
+
+**Loading Real EEG Data:**
+```python
+from tara.data import MOABBAdapter, is_moabb_available
+
+if is_moabb_available():
+    adapter = MOABBAdapter()
+
+    # Load motor imagery dataset
+    dataset = adapter.load_dataset("BNCI2014_001")
+    signals = adapter.get_signals(dataset, subject=1, max_epochs=10)
+
+    # Each signal is an EEGSignal object
+    for signal in signals:
+        print(f"Label: {signal.label}, Shape: {signal.data.shape}")
+```
+
+**Injecting Attacks for Security Testing:**
+```python
+# Inject spike attack (ransomware signature)
+attacked = adapter.inject_attack(
+    signals[0],
+    attack_type="spike",     # spike, noise, frequency, phase, dc_shift
+    intensity=2.0,
+    channels=[0, 1, 2],      # Target specific channels
+)
+
+# Compare original vs attacked
+print(f"Original max: {signals[0].data.max():.2f}")
+print(f"Attacked max: {attacked.attacked.max():.2f}")
+```
+
+**Benchmarking Coherence Metric:**
+```python
+# Benchmark coherence against real signals
+results = adapter.benchmark_coherence(signals)
+print(f"Clean signal Cₛ: {results['clean_signals']['mean_score']:.3f}")
+
+# With attack detection metrics
+attacked_signals = [adapter.inject_attack(s, "spike") for s in signals]
+results = adapter.benchmark_coherence(signals, attacked_signals)
+print(f"Detection accuracy: {results['detection_metrics']['accuracy']:.2%}")
+```
+
+**Available Datasets:**
+
+| Dataset | Paradigm | ONI Relevance |
+|---------|----------|---------------|
+| BNCI2014_001 | Motor Imagery | Motor cortex (L13) attack detection |
+| BNCI2014_002 | Motor Imagery | Longitudinal firewall validation |
+| EPFLP300 | P300 | Privacy-sensitive ERP (Kohno threats) |
+| SSVEP_Exo | SSVEP | Frequency injection attack vectors |
+
+**Citation Requirement:**
+When publishing results using MOABB data, cite:
+> Jayaram, V., & Barachant, A. (2018). MOABB: Trustworthy algorithm benchmarking for BCIs. *J Neural Eng*, 15(6), 066011.
+
 ---
 
 ## Testing
@@ -402,6 +468,6 @@ pytest tests/ -v
 
 ---
 
-*Version: 1.1*
-*Last Updated: 2026-01-23*
+*Version: 1.2*
+*Last Updated: 2026-01-24*
 *For: Claude AI Assistant*

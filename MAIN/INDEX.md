@@ -2,7 +2,7 @@
 
 > **The central navigation hub for all ONI Framework research, publications, and development.**
 
-**Version:** 1.5
+**Version:** 1.6
 **Last Updated:** 2026-01-24
 **Status:** Active Development
 
@@ -67,9 +67,26 @@ pip install oni-tara
 | [tara.attacks](tara/tara/attacks/) | Attack testing & scenarios | `AttackSimulator`, `AttackScenario` |
 | [tara.nsam](tara/tara/nsam/) | Neural Signal Assurance Monitoring | `NSAMMonitor`, `RuleEngine`, `AlertManager` |
 | [tara.neurosecurity](tara/tara/neurosecurity/) | Kohno rules integration | `NeurosecurityMonitor` |
+| [tara.data](tara/tara/data/) | Data models & external datasets | `MOABBAdapter`, `BrainRegion`, `BCINode` |
 | [tara.ui](tara/tara/ui/) | Streamlit web interface | `tara ui` command |
 
 **Documentation:** [tara/README.md](tara/README.md) | **CLI:** `tara --help`
+
+#### MOABB Integration (External Datasets)
+
+TARA integrates with [MOABB](https://github.com/NeuroTechX/moabb) (BSD 3-Clause) for testing against real EEG data:
+
+```bash
+pip install oni-tara[moabb]
+```
+
+```python
+from tara.data import MOABBAdapter
+adapter = MOABBAdapter()
+signals = adapter.get_signals(adapter.load_dataset("BNCI2014_001"), subject=1)
+```
+
+See [RELATED_WORK.md](RELATED_WORK.md#moabb-mother-of-all-bci-benchmarks) for citation requirements.
 
 **Neurosecurity Implementation:** [NEUROSECURITY_IMPLEMENTATION.md](oni-framework/NEUROSECURITY_IMPLEMENTATION.md) — Integrates Kohno (2009) and BCI Anonymizer patent
 

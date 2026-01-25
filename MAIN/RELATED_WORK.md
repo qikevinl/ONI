@@ -13,6 +13,7 @@ This document acknowledges the foundational and concurrent research in brain-com
 - [Privacy and Anonymization](#privacy-and-anonymization)
 - [Threat Modeling](#threat-modeling)
 - [Hardware Security](#hardware-security)
+- [Open Source BCI Resources](#open-source-bci-resources)
 - [Neuroethics](#neuroethics)
 - [How ONI Differs](#how-oni-differs)
 - [References](#references)
@@ -190,6 +191,81 @@ Founded by **Kevin Fu** at Northeastern University (formerly University of Michi
 
 ---
 
+## Open Source BCI Resources
+
+### NeuroTechX Community
+
+**NeuroTechX** is an international non-profit organization building a community of neurotechnology enthusiasts, researchers, and developers:
+
+**Key Resources:**
+
+| Resource | Description | License | ONI Integration |
+|----------|-------------|---------|-----------------|
+| **[MOABB](https://github.com/NeuroTechX/moabb)** | Mother of All BCI Benchmarks — standardized EEG datasets | BSD 3-Clause | `tara.data.moabb_adapter` |
+| **[awesome-bci](https://github.com/NeuroTechX/awesome-bci)** | Curated BCI resource collection | N/A (list) | Reference for partnerships |
+
+### MOABB (Mother of All BCI Benchmarks)
+
+> Jayaram, V., & Barachant, A. (2018). MOABB: Trustworthy algorithm benchmarking for BCIs. *Journal of Neural Engineering*, 15(6), 066011. https://doi.org/10.1088/1741-2552/aadea0
+
+**Key Contributions:**
+- Standardized benchmarking framework for BCI algorithms
+- 12+ freely available EEG datasets (motor imagery, P300, SSVEP)
+- Cross-session and cross-subject evaluation protocols
+- Integration with scikit-learn and MNE-Python
+- Reproducible research methodology
+
+**Datasets Relevant to ONI Security Testing:**
+
+| Dataset | Paradigm | Subjects | ONI Relevance |
+|---------|----------|----------|---------------|
+| BNCI2014_001 | Motor Imagery | 9 | Test motor cortex (L13) attack detection |
+| BNCI2014_002 | Motor Imagery | 14 | Longitudinal firewall validation |
+| EPFLP300 | P300 | 8 | Privacy-sensitive ERP detection (Kohno threats) |
+| SSVEP_Exo | SSVEP | 12 | Frequency injection attack vectors |
+
+**ONI Framework Relationship:** TARA integrates MOABB through the `tara.data.moabb_adapter` module, enabling:
+- Testing coherence metric against real EEG signals
+- Validating attack detection on authentic BCI paradigms
+- Benchmarking false positive/negative rates with real data
+
+**Installation:**
+```bash
+pip install oni-tara[moabb]
+```
+
+**Usage:**
+```python
+from tara.data import MOABBAdapter, BCIParadigm
+
+adapter = MOABBAdapter()
+dataset = adapter.load_dataset("BNCI2014_001")
+signals = adapter.get_signals(dataset, subject=1)
+
+# Test with Neural Firewall
+from tara import NeuralFirewall
+firewall = NeuralFirewall()
+for signal in signals:
+    result = firewall.process_signal(signal.to_tara_format())
+```
+
+### awesome-bci Curated Resources
+
+The **awesome-bci** repository provides a comprehensive collection of BCI resources that complement ONI development:
+
+**Categories Relevant to ONI:**
+
+| Category | Key Resources | ONI Application |
+|----------|---------------|-----------------|
+| **Python Toolboxes** | MNE-Python, pyRiemann, BrainFlow | Signal processing for Neural Firewall |
+| **Communication Protocols** | Lab Streaming Layer (LSL) | Real-time signal ingestion |
+| **Datasets** | OpenNeuro, PhysioNet | Training data for attack detection |
+| **Hardware SDKs** | OpenBCI, Emotiv, Muse | Hardware validation targets |
+
+**ONI Framework Relationship:** These resources inform the ONI hardware partnership roadmap (see [PARTNERSHIPS.md](PARTNERSHIPS.md)) and provide validation targets for the `oni-openbci` planned package.
+
+---
+
 ## Neuroethics
 
 ### Digital Ethics and Neurotechnology
@@ -309,6 +385,12 @@ This enables anomaly detection across neural scales (molecular to behavioral).
 
 10. OECD. (2019). Recommendation of the Council on Responsible Innovation in Neurotechnology.
 
+### Open Source Resources
+
+11. Jayaram, V., & Barachant, A. (2018). MOABB: Trustworthy algorithm benchmarking for BCIs. *Journal of Neural Engineering*, 15(6), 066011. https://doi.org/10.1088/1741-2552/aadea0
+
+12. NeuroTechX. (2024). awesome-bci: Curated collection of BCI resources. GitHub. https://github.com/NeuroTechX/awesome-bci
+
 ---
 
 ## Implementation in ONI Framework
@@ -364,5 +446,5 @@ This document is maintained as part of the ONI Framework. If you know of relevan
 
 ---
 
-*Last Updated: 2026-01-23*
+*Last Updated: 2026-01-24*
 *Part of the [ONI Framework](../README.md)*

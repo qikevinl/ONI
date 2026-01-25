@@ -2,7 +2,7 @@
 TARA Data Models
 
 Data definitions for brain regions, electrode templates,
-BCI nodes, and export functionality.
+BCI nodes, export functionality, and external dataset adapters.
 """
 
 from .brain_regions import (
@@ -26,6 +26,19 @@ from .bci_nodes import (
     create_demo_network,
 )
 
+# MOABB adapter (optional dependency)
+from .moabb_adapter import (
+    MOABBAdapter,
+    BCIParadigm,
+    EEGSignal,
+    AttackInjectedSignal,
+    DatasetInfo,
+    is_moabb_available,
+    get_moabb_version,
+    AVAILABLE_DATASETS,
+    SUPPORTED_PARADIGMS,
+)
+
 __all__ = [
     # Brain regions
     "BrainRegion",
@@ -44,4 +57,14 @@ __all__ = [
     "NodeStatus",
     "ConnectionStatus",
     "create_demo_network",
+    # MOABB Adapter (external datasets)
+    "MOABBAdapter",
+    "BCIParadigm",
+    "EEGSignal",
+    "AttackInjectedSignal",
+    "DatasetInfo",
+    "is_moabb_available",
+    "get_moabb_version",
+    "AVAILABLE_DATASETS",
+    "SUPPORTED_PARADIGMS",
 ]
