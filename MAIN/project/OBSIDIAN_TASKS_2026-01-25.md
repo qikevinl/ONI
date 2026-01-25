@@ -24,7 +24,6 @@
 |------|--------|----------|--------|
 | Add NeuroTechX MOABB datasets for benchmarking | Jan 23 notes | Medium | ✅ Done (MOABBAdapter in tara_mvp/data/) |
 | Review awesome-bci tools for potential adoption | Jan 23 notes | Medium | 🔲 Pending |
-| Verify notable researchers list with multiple AIs (reduce bias) | Jan 24 notes | Medium | 🔲 Pending |
 | Create ONI final paper abstract compiling git, docs, blogs | Jan 23 notes | High | 🔲 Pending |
 
 **References:**
