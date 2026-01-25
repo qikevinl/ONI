@@ -262,6 +262,41 @@
       ],
       "feasibility": "practical",
       "estimated_effort": "medium"
+    },
+    {
+      "id": "future-l11-l14-standards-development",
+      "title": "L11-L14 Standards Development",
+      "description": "Develop governance and standards alignment for Layers 11-14 (Cognitive Transport, Cognitive Session, Semantic Layer, Identity Layer). Unlike L1-L7 (IEEE, IETF) and L8-L10 (IEC 62443, FDA guidance), no established standards currently exist for cognitive and identity-layer security. Requires collaboration with Subject Matter Experts (neuroethicists, cognitive scientists, BCI researchers) and engagement with governing agencies (FDA, EU MDR, IEEE emerging working groups, UNESCO/OECD neuroethics initiatives).",
+      "rationale": "ONI_LAYERS.md Section 4 'Standards Alignment' notes L11-L14 depend on 'Emerging neuroethics frameworks' which are not yet mature. Framework adoption requires actionable standards at all layers.",
+      "feasibility": "blocked-external",
+      "blockers": [
+        "No mature international standards for cognitive-layer BCI security",
+        "Neuroethics governance frameworks still emerging (UNESCO, OECD)",
+        "IEEE and other standards bodies have not yet addressed L11-L14 scope",
+        "Requires multi-stakeholder coordination beyond single-project scope"
+      ],
+      "required_input": {
+        "subject_matter_experts": [
+          "Neuroethicists (e.g., NIH BRAIN Initiative ethics working groups)",
+          "Cognitive scientists specializing in BCI",
+          "BCI security researchers (academic and industry)"
+        ],
+        "governing_agencies": [
+          "FDA (neural device guidance evolution)",
+          "EU MDR (medical device regulation)",
+          "IEEE (emerging neural interface standards)",
+          "UNESCO (neurorights and neuroethics)",
+          "OECD (responsible AI/neural interface principles)"
+        ]
+      },
+      "actions_when_unblocked": [
+        "Monitor emerging neuroethics frameworks from UNESCO, OECD, IEEE",
+        "Engage with standards bodies when L11-L14 guidelines emerge",
+        "Contribute ONI framework principles to standards development efforts",
+        "Map ONI L11-L14 to emerging standards as they mature"
+      ],
+      "estimated_effort": "large",
+      "timeline": "external-dependent"
     }
   ],
 

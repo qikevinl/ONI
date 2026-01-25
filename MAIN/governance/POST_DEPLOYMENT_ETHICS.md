@@ -204,6 +204,37 @@ Full Function ──► Limited Function ──► Safe Mode ──► Standby �
 
 ---
 
+## Future Work
+
+### L11-L14 Standards Development
+
+The ONI Framework's upper layers (L11-L14: Cognitive Transport, Cognitive Session, Semantic Layer, Identity Layer) currently reference "Emerging neuroethics frameworks" for standards alignment. Unlike the lower layers:
+
+| Layer Range | Current Standards | Status |
+|-------------|-------------------|--------|
+| L1-L7 | IEEE, IETF | Mature |
+| L8-L10 | IEC 62443, FDA guidance | Established |
+| **L11-L14** | **Emerging neuroethics frameworks** | **Not yet mature** |
+
+**Gap:** No established international standards exist for cognitive and identity-layer security in neural interfaces.
+
+**Required Collaboration:**
+
+| Stakeholder Type | Examples | Role |
+|-----------------|----------|------|
+| **Subject Matter Experts** | Neuroethicists, cognitive scientists, BCI researchers | Define requirements and validate approaches |
+| **Governing Agencies** | FDA, EU MDR, IEEE, UNESCO, OECD | Develop regulatory frameworks and standards |
+
+**Actions (When Standards Emerge):**
+1. Monitor emerging neuroethics frameworks from UNESCO, OECD, IEEE
+2. Engage with standards bodies as L11-L14 guidelines develop
+3. Contribute ONI framework principles to standards development efforts
+4. Map ONI L11-L14 definitions to emerging standards as they mature
+
+**Tracking:** See `prd.json` future work item `future-l11-l14-standards-development`
+
+---
+
 ## References
 
 Lázaro-Muñoz, G., Pham, M. T., Muñoz, K. A., et al. (2022). Post-trial access in implanted neural device research: Device maintenance, abandonment, and cost. *Brain Stimulation*, 15(5), 1029-1036. https://doi.org/10.1016/j.brs.2022.07.051

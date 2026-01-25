@@ -84,7 +84,7 @@ This is where the brain enters the network.
 
 | Attribute | Value |
 |-----------|-------|
-| **Domain** | Silicon |
+| **Domain** | Biology |
 | **Function** | Filtering, amplification, denoising, digitization |
 | **Signals** | Sampled neural waveforms, spike trains |
 | **Frequency** | 1–500 Hz (sampled at kHz rates) |
@@ -95,7 +95,7 @@ This is where the brain enters the network.
 
 | Attribute | Value |
 |-----------|-------|
-| **Domain** | Silicon |
+| **Domain** | Biology |
 | **Function** | Mapping neural signals to machine-readable formats |
 | **Signals** | Encoded spike patterns, feature vectors |
 | **Frequency** | Event-driven |
@@ -106,7 +106,7 @@ This is where the brain enters the network.
 
 | Attribute | Value |
 |-----------|-------|
-| **Domain** | Silicon |
+| **Domain** | Biology |
 | **Function** | Reliable transmission of neural/cognitive state |
 | **Signals** | Structured cognitive packets |
 | **Frequency** | Seconds → minutes |
@@ -217,6 +217,8 @@ ONI can adopt existing standards:
 - L1-L7: IEEE, IETF standards
 - L8-L10: Medical device standards (IEC 62443, FDA guidance)
 - L11-L14: Emerging neuroethics frameworks
+
+> **⚠️ Future Work (L11-L14):** Unlike the mature standards for L1-L10, no established international standards currently exist for cognitive and identity-layer security. Standards development for L11-L14 requires collaboration with subject matter experts (neuroethicists, cognitive scientists, BCI researchers) and governing agencies (FDA, EU MDR, IEEE, UNESCO, OECD). See `MAIN/governance/POST_DEPLOYMENT_ETHICS.md` and `prd.json` item `future-l11-l14-standards-development` for tracking.
 
 ### 5. Scalability
 The model works for:
