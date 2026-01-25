@@ -73,12 +73,12 @@ class ONIVisualizationEmbed:
             tara_root = Path(__file__).parent.parent.parent
 
             # Try multiple possible locations
-            # Visualizations moved to MAIN/interactive-concept-demo/
+            # Visualizations moved to MAIN/interactive-oni-visualizations/
             possible_paths = [
-                tara_root.parent.parent / "interactive-concept-demo",  # Dev: MAIN/interactive-concept-demo
-                tara_root.parent / "interactive-concept-demo",          # Alternative location
-                Path.cwd() / "interactive-concept-demo",                # Current working directory
-                Path.cwd().parent / "interactive-concept-demo",         # Parent of cwd
+                tara_root.parent.parent / "interactive-oni-visualizations",  # Dev: MAIN/interactive-oni-visualizations
+                tara_root.parent / "interactive-oni-visualizations",          # Alternative location
+                Path.cwd() / "interactive-oni-visualizations",                # Current working directory
+                Path.cwd().parent / "interactive-oni-visualizations",         # Parent of cwd
             ]
 
             self.base_path = None
@@ -154,7 +154,7 @@ class ONIVisualizationEmbed:
                 </ol>
                 <p style="margin-top: 20px; color: #94a3b8;">
                     Or open the HTML files directly:<br>
-                    <code>MAIN/interactive-concept-demo/index.html</code>
+                    <code>MAIN/interactive-oni-visualizations/index.html</code>
                 </p>
             </div>
             """
