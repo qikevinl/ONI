@@ -41,7 +41,7 @@ License: Apache 2.0
 Repository: https://github.com/qikevinl/ONI
 """
 
-__version__ = "0.6.0"
+__version__ = "0.7.0"
 __author__ = "Kevin L. Qi"
 __name_full__ = "Telemetry Analysis and Response Automation"  # TARA
 
@@ -60,6 +60,19 @@ from .attacks import (
     AttackSimulator,
     AttackPattern,
     AttackScenario,
+)
+
+# Yale Threat Model & CVSS (Schroder et al., 2025)
+from .attacks.patterns import (
+    YaleThreatCategory,
+    CVSSScore,
+    get_yale_patterns,
+    get_cvss_summary,
+    patterns_by_cvss_severity,
+)
+from .attacks.scenarios import (
+    get_yale_scenarios,
+    scenarios_by_yale_category,
 )
 
 # Neural Signal Assurance Monitoring (NSAM)
@@ -117,6 +130,14 @@ __all__ = [
     "AttackSimulator",
     "AttackPattern",
     "AttackScenario",
+    # Yale Threat Model & CVSS
+    "YaleThreatCategory",
+    "CVSSScore",
+    "get_yale_patterns",
+    "get_cvss_summary",
+    "patterns_by_cvss_severity",
+    "get_yale_scenarios",
+    "scenarios_by_yale_category",
     # NSAM (Neural Signal Assurance Monitoring)
     "NeuralNSAM",
     "NeuralMonitor",

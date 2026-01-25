@@ -3,13 +3,24 @@ Attack Scenarios
 
 Predefined multi-stage attack scenarios combining multiple
 attack patterns for comprehensive security testing.
+
+Incorporates:
+- Yale Digital Ethics Center BCI threat model (Schroder et al., 2025)
+- CVSS v4.0 scoring via patterns module
+- ONI Framework layer mapping
+
+References:
+- Schroder, T., et al. (2025). Cyber Risks to Next-Gen BCIs. Neuroethics.
 """
 
 from dataclasses import dataclass, field
 from typing import Dict, Any, List, Optional
 from enum import Enum, auto
 
-from .patterns import AttackPattern, AttackType, ATTACK_PATTERNS
+from .patterns import (
+    AttackPattern, AttackType, ATTACK_PATTERNS,
+    YaleThreatCategory, CVSSScore,
+)
 
 
 class ScenarioSeverity(Enum):
@@ -55,6 +66,8 @@ class AttackScenario:
         target_layers: ONI layers targeted
         objectives: Attack objectives
         mitigations: Recommended defenses
+        yale_categories: Yale threat categories involved (Schroder et al., 2025)
+        references: Academic/industry references
     """
     name: str
     description: str
@@ -63,6 +76,8 @@ class AttackScenario:
     target_layers: List[int] = field(default_factory=list)
     objectives: List[str] = field(default_factory=list)
     mitigations: List[str] = field(default_factory=list)
+    yale_categories: List[YaleThreatCategory] = field(default_factory=list)
+    references: List[str] = field(default_factory=list)
     metadata: Dict[str, Any] = field(default_factory=dict)
 
     @property
@@ -296,6 +311,244 @@ def _build_scenarios():
         ],
     )
 
+    # =========================================================================
+    # Yale Threat Model Scenarios (Schroder et al., 2025)
+    # Source: "Cyber Risks to Next-Gen Brain-Computer Interfaces"
+    # =========================================================================
+
+    # Scenario 6: Supply Chain Firmware Attack (Yale)
+    PREDEFINED_SCENARIOS["supply_chain"] = AttackScenario(
+        name="Supply Chain Firmware Compromise",
+        description=(
+            "Multi-stage attack targeting the BCI firmware update mechanism. "
+            "Yale researchers note that older devices assume connection implies "
+            "authorization, making firmware updates a critical attack vector. "
+            "This scenario simulates a compromised update server delivering "
+            "malicious firmware that persists across device resets."
+        ),
+        severity=ScenarioSeverity.CRITICAL,
+        target_layers=[7, 8, 13, 14],
+        objectives=[
+            "Compromise update server or intercept update",
+            "Deliver malicious firmware payload",
+            "Establish persistent backdoor",
+            "Exfiltrate neural data or modify behavior",
+        ],
+        mitigations=[
+            "Code signing verification for all firmware updates",
+            "Secure boot chain with hardware root of trust",
+            "Update integrity verification (checksums)",
+            "Rollback protection to prevent downgrade attacks",
+            "Patient notification of pending updates",
+        ],
+        yale_categories=[
+            YaleThreatCategory.SOFTWARE_UPDATE,
+            YaleThreatCategory.AUTHENTICATION,
+        ],
+        references=[
+            "Schroder et al. (2025). Cyber Risks to Next-Gen BCIs. Neuroethics.",
+            "Yale News: 'Older devices implicitly authorized connections.'",
+        ],
+        stages=[
+            AttackStage(
+                name="Update Server Compromise",
+                pattern=ATTACK_PATTERNS["side_channel_leak"],
+                start_time=0,
+                duration=2000,
+                conditions={"target": "update_infrastructure"},
+            ),
+            AttackStage(
+                name="Malicious Firmware Delivery",
+                pattern=ATTACK_PATTERNS["malicious_firmware_update"],
+                start_time=2500,
+                duration=60000,
+            ),
+            AttackStage(
+                name="Backdoor Activation",
+                pattern=ATTACK_PATTERNS["gateway_bypass"],
+                start_time=63000,
+                duration=5000,
+            ),
+            AttackStage(
+                name="Neural Data Exfiltration",
+                pattern=ATTACK_PATTERNS["unencrypted_neural_intercept"],
+                start_time=68500,
+                duration=30000,
+            ),
+        ],
+    )
+
+    # Scenario 7: Wireless BCI Exploitation (Yale)
+    PREDEFINED_SCENARIOS["wireless_exploit"] = AttackScenario(
+        name="Wireless BCI Exploitation",
+        description=(
+            "Exploits always-on wireless connectivity common in modern BCIs. "
+            "Yale researchers recommend patient-controlled wireless enable/disable "
+            "as a mitigation. This scenario demonstrates how persistent network "
+            "exposure enables authentication bypass and data interception."
+        ),
+        severity=ScenarioSeverity.HIGH,
+        target_layers=[8, 10, 11],
+        objectives=[
+            "Scan for vulnerable BCI devices",
+            "Exploit weak/absent authentication",
+            "Intercept unencrypted neural data",
+            "Establish persistent connection",
+        ],
+        mitigations=[
+            "Patient-controlled wireless enable/disable switch",
+            "Strong authentication (multi-factor)",
+            "Network encryption (TLS 1.3 minimum)",
+            "Connection timeout and re-authentication",
+            "Wireless access logging and alerts",
+        ],
+        yale_categories=[
+            YaleThreatCategory.WIRELESS,
+            YaleThreatCategory.AUTHENTICATION,
+            YaleThreatCategory.ENCRYPTION,
+        ],
+        references=[
+            "Schroder et al. (2025). Cyber Risks to Next-Gen BCIs. Neuroethics.",
+        ],
+        stages=[
+            AttackStage(
+                name="Network Reconnaissance",
+                pattern=ATTACK_PATTERNS["wireless_network_exploit"],
+                start_time=0,
+                duration=10000,
+            ),
+            AttackStage(
+                name="Authentication Bypass",
+                pattern=ATTACK_PATTERNS["auth_bypass_wireless"],
+                start_time=10500,
+                duration=5000,
+            ),
+            AttackStage(
+                name="Data Interception",
+                pattern=ATTACK_PATTERNS["unencrypted_neural_intercept"],
+                start_time=16000,
+                duration=60000,
+            ),
+        ],
+    )
+
+    # Scenario 8: AI-Mediated Attack (Yale)
+    PREDEFINED_SCENARIOS["ai_attack"] = AttackScenario(
+        name="AI-Mediated Neural Manipulation",
+        description=(
+            "Targets the AI components used in modern BCIs for signal decoding "
+            "and stimulation control. Yale researchers note that AI-mediated "
+            "attacks could cause 'unwanted BCI actions' in bidirectional devices. "
+            "This scenario demonstrates adversarial manipulation of the AI pipeline."
+        ),
+        severity=ScenarioSeverity.CRITICAL,
+        target_layers=[9, 13, 14],
+        objectives=[
+            "Identify AI model vulnerabilities",
+            "Craft adversarial inputs",
+            "Cause false motor commands",
+            "Manipulate cognitive interpretation",
+        ],
+        mitigations=[
+            "Adversarial robustness training for AI models",
+            "Input validation and anomaly detection",
+            "Redundant AI systems with voting",
+            "Human-in-the-loop for critical commands",
+            "AI model integrity monitoring",
+        ],
+        yale_categories=[
+            YaleThreatCategory.SOFTWARE_UPDATE,  # AI is software
+        ],
+        references=[
+            "Schroder et al. (2025). Cyber Risks to Next-Gen BCIs. Neuroethics.",
+            "Yale News: 'AI in personalized medicine has both benefits and risks.'",
+        ],
+        stages=[
+            AttackStage(
+                name="Model Probing",
+                pattern=ATTACK_PATTERNS["side_channel_leak"],
+                start_time=0,
+                duration=5000,
+                conditions={"target": "ai_decoder"},
+            ),
+            AttackStage(
+                name="Adversarial Input Injection",
+                pattern=ATTACK_PATTERNS["ai_malicious_stimulation"],
+                start_time=5500,
+                duration=1000,
+            ),
+            AttackStage(
+                name="Command Manipulation",
+                pattern=ATTACK_PATTERNS["gateway_bypass"],
+                start_time=7000,
+                duration=3000,
+            ),
+        ],
+    )
+
+    # Scenario 9: Mass BCI Exploitation (Yale Worst-Case)
+    PREDEFINED_SCENARIOS["mass_exploitation"] = AttackScenario(
+        name="Mass BCI Exploitation Campaign",
+        description=(
+            "Yale's worst-case scenario: a coordinated attack on standardized "
+            "BCI systems affecting millions simultaneously. Could cause 'mass "
+            "manipulation of neural data or impairment of cognitive functions.' "
+            "This scenario simulates a nation-state level attack campaign."
+        ),
+        severity=ScenarioSeverity.CRITICAL,
+        target_layers=[7, 8, 13, 14],
+        objectives=[
+            "Compromise BCI vendor infrastructure",
+            "Deploy malicious update to all devices",
+            "Establish botnet of compromised BCIs",
+            "Execute coordinated neural manipulation",
+        ],
+        mitigations=[
+            "Device diversity (avoid monoculture)",
+            "Distributed update infrastructure",
+            "Geographic update rollout limits",
+            "Emergency kill switch mechanism",
+            "International BCI security standards",
+            "Regulatory incident reporting requirements",
+        ],
+        yale_categories=[
+            YaleThreatCategory.SOFTWARE_UPDATE,
+            YaleThreatCategory.WIRELESS,
+            YaleThreatCategory.AUTHENTICATION,
+            YaleThreatCategory.ENCRYPTION,
+        ],
+        references=[
+            "Schroder et al. (2025): 'A widespread security breach could affect "
+            "millions of users simultaneously, leading to mass manipulation.'",
+        ],
+        stages=[
+            AttackStage(
+                name="Infrastructure Compromise",
+                pattern=ATTACK_PATTERNS["malicious_firmware_update"],
+                start_time=0,
+                duration=86400000,  # 24 hours
+                conditions={"scope": "vendor_infrastructure"},
+            ),
+            AttackStage(
+                name="Botnet Formation",
+                pattern=ATTACK_PATTERNS["wireless_network_exploit"],
+                start_time=86400000,
+                duration=604800000,  # 7 days
+            ),
+            AttackStage(
+                name="Coordinated Attack",
+                pattern=ATTACK_PATTERNS["mass_neural_manipulation"],
+                start_time=691200000,
+                duration=3600000,  # 1 hour
+            ),
+        ],
+        metadata={
+            "estimated_affected_users": "millions",
+            "attack_sophistication": "nation-state",
+            "recovery_time": "weeks to months",
+        },
+    )
+
 
 # Build scenarios on module load
 _build_scenarios()
@@ -317,3 +570,77 @@ def list_scenarios() -> List[str]:
 def scenarios_by_severity(severity: ScenarioSeverity) -> List[AttackScenario]:
     """Get all scenarios of a specific severity."""
     return [s for s in PREDEFINED_SCENARIOS.values() if s.severity == severity]
+
+
+def scenarios_by_yale_category(category: YaleThreatCategory) -> List[AttackScenario]:
+    """
+    Get all scenarios involving a Yale threat category.
+
+    Args:
+        category: YaleThreatCategory enum value
+
+    Returns:
+        List of AttackScenarios involving that category
+
+    Example:
+        >>> wireless = scenarios_by_yale_category(YaleThreatCategory.WIRELESS)
+        >>> for scenario in wireless:
+        ...     print(f"{scenario.name}: {scenario.severity.name}")
+    """
+    return [s for s in PREDEFINED_SCENARIOS.values()
+            if category in s.yale_categories]
+
+
+def get_yale_scenarios() -> List[AttackScenario]:
+    """
+    Get all scenarios based on the Yale threat model.
+
+    Returns:
+        List of AttackScenarios with Yale categories assigned
+
+    Example:
+        >>> yale = get_yale_scenarios()
+        >>> print(f"Yale-based scenarios: {len(yale)}")
+    """
+    return [s for s in PREDEFINED_SCENARIOS.values()
+            if s.yale_categories]
+
+
+def get_scenario_cvss_summary(name: str) -> Dict[str, Any]:
+    """
+    Get CVSS summary for all patterns in a scenario.
+
+    Args:
+        name: Scenario name
+
+    Returns:
+        Dict with CVSS summary:
+        - max_score: Highest CVSS score in scenario
+        - mean_score: Average CVSS score
+        - stages_with_cvss: Number of stages with CVSS scores
+
+    Example:
+        >>> summary = get_scenario_cvss_summary("supply_chain")
+        >>> print(f"Max CVSS: {summary['max_score']}")
+    """
+    scenario = get_scenario(name)
+    scores = []
+
+    for stage in scenario.stages:
+        if stage.pattern.cvss:
+            scores.append(stage.pattern.cvss.base_score)
+
+    if not scores:
+        return {
+            "max_score": 0.0,
+            "mean_score": 0.0,
+            "stages_with_cvss": 0,
+            "total_stages": len(scenario.stages),
+        }
+
+    return {
+        "max_score": max(scores),
+        "mean_score": round(sum(scores) / len(scores), 1),
+        "stages_with_cvss": len(scores),
+        "total_stages": len(scenario.stages),
+    }
