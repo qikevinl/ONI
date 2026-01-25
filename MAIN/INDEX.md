@@ -435,6 +435,7 @@ MAIN/
 │
 ├── oni-framework/              # Python library (pip install oni-framework)
 │   ├── ONI_LAYERS.md           # **Authoritative 14-layer reference**
+│   ├── ONI_THREAT_MATRIX.md    # **7 tactics, 21 techniques (MITRE-inspired)**
 │   ├── NEUROSECURITY_IMPLEMENTATION.md  # Kohno/BCI integration guide
 │   ├── oni/                    # Source modules
 │   │   ├── coherence.py        # Cₛ calculation
