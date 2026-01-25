@@ -3,7 +3,7 @@
 > **Purpose:** Persistent learnings from Ralph Loop iterations. AI agents read this file at the start of each session to benefit from discovered patterns, gotchas, and conventions.
 
 **Last Updated:** 2026-01-24
-**Loop Iterations:** 7
+**Loop Iterations:** 8
 
 ---
 
@@ -26,6 +26,8 @@
 | 2026-01-24 | Uncertainty tagging system: ✅ ⚠️ 🔍 ❌ 🔬 | All claims must be tagged before publication |
 | 2026-01-24 | **L9-L14 domain error found in 6+ files** — labeled as "Silicon" but should be "Biology" | Fixed ONI_LAYERS.md, README.md, NEUROETHICS_ALIGNMENT.md, layer_validation.md, prototype-mvp files |
 | 2026-01-24 | **Comprehensive PM system implemented** — KANBAN.md + PROJECT_MANAGEMENT.md | Risk Impact Assessment (L×I matrix), Priority Framework (P0-P3), Scope Change Requests, Milestone roadmap |
+| 2026-01-24 | **Package consolidation: prototype-mvp → tara-neural-security-platform** | Source code, tests, visualizations now in single package directory. pyproject.toml updated to local paths. |
+| 2026-01-24 | **ONI Visualization Suite integrated into TARA UI** | 5 HTML apps accessible via sidebar "Interactive" section. Research alignment documented in VISUALIZATION_RESEARCH dict. |
 
 ### Patterns Established
 
@@ -342,8 +344,8 @@ L14: Identity & Ethics         (Biology)
 
 | Metric | Value |
 |--------|-------|
-| Total Iterations | 7 |
-| Learnings Captured | 28 |
+| Total Iterations | 8 |
+| Learnings Captured | 30 |
 | Gotchas Documented | 8 |
 | Patterns Established | 20 |
 | Personas Defined | 7 |

@@ -146,6 +146,23 @@ def render_sidebar():
             st.rerun()
 
     st.sidebar.markdown("")
+    st.sidebar.markdown("**Interactive**")
+
+    # Interactive visualizations section (ONI Visualization Suite)
+    interactive_pages = [
+        ("Coherence Playground", "coherence"),
+        ("Layer Explorer", "layers"),
+        ("Kill Chain Viz", "killchain"),
+        ("NSAM Checkpoint", "nsam"),
+        ("Scale-Frequency", "scale_freq"),
+    ]
+    for p_name, p_key in interactive_pages:
+        if st.sidebar.button(p_name, key=f"nav_viz_{p_key}", use_container_width=True,
+                            type="primary" if st.session_state.current_page == f"viz_{p_key}" else "secondary"):
+            st.session_state.current_page = f"viz_{p_key}"
+            st.rerun()
+
+    st.sidebar.markdown("")
     st.sidebar.markdown("**Configuration**")
 
     # Config section
@@ -1751,6 +1768,97 @@ def _generate_sample_events():
     st.session_state.events = events
 
 
+# ============================================================================
+# ONI VISUALIZATION PAGES (Interactive HTML Visualizations)
+# ============================================================================
+
+# Research alignment mapping for visualizations
+VISUALIZATION_RESEARCH = {
+    "coherence": {
+        "title": "Coherence Metric Playground",
+        "research": "Kohno (2009) — Signal integrity verification",
+        "description": "Interactive coherence score calculation with real-time waveform comparison. "
+                      "Demonstrates how Cₛ = Σᵢ wᵢ × Φᵢ(Δtᵢ) × Θᵢ(fᵢ, Aᵢ) detects attack signatures.",
+        "oni_layer": "L8-L9",
+    },
+    "layers": {
+        "title": "ONI Layer Explorer",
+        "research": "ONI Framework — 14-layer bio-digital model",
+        "description": "Navigate the complete ONI stack from L1 (Physical Carrier) to L14 (Identity & Ethics). "
+                      "Shows attack surfaces and defense mechanisms at each layer.",
+        "oni_layer": "L1-L14",
+    },
+    "killchain": {
+        "title": "Neural Kill Chain Visualizer",
+        "research": "Bonaci (2015) — BCI attack patterns",
+        "description": "Animated attack propagation across ONI layers. Shows 5 attack types and how "
+                      "the neural firewall intercepts them at L8.",
+        "oni_layer": "L8",
+    },
+    "nsam": {
+        "title": "NSAM Checkpoint Simulator",
+        "research": "Neural Signal Assurance Monitoring pipeline",
+        "description": "Gamified signal validation training. Learn to identify clean vs attacked "
+                      "neural signals through 5 checkpoint stages.",
+        "oni_layer": "L8-L10",
+    },
+    "scale_freq": {
+        "title": "Scale-Frequency Navigator",
+        "research": "f × S ≈ k invariant — Scale-frequency relationship",
+        "description": "Explore temporal scales from femtoseconds (quantum) to hours (circadian). "
+                      "Demonstrates the scale-frequency invariant principle.",
+        "oni_layer": "L9-L14",
+    },
+}
+
+
+def render_visualization_page(viz_key: str):
+    """
+    Render an ONI visualization page.
+
+    Args:
+        viz_key: Visualization key (coherence, layers, killchain, nsam, scale_freq)
+    """
+    if not VISUALIZATION_AVAILABLE:
+        st.error("Visualization modules not available. Please check installation.")
+        return
+
+    info = VISUALIZATION_RESEARCH.get(viz_key, {})
+
+    # Page header
+    st.title(f"🧠 {info.get('title', 'ONI Visualization')}")
+
+    # Research context
+    with st.expander("📚 Research Context", expanded=False):
+        col1, col2 = st.columns([2, 1])
+        with col1:
+            st.markdown(f"**Academic Foundation:** {info.get('research', 'N/A')}")
+            st.markdown(info.get('description', ''))
+        with col2:
+            st.metric("ONI Layers", info.get('oni_layer', 'N/A'))
+            st.caption("See ACADEMIC_LANDSCAPE.md for full citations")
+
+    st.divider()
+
+    # Embed the visualization
+    try:
+        embed = ONIVisualizationEmbed()
+        embed.render(
+            viz_key,
+            height=700,
+            initial_data={
+                "_visualization": viz_key,
+                "oni_layer": info.get("oni_layer", ""),
+            },
+            scrolling=True,
+        )
+    except FileNotFoundError as e:
+        st.error(f"Visualization file not found: {e}")
+        st.info("Run the application from the tara-neural-security-platform directory.")
+    except Exception as e:
+        st.error(f"Error loading visualization: {e}")
+
+
 def main():
     """Main application entry point."""
     init_session_state()
@@ -1772,6 +1880,10 @@ def main():
         render_nsam_page()
     elif page == "Settings":
         render_settings_page()
+    # Interactive visualization pages (ONI Visualization Suite)
+    elif page.startswith("viz_"):
+        viz_key = page.replace("viz_", "")
+        render_visualization_page(viz_key)
 
     # Auto-refresh when monitoring
     if st.session_state.monitor_running:

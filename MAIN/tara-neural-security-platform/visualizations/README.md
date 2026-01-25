@@ -31,7 +31,7 @@ This prototype suite demonstrates 5 interactive web applications designed to mak
 
 3. **Find the visualizations**
    - Open the unzipped folder
-   - Navigate to: `MAIN` → `visualizations`
+   - Navigate to: `MAIN` → `tara-neural-security-platform` → `visualizations`
 
 4. **Launch the app**
    - Double-click `index.html`
@@ -42,9 +42,17 @@ This prototype suite demonstrates 5 interactive web applications designed to mak
 
 ```bash
 git clone https://github.com/qikevinl/ONI.git
-cd ONI/MAIN/visualizations
+cd ONI/MAIN/tara-neural-security-platform/visualizations
 open index.html    # Mac
 start index.html   # Windows
+```
+
+### Option C: Via TARA UI
+
+```bash
+pip install oni-tara[ui]
+tara ui
+# Navigate to "Interactive" section in sidebar
 ```
 
 No build step required - pure HTML/CSS/JS
