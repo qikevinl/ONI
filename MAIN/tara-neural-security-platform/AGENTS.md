@@ -86,7 +86,7 @@ Each region in `REGION_SECURITY_DATA` should include:
 ### Plotly in Streamlit
 - Use `config={"displayModeBar": False}` for cleaner embeds
 - Set `paper_bgcolor="rgba(0,0,0,0)"` for transparent backgrounds
-- Use `use_container_width=True` for responsive sizing
+- Use `width="stretch"` for responsive sizing (replaces deprecated `use_container_width=True`)
 
 ### Import Patterns
 - Use try/except for optional visualization imports

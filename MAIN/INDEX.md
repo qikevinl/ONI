@@ -2,8 +2,8 @@
 
 > **The central navigation hub for all ONI Framework research, publications, and development.**
 
-**Version:** 2.0
-**Last Updated:** 2026-01-24
+**Version:** 2.1
+**Last Updated:** 2026-01-25
 **Status:** Active Development
 
 ---
@@ -84,7 +84,7 @@ Five interactive HTML applications for education and demonstration:
 | [Kill Chain Visualizer](interactive-oni-visualizations/03-neural-killchain-visualizer.html) | Attack propagation animation | Attack patterns (Bonaci 2015) |
 | [NSAM Checkpoint Sim](interactive-oni-visualizations/04-nsam-checkpoint-simulator.html) | Gamified signal validation | NSAM pipeline |
 | [Scale-Frequency Nav](interactive-oni-visualizations/05-scale-frequency-navigator.html) | Temporal scale exploration | f × S ≈ k invariant |
-| [ONI Threat Matrix](interactive-oni-visualizations/06-oni-attack-matrix.html) | MITRE-inspired threat framework | 7 tactics, 21 techniques |
+| [ONI Threat Matrix](interactive-oni-visualizations/06-oni-threat-matrix.html) | MITRE ATT&CK-inspired neural framework | 7 tactics, 18 techniques, Kohno integration |
 
 **Quick Start:** Open `interactive-oni-visualizations/index.html` in a browser.
 

@@ -151,7 +151,7 @@ def render_sidebar():
     # Monitoring section
     monitoring_pages = ["Dashboard", "Brain Topology", "Neural Firewall", "Signal Assurance", "Neurosecurity"]
     for p in monitoring_pages:
-        if st.sidebar.button(p, key=f"nav_{p}", use_container_width=True,
+        if st.sidebar.button(p, key=f"nav_{p}", width="stretch",
                             type="primary" if st.session_state.current_page == p else "secondary"):
             st.session_state.current_page = p
             st.rerun()
@@ -162,7 +162,7 @@ def render_sidebar():
     # Data section
     data_pages = ["Real EEG Data"]
     for p in data_pages:
-        if st.sidebar.button(p, key=f"nav_{p}", use_container_width=True,
+        if st.sidebar.button(p, key=f"nav_{p}", width="stretch",
                             type="primary" if st.session_state.current_page == p else "secondary"):
             st.session_state.current_page = p
             st.rerun()
@@ -173,7 +173,7 @@ def render_sidebar():
     # Simulations section
     simulations_pages = ["Neural Simulator", "Attack Simulator"]
     for p in simulations_pages:
-        if st.sidebar.button(p, key=f"nav_{p}", use_container_width=True,
+        if st.sidebar.button(p, key=f"nav_{p}", width="stretch",
                             type="primary" if st.session_state.current_page == p else "secondary"):
             st.session_state.current_page = p
             st.rerun()
@@ -190,7 +190,7 @@ def render_sidebar():
         ("Scale-Frequency", "scale_freq"),
     ]
     for p_name, p_key in interactive_pages:
-        if st.sidebar.button(p_name, key=f"nav_viz_{p_key}", use_container_width=True,
+        if st.sidebar.button(p_name, key=f"nav_viz_{p_key}", width="stretch",
                             type="primary" if st.session_state.current_page == f"viz_{p_key}" else "secondary"):
             st.session_state.current_page = f"viz_{p_key}"
             st.rerun()
@@ -199,7 +199,7 @@ def render_sidebar():
     st.sidebar.markdown("**Configuration**")
 
     # Config section
-    if st.sidebar.button("Settings", key="nav_Settings", use_container_width=True,
+    if st.sidebar.button("Settings", key="nav_Settings", width="stretch",
                         type="primary" if st.session_state.current_page == "Settings" else "secondary"):
         st.session_state.current_page = "Settings"
         st.rerun()
@@ -366,7 +366,7 @@ def render_dashboard():
 
     # Interactive chart with click to expand
     with st.expander("Click to expand signal details", expanded=True):
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
         # Detailed metrics when expanded
         detail_cols = st.columns(4)
@@ -447,7 +447,7 @@ def render_dashboard():
 
             # Create node network visualization
             fig = _create_node_network_viz(network)
-            st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+            st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
 
             # Connection status summary
             st.caption("Node Connections (L8 Neural Gateway)")
@@ -892,7 +892,7 @@ def render_neural_simulator_page():
 
         # 3D Brain visualization
         brain_fig = _create_brain_3d_with_regions()
-        st.plotly_chart(brain_fig, use_container_width=True, config={"displayModeBar": False})
+        st.plotly_chart(brain_fig, width="stretch", config={"displayModeBar": False})
 
         # Region selector
         regions = list(REGION_SECURITY_DATA.keys())
@@ -952,7 +952,7 @@ def render_neural_simulator_page():
 
         n_neurons = st.slider("Neuron Count", 20, 100, 40, key="neuron_count")
         neuron_fig = _create_neuron_network_viz(region, n_neurons)
-        st.plotly_chart(neuron_fig, use_container_width=True, config={"displayModeBar": False})
+        st.plotly_chart(neuron_fig, width="stretch", config={"displayModeBar": False})
 
         data = REGION_SECURITY_DATA.get(region, {})
         st.caption(f"Showing simulated {', '.join(data.get('neuron_types', ['neurons']))[:50]}...")
@@ -1219,7 +1219,7 @@ def _render_attack_simulation_panel():
 
         st.divider()
 
-        if st.button("Launch Attack", type="primary", use_container_width=True):
+        if st.button("Launch Attack", type="primary", width="stretch"):
             # Set animation state
             st.session_state.attack_animation_state = {
                 "attack_type": attack_type,
@@ -1274,7 +1274,7 @@ def _render_attack_simulation_panel():
                 paper_bgcolor="rgba(0,0,0,0)",
                 plot_bgcolor="rgba(0,0,0,0)",
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
             # Metrics
             col_a, col_b, col_c, col_d = st.columns(4)
@@ -1322,7 +1322,7 @@ def _render_pew_pew_animation():
     if st.session_state.attack_animation_state:
         state = st.session_state.attack_animation_state
         fig = _create_attack_animation_frame(state, show_shield)
-        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+        st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
 
         # Animation info
         st.markdown("### Attack Path")
@@ -1336,7 +1336,7 @@ def _render_pew_pew_animation():
 
         # Demo visualization
         fig = _create_demo_attack_viz()
-        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+        st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
 
     st.divider()
 
@@ -1686,7 +1686,7 @@ def _render_live_metrics():
             },
         ))
         fig.update_layout(height=300, margin=dict(l=20, r=20, t=50, b=20))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
     with col2:
         # Spike rate gauge
@@ -1708,7 +1708,7 @@ def _render_live_metrics():
             },
         ))
         fig.update_layout(height=300, margin=dict(l=20, r=20, t=50, b=20))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
     # Time series
     st.subheader("Metric History")
@@ -1741,7 +1741,7 @@ def _render_live_metrics():
     )
 
     fig.update_layout(height=450, showlegend=False, margin=dict(l=50, r=20, t=30, b=20))
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 
 def _render_alerts_panel():
@@ -1812,7 +1812,7 @@ def _render_events_panel():
         })
 
     if events_data:
-        st.dataframe(events_data, use_container_width=True, height=400)
+        st.dataframe(events_data, width="stretch", height=400)
     else:
         st.info("No events recorded.")
 
@@ -1878,12 +1878,12 @@ def render_brain_topology_page():
             filter_region=selected_region,
             height=500,
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
         # Metrics summary
         st.subheader("Electrode Array Metrics")
         metrics_fig = viz.create_metrics_summary(region=selected_region)
-        st.plotly_chart(metrics_fig, use_container_width=True)
+        st.plotly_chart(metrics_fig, width="stretch")
 
         # Region/Thread details
         col1, col2 = st.columns(2)
@@ -1904,7 +1904,7 @@ def render_brain_topology_page():
                         "ONI Layer": f"L{region.oni_layer}",
                     })
             if region_data:
-                st.dataframe(region_data, use_container_width=True, hide_index=True)
+                st.dataframe(region_data, width="stretch", hide_index=True)
             else:
                 st.info("No electrodes placed in defined regions")
 
@@ -1922,7 +1922,7 @@ def render_brain_topology_page():
                     "Avg SNR": f"{thread.avg_snr:.1f} dB",
                 })
             if thread_data:
-                st.dataframe(thread_data, use_container_width=True, hide_index=True)
+                st.dataframe(thread_data, width="stretch", hide_index=True)
 
     else:
         st.warning("No electrode array configured. Initialize one in settings.")
@@ -2016,7 +2016,7 @@ def render_neural_firewall_page():
     st.subheader("Validation Pipeline")
     pipeline_viz = FirewallPipelineVisualization(firewall)
     pipeline_fig = pipeline_viz.create_pipeline_figure(show_stats=True, height=500)
-    st.plotly_chart(pipeline_fig, use_container_width=True)
+    st.plotly_chart(pipeline_fig, width="stretch")
 
     # Last signal result
     if "last_signal_result" in st.session_state:
@@ -2036,7 +2036,7 @@ def render_neural_firewall_page():
             signal_data = []
             for key, value in signal.items():
                 signal_data.append({"Metric": key.replace("_", " ").title(), "Value": f"{value:.3f}"})
-            st.dataframe(signal_data, use_container_width=True, hide_index=True)
+            st.dataframe(signal_data, width="stretch", hide_index=True)
 
         with col2:
             st.subheader("Checkpoint Results")
@@ -2304,7 +2304,7 @@ def _render_privacy_calculator():
                 },
             ))
             fig.update_layout(height=250, margin=dict(l=20, r=20, t=50, b=20))
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
         with col2:
             st.markdown("### Risk Interpretation")
@@ -2405,7 +2405,7 @@ def _render_bci_anonymizer_demo():
         fig.update_xaxes(title_text="Time (ms)", row=2, col=1)
         fig.update_yaxes(title_text="Amplitude (μV)")
 
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
         st.success(f"Anonymization complete. Filtered ERPs: {', '.join(erp_filter)}")
 
@@ -2673,7 +2673,7 @@ def _render_dataset_loader():
                 yaxis_title="Amplitude (μV)",
                 height=300,
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
 
 def _render_attack_injection():
@@ -2748,7 +2748,7 @@ def _render_attack_injection():
             )
 
             fig.update_layout(height=400, showlegend=False)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
             # Stats comparison
             col1, col2 = st.columns(2)
@@ -2882,7 +2882,7 @@ def _render_coherence_benchmark():
             barmode="overlay",
             height=300,
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
         st.caption("Clean signals should cluster above threshold (0.5), attacked signals below.")
 

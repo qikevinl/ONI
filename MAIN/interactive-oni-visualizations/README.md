@@ -23,7 +23,7 @@ This prototype suite demonstrates 6 interactive web applications designed to mak
 | 03 | **Neural Kill Chain Visualizer** | Watch attacks propagate | 5 attack types, animated timeline, defense highlights |
 | 04 | **NSAM Checkpoint Simulator** | Gamified signal analysis | 5 checkpoints, score tracking, multiple scenarios |
 | 05 | **Scale-Frequency Navigator** | Explore temporal scales | 6 time scales, frequency bands, security context |
-| 06 | **ONI ATT&CK Matrix** | MITRE-inspired threat framework | 7 tactics, 21 techniques, ONI layer mapping, mitigations |
+| 06 | **ONI Threat Matrix** | MITRE ATT&CK-inspired neural threat framework | 7 tactics, 18 techniques, ONI layer mapping, Kohno integration |
 
 ## Alternative Methods
 
@@ -77,7 +77,7 @@ interactive-oni-visualizations/
 ├── 03-neural-killchain-visualizer.html
 ├── 04-nsam-checkpoint-simulator.html
 ├── 05-scale-frequency-navigator.html
-└── 06-oni-attack-matrix.html
+└── 06-oni-threat-matrix.html
 ```
 
 ## Design System
