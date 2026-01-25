@@ -7,18 +7,10 @@ An extensible framework for monitoring and securing neural communications, desig
 
 ---
 
-## Privacy & Ethics Statement
-
-**ONI is NOT a surveillance framework.** It exists to **protect** neural privacy, not compromise it. Signal integrity can be validated without reading thoughts. Attacks can be detected without decoding intent.
-
-**Full statement:** [NEUROETHICS_ALIGNMENT.md](MAIN/governance/NEUROETHICS_ALIGNMENT.md)
-
----
-
 ## Table of Contents
 
-- [Privacy & Ethics Statement](#privacy--ethics-statement)
 - [Navigation](#navigation)
+- [Privacy & Ethics Statement](#privacy--ethics-statement)
   - [Transparency & Ethics](#transparency--ethics)
 - [Python Library](#python-library)
 - [Repository Structure](#repository-structure)
@@ -69,6 +61,14 @@ An extensible framework for monitoring and securing neural communications, desig
 | `README.md` | Each topic folder | **Topic overview** — auto-rendered by GitHub when browsing folders |
 
 **For deep exploration:** Each topic folder contains a `README.md` with summaries, dependencies, and related topics.
+
+---
+
+## Privacy & Ethics Statement
+
+**ONI is NOT a surveillance framework.** It exists to **protect** neural privacy, not compromise it. Signal integrity can be validated without reading thoughts. Attacks can be detected without decoding intent.
+
+**Full statement:** [NEUROETHICS_ALIGNMENT.md](MAIN/governance/NEUROETHICS_ALIGNMENT.md)
 
 ---
 
