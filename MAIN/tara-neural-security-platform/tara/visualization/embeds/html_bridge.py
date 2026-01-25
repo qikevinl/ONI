@@ -64,21 +64,43 @@ class ONIVisualizationEmbed:
             base_path: Path to visualizations directory.
                        If None, attempts to find it relative to TARA.
         """
+        self._available = True
+
         if base_path:
             self.base_path = Path(base_path)
         else:
-            # Try to find visualizations relative to tara
+            # Try to find visualizations relative to tara package
             tara_root = Path(__file__).parent.parent.parent
-            self.base_path = tara_root.parent / "visualizations"
 
-        self._validate_path()
+            # Try multiple possible locations
+            possible_paths = [
+                tara_root.parent / "visualizations",  # Dev: tara-neural-security-platform/visualizations
+                tara_root / "visualizations",          # If included in package
+                Path.cwd() / "visualizations",         # Current working directory
+            ]
+
+            self.base_path = None
+            for path in possible_paths:
+                if path.exists() and (path / "index.html").exists():
+                    self.base_path = path
+                    break
+
+            if self.base_path is None:
+                self._available = False
+                self.base_path = possible_paths[0]  # Set default for error messages
+
+        if self._available:
+            self._validate_path()
 
     def _validate_path(self) -> None:
         """Validate that the visualization files exist."""
         if not self.base_path.exists():
-            raise FileNotFoundError(
-                f"ONI Visualizations not found at: {self.base_path}"
-            )
+            self._available = False
+
+    @property
+    def is_available(self) -> bool:
+        """Check if visualizations are available."""
+        return self._available
 
     def get_available(self) -> Dict[str, Dict[str, str]]:
         """Get list of available visualizations."""
@@ -114,6 +136,28 @@ class ONIVisualizationEmbed:
                 f"Unknown visualization: {visualization}. "
                 f"Available: {list(self.VISUALIZATIONS.keys())}"
             )
+
+        if not self._available:
+            # Render a helpful message instead of crashing
+            error_html = f"""
+            <div style="padding: 40px; text-align: center; background: #1e293b; border-radius: 8px; color: #e2e8f0;">
+                <h3 style="color: #f97316;">ONI Visualization Suite Not Found</h3>
+                <p>The interactive visualizations are not included in the PyPI package.</p>
+                <p style="margin-top: 20px;"><strong>To enable visualizations:</strong></p>
+                <ol style="text-align: left; max-width: 500px; margin: 20px auto;">
+                    <li>Clone the repository: <code>git clone https://github.com/qikevinl/oni</code></li>
+                    <li>Navigate to: <code>cd oni/MAIN/tara-neural-security-platform</code></li>
+                    <li>Install locally: <code>pip install -e .</code></li>
+                    <li>Run: <code>tara ui</code></li>
+                </ol>
+                <p style="margin-top: 20px; color: #94a3b8;">
+                    Or open the HTML files directly:<br>
+                    <code>visualizations/index.html</code>
+                </p>
+            </div>
+            """
+            components.html(error_html, height=300)
+            return
 
         info = self.VISUALIZATIONS[visualization]
         html_file = self.base_path / info["file"]

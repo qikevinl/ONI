@@ -1821,6 +1821,10 @@ def render_visualization_page(viz_key: str):
     """
     if not VISUALIZATION_AVAILABLE:
         st.error("Visualization modules not available. Please check installation.")
+        st.info(
+            "The visualization modules require the full TARA installation. "
+            "Clone the repository and install locally for full functionality."
+        )
         return
 
     info = VISUALIZATION_RESEARCH.get(viz_key, {})
