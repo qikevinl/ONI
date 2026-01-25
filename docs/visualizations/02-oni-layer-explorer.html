@@ -403,7 +403,8 @@
         }
 
         .mini-layer.traditional { background: #3b82f6; }
-        .mini-layer.interface { background: var(--oni-purple); }
+        .mini-layer.bridge { background: var(--oni-yellow); }
+        .mini-layer.biology { background: var(--oni-purple); }
         .mini-layer.cognitive { background: var(--oni-pink); }
     </style>
 </head>
@@ -526,7 +527,7 @@
             <!-- Cognitive Layers (L12-L14) -->
             <div class="domain-section domain-cognitive">
                 <div class="domain-header">Cognitive Domain (Layers 12-14)</div>
-                <div class="layer-card active" data-layer="12">
+                <div class="layer-card" data-layer="12">
                     <div class="layer-number">12</div>
                     <div class="layer-info">
                         <div class="layer-name">Cognitive Session</div>
@@ -534,7 +535,7 @@
                     </div>
                     <div class="layer-indicator"></div>
                 </div>
-                <div class="layer-card" data-layer="13">
+                <div class="layer-card active" data-layer="13">
                     <div class="layer-number">13</div>
                     <div class="layer-info">
                         <div class="layer-name">Semantic</div>
@@ -556,25 +557,25 @@
         <!-- Detail Panel -->
         <section class="detail-panel" id="detailPanel">
             <div class="detail-header">
-                <div class="detail-number" style="background: linear-gradient(135deg, var(--oni-pink), #be185d);">11</div>
+                <div class="detail-number" style="background: linear-gradient(135deg, var(--oni-pink), #be185d);">13</div>
                 <div class="detail-title">
-                    <h2>Working Memory</h2>
-                    <div class="detail-domain">Cognitive Domain / Layer 11 of 14</div>
+                    <h2>Semantic</h2>
+                    <div class="detail-domain">Cognitive / Executive Domain / Layer 13 of 14</div>
                 </div>
             </div>
 
             <div class="info-grid">
                 <div class="info-card">
                     <div class="info-label">Function</div>
-                    <div class="info-content">Temporary storage and manipulation of information needed for complex cognitive tasks like learning, reasoning, and comprehension.</div>
+                    <div class="info-content">Meaning construction, goal formation, agency, and intent decoding. Where neural signals become thoughts and decisions.</div>
                 </div>
                 <div class="info-card">
                     <div class="info-label">Capacity</div>
-                    <div class="info-content">~4 items (chunks) simultaneously, with decay over 15-30 seconds without rehearsal.</div>
+                    <div class="info-content">Minutes to hours timescale. Association cortex, prefrontal loops, distributed semantic representations.</div>
                 </div>
                 <div class="info-card full-width">
                     <div class="info-label">Neural Correlates</div>
-                    <div class="info-content">Prefrontal cortex (dorsolateral), posterior parietal cortex. Sustained neural firing maintains representations. Theta oscillations (4-8 Hz) coordinate with gamma bursts for item encoding.</div>
+                    <div class="info-content">Concept binding, decision policies, action planning, executive function networks. Prefrontal cortex integration with temporal and parietal association areas.</div>
                 </div>
             </div>
 
@@ -587,10 +588,10 @@
                     Attack Surfaces
                 </div>
                 <ul class="attack-list">
-                    <li>Theta rhythm disruption causing memory dropout</li>
-                    <li>False item injection during encoding windows</li>
-                    <li>Capacity overflow attacks (cognitive DoS)</li>
-                    <li>Rehearsal loop interference</li>
+                    <li>Intent manipulation (altering decisions)</li>
+                    <li>Goal hijacking via semantic injection</li>
+                    <li>Semantic confusion attacks</li>
+                    <li>False meaning injection</li>
                 </ul>
             </div>
 
@@ -602,10 +603,10 @@
                     Defense Mechanisms
                 </div>
                 <ul class="defense-list">
-                    <li>Coherence metric validation (phase variance check)</li>
-                    <li>Encoding window authentication</li>
-                    <li>Capacity monitoring with anomaly detection</li>
-                    <li>Theta-gamma coupling verification</li>
+                    <li>Intent verification against baselines</li>
+                    <li>Goal consistency checking</li>
+                    <li>Semantic anomaly detection</li>
+                    <li>User confirmation for critical decisions</li>
                 </ul>
             </div>
 
@@ -618,57 +619,53 @@
                     Real-World Analogy
                 </div>
                 <div class="analogy-text">
-                    Think of working memory like a whiteboard in a meeting room. It can only hold so much information at once, gets erased after the meeting, and anyone who can access the room could potentially alter what's written. The ONI Framework ensures only authorized "participants" can write to your mental whiteboard.
+                    Like a CEO's office where strategy is formed. Decisions made here affect everything downstream. If someone whispers bad advice, the whole organization suffers. ONI protects the semantic layer to ensure your intentions remain authentically yours.
                 </div>
             </div>
 
             <div class="layer-diagram">
-                <div class="diagram-title">Data Flow at Layer 11</div>
+                <div class="diagram-title">Data Flow at Layer 13</div>
                 <div class="diagram-visual">
                     <svg width="500" height="200" viewBox="0 0 500 200">
                         <!-- Background -->
                         <rect x="0" y="0" width="500" height="200" fill="#060912" rx="8"/>
 
-                        <!-- Layer 10 Input -->
-                        <rect x="20" y="80" width="80" height="40" fill="#8b5cf6" rx="6" opacity="0.3"/>
-                        <text x="60" y="105" fill="#c4b5fd" font-size="12" text-anchor="middle">L10: Oscillatory</text>
+                        <!-- Layer 12 Input -->
+                        <rect x="20" y="80" width="90" height="40" fill="#ec4899" rx="6" opacity="0.3"/>
+                        <text x="65" y="105" fill="#f9a8d4" font-size="11" text-anchor="middle">L12: Cognitive</text>
+                        <text x="65" y="118" fill="#f9a8d4" font-size="11" text-anchor="middle">Session</text>
 
                         <!-- Arrow -->
-                        <path d="M105 100 L140 100" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <path d="M115 100 L145 100" stroke="#ec4899" stroke-width="2" marker-end="url(#arrowhead)"/>
 
-                        <!-- Working Memory Box -->
-                        <rect x="145" y="40" width="210" height="120" fill="rgba(236, 72, 153, 0.2)" rx="8" stroke="#ec4899" stroke-width="2"/>
-                        <text x="250" y="65" fill="#ec4899" font-size="14" text-anchor="middle" font-weight="600">Layer 11: Working Memory</text>
+                        <!-- Semantic Layer Box -->
+                        <rect x="150" y="35" width="200" height="130" fill="rgba(236, 72, 153, 0.2)" rx="8" stroke="#ec4899" stroke-width="2"/>
+                        <text x="250" y="55" fill="#ec4899" font-size="14" text-anchor="middle" font-weight="600">Layer 13: Semantic</text>
 
-                        <!-- Memory Slots -->
-                        <rect x="160" y="80" width="40" height="40" fill="#ec4899" rx="4" opacity="0.8"/>
-                        <text x="180" y="105" fill="white" font-size="10" text-anchor="middle">Item 1</text>
+                        <!-- Semantic Components -->
+                        <rect x="165" y="70" width="70" height="35" fill="#ec4899" rx="4" opacity="0.7"/>
+                        <text x="200" y="92" fill="white" font-size="10" text-anchor="middle">Intent</text>
 
-                        <rect x="210" y="80" width="40" height="40" fill="#ec4899" rx="4" opacity="0.6"/>
-                        <text x="230" y="105" fill="white" font-size="10" text-anchor="middle">Item 2</text>
+                        <rect x="245" y="70" width="70" height="35" fill="#ec4899" rx="4" opacity="0.6"/>
+                        <text x="280" y="92" fill="white" font-size="10" text-anchor="middle">Goals</text>
 
-                        <rect x="260" y="80" width="40" height="40" fill="#ec4899" rx="4" opacity="0.4"/>
-                        <text x="280" y="105" fill="white" font-size="10" text-anchor="middle">Item 3</text>
+                        <rect x="165" y="115" width="70" height="35" fill="#ec4899" rx="4" opacity="0.5"/>
+                        <text x="200" y="137" fill="white" font-size="10" text-anchor="middle">Meaning</text>
 
-                        <rect x="310" y="80" width="40" height="40" fill="#ec4899" rx="4" opacity="0.2"/>
-                        <text x="330" y="105" fill="white" font-size="10" text-anchor="middle">Item 4</text>
+                        <rect x="245" y="115" width="70" height="35" fill="#ec4899" rx="4" opacity="0.4"/>
+                        <text x="280" y="137" fill="white" font-size="10" text-anchor="middle">Decisions</text>
 
-                        <!-- Theta Wave -->
-                        <path d="M160 135 Q180 125, 200 135 Q220 145, 240 135 Q260 125, 280 135 Q300 145, 320 135 Q340 125, 350 135"
-                              stroke="#f59e0b" stroke-width="2" fill="none" opacity="0.6"/>
-                        <text x="255" y="155" fill="#f59e0b" font-size="9" text-anchor="middle">Theta Rhythm (4-8 Hz)</text>
+                        <!-- Arrow to L14 -->
+                        <path d="M355 100 L390 100" stroke="#ec4899" stroke-width="2" marker-end="url(#arrowhead2)"/>
 
-                        <!-- Arrow to L12 -->
-                        <path d="M360 100 L395 100" stroke="#ec4899" stroke-width="2" marker-end="url(#arrowhead2)"/>
-
-                        <!-- Layer 12 Output -->
-                        <rect x="400" y="80" width="80" height="40" fill="#ec4899" rx="6" opacity="0.3"/>
-                        <text x="440" y="105" fill="#f9a8d4" font-size="12" text-anchor="middle">L12: Attention</text>
+                        <!-- Layer 14 Output -->
+                        <rect x="395" y="80" width="85" height="40" fill="#ec4899" rx="6" opacity="0.3"/>
+                        <text x="437" y="105" fill="#f9a8d4" font-size="12" text-anchor="middle">L14: Identity</text>
 
                         <!-- Arrowhead markers -->
                         <defs>
                             <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                                <polygon points="0 0, 10 3.5, 0 7" fill="#8b5cf6"/>
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#ec4899"/>
                             </marker>
                             <marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
                                 <polygon points="0 0, 10 3.5, 0 7" fill="#ec4899"/>
