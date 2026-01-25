@@ -23,19 +23,19 @@ jobs:
 
       - name: Build package
         run: |
-          cd MAIN/tara
+          cd MAIN/tara-neural-security-platform
           python -m build
 
       - name: Check package
         run: |
-          cd MAIN/tara
+          cd MAIN/tara-neural-security-platform
           twine check dist/*
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: dist
-          path: MAIN/tara/dist/
+          path: MAIN/tara-neural-security-platform/dist/
 
   publish:
     needs: build
