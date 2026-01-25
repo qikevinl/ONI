@@ -289,15 +289,23 @@
         /* Visualization Cards */
         .viz-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.25rem;
+        }
+
+        @media (max-width: 1000px) {
+            .viz-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 650px) {
+            .viz-grid { grid-template-columns: 1fr; }
         }
 
         .viz-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 1.5rem;
+            overflow: hidden;
             transition: all 0.2s;
             text-decoration: none;
             color: inherit;
@@ -306,7 +314,27 @@
 
         .viz-card:hover {
             border-color: var(--accent-purple);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .viz-preview {
+            height: 140px;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .viz-preview svg {
+            width: 85%;
+            height: 85%;
+            opacity: 0.9;
+        }
+
+        .viz-content {
+            padding: 1.25rem;
         }
 
         .viz-card .label {
@@ -317,17 +345,18 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
 
         .viz-card h4 {
             font-size: 1rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.375rem;
         }
 
         .viz-card p {
             color: var(--text-muted);
             font-size: 0.85rem;
+            line-height: 1.5;
         }
 
         /* Stats Row */
@@ -570,46 +599,140 @@
         </div>
 
         <div class="viz-grid">
+            <!-- Coherence Metric Playground -->
             <a href="visualizations/01-coherence-metric-playground.html" class="viz-card">
-                <span class="label" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">Core Concept</span>
-                <h4>Coherence Metric Playground</h4>
-                <p>Calculate Cₛ in real-time. Adjust phase, amplitude, and timing to see how trust scores change.</p>
+                <div class="viz-preview">
+                    <svg viewBox="0 0 200 100">
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#00d4ff"/>
+                                <stop offset="100%" style="stop-color:#8b5cf6"/>
+                            </linearGradient>
+                        </defs>
+                        <path d="M10 50 Q30 20 50 50 T90 50 T130 50 T170 50 T190 50" stroke="url(#grad1)" stroke-width="3" fill="none"/>
+                        <circle cx="100" cy="50" r="20" fill="none" stroke="#00d4ff" stroke-width="2" opacity="0.5"/>
+                        <text x="100" y="55" text-anchor="middle" fill="#00d4ff" font-size="12" font-weight="bold">0.87</text>
+                    </svg>
+                </div>
+                <div class="viz-content">
+                    <span class="label" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">Core Concept</span>
+                    <h4>Coherence Metric Playground</h4>
+                    <p>Calculate Cₛ in real-time. Adjust phase, amplitude, and timing to see how trust scores change.</p>
+                </div>
             </a>
 
+            <!-- ONI Layer Explorer -->
             <a href="visualizations/02-oni-layer-explorer.html" class="viz-card">
-                <span class="label" style="background: rgba(139, 92, 246, 0.15); color: #a78bfa;">Architecture</span>
-                <h4>ONI Layer Explorer</h4>
-                <p>Navigate all 14 layers from physical transmission to cognitive identity.</p>
+                <div class="viz-preview">
+                    <svg viewBox="0 0 200 100">
+                        <rect x="30" y="10" width="140" height="12" rx="2" fill="#3b82f6" opacity="0.6"/>
+                        <rect x="30" y="25" width="140" height="12" rx="2" fill="#3b82f6" opacity="0.5"/>
+                        <rect x="30" y="40" width="140" height="12" rx="2" fill="#8b5cf6" opacity="0.7"/>
+                        <rect x="30" y="55" width="140" height="12" rx="2" fill="#8b5cf6" opacity="0.6"/>
+                        <rect x="30" y="70" width="140" height="12" rx="2" fill="#ec4899" opacity="0.8"/>
+                        <rect x="30" y="85" width="140" height="12" rx="2" fill="#ec4899" opacity="0.7"/>
+                        <text x="20" y="50" fill="#64748b" font-size="8">14</text>
+                        <text x="175" y="50" fill="#64748b" font-size="8">1</text>
+                    </svg>
+                </div>
+                <div class="viz-content">
+                    <span class="label" style="background: rgba(139, 92, 246, 0.15); color: #a78bfa;">Architecture</span>
+                    <h4>ONI Layer Explorer</h4>
+                    <p>Navigate all 14 layers from physical transmission to cognitive identity.</p>
+                </div>
             </a>
 
+            <!-- Academic Research Alignment -->
             <a href="visualizations/03-academic-alignment.html" class="viz-card">
-                <span class="label" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">Research</span>
-                <h4>Academic Research Alignment</h4>
-                <p>Built on peer-reviewed research from 12+ universities. Explore the scientific foundation.</p>
+                <div class="viz-preview">
+                    <svg viewBox="0 0 200 100">
+                        <circle cx="60" cy="50" r="25" fill="none" stroke="#10b981" stroke-width="2" opacity="0.6"/>
+                        <circle cx="100" cy="50" r="25" fill="none" stroke="#10b981" stroke-width="2" opacity="0.6"/>
+                        <circle cx="140" cy="50" r="25" fill="none" stroke="#10b981" stroke-width="2" opacity="0.6"/>
+                        <text x="60" y="54" text-anchor="middle" fill="#10b981" font-size="8">Kohno</text>
+                        <text x="100" y="54" text-anchor="middle" fill="#10b981" font-size="8">ONI</text>
+                        <text x="140" y="54" text-anchor="middle" fill="#10b981" font-size="8">Bonaci</text>
+                        <text x="100" y="90" text-anchor="middle" fill="#64748b" font-size="7">12+ Universities</text>
+                    </svg>
+                </div>
+                <div class="viz-content">
+                    <span class="label" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">Research</span>
+                    <h4>Academic Research Alignment</h4>
+                    <p>Built on peer-reviewed research from 12+ universities. Explore the scientific foundation.</p>
+                </div>
             </a>
 
+            <!-- NSAM Checkpoint Simulator -->
             <a href="visualizations/04-nsam-checkpoint-simulator.html" class="viz-card">
-                <span class="label" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">Interactive</span>
-                <h4>NSAM Checkpoint Simulator</h4>
-                <p>Become the Neural Signal Assurance Model. Analyze signals and protect the brain.</p>
+                <div class="viz-preview">
+                    <svg viewBox="0 0 200 100">
+                        <circle cx="40" cy="50" r="15" fill="#10b981"/>
+                        <circle cx="80" cy="50" r="15" fill="#10b981"/>
+                        <circle cx="120" cy="50" r="15" fill="#f59e0b"/>
+                        <circle cx="160" cy="50" r="15" fill="#1e293b" stroke="#64748b"/>
+                        <text x="40" y="54" text-anchor="middle" fill="white" font-size="10">1</text>
+                        <text x="80" y="54" text-anchor="middle" fill="white" font-size="10">2</text>
+                        <text x="120" y="54" text-anchor="middle" fill="white" font-size="10">3</text>
+                        <text x="160" y="54" text-anchor="middle" fill="#64748b" font-size="10">4</text>
+                        <line x1="55" y1="50" x2="65" y2="50" stroke="#10b981" stroke-width="2"/>
+                        <line x1="95" y1="50" x2="105" y2="50" stroke="#10b981" stroke-width="2"/>
+                        <line x1="135" y1="50" x2="145" y2="50" stroke="#64748b" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="viz-content">
+                    <span class="label" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">Interactive</span>
+                    <h4>NSAM Checkpoint Simulator</h4>
+                    <p>Become the Neural Signal Assurance Model. Analyze signals and protect the brain.</p>
+                </div>
             </a>
 
+            <!-- Scale-Frequency Navigator -->
             <a href="visualizations/05-scale-frequency-navigator.html" class="viz-card">
-                <span class="label" style="background: rgba(236, 72, 153, 0.15); color: #f472b6;">Explore</span>
-                <h4>Scale-Frequency Navigator</h4>
-                <p>From femtoseconds to years. Explore neural patterns across temporal scales.</p>
+                <div class="viz-preview">
+                    <svg viewBox="0 0 200 100">
+                        <rect x="20" y="20" width="160" height="60" rx="4" fill="#0a0e17" stroke="#1e293b"/>
+                        <path d="M30 50 Q50 30 70 50 T110 50 T150 50 T170 50" stroke="#ec4899" stroke-width="2" fill="none" opacity="0.5"/>
+                        <path d="M30 50 Q40 40 50 50 T70 50 T90 50 T110 50 T130 50 T150 50 T170 50" stroke="#8b5cf6" stroke-width="2" fill="none"/>
+                        <text x="30" y="90" fill="#64748b" font-size="8">1ms</text>
+                        <text x="90" y="90" fill="#64748b" font-size="8">1s</text>
+                        <text x="150" y="90" fill="#64748b" font-size="8">1hr</text>
+                    </svg>
+                </div>
+                <div class="viz-content">
+                    <span class="label" style="background: rgba(236, 72, 153, 0.15); color: #f472b6;">Explore</span>
+                    <h4>Scale-Frequency Navigator</h4>
+                    <p>From femtoseconds to years. Explore neural patterns across temporal scales.</p>
+                </div>
             </a>
 
+            <!-- ONI Threat Matrix -->
             <a href="visualizations/06-oni-attack-matrix.html" class="viz-card">
-                <span class="label" style="background: rgba(239, 68, 68, 0.15); color: #f87171;">Security</span>
-                <h4>ONI Threat Matrix</h4>
-                <p>Neural threat framework. 7 tactics, 21 techniques mapped to ONI layers.</p>
-            </a>
-
-            <a href="visualizations/" class="viz-card">
-                <span class="label" style="background: rgba(100, 116, 139, 0.15); color: #94a3b8;">All Tools</span>
-                <h4>Visualization Suite</h4>
-                <p>Complete collection of interactive ONI educational tools.</p>
+                <div class="viz-preview">
+                    <svg viewBox="0 0 200 100">
+                        <rect x="15" y="15" width="24" height="70" rx="2" fill="#3b82f6" opacity="0.3"/>
+                        <rect x="42" y="15" width="24" height="70" rx="2" fill="#6366f1" opacity="0.3"/>
+                        <rect x="69" y="15" width="24" height="70" rx="2" fill="#8b5cf6" opacity="0.3"/>
+                        <rect x="96" y="15" width="24" height="70" rx="2" fill="#a855f7" opacity="0.3"/>
+                        <rect x="123" y="15" width="24" height="70" rx="2" fill="#d946ef" opacity="0.3"/>
+                        <rect x="150" y="15" width="24" height="70" rx="2" fill="#ec4899" opacity="0.3"/>
+                        <rect x="177" y="15" width="18" height="70" rx="2" fill="#ef4444" opacity="0.3"/>
+                        <rect x="17" y="25" width="20" height="12" rx="2" fill="#3b82f6"/>
+                        <rect x="17" y="40" width="20" height="12" rx="2" fill="#3b82f6"/>
+                        <rect x="44" y="25" width="20" height="12" rx="2" fill="#6366f1"/>
+                        <rect x="71" y="25" width="20" height="12" rx="2" fill="#8b5cf6"/>
+                        <rect x="98" y="25" width="20" height="12" rx="2" fill="#a855f7"/>
+                        <rect x="125" y="25" width="20" height="12" rx="2" fill="#d946ef"/>
+                        <rect x="152" y="25" width="20" height="12" rx="2" fill="#ec4899"/>
+                        <rect x="179" y="25" width="14" height="12" rx="2" fill="#ef4444"/>
+                        <rect x="179" y="40" width="14" height="12" rx="2" fill="#ef4444"/>
+                        <text x="100" y="95" text-anchor="middle" fill="#64748b" font-size="7">7 Tactics · 21 Techniques</text>
+                    </svg>
+                </div>
+                <div class="viz-content">
+                    <span class="label" style="background: rgba(239, 68, 68, 0.15); color: #f87171;">Security</span>
+                    <h4>ONI Threat Matrix</h4>
+                    <p>Neural threat framework. 7 tactics, 21 techniques mapped to ONI layers.</p>
+                </div>
             </a>
         </div>
     </section>
