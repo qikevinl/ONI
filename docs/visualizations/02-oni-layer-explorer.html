@@ -162,8 +162,12 @@
         .domain-traditional .layer-number { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
         .domain-traditional .layer-indicator { background: #3b82f6; }
 
-        .domain-interface .layer-number { background: linear-gradient(135deg, var(--oni-purple), #6d28d9); }
-        .domain-interface .layer-indicator { background: var(--oni-purple); }
+        .domain-bridge .layer-number { background: linear-gradient(135deg, var(--oni-yellow), var(--oni-orange)); }
+        .domain-bridge .layer-indicator { background: var(--oni-yellow); }
+        .domain-bridge .layer-card { border-left: 3px solid var(--oni-yellow); }
+
+        .domain-biology .layer-number { background: linear-gradient(135deg, var(--oni-purple), #6d28d9); }
+        .domain-biology .layer-indicator { background: var(--oni-purple); }
 
         .domain-cognitive .layer-number { background: linear-gradient(135deg, var(--oni-pink), #be185d); }
         .domain-cognitive .layer-indicator { background: var(--oni-pink); }
@@ -477,59 +481,64 @@
                 </div>
             </div>
 
-            <!-- Neural Interface -->
-            <div class="domain-section domain-interface">
-                <div class="domain-header">Neural Interface (Layers 8-10)</div>
+            <!-- L8: Bridge Layer -->
+            <div class="domain-section domain-bridge">
+                <div class="domain-header">Bridge Layer (L8) — THE FIREWALL</div>
                 <div class="layer-card" data-layer="8">
                     <div class="layer-number">8</div>
                     <div class="layer-info">
-                        <div class="layer-name">Electrode</div>
-                        <div class="layer-brief">Physical neural contact</div>
+                        <div class="layer-name">Neural Gateway</div>
+                        <div class="layer-brief">Silicon ↔ Biology boundary</div>
                     </div>
                     <div class="layer-indicator"></div>
                 </div>
+            </div>
+
+            <!-- Biology Layers (L9-L11) -->
+            <div class="domain-section domain-biology">
+                <div class="domain-header">Biology Domain (Layers 9-11)</div>
                 <div class="layer-card" data-layer="9">
                     <div class="layer-number">9</div>
                     <div class="layer-info">
-                        <div class="layer-name">Local Field Potential</div>
-                        <div class="layer-brief">Regional neural activity</div>
+                        <div class="layer-name">Signal Processing</div>
+                        <div class="layer-brief">Filtering, amplification, digitization</div>
                     </div>
                     <div class="layer-indicator"></div>
                 </div>
                 <div class="layer-card" data-layer="10">
                     <div class="layer-number">10</div>
                     <div class="layer-info">
-                        <div class="layer-name">Oscillatory</div>
-                        <div class="layer-brief">Brain wave patterns</div>
+                        <div class="layer-name">Neural Protocol</div>
+                        <div class="layer-brief">Neural data formatting, codecs</div>
+                    </div>
+                    <div class="layer-indicator"></div>
+                </div>
+                <div class="layer-card" data-layer="11">
+                    <div class="layer-number">11</div>
+                    <div class="layer-info">
+                        <div class="layer-name">Cognitive Transport</div>
+                        <div class="layer-brief">Reliable neural data delivery</div>
                     </div>
                     <div class="layer-indicator"></div>
                 </div>
             </div>
 
-            <!-- Cognitive -->
+            <!-- Cognitive Layers (L12-L14) -->
             <div class="domain-section domain-cognitive">
-                <div class="domain-header">Cognitive (Layers 11-14)</div>
-                <div class="layer-card active" data-layer="11">
-                    <div class="layer-number">11</div>
-                    <div class="layer-info">
-                        <div class="layer-name">Working Memory</div>
-                        <div class="layer-brief">Short-term information storage</div>
-                    </div>
-                    <div class="layer-indicator"></div>
-                </div>
-                <div class="layer-card" data-layer="12">
+                <div class="domain-header">Cognitive Domain (Layers 12-14)</div>
+                <div class="layer-card active" data-layer="12">
                     <div class="layer-number">12</div>
                     <div class="layer-info">
-                        <div class="layer-name">Attention</div>
-                        <div class="layer-brief">Focus and selection</div>
+                        <div class="layer-name">Cognitive Session</div>
+                        <div class="layer-brief">Context, attention, working memory</div>
                     </div>
                     <div class="layer-indicator"></div>
                 </div>
                 <div class="layer-card" data-layer="13">
                     <div class="layer-number">13</div>
                     <div class="layer-info">
-                        <div class="layer-name">Executive Function</div>
-                        <div class="layer-brief">Decision making, planning</div>
+                        <div class="layer-name">Semantic</div>
+                        <div class="layer-brief">Meaning, intent, goals</div>
                     </div>
                     <div class="layer-indicator"></div>
                 </div>
@@ -537,7 +546,7 @@
                     <div class="layer-number">14</div>
                     <div class="layer-info">
                         <div class="layer-name">Identity</div>
-                        <div class="layer-brief">Self-model, personality</div>
+                        <div class="layer-brief">Self-model, ethics, continuity</div>
                     </div>
                     <div class="layer-indicator"></div>
                 </div>
@@ -680,12 +689,12 @@
         <div class="mini-layer traditional" data-layer="5" title="L5: Session"></div>
         <div class="mini-layer traditional" data-layer="6" title="L6: Presentation"></div>
         <div class="mini-layer traditional" data-layer="7" title="L7: Application"></div>
-        <div class="mini-layer interface" data-layer="8" title="L8: Electrode"></div>
-        <div class="mini-layer interface" data-layer="9" title="L9: LFP"></div>
-        <div class="mini-layer interface" data-layer="10" title="L10: Oscillatory"></div>
-        <div class="mini-layer cognitive active" data-layer="11" title="L11: Working Memory"></div>
-        <div class="mini-layer cognitive" data-layer="12" title="L12: Attention"></div>
-        <div class="mini-layer cognitive" data-layer="13" title="L13: Executive"></div>
+        <div class="mini-layer bridge" data-layer="8" title="L8: Neural Gateway"></div>
+        <div class="mini-layer biology" data-layer="9" title="L9: Signal Processing"></div>
+        <div class="mini-layer biology" data-layer="10" title="L10: Neural Protocol"></div>
+        <div class="mini-layer biology" data-layer="11" title="L11: Cognitive Transport"></div>
+        <div class="mini-layer cognitive" data-layer="12" title="L12: Cognitive Session"></div>
+        <div class="mini-layer cognitive active" data-layer="13" title="L13: Semantic"></div>
         <div class="mini-layer cognitive" data-layer="14" title="L14: Identity"></div>
     </nav>
 
@@ -735,54 +744,138 @@
                 analogy: "Like the addressing on an envelope. The data link layer ensures each packet knows where it came from and where it's going."
             },
             8: {
-                name: "Electrode",
-                domain: "Neural Interface",
-                domainColor: "#8b5cf6",
-                function: "Physical contact point between electronics and neural tissue. Converts ionic signals to electronic and vice versa.",
-                capacity: "Neuralink N1: 1,024 electrodes, ~1mm² footprint, 6μm electrode diameter",
-                correlates: "Electrode impedance (target: 100kΩ-1MΩ), biocompatibility coatings, signal-to-noise ratio, recording/stimulation modes.",
+                name: "Neural Gateway",
+                domain: "Bridge (Silicon ↔ Biology)",
+                domainColor: "#f59e0b",
+                function: "THE FIREWALL LAYER. Physical and logical interface between neural tissue and computation. All security policy enforcement happens here: read/write access control, signal validation, trust establishment, isolation enforcement.",
+                capacity: "Neuralink N1: 1,024 electrodes, ~1mm² footprint, 6μm diameter. Utah arrays, ECoG grids, cochlear implants.",
+                correlates: "Action potentials (~1-500 Hz), local field potentials. Electrode impedance (target: 100kΩ-1MΩ), biocompatibility.",
                 attacks: [
+                    "Bypass attacks (circumventing security checks)",
                     "Signal injection at electrode site",
-                    "Impedance manipulation",
-                    "Electrode poisoning (chemical attacks)",
-                    "Micro-motion exploitation"
+                    "Unauthorized read/write access",
+                    "Trust establishment exploitation"
                 ],
                 defenses: [
-                    "Impedance monitoring and validation",
-                    "Signal authentication at hardware level",
-                    "Redundant electrode verification",
-                    "Anomaly detection on electrode characteristics"
+                    "ONI Firewall with coherence validation (Cₛ)",
+                    "Zero-trust policy enforcement",
+                    "Hardware-bound cryptographic attestation",
+                    "Isolation between read/write channels"
                 ],
-                analogy: "Like tiny microphones and speakers implanted in brain tissue. They listen to neurons and can also speak to them - which means they can be hijacked to play the wrong music."
+                analogy: "Like a heavily guarded border checkpoint between two countries. Every piece of data must show its passport (coherence score), declare its purpose, and be searched for contraband before crossing."
+            },
+            9: {
+                name: "Signal Processing",
+                domain: "Biology",
+                domainColor: "#8b5cf6",
+                function: "Filtering, amplification, denoising, and digitization of raw neural signals. Converts analog biological signals into clean digital representations.",
+                capacity: "Sampled at kHz rates (typically 30kHz), bandpass filtered 1-500 Hz for LFP, 300-3000 Hz for spikes.",
+                correlates: "Spike sorting algorithms, FFT analysis, adaptive filters, embedded edge compute systems.",
+                attacks: [
+                    "Filter manipulation to hide attack signals",
+                    "Amplifier saturation attacks",
+                    "Spike sorting confusion",
+                    "Noise injection to degrade SNR"
+                ],
+                defenses: [
+                    "Hardware-level signal authentication",
+                    "Redundant processing pipelines",
+                    "Anomaly detection on signal characteristics",
+                    "Tamper-evident processing logs"
+                ],
+                analogy: "Like a recording studio's mixing board. Raw sounds come in, get cleaned up, amplified, and prepared for distribution. If someone tampers with the board, the final recording is corrupted."
+            },
+            10: {
+                name: "Neural Protocol",
+                domain: "Biology",
+                domainColor: "#8b5cf6",
+                function: "Mapping neural signals to machine-readable formats. Defines how spike patterns become feature vectors and structured data.",
+                capacity: "Event-driven, variable rate depending on neural activity. Protocol buffers, BCI data schemas.",
+                correlates: "Neural codecs, spike encoding schemes, feature extraction algorithms, standardized data formats.",
+                attacks: [
+                    "Protocol manipulation to inject false data",
+                    "Schema exploitation",
+                    "Feature vector poisoning",
+                    "Codec vulnerabilities"
+                ],
+                defenses: [
+                    "Schema validation and checksums",
+                    "Cryptographic message authentication",
+                    "Format fuzzing and hardening",
+                    "Version control and rollback"
+                ],
+                analogy: "Like a language translator at the UN. Neural 'speech' gets translated into a common format everyone can understand. A corrupt translator could change the meaning entirely."
             },
             11: {
-                name: "Working Memory",
-                domain: "Cognitive",
-                domainColor: "#ec4899",
-                function: "Temporary storage and manipulation of information needed for complex cognitive tasks like learning, reasoning, and comprehension.",
-                capacity: "~4 items (chunks) simultaneously, with decay over 15-30 seconds without rehearsal.",
-                correlates: "Prefrontal cortex (dorsolateral), posterior parietal cortex. Sustained neural firing maintains representations. Theta oscillations (4-8 Hz) coordinate with gamma bursts for item encoding.",
+                name: "Cognitive Transport",
+                domain: "Biology",
+                domainColor: "#8b5cf6",
+                function: "Reliable transmission of neural/cognitive state across distributed systems. Ensures data arrives intact with integrity validation.",
+                capacity: "Operates on seconds to minutes timescale. Structured cognitive packets with redundancy.",
+                correlates: "Cognitive state streaming, checksums, integrity validation, reliable delivery protocols.",
                 attacks: [
-                    "Theta rhythm disruption causing memory dropout",
-                    "False item injection during encoding windows",
-                    "Capacity overflow attacks (cognitive DoS)",
-                    "Rehearsal loop interference"
+                    "State corruption during transmission",
+                    "Replay of old cognitive states",
+                    "Man-in-the-middle on cognitive channels",
+                    "Integrity check bypass"
                 ],
                 defenses: [
-                    "Coherence metric validation (phase variance check)",
-                    "Encoding window authentication",
-                    "Capacity monitoring with anomaly detection",
-                    "Theta-gamma coupling verification"
+                    "End-to-end encryption of cognitive data",
+                    "Sequence number validation",
+                    "Integrity hashes at each hop",
+                    "Temporal freshness guarantees"
                 ],
-                analogy: "Think of working memory like a whiteboard in a meeting room. It can only hold so much information at once, gets erased after the meeting, and anyone who can access the room could potentially alter what's written."
+                analogy: "Like a secure courier service for thoughts. Each package is sealed, tracked, and verified at every checkpoint to ensure it arrives exactly as sent."
+            },
+            12: {
+                name: "Cognitive Session",
+                domain: "Cognitive Systems",
+                domainColor: "#ec4899",
+                function: "Context persistence, working memory windows, attention management. Maintains the 'mental workspace' for ongoing cognitive tasks.",
+                capacity: "~4 items (chunks) simultaneously, 15-30 second decay without rehearsal. Theta oscillations (4-8 Hz).",
+                correlates: "Prefrontal cortex, posterior parietal cortex, attention networks, sustained neural firing.",
+                attacks: [
+                    "Context hijacking (injecting false context)",
+                    "Attention redirection attacks",
+                    "Working memory overflow (cognitive DoS)",
+                    "Session state corruption"
+                ],
+                defenses: [
+                    "Context integrity verification",
+                    "Attention anomaly detection",
+                    "Session tokens and timeouts",
+                    "Cross-reference with long-term memory"
+                ],
+                analogy: "Like a whiteboard in a meeting room. It holds the current discussion, but anyone with marker access could alter what's written while you're distracted."
+            },
+            13: {
+                name: "Semantic",
+                domain: "Cognitive / Executive",
+                domainColor: "#ec4899",
+                function: "Meaning construction, goal formation, agency, and intent decoding. Where neural signals become thoughts and decisions.",
+                capacity: "Minutes to hours timescale. Association cortex, prefrontal loops, distributed semantic representations.",
+                correlates: "Concept binding, decision policies, action planning, executive function networks.",
+                attacks: [
+                    "Intent manipulation (altering decisions)",
+                    "Goal hijacking",
+                    "Semantic confusion attacks",
+                    "False meaning injection"
+                ],
+                defenses: [
+                    "Intent verification against baselines",
+                    "Goal consistency checking",
+                    "Semantic anomaly detection",
+                    "User confirmation for critical decisions"
+                ],
+                analogy: "Like the CEO's office where strategy is formed. Decisions made here affect everything downstream. If someone whispers bad advice, the whole organization suffers."
             },
             14: {
                 name: "Identity",
-                domain: "Cognitive",
+                domain: "Human",
                 domainColor: "#ec4899",
-                function: "The self-model - persistent sense of who you are, your values, personality, autobiographical continuity. The 'crown jewel' of neural security.",
-                capacity: "Distributed across cortical and subcortical regions. Emerges from integrated activity across all lower layers.",
-                correlates: "Default mode network, medial prefrontal cortex, posterior cingulate, hippocampal-cortical memory systems. Global workspace integration.",
+                function: "Self-model, moral reasoning, long-term coherence, and continuity of self. The 'crown jewel' of neural security - who you fundamentally are.",
+                capacity: "Days to lifetime timescale. Distributed across whole brain, emerges from all lower layers.",
+                correlates: "Default mode network, medial prefrontal cortex, posterior cingulate, autobiographical memory systems.",
                 attacks: [
                     "Gradual personality drift through subtle stimulation",
                     "Value system manipulation",
@@ -791,28 +884,34 @@
                 ],
                 defenses: [
                     "Long-term baseline tracking (identity signature)",
-                    "Rate limiting on stimulation patterns",
+                    "Rate limiting on personality-affecting stimulation",
                     "Cross-layer coherence validation",
                     "Human-in-the-loop sovereignty checks"
                 ],
-                analogy: "Your identity is like your operating system's core kernel. Everything else runs on top of it. If compromised, nothing else can be trusted - but it's also the hardest thing to attack because changes are immediately noticeable to the 'user' (you)."
+                analogy: "Your operating system's kernel. Everything else runs on top of it. If compromised, nothing can be trusted - but changes are immediately noticeable to 'you', making attacks obvious but devastating."
             }
         };
 
-        // Add more layer data as needed...
-        // For brevity, adding placeholders for remaining layers
-        [3,4,5,6,7,9,10,12,13].forEach(n => {
+        // Add remaining OSI layer data
+        [3,4,5,6,7].forEach(n => {
             if (!layers[n]) {
+                const layerData = {
+                    3: { name: "Network", brief: "IP routing, logical addressing", func: "Logical addressing and routing across networks.", attacks: ["IP spoofing", "Route hijacking", "ICMP attacks"], defenses: ["IPsec", "BGP security", "Network segmentation"] },
+                    4: { name: "Transport", brief: "TCP/UDP, flow control", func: "End-to-end delivery with flow control and reliability.", attacks: ["SYN floods", "Session hijacking", "Port scanning"], defenses: ["TLS encryption", "Rate limiting", "Connection validation"] },
+                    5: { name: "Session", brief: "Connection management", func: "Managing connection lifecycle, authentication sessions.", attacks: ["Session fixation", "Token theft", "Replay attacks"], defenses: ["Session tokens", "Timeout policies", "Re-authentication"] },
+                    6: { name: "Presentation", brief: "Encoding, encryption", func: "Data encoding, encryption, and format conversion.", attacks: ["Padding oracle", "Encoding exploits", "Downgrade attacks"], defenses: ["Strong encryption (AES-256)", "Format validation", "Protocol hardening"] },
+                    7: { name: "Application", brief: "BCI software interface", func: "User-facing BCI applications and APIs.", attacks: ["API injection", "Buffer overflow", "Logic flaws"], defenses: ["Input validation", "API authentication", "Secure coding practices"] }
+                }[n];
                 layers[n] = {
-                    name: document.querySelector(`[data-layer="${n}"] .layer-name`).textContent,
-                    domain: n <= 7 ? "Traditional OSI" : n <= 10 ? "Neural Interface" : "Cognitive",
-                    domainColor: n <= 7 ? "#3b82f6" : n <= 10 ? "#8b5cf6" : "#ec4899",
-                    function: "Detailed function description for Layer " + n,
-                    capacity: "Layer-specific metrics and constraints",
-                    correlates: "Technical and biological correlates",
-                    attacks: ["Attack vector 1", "Attack vector 2", "Attack vector 3"],
-                    defenses: ["Defense mechanism 1", "Defense mechanism 2", "Defense mechanism 3"],
-                    analogy: "A relatable real-world analogy for this layer."
+                    name: layerData.name,
+                    domain: "OSI",
+                    domainColor: "#3b82f6",
+                    function: layerData.func,
+                    capacity: "Standard networking metrics apply.",
+                    correlates: "IEEE/IETF standards, networking protocols.",
+                    attacks: layerData.attacks,
+                    defenses: layerData.defenses,
+                    analogy: "Standard OSI layer " + n + " - well-understood networking concepts."
                 };
             }
         });
