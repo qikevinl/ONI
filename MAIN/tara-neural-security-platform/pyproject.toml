@@ -99,20 +99,22 @@ Issues = "https://github.com/qikevinl/ONI/issues"
 [project.scripts]
 tara = "tara.cli:main"
 
-# NOTE: Source code is in ../prototype-mvp/tara/
-# For development: cd ../prototype-mvp && pip install -e ../tara-neural-security-platform
+# Source code is now in ./tara/ (moved from prototype-mvp)
+# For development: pip install -e .
 [tool.hatch.build.targets.wheel]
-packages = ["../prototype-mvp/tara"]
+packages = ["tara"]
 
 [tool.hatch.build.targets.sdist]
 include = [
-    "../prototype-mvp/tara",
+    "tara",
+    "tests",
+    "visualizations",
     "/README.md",
     "/LICENSE",
 ]
 
 [tool.pytest.ini_options]
-testpaths = ["../prototype-mvp/tests"]
+testpaths = ["tests"]
 python_files = ["test_*.py"]
 addopts = "-v --tb=short"
 

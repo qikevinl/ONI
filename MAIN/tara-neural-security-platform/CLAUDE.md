@@ -23,72 +23,86 @@ This file provides instructions for Claude to follow when updating, maintaining,
 
 ## Module Architecture
 
-> **Note:** Source code is located in `MAIN/prototype-mvp/tara/`. This folder contains package configuration and documentation.
+> **Note:** All source code, tests, and visualizations are now consolidated in this folder.
 
 ```
-tara-neural-security-platform/   # Package config
+tara-neural-security-platform/   # Complete package
 ├── CLAUDE.md                    # Claude AI instructions (this file)
 ├── AGENTS.md                    # Learnings from previous sessions
 ├── README.md                    # Public documentation
 ├── pyproject.toml               # Package configuration
-└── LICENSE                      # Apache 2.0
-
-prototype-mvp/tara/              # Source code (separate folder)
-├── __init__.py                  # Package entry point
-├── cli.py                       # Command-line interface
+├── LICENSE                      # Apache 2.0
 │
-├── core/                        # ONI Framework security primitives
-│   ├── coherence.py       # Cₛ (Coherence Score) calculation
-│   ├── layers.py          # 14-layer ONI model (L1-L14)
-│   ├── firewall.py        # Neural firewall decision matrix
-│   └── scale_freq.py      # Scale-frequency invariant (f × S ≈ k)
+├── tara/                        # Source code
+│   ├── __init__.py              # Package entry point
+│   ├── cli.py                   # Command-line interface
+│   │
+│   ├── core/                    # ONI Framework security primitives
+│   │   ├── coherence.py         # Cₛ (Coherence Score) calculation
+│   │   ├── layers.py            # 14-layer ONI model (L1-L14)
+│   │   ├── firewall.py          # Neural firewall decision matrix
+│   │   └── scale_freq.py        # Scale-frequency invariant (f × S ≈ k)
+│   │
+│   ├── simulation/              # Neural network simulation
+│   │   ├── neurons/             # LIF, Izhikevich, Hodgkin-Huxley, Adaptive LIF
+│   │   ├── synapses/            # Chemical, Electrical, STDP
+│   │   ├── networks/            # Layered, Recurrent, Small-World
+│   │   └── engine/              # Simulation execution engine
+│   │
+│   ├── attacks/                 # Attack simulation & testing
+│   │   ├── patterns.py          # Attack pattern definitions
+│   │   ├── generator.py         # Signal generation
+│   │   ├── scenarios.py         # Multi-stage attack scenarios
+│   │   └── simulator.py         # Attack execution engine
+│   │
+│   ├── nsam/                    # Neural Signal Assurance Monitoring (NSAM)
+│   │   ├── events.py            # Event storage
+│   │   ├── rules.py             # Detection rules engine
+│   │   ├── detector.py          # Anomaly detection
+│   │   ├── alerts.py            # Alert management
+│   │   └── monitor.py           # Real-time monitoring service
+│   │
+│   ├── data/                    # Data models & external datasets
+│   │   ├── brain_regions.py     # Brain region definitions (10 regions)
+│   │   ├── bci_nodes.py         # BCI node network models
+│   │   ├── moabb_adapter.py     # MOABB dataset integration (BSD 3-Clause)
+│   │   └── export/              # Export functionality (placeholder)
+│   │
+│   ├── neurosecurity/           # Neurosecurity (Kohno 2009, Bonaci 2015)
+│   │   ├── __init__.py          # ONI neurosecurity wrapper
+│   │   └── integration.py       # Kohno rules, NeurosecurityMonitor
+│   │
+│   ├── visualization/           # Real-time visualization
+│   │   ├── components/
+│   │   │   ├── brain_topology.py      # 3D brain visualization
+│   │   │   └── firewall_pipeline.py   # ONI L8-L14 pipeline visualization
+│   │   ├── embeds/
+│   │   │   └── html_bridge.py         # ONI-visualizations embedding
+│   │   └── themes/
+│   │       └── oni_theme.py           # ONI color scheme
+│   │
+│   ├── ui/                      # Streamlit web interface
+│   │   ├── app.py               # Main dashboard (all pages)
+│   │   ├── widgets/             # Reusable UI components
+│   │   └── pages/               # Page components (if split)
+│   │
+│   └── persistence/             # Data storage (SQLite, placeholder)
 │
-├── simulation/            # Neural network simulation
-│   ├── neurons/           # LIF, Izhikevich, Hodgkin-Huxley, Adaptive LIF
-│   ├── synapses/          # Chemical, Electrical, STDP
-│   ├── networks/          # Layered, Recurrent, Small-World
-│   └── engine/            # Simulation execution engine
+├── tests/                       # Unit tests
+│   ├── test_coherence.py
+│   ├── test_firewall.py
+│   ├── test_layers.py
+│   ├── test_nsam.py
+│   └── test_scale_freq.py
 │
-├── attacks/               # Attack simulation & testing
-│   ├── patterns.py        # Attack pattern definitions
-│   ├── generator.py       # Signal generation
-│   ├── scenarios.py       # Multi-stage attack scenarios
-│   └── simulator.py       # Attack execution engine
-│
-├── nsam/                  # Neural Signal Assurance Monitoring (NSAM)
-│   ├── events.py          # Event storage
-│   ├── rules.py           # Detection rules engine
-│   ├── detector.py        # Anomaly detection
-│   ├── alerts.py          # Alert management
-│   └── monitor.py         # Real-time monitoring service
-│
-├── data/                  # Data models & external datasets
-│   ├── brain_regions.py   # Brain region definitions (10 regions)
-│   ├── bci_nodes.py       # BCI node network models
-│   ├── moabb_adapter.py   # MOABB dataset integration (BSD 3-Clause)
-│   └── export/            # Export functionality (placeholder)
-│
-├── neurosecurity/         # Neurosecurity (Kohno 2009, Bonaci 2015)
-│   ├── __init__.py        # ONI neurosecurity wrapper
-│   └── integration.py     # Kohno rules, NeurosecurityMonitor
-│
-├── visualization/         # Real-time visualization
-│   ├── components/
-│   │   ├── brain_topology.py      # 3D brain visualization
-│   │   └── firewall_pipeline.py   # ONI L8-L14 pipeline visualization
-│   ├── embeds/
-│   │   └── html_bridge.py         # ONI-visualizations embedding
-│   └── themes/
-│       └── oni_theme.py           # ONI color scheme
-│
-├── ui/                    # Streamlit web interface
-│   ├── app.py             # Main dashboard (all pages)
-│   ├── widgets/           # Reusable UI components
-│   └── pages/             # Page components (if split)
-│
-└── persistence/           # Data storage (SQLite, placeholder)
-
-prototype-mvp/tests/             # Unit tests (separate folder)
+└── visualizations/              # Interactive HTML visualizations (ONI Suite)
+    ├── index.html               # Master launcher
+    ├── README.md                # Visualization documentation
+    ├── 01-coherence-metric-playground.html
+    ├── 02-oni-layer-explorer.html
+    ├── 03-neural-killchain-visualizer.html
+    ├── 04-nsam-checkpoint-simulator.html
+    └── 05-scale-frequency-navigator.html
 ```
 
 ---
@@ -154,15 +168,37 @@ NEURAL/COGNITIVE (L9-L14):
 
 TARA's Streamlit UI has the following pages:
 
-| Page | Nav Section | Purpose |
-|------|-------------|---------|
-| **Dashboard** | Monitoring | System status, alerts, BCI nodes, real-time metrics |
-| **Brain Topology** | Monitoring | 3D brain visualization with electrode monitoring |
-| **Neural Firewall** | Monitoring | ONI L8-L14 validation pipeline |
-| **Signal Assurance** | Monitoring | Live metrics, alerts management, event logs |
-| **Neural Simulator** | Testing | Brain region security analysis with attacks/defenses |
-| **Attack Testing** | Testing | Execute attack scenarios and view results |
-| **Settings** | Configuration | Thresholds, rules, system parameters |
+### Monitoring Pages
+
+| Page | Purpose |
+|------|---------|
+| **Dashboard** | System status, alerts, BCI nodes, real-time metrics |
+| **Brain Topology** | 3D brain visualization with electrode monitoring |
+| **Neural Firewall** | ONI L8-L14 validation pipeline |
+| **Signal Assurance** | Live metrics, alerts management, event logs |
+
+### Testing Pages
+
+| Page | Purpose |
+|------|---------|
+| **Neural Simulator** | Brain region security analysis with attacks/defenses |
+| **Attack Testing** | Execute attack scenarios and view results |
+
+### Interactive Visualizations (ONI Suite)
+
+| Page | Purpose | Research Alignment |
+|------|---------|-------------------|
+| **Coherence Playground** | Real-time Cₛ calculation, waveform comparison | Kohno (2009) signal integrity |
+| **ONI Layer Explorer** | Interactive 14-layer model navigation | ONI Framework core model |
+| **Kill Chain Visualizer** | Attack propagation across ONI layers | Bonaci (2015) attack patterns |
+| **NSAM Checkpoint Sim** | Gamified signal validation training | NSAM validation pipeline |
+| **Scale-Frequency Nav** | Temporal scale exploration (fs→hours) | Scale-frequency invariant (f × S ≈ k) |
+
+### Configuration
+
+| Page | Purpose |
+|------|---------|
+| **Settings** | Thresholds, rules, system parameters |
 
 ### Dashboard Structure
 
@@ -470,9 +506,10 @@ pytest tests/ -v
 | 0.2.0 | 2026-01 | Added visualization, brain topology, firewall pipeline |
 | 0.3.0 | 2026-01 | Added Neural Simulator with region security analysis |
 | 0.4.0 | 2026-01 | Added neurosecurity module (Kohno 2009, Bonaci 2015) |
+| 0.5.0 | 2026-01 | Consolidated package structure, integrated ONI Visualization Suite |
 
 ---
 
-*Version: 1.2*
+*Version: 1.3*
 *Last Updated: 2026-01-24*
 *For: Claude AI Assistant*
