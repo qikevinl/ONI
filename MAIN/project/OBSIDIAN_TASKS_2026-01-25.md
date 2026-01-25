@@ -2,7 +2,7 @@
 
 > **Processed:** 2026-01-25
 > **Source:** Obsidian inbox Jan 23-24, 2026
-> **Processed By:** SCRIBE Agent
+> **Processed By:** IMHOTEP Agent
 
 ---
 
