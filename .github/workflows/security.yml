@@ -84,7 +84,7 @@ jobs:
             || true
 
       - name: Upload Bandit results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: bandit-results
           path: |
@@ -121,7 +121,7 @@ jobs:
           safety check --json > safety-report.json || true
 
       - name: Upload Safety results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: safety-results
           path: safety-report.json
