@@ -12,7 +12,8 @@
     <meta property="og:description" content="The neural security standard. 14 layers extending OSI to protect brain-computer interfaces.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://qikevinl.github.io/ONI/">
-    <meta property="og:image" content="https://qikevinl.github.io/ONI/images/oni-14-layer-hourglass.png">
+    <meta property="og:image" content="https://qikevinl.github.io/ONI/images/ONI_Banner_Logo.png">
+    <meta property="og:video" content="https://qikevinl.github.io/ONI/video/ONI-Demo-720p.mp4">
 
     <style>
         :root {
@@ -487,6 +488,160 @@
             .hero-content h1 { font-size: 2rem; }
             .section { padding: 4rem 1.5rem; }
         }
+
+        /* Video Player Styles */
+        .video-container {
+            position: relative;
+            cursor: pointer;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .video-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.4);
+            transition: background 0.3s ease;
+        }
+
+        .video-container:hover .play-overlay {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(59, 130, 246, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .video-container:hover .play-button {
+            transform: scale(1.1);
+            box-shadow: 0 15px 50px rgba(59, 130, 246, 0.6);
+        }
+
+        .play-button svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+            margin-left: 4px;
+        }
+
+        .video-label {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            backdrop-filter: blur(8px);
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            font-family: 'SF Mono', Monaco, monospace;
+            backdrop-filter: blur(8px);
+        }
+
+        /* Video Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            padding: 2rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-modal-content {
+            position: relative;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .video-modal video {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 8px;
+            transition: color 0.2s;
+        }
+
+        .video-close:hover {
+            color: var(--text-primary);
+        }
+
+        /* Coming soon badge for video */
+        .coming-soon-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
     </style>
 </head>
 <body>
@@ -535,7 +690,21 @@
             </div>
 
             <div class="hero-image">
-                <img src="images/ONI_Banner_Logo.png" alt="ONI Model - Neural Security Standard">
+                <div class="video-container" onclick="openVideoModal()">
+                    <div class="video-thumbnail">
+                        <img src="images/ONI_Banner_Logo.png" alt="ONI Model - Neural Security Standard">
+                        <div class="play-overlay">
+                            <div class="play-button">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="video-label">Watch Demo</div>
+                        <div class="video-duration">3:30</div>
+                        <div class="coming-soon-badge">Coming Soon</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -602,7 +771,7 @@
     <section class="section" id="explore">
         <div class="section-header">
             <h2>Interactive Learning</h2>
-            <p>Explore neural security concepts through hands-on educational tools</p>
+            <p>Explore ONI's neural security concepts through hands-on educational tools</p>
         </div>
 
         <div class="viz-grid">
@@ -842,5 +1011,44 @@
             Created by <a href="https://github.com/qikevinl">Kevin L. Qi</a>
         </p>
     </footer>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal" onclick="closeVideoModal(event)">
+        <div class="video-modal-content" onclick="event.stopPropagation()">
+            <button class="video-close" onclick="closeVideoModal()">&times;</button>
+            <video id="demoVideo" controls poster="images/ONI_Banner_Logo.png">
+                <source src="video/ONI-Demo-720p.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <script>
+        function openVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('demoVideo');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            // Uncomment when video is ready:
+            // video.play();
+        }
+
+        function closeVideoModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('demoVideo');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            video.pause();
+            video.currentTime = 0;
+        }
+
+        // Close on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+            }
+        });
+    </script>
 </body>
 </html>
