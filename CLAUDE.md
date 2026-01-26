@@ -63,7 +63,7 @@ ONI/
 │   └── neuroscience-bci/               # Personal neuroscience learning for BCI security
 │       ├── README.md                   # Learning roadmap
 │       ├── brain-regions/              # Brain anatomy notes
-│       └── Research-BCI_Mouse_Movement.md
+│       └── brain-regions/cerebral-cortex/motor-cortex/Research-BCI_Mouse_Movement.md
 │
 ├── .github/
 │   ├── .gitignore                      # Git ignore rules

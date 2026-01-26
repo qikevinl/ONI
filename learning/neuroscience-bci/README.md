@@ -32,7 +32,7 @@
 ### In Progress
 | Task | Description | Notes |
 |------|-------------|-------|
-| BCI Mouse Movement | How BCIs decode motor signals | See Research-BCI_Mouse_Movement.md |
+| BCI Mouse Movement | How BCIs decode motor signals | See brain-regions/cerebral-cortex/motor-cortex/Research-BCI_Mouse_Movement.md |
 
 ### Done
 | Task | Completed | Output |
@@ -47,7 +47,6 @@
 ```
 learning/neuroscience-bci/
 ├── README.md                           # This file
-├── Research-BCI_Mouse_Movement.md      # How BCIs enable cursor/keyboard control
 │
 ├── visualizing-the-mind/               # 3D visualization projects (Blender, Manim)
 │   ├── blender/                        # Blender scene files and renders
@@ -56,6 +55,7 @@ learning/neuroscience-bci/
 └── brain-regions/                      # Anatomical brain region research
     ├── cerebral-cortex/                # Outer brain layer (higher functions)
     │   ├── motor-cortex/               # Movement control (BCI primary target)
+    │   │   └── Research-BCI_Mouse_Movement.md  # How BCIs decode motor signals
     │   ├── sensory-cortex/             # Touch, proprioception
     │   ├── prefrontal-cortex/          # Executive function, planning
     │   ├── visual-cortex/              # Vision processing
@@ -100,7 +100,7 @@ Each brain region folder is for documenting:
 
 | Document | Description |
 |----------|-------------|
-| [Research-BCI_Mouse_Movement.md](./Research-BCI_Mouse_Movement.md) | Deep dive on how BCIs decode motor cortex signals for cursor control |
+| [Research-BCI_Mouse_Movement.md](./brain-regions/cerebral-cortex/motor-cortex/Research-BCI_Mouse_Movement.md) | Deep dive on how BCIs decode motor cortex signals for cursor control |
 
 ---
 
