@@ -74,10 +74,11 @@
             display: flex;
             flex-direction: column;
             gap: 4px;
-            padding: 20px;
+            padding: 20px 20px 20px 50px;
             background: rgba(0, 0, 0, 0.4);
             border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            position: relative;
         }
 
         .oni-layer-bar {
@@ -161,23 +162,6 @@
             color: rgba(255, 255, 255, 0.8) !important;
         }
 
-        /* Zone label pulse during L8 expansion */
-        .oni-zone-label.gateway.expanded {
-            animation: gatewayPulse 1.5s ease-in-out infinite;
-            font-size: 1.3rem;
-            letter-spacing: 0.1em;
-        }
-
-        @keyframes gatewayPulse {
-            0%, 100% {
-                text-shadow: 0 0 15px rgba(255, 150, 50, 0.6), 0 0 30px rgba(255, 150, 50, 0.3);
-                transform: translateY(0) scale(1);
-            }
-            50% {
-                text-shadow: 0 0 30px rgba(255, 150, 50, 1), 0 0 60px rgba(255, 150, 50, 0.6), 0 0 90px rgba(255, 100, 0, 0.3);
-                transform: translateY(-3px) scale(1.05);
-            }
-        }
 
         .oni-layer-id {
             font-weight: 700;
@@ -202,24 +186,41 @@
         }
 
         .oni-zone-label {
-            font-size: 0.7rem;
+            position: absolute;
+            left: 8px;
+            font-size: 0.65rem;
             font-weight: 600;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            padding: 8px 0 4px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
             opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transition: opacity 0.4s ease;
+            white-space: nowrap;
         }
 
         .oni-zone-label.visible {
             opacity: 1;
-            transform: translateY(0);
         }
 
-        .oni-zone-label.silicon { color: #60a5fa; }
-        .oni-zone-label.gateway { color: #ff9632; text-align: center; }
-        .oni-zone-label.biology { color: #4ade80; }
+        .oni-zone-label.silicon {
+            color: #60a5fa;
+            top: 20px;
+            height: 322px; /* Spans L1-L7 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .oni-zone-label.biology {
+            color: #4ade80;
+            bottom: 20px;
+            height: 276px; /* Spans L9-L14 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
         /* Navigation */
         nav {
@@ -1171,7 +1172,6 @@
                     </div>
 
                     <!-- Neural Gateway (L8) -->
-                    <div class="oni-zone-label gateway">★ Neural Gateway — The Bridge ★</div>
                     <div class="oni-layer-bar gateway" data-layer="8" style="background: linear-gradient(135deg, #b45309, #d97706, #f59e0b);">
                         <span class="oni-layer-id" style="font-size: 1.1rem;">L8</span>
                         <span class="oni-layer-name" style="font-weight: 600;">Neural Gateway</span>
@@ -1803,14 +1803,14 @@
 
             if (!container || layerBars.length === 0) return;
 
-            // Total elements to animate (3 zone labels + 14 layer bars = 17)
-            const totalElements = 17;
-            // L8 is at index 9 (0: silicon label, 1-7: L1-L7, 8: gateway label, 9: L8)
-            // For L8 to be visible, visibleCount must be >= 10, so progress >= 10/17
-            const L8_VISIBLE_PROGRESS = 10 / totalElements;     // ~0.588 - when L8 first appears
+            // Total elements to animate (2 zone labels + 14 layer bars = 16)
+            const totalElements = 16;
+            // L8 is at index 8 (0: silicon label, 1-7: L1-L7, 8: L8)
+            // For L8 to be visible, visibleCount must be >= 9, so progress >= 9/16
+            const L8_VISIBLE_PROGRESS = 9 / totalElements;     // ~0.5625 - when L8 first appears
             // Scroll snap zone: when raw progress would show L8, we "pause" here
             const L8_SNAP_START = L8_VISIBLE_PROGRESS;
-            const L8_SNAP_END = (10 + 2) / totalElements;       // ~0.706 - extra scroll needed to continue
+            const L8_SNAP_END = (9 + 2) / totalElements;       // ~0.6875 - extra scroll needed to continue
             let lastActiveIndex = -1;
 
             function updateReveal() {
@@ -1830,7 +1830,6 @@
                 // This creates a "sticky" zone where L8 stays expanded while user scrolls more
                 let progress;
                 const gatewayBar = layerBars[7]; // L8
-                const gatewayLabel = zoneLabels[1]; // Gateway zone label
 
                 if (rawProgress < L8_SNAP_START) {
                     // Before L8: normal linear progress
@@ -1838,30 +1837,21 @@
                     if (gatewayBar) {
                         gatewayBar.classList.remove('expanded');
                     }
-                    if (gatewayLabel) {
-                        gatewayLabel.classList.remove('expanded');
-                    }
                 } else if (rawProgress >= L8_SNAP_START && rawProgress < L8_SNAP_END) {
                     // In the snap zone: hold at showing L8, keep it expanded
                     progress = L8_VISIBLE_PROGRESS; // Exactly enough to show L8
                     if (gatewayBar) {
                         gatewayBar.classList.add('expanded');
                     }
-                    if (gatewayLabel) {
-                        gatewayLabel.classList.add('expanded');
-                    }
                 } else {
                     // After snap zone: resume from Biology label onwards
-                    // Map remaining scroll (L8_SNAP_END to 1) to remaining elements (index 10+ to 17)
+                    // Map remaining scroll (L8_SNAP_END to 1) to remaining elements (index 9+ to 16)
                     const remainingRaw = rawProgress - L8_SNAP_END;
                     const remainingRange = 1 - L8_SNAP_END;
-                    const biologyStartProgress = 11 / totalElements; // Biology label is index 10
+                    const biologyStartProgress = 10 / totalElements; // Biology label is index 9
                     progress = biologyStartProgress + (remainingRaw / remainingRange) * (1 - biologyStartProgress);
                     if (gatewayBar) {
                         gatewayBar.classList.remove('expanded');
-                    }
-                    if (gatewayLabel) {
-                        gatewayLabel.classList.remove('expanded');
                     }
                 }
 
@@ -1871,21 +1861,19 @@
                 const visibleCount = Math.floor(progress * totalElements);
 
                 // Animate zone labels and layer bars sequentially
-                // Order: Silicon label, L1-L7, Gateway label, L8, Biology label, L9-L14
+                // Order: Silicon label, L1-L7, L8, Biology label, L9-L14
                 const animationOrder = [];
 
-                // Silicon zone label
+                // Silicon zone label (sideways on left)
                 animationOrder.push({ type: 'zone', element: zoneLabels[0], layer: 0 });
                 // L1-L7
                 for (let i = 0; i < 7; i++) {
                     animationOrder.push({ type: 'bar', element: layerBars[i], layer: i + 1 });
                 }
-                // Gateway zone label
-                animationOrder.push({ type: 'zone', element: zoneLabels[1], layer: 8 });
                 // L8 (gateway)
                 animationOrder.push({ type: 'bar', element: layerBars[7], layer: 8 });
-                // Biology zone label
-                animationOrder.push({ type: 'zone', element: zoneLabels[2], layer: 9 });
+                // Biology zone label (sideways on left)
+                animationOrder.push({ type: 'zone', element: zoneLabels[1], layer: 9 });
                 // L9-L14
                 for (let i = 8; i < 14; i++) {
                     animationOrder.push({ type: 'bar', element: layerBars[i], layer: i + 1 });
