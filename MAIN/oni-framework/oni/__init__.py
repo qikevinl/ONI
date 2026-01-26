@@ -62,7 +62,25 @@ from .scale_freq import ScaleFrequencyInvariant
 # =============================================================================
 # ARCHITECTURE: 14-Layer Reference Model
 # =============================================================================
-from .layers import ONIStack, Layer, Domain
+from .layers import ONIStack, Layer, Domain, get_stack, layer_info
+
+# =============================================================================
+# NEUROSCIENCE MAPPINGS: Brain Regions, Neurotransmitters, Functions
+# =============================================================================
+from .neuromapping import (
+    NeuroscienceAtlas,
+    BrainRegion,
+    BrainRegionAtlas,
+    NeurotransmitterSystem,
+    NeurotransmitterAtlas,
+    CognitiveFunction,
+    CognitiveFunctionAtlas,
+    TimeScale,
+    TimeScaleHierarchy,
+    Citation,
+    References,
+    get_atlas,
+)
 
 # =============================================================================
 # NEUROSECURITY: Threat Detection (Kohno 2009)
@@ -124,6 +142,22 @@ __all__ = [
     "ONIStack",
     "Layer",
     "Domain",
+    "get_stack",
+    "layer_info",
+
+    # Neuroscience Mappings
+    "NeuroscienceAtlas",
+    "BrainRegion",
+    "BrainRegionAtlas",
+    "NeurotransmitterSystem",
+    "NeurotransmitterAtlas",
+    "CognitiveFunction",
+    "CognitiveFunctionAtlas",
+    "TimeScale",
+    "TimeScaleHierarchy",
+    "Citation",
+    "References",
+    "get_atlas",
 
     # Threat Detection (Kohno 2009)
     "ThreatType",
@@ -171,6 +205,15 @@ SIGNAL TRUST
 ARCHITECTURE
   ONIStack             Navigate 14-layer model
   Layer                Individual layer details
+  get_stack            Get pre-configured stack
+  layer_info           Get comprehensive layer info
+
+NEUROSCIENCE MAPPINGS
+  NeuroscienceAtlas    Brain regions, NTs, functions
+  BrainRegionAtlas     15+ brain regions with citations
+  NeurotransmitterAtlas 8 NT systems with cofactors
+  CognitiveFunctionAtlas 10 functions mapped to layers
+  TimeScaleHierarchy   Femtoseconds to lifetime
 
 THREAT DETECTION
   KohnoThreatModel     CIA threat classification

@@ -291,6 +291,53 @@ print(sfi.hierarchy_report())
 | Regional | ~10 mm | ~1-10 Hz | Brain regions |
 | Whole-Brain | ~100 mm | <1 Hz | Global states |
 
+### Neuroscience Mappings (NEW in v3.1)
+
+**What it does:** Maps brain regions, neurotransmitter systems, and cognitive functions to ONI layers. All mappings are backed by peer-reviewed research with full citations.
+
+**Why this matters:** Understanding the biological substrate helps identify attack surfaces that electrical monitoring alone cannot detect (e.g., neurotransmitter depletion attacks).
+
+```python
+from oni import ONIStack, get_atlas
+
+stack = ONIStack()
+atlas = get_atlas()
+
+# Get brain regions relevant to a layer
+regions = stack.brain_regions_for_layer(13)  # Semantic Layer
+print(f"Brain regions for L13: {regions}")
+# ['VTA', 'NAc', 'PFC', 'hippocampus', 'amygdala']
+
+# Look up a neurotransmitter system
+da = atlas.neurotransmitter("dopamine")
+print(f"Dopamine synthesis requires: {da.required_cofactors}")
+# ['Fe²⁺', 'BH4 (tetrahydrobiopterin)', 'O₂']
+
+print(f"BCI can trigger release: {da.bci_can_trigger_release}")  # True
+print(f"BCI can synthesize: {da.bci_can_synthesize}")            # False
+
+# Get security implications
+implications = stack.security_implications_for_layer(13)
+for imp in implications:
+    print(f"⚠ {imp}")
+
+# Access research citations
+for cite in atlas.citations_for("dopamine"):
+    print(cite.apa_format())
+```
+
+**Available data:**
+
+| Category | Count | Examples |
+|----------|-------|----------|
+| Brain Regions | 15+ | SNc, VTA, NAc, PFC, hippocampus, LC, raphe |
+| Neurotransmitters | 8 | Dopamine, serotonin, NE, GABA, glutamate, ACh |
+| Cognitive Functions | 10 | Motor, memory, attention, reward, emotion |
+| Time Scales | 13 | Femtoseconds to lifetime |
+| Citations | 20+ | With DOIs and PubMed IDs |
+
+**Key insight:** BCI can trigger release of pre-synthesized neurotransmitters but cannot synthesize them. This means molecular substrate attacks (e.g., iron depletion affecting dopamine synthesis) cannot be compensated by electrical stimulation.
+
 ## Detection Signatures
 
 ### Variance Components (σ²)
@@ -356,7 +403,9 @@ oni-framework/
 │   ├── coherence.py     # Cₛ calculation
 │   ├── layers.py        # 14-layer model
 │   ├── firewall.py      # Signal filtering
-│   └── scale_freq.py    # f × S ≈ k invariant
+│   ├── scale_freq.py    # f × S ≈ k invariant
+│   ├── neuromapping.py  # Brain regions, neurotransmitters, functions
+│   └── neurosecurity/   # Kohno threat model, BCI Anonymizer
 ├── tests/
 │   └── test_*.py        # Unit tests
 ├── pyproject.toml       # Package configuration
@@ -381,10 +430,25 @@ oni-framework/
 ### `oni.ONIStack`
 
 - `layer(n)` → Get layer by number (1-14)
-- `biological_layers()` → L1-L7
-- `silicon_layers()` → L9-L14
+- `silicon_layers()` → L1-L7 (OSI networking)
+- `biology_layers()` → L9-L14 (Cognitive processing)
 - `bridge_layer()` → L8 (Neural Gateway)
 - `ascii_diagram()` → Visual representation
+- `brain_regions_for_layer(n)` → Brain regions for layer
+- `neurotransmitters_for_layer(n)` → Neurotransmitters for layer
+- `functions_for_layer(n)` → Cognitive functions for layer
+- `layer_neuroscience_report(n)` → Comprehensive report
+- `security_implications_for_layer(n)` → Security concerns
+
+### `oni.NeuroscienceAtlas`
+
+- `brain_region(abbr)` → BrainRegion object
+- `neurotransmitter(name)` → NeurotransmitterSystem object
+- `cognitive_function(name)` → CognitiveFunction object
+- `citation(id)` → Research citation
+- `citations_for(topic)` → Citations for a topic
+- `layer_mapping(n)` → All mappings for a layer
+- `bci_capabilities_summary()` → What BCI can/cannot do
 
 ### `oni.ScaleFrequencyInvariant`
 
@@ -402,6 +466,7 @@ oni-framework/
 | [ONI Framework Wiki](https://github.com/qikevinl/ONI/blob/main/MAIN/INDEX.md) | Central hub — navigation, dependencies, roadmap |
 | [14-Layer Model Reference](https://github.com/qikevinl/ONI/blob/main/MAIN/oni-framework/ONI_LAYERS.md) | Complete layer specification with attack surfaces |
 | [Biological Foundation](https://github.com/qikevinl/ONI/blob/main/MAIN/oni-framework/ONI_LAYERS.md#biological-foundation-what-l8-encapsulates) | Research on what L8 encapsulates (neurotransmitter pathways, cofactors, time-scales) |
+| [Neuroscience Mappings API](https://github.com/qikevinl/ONI/blob/main/MAIN/oni-framework/ONI_LAYERS.md#python-api-neuroscience-mappings) | Brain regions, neurotransmitters, functions mapped to layers with citations |
 | [Coherence Metric](https://github.com/qikevinl/ONI/tree/main/MAIN/publications/coherence-metric/) | Technical document on Cₛ calculation |
 | [Neural Firewall](https://github.com/qikevinl/ONI/tree/main/MAIN/publications/neural-firewall/) | Firewall architecture and decision matrix |
 | [Scale-Frequency Invariant](https://github.com/qikevinl/ONI/tree/main/MAIN/publications/scale-frequency/) | The f × S ≈ k constraint |

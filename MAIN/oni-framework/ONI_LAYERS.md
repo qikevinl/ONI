@@ -758,9 +758,161 @@ These implementations render the 14-layer model and must stay synchronized with 
 | **brand.json** | [`MAIN/resources/brand.json`](../resources/brand.json) | Single source of truth for layer data (names, colors, zones) |
 | **Video Animation** | [`video/demo/src/components/LayerStack.tsx`](../../video/demo/src/components/LayerStack.tsx) | Remotion video layer stack with cascade animation |
 | **GitHub Pages** | [`docs/index.html`](../../docs/index.html) | Website scroll-reveal animation with L8 expansion effect |
-| **Python API** | [`oni/layers.py`](oni/layers.py) | Programmatic layer access, attack surfaces, defenses |
+| **Python API - Layers** | [`oni/layers.py`](oni/layers.py) | Programmatic layer access, attack surfaces, defenses |
+| **Python API - Neuroscience** | [`oni/neuromapping.py`](oni/neuromapping.py) | Brain regions, neurotransmitters, functions, citations |
 
 > **Sync Protocol:** When updating layer names or structure, update `brand.json` first, then propagate to all consumers listed above.
+
+### Python API: Neuroscience Mappings
+
+The ONI Framework Python API (`oni-framework`) includes a comprehensive neuroscience mapping module that connects brain regions, neurotransmitter systems, and cognitive functions to the 14-layer model. All mappings are backed by peer-reviewed research citations.
+
+#### Installation
+
+```bash
+pip install oni-framework
+```
+
+#### Quick Start
+
+```python
+from oni import ONIStack, NeuroscienceAtlas, get_atlas
+
+# Get the ONI stack with neuroscience integration
+stack = ONIStack()
+
+# Get brain regions relevant to Layer 13 (Semantic Layer)
+regions = stack.brain_regions_for_layer(13)
+print(regions)  # ['VTA', 'NAc', 'PFC', 'hippocampus', 'amygdala']
+
+# Get neurotransmitters for Layer 12 (Cognitive Session)
+neurotransmitters = stack.neurotransmitters_for_layer(12)
+print(neurotransmitters)  # ['dopamine', 'serotonin', 'norepinephrine', ...]
+
+# Generate a comprehensive layer report
+print(stack.layer_neuroscience_report(13))
+```
+
+#### Available Mappings
+
+| Mapping Type | Module | Count | Description |
+|--------------|--------|-------|-------------|
+| **Brain Regions** | `BrainRegionAtlas` | 15+ | SNc, VTA, NAc, PFC, hippocampus, etc. |
+| **Neurotransmitters** | `NeurotransmitterAtlas` | 8 | DA, 5-HT, NE, GABA, Glu, ACh, adenosine, eCB |
+| **Cognitive Functions** | `CognitiveFunctionAtlas` | 10 | motor, memory, attention, reward, emotion, etc. |
+| **Time Scales** | `TimeScaleHierarchy` | 13 | Femtoseconds to lifetime |
+| **Citations** | `References` | 20+ | Peer-reviewed sources for all data |
+
+#### Brain Region Lookup
+
+```python
+from oni import get_atlas
+
+atlas = get_atlas()
+
+# Look up a brain region
+snc = atlas.brain_region("SNc")
+print(f"{snc.full_name}")           # "Substantia Nigra pars compacta"
+print(f"Functions: {snc.primary_functions}")  # ['motor control', 'movement initiation', ...]
+print(f"ONI Layers: {snc.oni_layers}")        # [9, 10, 11]
+print(f"BCI Access: {snc.bci_access}")        # 'low'
+
+# Find regions by neurotransmitter
+dopamine_regions = atlas.regions.by_neurotransmitter("dopamine")
+for r in dopamine_regions:
+    print(f"  {r.abbreviation}: {r.full_name}")
+```
+
+#### Neurotransmitter System Lookup
+
+```python
+from oni import get_atlas
+
+atlas = get_atlas()
+
+# Look up a neurotransmitter system
+da = atlas.neurotransmitter("dopamine")
+print(f"Synthesis enzyme: {da.synthesis_enzyme}")     # "Tyrosine Hydroxylase (TH)"
+print(f"Required cofactors: {da.required_cofactors}") # ['Fe²⁺', 'BH4', 'O₂']
+print(f"Synthesis regions: {da.synthesis_regions}")   # ['SNc', 'VTA']
+print(f"BCI can trigger release: {da.bci_can_trigger_release}")  # True
+print(f"BCI can synthesize: {da.bci_can_synthesize}")            # False
+
+# Find systems requiring a specific cofactor
+iron_dependent = atlas.neurotransmitters.by_cofactor("Fe")
+print("Iron-dependent systems:", [nt.name for nt in iron_dependent])
+# ['dopamine', 'serotonin']
+```
+
+#### Security Analysis
+
+```python
+from oni import ONIStack
+
+stack = ONIStack()
+
+# Get security implications for a layer
+implications = stack.security_implications_for_layer(13)
+for imp in implications:
+    print(f"⚠ {imp}")
+# ⚠ Reward Processing: Reward pathway manipulation could alter motivation or cause addiction
+# ⚠ dopamine: Iron depletion attack would reduce synthesis. BCI cannot compensate via electrical stimulation.
+```
+
+#### Research Citations
+
+All data in the neuroscience mappings is backed by peer-reviewed research:
+
+```python
+from oni import get_atlas
+
+atlas = get_atlas()
+
+# Get citations for a topic
+for cite in atlas.citations_for("dopamine"):
+    print(cite.apa_format())
+# Björklund, A., & Dunnett, S. B. (2007). Dopamine neuron systems in the brain...
+# Matak, P., et al. (2016). Disrupted iron homeostasis causes dopaminergic neurodegeneration...
+
+# Access a specific citation
+bjorklund = atlas.citation("bjorklund2007")
+print(f"Key finding: {bjorklund.key_finding}")
+# "Comprehensive mapping of dopamine pathways: nigrostriatal, mesolimbic, mesocortical, tuberoinfundibular"
+```
+
+#### BCI Capabilities Summary
+
+```python
+from oni import get_atlas
+
+atlas = get_atlas()
+capabilities = atlas.bci_capabilities_summary()
+
+print("Can trigger release:", capabilities["can_trigger_release"])
+# ['dopamine', 'serotonin', 'norepinephrine', 'GABA', 'glutamate', 'acetylcholine', 'endocannabinoids']
+
+print("Cannot synthesize:", capabilities["cannot_synthesize"])
+# All neurotransmitters - BCI cannot create molecules
+
+print("Accessible time range:", capabilities["accessible_time_range"])
+# ('milliseconds (10⁻³ s)', 'minutes (10² s)')
+
+print("High BCI access regions:", capabilities["high_access_regions"])
+# ['PFC', 'M1', 'V1', 'A1']
+```
+
+#### Layer-to-Neuroscience Mapping Table
+
+| ONI Layer | Brain Regions | Neurotransmitters | Primary Functions |
+|-----------|---------------|-------------------|-------------------|
+| L9 (Signal Processing) | V1, A1 | Glu, GABA | Sensory processing |
+| L10 (Neural Protocol) | M1, SNc, striatum | DA, Glu, GABA | Motor control, encoding |
+| L11 (Cognitive Transport) | LC, BF, LHA, VLPO | NE, ACh, adenosine | Attention, arousal, sleep |
+| L12 (Cognitive Session) | PFC, hippocampus, NAc | DA, 5-HT, ACh, NE | Working memory, context |
+| L13 (Semantic Layer) | VTA, NAc, PFC, amygdala | DA, 5-HT | Reward, decision, intent |
+| L14 (Identity Layer) | PFC, hippocampus | DA, 5-HT | Self-awareness, identity |
+
+> **Citation Note:** All mappings are derived from peer-reviewed neuroscience literature. See the `References` class in `oni/neuromapping.py` for complete citations including DOIs and PubMed IDs.
 
 ---
 
@@ -768,6 +920,7 @@ These implementations render the 14-layer model and must stay synchronized with 
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 3.1 | 2026-01-26 | **Python API neuroscience mappings**: Added `neuromapping.py` module with brain regions (15+), neurotransmitter systems (8), cognitive functions (10), time scales (13), research citations (20+). All data backed by peer-reviewed literature with DOIs/PMIDs. |
 | 3.0 | 2026-01-26 | **Major addition**: Biological Foundation section with molecular substrate hierarchy, time-scale analysis (femtoseconds to lifetime), detailed examples (Iron→Dopamine with SNc/VTA/Striatum, Caffeine→Adenosine with NAc shell), BCI capabilities vs limitations, research citations |
 | 2.2 | 2026-01-25 | Added bidirectional BCI security: stimulation safety bounds, WRITE direction threats |
 | 2.1 | 2026-01-24 | Fixed L9-L11 domain labels: Silicon → Biology (L9+ is neural side of bridge) |
