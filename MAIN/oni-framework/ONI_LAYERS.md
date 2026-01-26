@@ -1,6 +1,6 @@
 # ONI Layer Model Reference
 
-> **ONI**: Organic Neurocomputing Interface — A 14-layer framework extending OSI for brain-computer interface (BCI) security.
+> **ONI**: Open/Organic Neurocomputing Interface — A 14-layer framework extending OSI for brain-computer interface (BCI) security.
 
 ---
 
@@ -66,10 +66,8 @@ The framework provides security without requiring surveillance. Signal integrity
 ---
 
 ## Complete 14-Layer Model
-
-<p align="center">
-  <img src="../resources/images/oni-14-layer-hourglass.png" alt="ONI Framework 14-Layer Model" width="700">
-</p>
+See all layers here: 
+https://github.com/qikevinl/ONI/edit/main/MAIN/oni-framework/ONI_LAYERS.md
 
 ### OSI Stack — Classical Networking (L1-L7)
 
