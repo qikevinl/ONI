@@ -5,6 +5,7 @@ import { LayersCanvasScene } from "./scenes/LayersCanvasScene";
 import { TitleSceneEnhanced } from "./scenes/TitleSceneEnhanced";
 import { TitleThreadsScene } from "./scenes/TitleThreadsScene";
 import { TitleCalmScene } from "./scenes/TitleCalmScene";
+import { TitleVectorScene } from "./scenes/TitleVectorScene";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -58,6 +59,15 @@ export const RemotionRoot: React.FC = () => {
         id="TitleCalm"
         component={TitleCalmScene}
         durationInFrames={360} // 12 seconds - slower pace
+        fps={videoConfig.fps}
+        width={videoConfig.width}
+        height={videoConfig.height}
+      />
+      {/* Vector Waves - Tech-inspired, Clean, Electric Water */}
+      <Composition
+        id="TitleVector"
+        component={TitleVectorScene}
+        durationInFrames={300} // 10 seconds
         fps={videoConfig.fps}
         width={videoConfig.width}
         height={videoConfig.height}

@@ -14,3 +14,5 @@ export { RotatingText } from './RotatingText';
 export { Threads } from './Threads';
 export { Aurora } from './Aurora';
 export { FloatingOrbs } from './FloatingOrbs';
+export { WaveGrid } from './WaveGrid';
+export { ElectricFlow } from './ElectricFlow';
