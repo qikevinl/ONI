@@ -31,10 +31,16 @@ const features = [
     iconType: 'monitor' as const,
     color: colors.primary.accent,
   },
+  {
+    title: 'Privacy-First',
+    description: 'Only Cₛ scores transmitted—raw data stays local',
+    iconType: 'privacy' as const,
+    color: colors.primary.accentPurple,
+  },
 ];
 
 // Professional abstract icons (SVG-based)
-const FeatureIcon: React.FC<{ type: 'topology' | 'attack' | 'monitor'; color: string }> = ({ type, color }) => {
+const FeatureIcon: React.FC<{ type: 'topology' | 'attack' | 'monitor' | 'privacy'; color: string }> = ({ type, color }) => {
   if (type === 'topology') {
     return (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -55,6 +61,17 @@ const FeatureIcon: React.FC<{ type: 'topology' | 'attack' | 'monitor'; color: st
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <path d="M12 2L15 8H21L16 12L18 20L12 16L6 20L8 12L3 8H9L12 2Z" stroke={color} strokeWidth="1.5" fill="none" />
         <circle cx="12" cy="11" r="2" fill={color} />
+      </svg>
+    );
+  }
+  if (type === 'privacy') {
+    // Lock inside shield - privacy-first icon
+    return (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2L20 6V11C20 16 16 20 12 21C8 20 4 16 4 11V6L12 2Z" stroke={color} strokeWidth="1.5" fill="none" />
+        <rect x="9" y="10" width="6" height="5" rx="1" stroke={color} strokeWidth="1.5" fill="none" />
+        <path d="M10 10V8C10 6.9 10.9 6 12 6C13.1 6 14 6.9 14 8V10" stroke={color} strokeWidth="1.5" fill="none" />
+        <circle cx="12" cy="12.5" r="1" fill={color} />
       </svg>
     );
   }

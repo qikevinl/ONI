@@ -156,7 +156,7 @@ export const script: ScriptLine[] = [
     endFrame: 3840,
   },
 
-  // Scene 5: TARA Platform (2:06-2:36)
+  // Scene 5: TARA Platform (2:06-2:46)
   {
     scene: 'tara',
     text: "For security professionals, there's TARA—the Telemetry Analysis and Response Automation platform.",
@@ -179,113 +179,125 @@ export const script: ScriptLine[] = [
     scene: 'tara',
     text: "Neural Signal Assurance Monitoring that flags anomalies before they become breaches.",
     startFrame: 4410,
-    endFrame: 4680,
+    endFrame: 4620,
+  },
+  {
+    scene: 'tara',
+    text: "And here's what makes it different: TARA never sees your raw neural data.",
+    startFrame: 4620,
+    endFrame: 4830,
+  },
+  {
+    scene: 'tara',
+    text: "Only mathematical scores—coherence values, deltas, and deviations. Your thoughts stay on your device.",
+    startFrame: 4830,
+    endFrame: 5100,
   },
 
-  // Scene 6: Academic Foundation (2:36-3:01)
+  // Scene 6: Academic Foundation (2:50-3:21)
   {
     scene: 'academic',
     text: "ONI isn't built in a vacuum.",
-    startFrame: 4680,
-    endFrame: 4800,
+    startFrame: 5100,
+    endFrame: 5220,
   },
   {
     scene: 'academic',
     text: "It extends the threat models of Kohno and colleagues at the University of Washington.",
-    startFrame: 4800,
-    endFrame: 5040,
-  },
-  {
-    scene: 'academic',
-    text: "It incorporates neurosecurity research from Columbia, Yale, and the Graz BCI Lab.",
-    startFrame: 5040,
-    endFrame: 5310,
-  },
-  {
-    scene: 'academic',
-    text: "Every claim is cited. Every formula is documented.",
-    startFrame: 5310,
+    startFrame: 5220,
     endFrame: 5460,
   },
   {
     scene: 'academic',
-    text: "Built for researchers, developers, regulators, security teams...",
+    text: "It incorporates neurosecurity research from Columbia, Yale, and the Graz BCI Lab.",
     startFrame: 5460,
-    endFrame: 5640,
+    endFrame: 5730,
+  },
+  {
+    scene: 'academic',
+    text: "Every claim is cited. Every formula is documented.",
+    startFrame: 5730,
+    endFrame: 5880,
+  },
+  {
+    scene: 'academic',
+    text: "Built for researchers, developers, regulators, security teams...",
+    startFrame: 5880,
+    endFrame: 6060,
   },
   {
     scene: 'academic',
     // NOTE: This line should have slow pan-in animation with WHITE TEXT for dramatic emphasis
     text: "...and you.",
-    startFrame: 5640,
-    endFrame: 5880, // Extended for dramatic effect
+    startFrame: 6060,
+    endFrame: 6300, // Extended for dramatic effect
   },
 
-  // Scene 7: Call to Action (3:01-3:21)
+  // Scene 7: Call to Action (3:30-3:50)
   {
     scene: 'cta',
     text: "Ready to secure the neural frontier?",
-    startFrame: 5880,
-    endFrame: 6030,
+    startFrame: 6300,
+    endFrame: 6450,
   },
   {
     scene: 'cta',
     text: "Install ONI with a single command.",
-    startFrame: 6030,
-    endFrame: 6180,
+    startFrame: 6450,
+    endFrame: 6600,
   },
   {
     scene: 'cta',
     text: "pip install oni-framework, oni-tara, or oni-academy",
-    startFrame: 6180,
-    endFrame: 6360,
+    startFrame: 6600,
+    endFrame: 6780,
   },
   {
     scene: 'cta',
     text: "Join us in building the security standards for brain-computer interfaces.",
-    startFrame: 6360,
-    endFrame: 6570,
+    startFrame: 6780,
+    endFrame: 6990,
   },
 
-  // Scene 8: Credits (3:21-3:53) - Powerful closing with dynamic waves
+  // Scene 8: Credits (3:53-4:23) - Powerful closing with dynamic waves
   {
     scene: 'credits',
     text: "Your mind.",
-    startFrame: 6570,
-    endFrame: 6660,
+    startFrame: 6990,
+    endFrame: 7080,
   },
   {
     scene: 'credits',
     text: "Your privacy.",
-    startFrame: 6660,
-    endFrame: 6750,
+    startFrame: 7080,
+    endFrame: 7170,
   },
   {
     scene: 'credits',
     text: "Our future.",
-    startFrame: 6750,
-    endFrame: 6840,
+    startFrame: 7170,
+    endFrame: 7260,
   },
   {
     scene: 'credits',
     text: "Because life's most important connections deserve the most thought.",
-    startFrame: 6840,
-    endFrame: 7050,
+    startFrame: 7260,
+    endFrame: 7470,
   },
   {
     scene: 'credits',
     text: "Welcome to the OSI of Mind.",
-    startFrame: 7050,
-    endFrame: 7290,
+    startFrame: 7470,
+    endFrame: 7710,
   },
 ];
 
 // Full script as single text for voiceover generation
 export const fullScript = script.map(line => line.text).join(' ');
 
-// Word count: ~440 words
-// Estimated read time at 110 WPM: ~4:03 (fits 4:03 with natural pacing)
-// Final frame: 7290 = 4:03 at 30fps
+// Word count: ~480 words
+// Estimated read time at 110 WPM: ~4:23 (fits 4:23 with natural pacing)
+// Final frame: 7710 = 4:17 at 30fps
 //
 // ANIMATION NOTES:
 // - Scene 2 (Problem): NEW selling points phase after "ONI Framework" intro
@@ -295,6 +307,10 @@ export const fullScript = script.map(line => line.text).join(' ');
 //   - Examples: MRI interference, electromagnetic disruption, injection attacks
 // - Scene 4 (Scale-Frequency): Animated visualization of f × S ≈ k
 //   - Scale bar grows (10→1000), Frequency shrinks (100→1 Hz), k stays ~1000
+// - Scene 5 (TARA): NEW - Privacy-preserving monitoring explanation
+//   - Visual: Shield icon with lock, "RAW → Cₛ ONLY" transformation
+//   - Show: Raw data stays local, only scores transmitted
+//   - Add "Privacy-First" feature card to TARAScene
 // - Scene 6 ("...and you"): SLOW PAN-IN with WHITE TEXT and glow for emphasis
 // - Scene 7 (CTA): Cycling pip install animation (framework → tara → academy)
 // - Scene 8 (Credits): Dynamic circular wave animation on "Welcome to" finale

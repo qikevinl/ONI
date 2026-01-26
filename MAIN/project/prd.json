@@ -220,6 +220,67 @@
 
   "future_work": [
     {
+      "id": "epic-federated-ai-training",
+      "title": "Federated AI Training for Privacy-Preserving Neural Security",
+      "type": "epic",
+      "description": "Implement federated learning architecture where AI models train locally on user devices, sharing only encrypted gradients with central servers. TARA portal receives only mathematical scores (Cₛ, Δ, σ)—never raw neural data. This enables collective learning while preserving individual privacy.",
+      "rationale": "Current centralized ML approaches require raw data transmission, creating privacy risks. Federated learning enables model improvement without data exposure. This aligns with ONI's core principle: your thoughts stay on your device.",
+      "feasibility": "research-needed",
+      "components": [
+        {
+          "id": "fl-local-training-module",
+          "title": "Local Training Module",
+          "description": "On-device model training using TensorFlow Federated or PySyft",
+          "status": "not-started"
+        },
+        {
+          "id": "fl-gradient-encryption",
+          "title": "Gradient Encryption Layer",
+          "description": "Homomorphic encryption or secure aggregation for gradient sharing",
+          "status": "not-started"
+        },
+        {
+          "id": "fl-differential-privacy",
+          "title": "Differential Privacy Integration",
+          "description": "Add noise to gradients to prevent model inversion attacks",
+          "status": "not-started"
+        },
+        {
+          "id": "fl-score-only-transmission",
+          "title": "Score-Only Transmission Protocol",
+          "description": "Ensure only Cₛ scores, deltas, and deviations are transmitted to TARA",
+          "status": "not-started"
+        },
+        {
+          "id": "fl-aggregation-server",
+          "title": "Secure Aggregation Server",
+          "description": "Central server that combines encrypted gradients without seeing individual updates",
+          "status": "not-started"
+        }
+      ],
+      "technical_approach": {
+        "framework": "TensorFlow Federated or PySyft",
+        "encryption": "Homomorphic encryption (CKKS scheme) for gradient protection",
+        "privacy_budget": "Differential privacy with configurable ε (epsilon)",
+        "aggregation": "Secure aggregation protocol (Bonawitz et al., 2017)"
+      },
+      "research_questions": [
+        "What's the minimum data needed for effective local training?",
+        "How to handle non-IID neural data distributions across users?",
+        "What privacy budget (ε) balances utility vs privacy?",
+        "How to detect and handle Byzantine/malicious participants?",
+        "Can model updates leak information about neural patterns?"
+      ],
+      "references": [
+        "McMahan et al. (2017) - Communication-Efficient Learning of Deep Networks from Decentralized Data",
+        "Bonawitz et al. (2017) - Practical Secure Aggregation for Privacy-Preserving Machine Learning",
+        "Abadi et al. (2016) - Deep Learning with Differential Privacy",
+        "Geiping et al. (2020) - Inverting Gradients - How easy is it to break privacy in federated learning?"
+      ],
+      "estimated_effort": "large",
+      "timeline": "6-12 months for MVP"
+    },
+    {
       "id": "future-neural-consent-publication",
       "title": "Neural Consent Publication Topic",
       "description": "Create publications/neural-consent/ with Blog and TechDoc on consent architecture for BCIs",

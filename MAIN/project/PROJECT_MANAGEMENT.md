@@ -86,6 +86,7 @@ Create an open-source, academically rigorous, and practically implementable secu
 | SCR-002 | MOABB adapter integration | 2026-01-24 | Medium | **Approved** - Enables validation |
 | SCR-003 | BrainFlow hardware support | 2026-01-24 | Low | **Deferred** - Nice-to-have |
 | SCR-004 | AI attack prediction | 2026-01-24 | High | **Future** - Research needed |
+| SCR-005 | Privacy-First Architecture (Federated AI) | 2026-01-26 | High | **Future** - Epic created, M8 milestone |
 
 ### Scope Creep Prevention
 
@@ -375,10 +376,10 @@ When assigning priority, score each criterion (0-2):
 │  - Layer correction      │  - Attack scenarios │  - Peer review sub  │  - FDA alignment
 │  - Ethics framework      │  - Performance      │  - Conference       │
 │                          │                     │                     │
-├─ M2: Implementation ◐    ├─ M4: Integration    ├─ M6: Community      │
-│  - Python packages       │  - BrainFlow        │  - Contributors     │
-│  - Neurosecurity         │  - Real hardware    │  - Documentation    │
-│  - Consent module        │  - CI/CD complete   │  - Tutorials        │
+├─ M2: Implementation ◐    ├─ M4: Integration    ├─ M6: Community      ├─ M8: Privacy-First
+│  - Python packages       │  - BrainFlow        │  - Contributors     │  - Federated AI
+│  - Neurosecurity         │  - Real hardware    │  - Documentation    │  - Score-only TARA
+│  - Consent module        │  - CI/CD complete   │  - Tutorials        │  - Gradient encryption
 │                          │                     │                     │
 ◄────────────────────────────────────────────────────────────────────────►
          We are here (Jan 2026)
@@ -395,6 +396,47 @@ When assigning priority, score each criterion (0-2):
 | M5 | Publication Ready | 2026-06-30 | Planned | arXiv, peer review submission |
 | M6 | Community Launch | 2026-08-31 | Planned | Contributors, tutorials |
 | M7 | Industry Ready | 2026-12-31 | Planned | Manufacturer guide, FDA docs |
+| M8 | Privacy-First Architecture | 2027-Q1 | **Future** | Federated AI, score-only transmission, gradient encryption |
+
+### M8: Privacy-First Architecture (Future Implementation Goal)
+
+**Vision:** TARA monitors neural security without ever seeing raw neural data.
+
+**Architecture:**
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         USER DEVICE (Local)                              │
+│  ┌──────────┐    ┌──────────────┐    ┌──────────────┐                   │
+│  │Raw Neural│───►│ Local Model  │───►│ Cₛ Score     │                   │
+│  │ Signals  │    │ Training     │    │ Calculation  │                   │
+│  └──────────┘    └──────────────┘    └──────────────┘                   │
+│       ▲                │                     │                           │
+│       │                │ Encrypted           │ Only: Cₛ, Δ, σ            │
+│       │                │ Gradients           │ (scores, not signals)     │
+│  NEVER LEAVES         ▼                     ▼                           │
+└───────────────────────┼─────────────────────┼───────────────────────────┘
+                        │                     │
+                        ▼                     ▼
+              ┌─────────────────┐    ┌─────────────────┐
+              │ Secure Gradient │    │  TARA Portal    │
+              │ Aggregation     │    │  (Scores Only)  │
+              │ Server          │    │                 │
+              └─────────────────┘    └─────────────────┘
+```
+
+**Key Components:**
+1. **Score-Only Transmission:** TARA receives only Cₛ coherence scores, Δ (delta/rate of change), and σ (deviation from baseline)
+2. **Federated Learning:** AI models train locally; only encrypted gradients shared for collective improvement
+3. **Differential Privacy:** Noise added to gradients to prevent model inversion attacks
+4. **Zero Raw Data Exposure:** Raw neural signals never leave the user's device
+
+**Research Dependencies:**
+- TensorFlow Federated or PySyft integration
+- Homomorphic encryption (CKKS scheme) implementation
+- Privacy budget (ε) optimization for neural data
+- Byzantine fault tolerance for distributed training
+
+**See Also:** `prd.json` epic `epic-federated-ai-training` for detailed implementation plan.
 
 ---
 
