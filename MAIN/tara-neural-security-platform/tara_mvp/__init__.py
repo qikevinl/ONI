@@ -55,6 +55,16 @@ from .core import (
     ScaleFrequencyInvariant,
 )
 
+# Bidirectional BCI support
+from .core.firewall import (
+    FlowDirection,
+    StimulationCommand,
+    StimulationResult,
+    Signal,
+    FilterResult,
+    Decision,
+)
+
 # Attack simulation
 from .attacks import (
     AttackSimulator,
@@ -126,6 +136,13 @@ __all__ = [
     "Layer",
     "NeuralFirewall",
     "ScaleFrequencyInvariant",
+    # Bidirectional BCI
+    "FlowDirection",
+    "StimulationCommand",
+    "StimulationResult",
+    "Signal",
+    "FilterResult",
+    "Decision",
     # Attacks
     "AttackSimulator",
     "AttackPattern",
