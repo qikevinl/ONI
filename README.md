@@ -48,7 +48,10 @@ One framework to understand, build, and secure brain-computer interfaces. Open. 
 | **[Live Demo](https://qikevinl.github.io/ONI/)** | **Interactive visualizations** — animated, dynamic exploration of the framework |
 | **[MAIN/](MAIN/)** | All research content — publications, visualizations, resources |
 | **[INDEX.md](MAIN/INDEX.md)** | **Main Wiki** — central hub for navigation, dependencies, cross-references, roadmap |
+| **[TLDR.md](TLDR.md)** | **Quick Summary** — auto-generated index with folder descriptions (AI-powered) |
 | **This README** | Public overview — key concepts, quick reference |
+
+> **TLDR.md** is auto-generated when changes are pushed to `MAIN/` or `autodidact/`. Uses GitHub Models (GPT-4o-mini) to summarize the repository structure. Updates are submitted as PRs for review before merging.
 
 ### Security & Maintenance
 
