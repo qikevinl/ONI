@@ -52,9 +52,6 @@ ONI/
 ├── LICENSE                             # Apache 2.0 License
 │
 │
-├── scripts/
-│   └── sync_brand.py                   # Syncs brand.json → README.md
-│
 ├── autodidact/                           # Educational content and personal research
 │   ├── oni-academy/                    # ONI Academy (pip install oni-academy)
 │   │   ├── README.md                   # Academy documentation
@@ -124,6 +121,9 @@ ONI/
     │   └── scale-frequency/
     │
     └── resources/                      # NON-CONTENT (infrastructure)
+        ├── brand/                      # Brand configuration (CODEOWNERS protected)
+        │   ├── brand.json              # Single source of truth for naming, versions
+        │   └── sync_brand.py           # Syncs brand.json → README.md
         ├── agents/                     # Agent instructions & personas
         │   ├── PM_AGENT.md
         │   ├── PERSONAS.md             # Research verification personas

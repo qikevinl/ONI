@@ -226,15 +226,21 @@ All research, publications, and supporting infrastructure live in the `MAIN/` di
 ```
 ONI/
 ├── README.md                    # Public overview (you are here)
+├── TLDR.md                      # Auto-generated summary index (AI-powered)
+├── SECURITY.md                  # Security policy & hardening checklist
 ├── CLAUDE.md                    # Claude AI instructions
 ├── AGENTS.md                    # Ralph Loop learnings (knowledge compounding)
 ├── ABOUT.md                     # Author bio
 ├── LICENSE                      # Apache 2.0
 │
 ├── .github/
-│   ├── .gitignore               # Git ignore rules
-│   ├── workflows/               # CI/CD pipelines
+│   ├── CODEOWNERS               # Protected files (brand, workflows, layers)
+│   ├── workflows/               # CI/CD pipelines (tests, publish, auto-index)
 │   └── security-audit/          # Security scanning tools
+│
+├── autodidact/                  # Educational content
+│   ├── oni-academy/             # ONI Academy (pip install oni-academy)
+│   └── neuroscience-bci/        # Personal neuroscience learning
 │
 └── MAIN/
     ├── INDEX.md                 # Central hub — navigation, dependencies, cross-references
@@ -288,6 +294,9 @@ ONI/
     │   └── scale-frequency/
     │
     └── resources/               # Infrastructure
+        ├── brand/               # Brand configuration (CODEOWNERS protected)
+        │   ├── brand.json       # Single source of truth for naming, versions
+        │   └── sync_brand.py    # Syncs brand.json → README.md
         ├── agents/              # PM Agent instructions
         ├── editor/              # Editor Agent (quality & sync)
         ├── images/              # ONI diagrams
