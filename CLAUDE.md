@@ -55,7 +55,7 @@ ONI/
 ├── scripts/
 │   └── sync_brand.py                   # Syncs brand.json → README.md
 │
-├── learning/                           # Educational content and personal research
+├── autodidact/                           # Educational content and personal research
 │   ├── oni-academy/                    # ONI Academy (pip install oni-academy)
 │   │   ├── README.md                   # Academy documentation
 │   │   ├── ONI_ACADEMY.md              # Course curriculum
@@ -296,7 +296,7 @@ Push to GitHub → website auto-updates on next page load.
 | `tara-nsec-platform/` | **TARA package** | Source, tests, visualizations, pyproject.toml |
 | `publications/` | **Content only** | Blog posts, technical documents |
 
-> **Note:** `oni-academy/` has moved to `learning/oni-academy/` (root-level `learning/` folder).
+> **Note:** `oni-academy/` has moved to `autodidact/oni-academy/` (root-level `autodidact/` folder).
 | `resources/templates/` | Formatting templates | APA template, Blog template |
 | `resources/pipeline/` | Research pipeline | Incoming papers, processed, scripts, keywords |
 | `resources/editor/` | **Editor Agent** | Quality validation, sync rules, auto-fix logic |

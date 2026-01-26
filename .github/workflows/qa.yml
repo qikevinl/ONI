@@ -61,7 +61,7 @@ jobs:
           # Install packages
           pip install -e MAIN/oni-framework -q
           pip install -e MAIN/tara-nsec-platform -q
-          pip install -e learning/oni-academy -q
+          pip install -e autodidact/oni-academy -q
 
           # Test oni-framework brand loading
           python -c "
@@ -128,7 +128,7 @@ jobs:
         run: |
           pip install -e MAIN/oni-framework
           pip install -e MAIN/tara-nsec-platform
-          pip install -e learning/oni-academy
+          pip install -e autodidact/oni-academy
 
       - name: Validate core imports
         run: |

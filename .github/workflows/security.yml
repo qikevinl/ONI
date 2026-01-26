@@ -7,7 +7,7 @@ on:
       # Python packages
       - 'MAIN/oni-framework/**/*.py'
       - 'MAIN/tara-nsec-platform/**/*.py'
-      - 'learning/oni-academy/**/*.py'
+      - 'autodidact/oni-academy/**/*.py'
       # GitHub Pages (HTML/JS)
       - 'docs/**/*.html'
       - 'docs/**/*.js'

@@ -45,7 +45,7 @@
 ## Folder Structure
 
 ```
-learning/neuroscience-bci/
+autodidact/neuroscience-bci/
 ├── README.md                           # This file
 │
 ├── visualizing-the-mind/               # 3D visualization projects (Blender, Manim)

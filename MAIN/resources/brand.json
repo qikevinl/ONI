@@ -56,7 +56,7 @@
     "consumers": [
       "MAIN/oni-framework/oni/brand.py",
       "MAIN/tara-nsec-platform/tara_mvp/_brand.py",
-      "learning/oni-academy/oni_academy/_brand.py",
+      "autodidact/oni-academy/oni_academy/_brand.py",
       "docs/index.html",
       "video/demo/src/data/oni-theme.ts",
       "video/demo/src/components/LayerStack.tsx",

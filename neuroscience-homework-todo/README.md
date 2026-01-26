@@ -414,7 +414,9 @@ neuroscience-homework-todo/
 
 ## Related Projects
 
-- **Visualizations:** [visualizing-the-mind/](./visualizing-the-mind/) — Blender and Manim visualization projects
+- **Visualizations:** [visualizing-the-mind/](./visualizing-the-mind/) — BCI macro-to-micro zoom animations
+  - [3D-mindmapper/](./visualizing-the-mind/3D-mindmapper/) — Blender photorealistic rendering
+  - [2D-mindmapper/](./visualizing-the-mind/2D-mindmapper/) — Manim scientific animations
 - **Backlog:** [bci-to-neuron-zoom-rendering](../docs/visualizations/pending/bci-to-neuron-zoom-rendering/) — GitHub Pages pending visualization
 - **Video Assets:** `video/bci-zoom/` — Video project files
 - **ONI_LAYERS.md:** Biological Foundation section — How this maps to L8-L14

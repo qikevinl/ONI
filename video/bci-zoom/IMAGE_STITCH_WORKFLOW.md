@@ -217,8 +217,8 @@ Already set up in `video/demo/` - can reuse infrastructure.
 
 ## Related Documents
 
-- [Research-BCI_Mouse_Movement.md](../../MAIN/publications/brain-anatomy/Research-BCI_Mouse_Movement.md) — Electrode specs, neural decoding
-- [scales.json](../../neuroscience-homework-todo/visualizing-the-mind/manim/bci-zoom/data/scales.json) — Scientific scale data
+- [Research-BCI_Mouse_Movement.md](../../neuroscience-homework-todo/Research-BCI_Mouse_Movement.md) — Electrode specs, neural decoding
+- [scales.json](../../neuroscience-homework-todo/visualizing-the-mind/2D-mindmapper/manim/bci-zoom/data/scales.json) — Scientific scale data
 - [KANBAN.md](../../MAIN/project/KANBAN.md) — Backlog item: `bci-macro-to-micro-visualization`
 
 ---

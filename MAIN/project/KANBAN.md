@@ -90,7 +90,7 @@
     - Molecular Nodes addon for Blender (neurotransmitter/molecule rendering)
     - PDB database for receptor structures (e.g., dopamine D2 receptor: 6CM4)
   - Approach: Programmatically stitch components across scales for seamless animation
-  - Related: Research doc `learning/neuroscience-bci/brain-regions/cerebral-cortex/motor-cortex/Research-BCI_Mouse_Movement.md`
+  - Related: Research doc `autodidact/neuroscience-bci/brain-regions/cerebral-cortex/motor-cortex/Research-BCI_Mouse_Movement.md`
 
 ---
 
