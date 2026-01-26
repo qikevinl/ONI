@@ -6,6 +6,28 @@
 
 ---
 
+## API Type
+
+This is a **Library API (SDK)** — a Python package you import and use directly in your code. No server setup, API keys, or network requests required.
+
+```python
+# Install and use locally
+pip install oni-framework
+
+# Import and call directly
+from oni import CoherenceMetric, get_atlas
+metric = CoherenceMetric()
+```
+
+| API Type | This Package | Future |
+|----------|--------------|--------|
+| **Library API (SDK)** | ✓ Available now | — |
+| **REST API** | — | Planned |
+
+> **Note on REST API:** A REST/HTTP API for integration with external tools and platforms is on the roadmap but requires extensive infrastructure and a secure deployment environment. This will be revisited as the project matures through the SDLC.
+
+---
+
 ## Table of Contents
 
 - [Quick Import Reference](#quick-import-reference)
