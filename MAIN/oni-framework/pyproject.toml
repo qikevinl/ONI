@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "oni-framework"
-version = "0.2.2"
-description = "Neural security framework for brain-computer interfaces. Calculate signal trust scores, filter suspicious signals, anonymize neural data, and validate BCI communications against the 14-layer ONI model."
+version = "0.2.3"
+description = "Cₛ Core - Mathematical API for detection signatures and anomaly validation in brain-computer interfaces. Build security rules using coherence scoring (Cₛ) and scale-frequency invariant (f×S≈k) equations."
 readme = "README.md"
 license = {text = "Apache-2.0"}
 authors = [
