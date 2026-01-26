@@ -109,12 +109,13 @@ class BoardInfo:
     description: str
     oni_relevance: str
 
-    # Board registry
-    REGISTRY: Dict[BoardType, "BoardInfo"] = {}
+
+# Board registry (class variable cannot be mutable default in dataclass)
+BOARD_REGISTRY: Dict[BoardType, "BoardInfo"] = {}
 
 
 # Initialize board registry
-BoardInfo.REGISTRY = {
+BOARD_REGISTRY = {
     BoardType.CYTON: BoardInfo(
         board_type=BoardType.CYTON,
         name="OpenBCI Cyton",
@@ -262,7 +263,7 @@ class OpenBCIAdapter:
         self.serial_port = serial_port
         self.mac_address = mac_address
 
-        self.board_info = BoardInfo.REGISTRY[self.board_type]
+        self.board_info = BOARD_REGISTRY[self.board_type]
         self.state = ConnectionState.DISCONNECTED
         self._board: Optional[Any] = None  # BoardShim instance
         self._sequence = 0
@@ -500,7 +501,7 @@ class OpenBCIAdapter:
                 "description": info.description,
                 "oni_relevance": info.oni_relevance,
             }
-            for info in BoardInfo.REGISTRY.values()
+            for info in BOARD_REGISTRY.values()
         ]
 
     def __enter__(self) -> "OpenBCIAdapter":
@@ -544,5 +545,5 @@ def list_serial_ports() -> List[str]:
 # Exports
 SUPPORTED_BOARDS = {
     board_type.name.lower(): info
-    for board_type, info in BoardInfo.REGISTRY.items()
+    for board_type, info in BOARD_REGISTRY.items()
 }

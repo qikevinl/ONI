@@ -73,12 +73,12 @@ class ONIVisualizationEmbed:
             tara_root = Path(__file__).parent.parent.parent
 
             # Try multiple possible locations
-            # Visualizations moved to MAIN/interactive-oni-visualizations/
+            # Visualizations canonical location: docs/visualizations/
             possible_paths = [
-                tara_root.parent.parent / "interactive-oni-visualizations",  # Dev: MAIN/interactive-oni-visualizations
-                tara_root.parent / "interactive-oni-visualizations",          # Alternative location
-                Path.cwd() / "interactive-oni-visualizations",                # Current working directory
-                Path.cwd().parent / "interactive-oni-visualizations",         # Parent of cwd
+                tara_root.parent.parent.parent / "docs" / "visualizations",  # Dev: ONI/docs/visualizations
+                tara_root.parent.parent / "docs" / "visualizations",         # Alternative
+                Path.cwd() / "docs" / "visualizations",                      # Current working directory
+                Path.cwd().parent / "docs" / "visualizations",               # Parent of cwd
             ]
 
             self.base_path = None
@@ -148,13 +148,13 @@ class ONIVisualizationEmbed:
                 <p style="margin-top: 20px;"><strong>To enable visualizations:</strong></p>
                 <ol style="text-align: left; max-width: 500px; margin: 20px auto;">
                     <li>Clone the repository: <code>git clone https://github.com/qikevinl/oni</code></li>
-                    <li>Navigate to: <code>cd oni/MAIN/tara-neural-security-platform</code></li>
+                    <li>Navigate to: <code>cd oni/MAIN/tara-nsec-platform</code></li>
                     <li>Install locally: <code>pip install -e .</code></li>
                     <li>Run: <code>tara ui</code></li>
                 </ol>
                 <p style="margin-top: 20px; color: #94a3b8;">
                     Or open the HTML files directly:<br>
-                    <code>MAIN/interactive-oni-visualizations/index.html</code>
+                    <code>docs/visualizations/index.html</code>
                 </p>
             </div>
             """

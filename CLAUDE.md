@@ -8,6 +8,7 @@
 
 | Resource | Location | Purpose |
 |----------|----------|---------|
+| **Brand Constants** | `brand.json` | **Single source of truth for ONI/TARA naming, slogans, versions** |
 | **Main Wiki (INDEX)** | `MAIN/INDEX.md` | **Central hub - navigation, dependencies, cross-references** |
 | **Python Package** | `MAIN/oni-framework/` | **pip install oni-framework** |
 | **Transparency Statement** | `MAIN/governance/TRANSPARENCY.md` | **Human-AI collaboration audit trail** |
@@ -48,10 +49,14 @@ ONI/
 ├── AGENTS.md                           # Ralph Loop learnings (read at session start)
 ├── ABOUT.md                            # Author bio
 ├── LICENSE                             # Apache 2.0 License
+├── brand.json                          # BRAND: Single source of truth for naming/versions
+│
+├── scripts/
+│   └── sync_brand.py                   # Syncs brand.json → README.md
 │
 ├── .github/
 │   ├── .gitignore                      # Git ignore rules
-│   ├── workflows/                      # CI/CD pipelines (tests, publish, security)
+│   ├── workflows/                      # CI/CD pipelines (tests, publish, security, brand-sync)
 │   └── security-audit/                 # Security scanning tools
 │
 └── MAIN/
@@ -78,16 +83,18 @@ ONI/
     │   │   ├── layers.py               # 14-layer model
     │   │   ├── firewall.py             # Neural Firewall
     │   │   ├── scale_freq.py           # f × S ≈ k invariant
+    │   │   ├── brand.py                # Loads brand from brand.json
     │   │   └── neurosecurity/          # Kohno threat model + BCI Anonymizer
     │   ├── tests/                      # Unit tests
     │   └── README.md                   # Library documentation
     │
-    ├── tara-neural-security-platform/  # TARA package (pip install oni-tara)
+    ├── tara-nsec-platform/             # TARA package (pip install oni-tara)
     │   ├── pyproject.toml              # Package configuration
     │   ├── README.md                   # Platform documentation
     │   ├── CLAUDE.md                   # Claude instructions for TARA
     │   ├── LICENSE                     # Apache 2.0
-    │   ├── tara_mvp/                    # Source modules (MVP)
+    │   ├── tara_mvp/                   # Source modules (MVP)
+    │   │   ├── _brand.py               # Loads brand from brand.json
     │   │   ├── core/                   # ONI security primitives
     │   │   ├── simulation/             # Neural network simulation
     │   │   ├── attacks/                # Attack testing & scenarios
@@ -95,8 +102,13 @@ ONI/
     │   │   ├── neurosecurity/          # Kohno rules integration
     │   │   ├── visualization/          # Real-time dashboards
     │   │   └── ui/                     # Streamlit web interface
-    │   ├── tests/                      # Unit tests
-    │   └── visualizations/             # Interactive HTML visualizations (ONI Suite)
+    │   └── tests/                      # Unit tests
+    │
+    ├── oni-academy/                    # ONI Academy (educational platform)
+    │   ├── README.md                   # Academy documentation
+    │   └── oni_academy/
+    │       ├── __init__.py             # Package entry point
+    │       └── _brand.py               # Loads brand from brand.json
     │
     ├── publications/                   # CONTENT ONLY
     │   ├── 0-oni-framework/            # Base/foundational content
@@ -133,6 +145,88 @@ ONI/
 
 ---
 
+## Brand System (CRITICAL)
+
+> **Single source of truth for all project naming, slogans, and versions.**
+
+### Architecture
+
+```
+brand.json (repo root)         ← EDIT THIS to change any brand value
+    │
+    ├── oni/brand.py           ← Python API for ONI Framework
+    ├── tara_mvp/_brand.py     ← Python API for TARA
+    ├── oni_academy/_brand.py  ← Python API for ONI Academy
+    │
+    └── scripts/sync_brand.py  ← Syncs changes to README.md
+```
+
+### Brand Values
+
+| Project | Acronym | Full Name |
+|---------|---------|-----------|
+| **ONI** | ONI | Open Neurosecurity Interoperability |
+| **TARA** | TARA | Telemetry Analysis & Response Automation |
+
+### Session Start: Brand Consistency Check
+
+**At the start of every session, verify brand consistency:**
+
+```bash
+# Quick check - run from repo root
+python3 -c "
+import json
+with open('brand.json') as f: b = json.load(f)
+print(f\"ONI: {b['oni']['full_name']}\")
+print(f\"TARA: {b['tara']['full_name']}\")
+print(f\"ONI v{b['oni']['version']} | TARA v{b['tara']['version']}\")
+"
+```
+
+### When to Update brand.json
+
+Update `brand.json` when:
+- Changing project name, acronym, or full name
+- Updating taglines, slogans, or mission statements
+- Bumping version numbers for releases
+- Adding new project brands
+
+### After Updating brand.json
+
+1. **Run sync script:** `python scripts/sync_brand.py`
+2. **Verify Python loads correctly:** Test import from each package
+3. **Commit both brand.json and any synced files**
+4. **GitHub Action auto-syncs** README.md on push
+
+### Brand Fields Reference
+
+```json
+{
+  "acronym": "ONI",
+  "full_name": "Open Neurosecurity Interoperability",
+  "name": "ONI Framework",
+  "tagline": "The OSI of Mind",
+  "slogan": "Our minds. Our rules. Our future.",
+  "mission": "The mind is the last frontier...",
+  "description": "A unified 14-layer model...",
+  "version": "0.2.0"
+}
+```
+
+### Python Usage
+
+```python
+# From ONI Framework
+from oni.brand import ONI, TARA, ONI_VERSION
+print(ONI.full_name)  # "Open Neurosecurity Interoperability"
+
+# From TARA (no oni-framework dependency needed)
+from tara_mvp._brand import TARA, ONI
+print(TARA.tagline)  # "Protection for the neural frontier"
+```
+
+---
+
 ## Folder Purposes
 
 | Folder | Purpose | What Goes Here |
@@ -140,7 +234,8 @@ ONI/
 | `governance/` | **Ethics & transparency** | TRANSPARENCY.md, NEUROETHICS_ALIGNMENT.md |
 | `project/` | **Project management** | prd.json, processes/ (workflows, improvements) |
 | `oni-framework/` | **Python library** | Source code, tests, package config (pip installable) |
-| `tara-neural-security-platform/` | **TARA package** | Source, tests, visualizations, pyproject.toml |
+| `tara-nsec-platform/` | **TARA package** | Source, tests, visualizations, pyproject.toml |
+| `oni-academy/` | **Educational platform** | Learning modules, tutorials, interactive content |
 | `publications/` | **Content only** | Blog posts, technical documents |
 | `resources/templates/` | Formatting templates | APA template, Blog template |
 | `resources/pipeline/` | Research pipeline | Incoming papers, processed, scripts, keywords |
@@ -589,7 +684,7 @@ Update the metrics table:
 - Forgetting to update `siem/` to `nsam/` (the actual folder name)
 - Outdated version numbers in metrics
 - Stale test counts
-- Referencing old paths (source is now in `tara-neural-security-platform/tara_mvp/`, not `prototype-mvp/`)
+- Referencing old paths (source is now in `tara-nsec-platform/tara_mvp/`, not `prototype-mvp/`)
 
 ---
 

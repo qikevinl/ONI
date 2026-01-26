@@ -211,7 +211,7 @@ tara ui
 
 **Note:** TARA is a research and development tool for BCI security analysis. It requires `oni-framework` as a dependency and is intended for security researchers, not production BCI systems.
 
-**Full documentation:** [MAIN/tara-neural-security-platform/README.md](MAIN/tara-neural-security-platform/README.md)
+**Full documentation:** [MAIN/tara-nsec-platform/README.md](MAIN/tara-nsec-platform/README.md)
 
 ---
 
@@ -258,7 +258,7 @@ ONI/
     │   │   └── neurosecurity/   # Kohno threat model + BCI Anonymizer
     │   └── tests/               # Unit tests
     │
-    ├── tara-neural-security-platform/  # TARA package (pip install oni-tara)
+    ├── tara-nsec-platform/  # TARA package (pip install oni-tara)
     │   ├── pyproject.toml       # Package configuration
     │   ├── README.md            # Platform documentation
     │   ├── LICENSE              # Apache 2.0

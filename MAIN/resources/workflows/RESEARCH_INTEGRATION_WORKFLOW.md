@@ -155,7 +155,7 @@ For each discovered paper/finding, score on these dimensions:
 
 | Type | Description | ONI Target | Example |
 |------|-------------|------------|---------|
-| **CODE** | Implementable algorithm/method | `tara-neural-security-platform/tara/` | Signal processing technique |
+| **CODE** | Implementable algorithm/method | `tara-nsec-platform/tara/` | Signal processing technique |
 | **MODEL** | Theoretical framework | `oni-framework/` | Threat model extension |
 | **VALIDATION** | Empirical support for ONI claims | `publications/` | Synaptic reliability data |
 | **ETHICS** | Policy/rights framework | `governance/` | Neurorights enforcement |
@@ -209,7 +209,7 @@ For each discovered paper/finding, score on these dimensions:
 #### CODE Integration
 
 ```
-1. Identify target module in tara-neural-security-platform/tara/
+1. Identify target module in tara-nsec-platform/tara/
 2. Create feature branch: research/[paper-shortname]
 3. Implement algorithm/method
 4. Add unit tests with paper-derived test cases

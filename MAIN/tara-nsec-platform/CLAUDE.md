@@ -27,7 +27,7 @@ This file provides instructions for Claude to follow when updating, maintaining,
 > **Note:** All source code, tests, and visualizations are now consolidated in this folder.
 
 ```
-tara-neural-security-platform/   # Complete package
+tara-nsec-platform/   # Complete package
 ├── CLAUDE.md                    # Claude AI instructions (this file)
 ├── AGENTS.md                    # Learnings from previous sessions
 ├── README.md                    # Public documentation
@@ -97,7 +97,7 @@ tara-neural-security-platform/   # Complete package
 │   ├── test_nsam.py
 │   └── test_scale_freq.py
 │
-└── ../interactive-oni-visualizations/              # Interactive HTML visualizations (ONI Suite)
+└── ../docs/visualizations/              # Interactive HTML visualizations (ONI Suite)
     ├── index.html               # Master launcher
     ├── README.md                # Visualization documentation
     ├── 01-coherence-metric-playground.html

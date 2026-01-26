@@ -22,6 +22,9 @@ from pathlib import Path
 # Add parent to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
+# TARA UI styles (cyberpunk theme)
+from tara_mvp.ui.styles import inject_styles, header_section, status_card, metric_display
+
 # TARA visualization imports
 try:
     from tara_mvp.visualization.components.brain_topology import BrainTopologyVisualization
@@ -59,6 +62,9 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
+
+# Inject cyberpunk styles
+inject_styles()
 
 
 def init_session_state():
@@ -176,23 +182,6 @@ def render_sidebar():
         if st.sidebar.button(p, key=f"nav_{p}", width="stretch",
                             type="primary" if st.session_state.current_page == p else "secondary"):
             st.session_state.current_page = p
-            st.rerun()
-
-    st.sidebar.markdown("")
-    st.sidebar.markdown("**Interactive**")
-
-    # Interactive visualizations section (ONI Visualization Suite)
-    interactive_pages = [
-        ("Coherence Playground", "coherence"),
-        ("Layer Explorer", "layers"),
-        ("Kill Chain Viz", "killchain"),
-        ("NSAM Checkpoint", "nsam"),
-        ("Scale-Frequency", "scale_freq"),
-    ]
-    for p_name, p_key in interactive_pages:
-        if st.sidebar.button(p_name, key=f"nav_viz_{p_key}", width="stretch",
-                            type="primary" if st.session_state.current_page == f"viz_{p_key}" else "secondary"):
-            st.session_state.current_page = f"viz_{p_key}"
             st.rerun()
 
     st.sidebar.markdown("")
@@ -3046,7 +3035,7 @@ def render_visualization_page(viz_key: str):
         )
     except FileNotFoundError as e:
         st.error(f"Visualization file not found: {e}")
-        st.info("Run the application from the tara-neural-security-platform directory.")
+        st.info("Run the application from the tara-nsec-platform directory.")
     except Exception as e:
         st.error(f"Error loading visualization: {e}")
 

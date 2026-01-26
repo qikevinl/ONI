@@ -46,7 +46,7 @@ print(ONI.tagline)    # "The OSI of Mind"
 ## Related Projects
 
 - **[ONI Framework](../oni-framework/)** - Core security library
-- **[TARA Platform](../tara-neural-security-platform/)** - Security monitoring platform
+- **[TARA Platform](../tara-nsec-platform/)** - Security monitoring platform
 
 ## License
 

@@ -73,7 +73,7 @@
 | Add EMOTIV to PARTNERSHIPS.md | 2026-01-24 | Tan Le connection |
 | Add Yale Digital Ethics Center | 2026-01-24 | ACADEMIC_LANDSCAPE.md |
 | Add publication links for researchers | 2026-01-24 | UC Berkeley, Northeastern added |
-| Add ONI ATT&CK Matrix (06) | 2026-01-24 | interactive-oni-visualizations/ |
+| Add ONI ATT&CK Matrix (06) | 2026-01-24 | docs/visualizations/ |
 
 ---
 

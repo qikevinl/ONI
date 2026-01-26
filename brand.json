@@ -24,7 +24,7 @@
     "location": "repo root (brand.json)",
     "consumers": [
       "MAIN/oni-framework/oni/brand.py",
-      "MAIN/tara-neural-security-platform/tara_mvp/_brand.py",
+      "MAIN/tara-nsec-platform/tara_mvp/_brand.py",
       "MAIN/oni-academy/oni_academy/_brand.py"
     ],
     "note": "Single source of truth for all ONI project branding"

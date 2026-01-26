@@ -185,9 +185,9 @@ How to implement (if applicable).
 ### Version Synchronization
 
 Files that must have matching versions:
-- `MAIN/tara-neural-security-platform/pyproject.toml` → `version`
-- `MAIN/tara-neural-security-platform/tara/__init__.py` → `__version__`
-- `MAIN/tara-neural-security-platform/README.md` → Changelog header
+- `MAIN/tara-nsec-platform/pyproject.toml` → `version`
+- `MAIN/tara-nsec-platform/tara/__init__.py` → `__version__`
+- `MAIN/tara-nsec-platform/README.md` → Changelog header
 - `MAIN/oni-framework/pyproject.toml` → `version`
 - `MAIN/oni-framework/oni/__init__.py` → `__version__`
 

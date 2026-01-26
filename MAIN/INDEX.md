@@ -62,16 +62,16 @@ pip install oni-tara
 
 | Module | Purpose | Key Functions |
 |--------|---------|---------------|
-| [tara.core](tara-neural-security-platform/tara_mvp/core/) | ONI security primitives | `CoherenceMetric`, `ONIStack`, `NeuralFirewall` |
-| [tara.simulation](tara-neural-security-platform/tara_mvp/simulation/) | Neural network simulation | `LIFNeuron`, `IzhikevichNeuron`, networks |
-| [tara.attacks](tara-neural-security-platform/tara_mvp/attacks/) | Attack testing & scenarios | `AttackSimulator`, `AttackScenario` |
-| [tara.nsam](tara-neural-security-platform/tara_mvp/nsam/) | Neural Signal Assurance Monitoring | `NSAMMonitor`, `RuleEngine`, `AlertManager` |
-| [tara.neurosecurity](tara-neural-security-platform/tara_mvp/neurosecurity/) | Kohno rules integration | `NeurosecurityMonitor` |
-| [tara.data](tara-neural-security-platform/tara_mvp/data/) | Data models & external datasets | `MOABBAdapter`, `BrainRegion`, `BCINode` |
-| [tara.ui](tara-neural-security-platform/tara_mvp/ui/) | Streamlit web interface | `tara ui` command |
-| [visualizations/](interactive-oni-visualizations/) | Interactive HTML apps | ONI Visualization Suite |
+| [tara.core](tara-nsec-platform/tara_mvp/core/) | ONI security primitives | `CoherenceMetric`, `ONIStack`, `NeuralFirewall` |
+| [tara.simulation](tara-nsec-platform/tara_mvp/simulation/) | Neural network simulation | `LIFNeuron`, `IzhikevichNeuron`, networks |
+| [tara.attacks](tara-nsec-platform/tara_mvp/attacks/) | Attack testing & scenarios | `AttackSimulator`, `AttackScenario` |
+| [tara.nsam](tara-nsec-platform/tara_mvp/nsam/) | Neural Signal Assurance Monitoring | `NSAMMonitor`, `RuleEngine`, `AlertManager` |
+| [tara.neurosecurity](tara-nsec-platform/tara_mvp/neurosecurity/) | Kohno rules integration | `NeurosecurityMonitor` |
+| [tara.data](tara-nsec-platform/tara_mvp/data/) | Data models & external datasets | `MOABBAdapter`, `BrainRegion`, `BCINode` |
+| [tara.ui](tara-nsec-platform/tara_mvp/ui/) | Streamlit web interface | `tara ui` command |
+| [visualizations/](../docs/visualizations/) | Interactive HTML apps | ONI Visualization Suite |
 
-**Documentation:** [tara-neural-security-platform/README.md](tara-neural-security-platform/README.md) | **CLI:** `tara --help`
+**Documentation:** [tara-nsec-platform/README.md](tara-nsec-platform/README.md) | **CLI:** `tara --help`
 
 #### ONI Visualization Suite
 
@@ -79,14 +79,14 @@ Five interactive HTML applications for education and demonstration:
 
 | App | Purpose | Research Alignment |
 |-----|---------|-------------------|
-| [Coherence Playground](interactive-oni-visualizations/01-coherence-metric-playground.html) | Real-time Cₛ calculation | Signal integrity (Kohno 2009) |
-| [Layer Explorer](interactive-oni-visualizations/02-oni-layer-explorer.html) | Interactive 14-layer navigation | ONI Framework model |
-| [Kill Chain Visualizer](interactive-oni-visualizations/03-neural-killchain-visualizer.html) | Attack propagation animation | Attack patterns (Bonaci 2015) |
-| [NSAM Checkpoint Sim](interactive-oni-visualizations/04-nsam-checkpoint-simulator.html) | Gamified signal validation | NSAM pipeline |
-| [Scale-Frequency Nav](interactive-oni-visualizations/05-scale-frequency-navigator.html) | Temporal scale exploration | f × S ≈ k invariant |
-| [ONI Threat Matrix](interactive-oni-visualizations/06-oni-threat-matrix.html) | MITRE ATT&CK-inspired neural framework | 7 tactics, 18 techniques, Kohno integration |
+| [Coherence Playground](../docs/visualizations/01-coherence-metric-playground.html) | Real-time Cₛ calculation | Signal integrity (Kohno 2009) |
+| [Layer Explorer](../docs/visualizations/02-oni-layer-explorer.html) | Interactive 14-layer navigation | ONI Framework model |
+| [Kill Chain Visualizer](../docs/visualizations/03-neural-killchain-visualizer.html) | Attack propagation animation | Attack patterns (Bonaci 2015) |
+| [NSAM Checkpoint Sim](../docs/visualizations/04-nsam-checkpoint-simulator.html) | Gamified signal validation | NSAM pipeline |
+| [Scale-Frequency Nav](../docs/visualizations/05-scale-frequency-navigator.html) | Temporal scale exploration | f × S ≈ k invariant |
+| [ONI Threat Matrix](../docs/visualizations/06-oni-threat-matrix.html) | MITRE ATT&CK-inspired neural framework | 7 tactics, 18 techniques, Kohno integration |
 
-**Quick Start:** Open `interactive-oni-visualizations/index.html` in a browser.
+**Quick Start:** Open `../docs/visualizations/index.html` in a browser.
 
 #### GitHub Pages Live Demo
 
@@ -243,7 +243,7 @@ The ONI Framework extends the classical OSI model with 7 additional layers for n
 
 | Project | Description |
 |---------|-------------|
-| [Visualizations](interactive-oni-visualizations/README.md) | Interactive web apps for ONI concepts (6 demos) |
+| [Visualizations](../docs/visualizations/README.md) | Interactive web apps for ONI concepts (6 demos) |
 
 ---
 
@@ -446,7 +446,7 @@ MAIN/
 │   ├── tests/                  # Unit tests (77 tests)
 │   └── pyproject.toml          # Package config (v0.1.0)
 │
-├── tara-neural-security-platform/  # Security Operations Platform (pip install oni-tara)
+├── tara-nsec-platform/  # Security Operations Platform (pip install oni-tara)
 │   ├── pyproject.toml          # Package config (v0.8.0)
 │   ├── tara_mvp/               # Source modules
 │   │   ├── core/               # ONI security primitives (incl. bidirectional BCI)

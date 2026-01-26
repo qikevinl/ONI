@@ -904,7 +904,7 @@ def render_interactive_lab():
     st.markdown("---")
 
     # Check for visualization files
-    viz_path = Path(__file__).parent.parent.parent.parent / "tara-neural-security-platform" / "visualizations"
+    viz_path = Path(__file__).parent.parent.parent.parent / "tara-nsec-platform" / "visualizations"
 
     st.markdown("""
     <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
