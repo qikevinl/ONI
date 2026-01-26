@@ -228,7 +228,7 @@ class AlertManager:
         for callback in self._alert_callbacks:
             try:
                 callback(alert)
-            except Exception:
+            except Exception:  # nosec B110
                 pass  # Don't let callback errors stop processing
 
         return alert
@@ -375,8 +375,8 @@ class AlertManager:
         for callback in self._escalation_callbacks:
             try:
                 callback(alert)
-            except Exception:
-                pass
+            except Exception:  # nosec B110
+                pass  # Don't let callback errors affect escalation
 
         self._stats["escalated"] += 1
         return True

@@ -507,7 +507,7 @@ class ConsentManager:
         for callback in self._callbacks.get(event, []):
             try:
                 callback(record)
-            except Exception:
+            except Exception:  # nosec B110
                 pass  # Don't let callback errors affect consent management
 
     def get_history(self) -> List[ConsentRecord]:

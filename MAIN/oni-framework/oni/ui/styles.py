@@ -860,7 +860,7 @@ def mock_terminal(lines: list, title: str = "Terminal", animate: bool = True, ty
     import random
 
     # Generate unique ID for this terminal instance
-    terminal_id = f"term_{random.randint(10000, 99999)}"
+    terminal_id = f"term_{random.randint(10000, 99999)}"  # nosec B311
 
     # Build terminal lines HTML with data attributes for animation
     lines_html = ""

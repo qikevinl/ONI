@@ -33,7 +33,7 @@ except ImportError:
 
 class CheckpointStatus(Enum):
     """Status of a firewall checkpoint."""
-    PASS = "pass"
+    PASS = "pass"  # nosec B105 - not a password, status enum value
     FAIL = "fail"
     FLAGGED = "flagged"
     PENDING = "pending"

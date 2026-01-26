@@ -609,10 +609,10 @@ def render_coherence():
 
             random.seed(42)
             for i in range(4):
-                jitter = (random.random() - 0.5) * 2 * timing_jitter * base_interval
+                jitter = (random.random() - 0.5) * 2 * timing_jitter * base_interval  # nosec B311
                 times.append(times[-1] + base_interval + jitter)
 
-                amp_jitter = (random.random() - 0.5) * 2 * amp_variance * 50
+                amp_jitter = (random.random() - 0.5) * 2 * amp_variance * 50  # nosec B311
                 amps.append(100 + amp_jitter)
 
             metric = CoherenceMetric(reference_freq=float(ref_freq))
@@ -1554,7 +1554,7 @@ for d in defenses:
     if st.button("Run Example", type="primary"):
         try:
             exec_globals = {}
-            exec(examples[selected], exec_globals)
+            exec(examples[selected], exec_globals)  # nosec B102
         except Exception as e:
             st.error(f"Error: {e}")
 

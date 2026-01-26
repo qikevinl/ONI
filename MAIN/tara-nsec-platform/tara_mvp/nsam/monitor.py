@@ -263,8 +263,8 @@ class NeuralMonitor:
             for callback in self._metrics_callbacks:
                 try:
                     callback(metrics)
-                except Exception:
-                    pass
+                except Exception:  # nosec B110
+                    pass  # Don't let callback errors affect monitoring
 
             result = None
 
@@ -306,8 +306,8 @@ class NeuralMonitor:
             for callback in self._detection_callbacks:
                 try:
                     callback(result)
-                except Exception:
-                    pass
+                except Exception:  # nosec B110
+                    pass  # Don't let callback errors affect detection
 
         return result if result.detected else None
 

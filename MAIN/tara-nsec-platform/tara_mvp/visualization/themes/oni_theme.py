@@ -44,7 +44,7 @@ ONI_COLORS: Dict[str, str] = {
     "signal_offline": "#64748b",
 
     # Firewall checkpoint status
-    "checkpoint_pass": "#10b981",
+    "checkpoint_pass": "#10b981",  # nosec B105 - not a password, color value
     "checkpoint_fail": "#ef4444",
     "checkpoint_flagged": "#f59e0b",
     "checkpoint_pending": "#64748b",

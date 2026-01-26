@@ -395,7 +395,7 @@ class NeurosecurityFirewall:
         for callback in self._callbacks["threat_detected"]:
             try:
                 callback(event)
-            except Exception:
+            except Exception:  # nosec B110
                 pass  # Don't let callback errors affect security
 
     def _trigger_emergency(self, reason: str) -> None:
@@ -406,7 +406,7 @@ class NeurosecurityFirewall:
         for callback in self._callbacks["emergency_shutoff"]:
             try:
                 callback()
-            except Exception:
+            except Exception:  # nosec B110
                 pass  # Safety-critical - must complete
 
     def reset(self) -> None:
