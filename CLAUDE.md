@@ -236,22 +236,20 @@ print(TARA.tagline)  # "Protection for the neural frontier"
 
 | Stat | Source | Update Method |
 |------|--------|---------------|
-| **Security Layers** | `brand.json → stats.security_layers` | Manual (always 14) |
-| **Threat Patterns** | `brand.json → stats.threat_patterns` | Manual |
-| **Learning Portals** | `brand.json → stats.learning_portals` | Manual |
 | **Commits** | GitHub API | **Auto** (real-time) |
+| **Threat Signatures** | `brand.json → stats.threat_signatures` | Manual |
+| **Security Layers** | `brand.json → stats.security_layers` | Manual (always 14) |
 | **Interactive Tools** | GitHub API | **Auto** (counts `.html` in `docs/visualizations/`) |
-| **Python Packages** | GitHub API | **Auto** (counts `pyproject.toml` in `MAIN/`) |
+| **Learning Portals** | `brand.json → stats.learning_portals` | Manual |
 
 ### How It Works
 
 1. **Page loads** → displays default values from HTML
 2. **JavaScript fetches** `brand.json` from GitHub raw URL
-3. **Manual stats** (layers, threats, portals) update from `brand.json`
+3. **Manual stats** (threat signatures, layers, portals) update from `brand.json`
 4. **Auto stats** fetch from GitHub API:
    - Commits: `api.github.com/repos/qikevinl/ONI/commits`
    - Tools: `api.github.com/repos/qikevinl/ONI/contents/docs/visualizations`
-   - Packages: Checks each `MAIN/*/` directory for `pyproject.toml`
 
 ### Updating Manual Stats
 
@@ -261,7 +259,7 @@ Edit `MAIN/resources/brand.json`:
 {
   "stats": {
     "security_layers": 14,
-    "threat_patterns": 25,
+    "threat_signatures": 25,
     "learning_portals": 1
   }
 }
@@ -275,7 +273,6 @@ Push to GitHub → website auto-updates on next page load.
 |------|-----------------|
 | Commits | Any push to main branch |
 | Interactive Tools | Add/remove `.html` files in `docs/visualizations/` |
-| Python Packages | Add/remove directories with `pyproject.toml` in `MAIN/` |
 
 ### Troubleshooting
 
