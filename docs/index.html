@@ -1896,6 +1896,20 @@
 
         }
 
+        // Text reveal animation on scroll
+        function initTextReveal() {
+            const textRevealElements = document.querySelectorAll('.text-reveal');
+            textRevealElements.forEach(el => {
+                const observer = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        el.classList.add('animate');
+                        observer.disconnect();
+                    }
+                }, { threshold: 0.5 });
+                observer.observe(el);
+            });
+        }
+
         // Initialize on load
         document.addEventListener('DOMContentLoaded', function() {
             initHyperspeed();
@@ -1903,6 +1917,7 @@
             animateCounters();
             loadBrandConstants();
             initLayersReveal();
+            initTextReveal();
         });
     </script>
 </body>
