@@ -240,7 +240,7 @@ export const CreditsScene: React.FC = () => {
                       lineHeight: 1.6,
                     }}
                   >
-                    Open Neurocomputing Interface
+                    Open Neurosecurity Interoperability
                   </div>
 
                   {/* Credits footer */}

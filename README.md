@@ -8,7 +8,7 @@ The most important connections deserve the most thought.
 
 ---
 
-**ONI** (Open Neurocomputing Interface) — a unified 14-layer model extending OSI into the biological domain.
+**ONI** (Open Neurosecurity Interoperability) — a unified 14-layer model extending OSI into the biological domain.
 
 One framework to understand, build, and secure brain-computer interfaces. Open. Extensible. Universal.
 

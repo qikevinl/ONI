@@ -69,7 +69,7 @@ export const script: ScriptLine[] = [
   },
   {
     scene: 'problem',
-    text: "Introducing ONI—the Open Neurocomputing Interface.",
+    text: "Introducing ONI—the Open Neurosecurity Interoperability.",
     startFrame: 960,
     endFrame: 1200,
   },

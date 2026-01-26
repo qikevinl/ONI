@@ -49,7 +49,7 @@ export default makeScene2D(function* (view) {
   view.add(
     <Txt
       ref={tagline}
-      text="Open Neurocomputing Interface"
+      text="Open Neurosecurity Interoperability"
       x={0}
       y={120}
       fontSize={0}
