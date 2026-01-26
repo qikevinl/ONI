@@ -157,60 +157,57 @@ export const TitleScene: React.FC = () => {
                 }}
               >
                 {letter}
-                {/* Animated signal pulse on I */}
-                {letter === 'I' && progress > 0.9 && (() => {
-                  // Signal animation values
-                  const pulseY = Math.sin(frame * 0.18) * 12;
-                  const pulseScale = 1 + Math.sin(frame * 0.25) * 0.3;
-                  const glowIntensity = 0.6 + Math.sin(frame * 0.2) * 0.4;
+                {/* Neural signal inside the O */}
+                {letter === 'O' && progress > 0.9 && (() => {
+                  const signalOpacity = interpolate(progress, [0.9, 1], [0, 1]);
 
                   return (
                     <div
                       style={{
                         position: 'absolute',
-                        top: -45,
+                        top: '50%',
                         left: '50%',
-                        transform: 'translateX(-50%)',
-                        opacity: interpolate(progress, [0.9, 1], [0, 1]),
+                        transform: 'translate(-50%, -50%)',
+                        width: 80,
+                        height: 50,
+                        opacity: signalOpacity,
+                        overflow: 'hidden',
                       }}
                     >
-                      {/* Vertical pulse line */}
-                      <div
-                        style={{
-                          position: 'absolute',
-                          left: '50%',
-                          bottom: 0,
-                          width: 2,
-                          height: 25,
-                          background: 'linear-gradient(to top, rgba(64, 216, 255, 0.8), rgba(64, 216, 255, 0.1))',
-                          transform: 'translateX(-50%)',
-                        }}
-                      />
-                      {/* Pulsing dot */}
-                      <div
-                        style={{
-                          width: 10,
-                          height: 10,
-                          borderRadius: '50%',
-                          background: '#ffffff',
-                          boxShadow: `0 0 ${12 * glowIntensity}px ${6 * glowIntensity}px rgba(64, 216, 255, ${glowIntensity}),
-                                      0 0 ${20 * glowIntensity}px ${10 * glowIntensity}px rgba(64, 216, 255, ${glowIntensity * 0.5})`,
-                          transform: `translateY(${pulseY}px) scale(${pulseScale})`,
-                        }}
-                      />
-                      {/* Trail effect */}
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: 5,
-                          left: '50%',
-                          width: 4,
-                          height: 15,
-                          background: `linear-gradient(to bottom, rgba(64, 216, 255, ${0.6 - pulseY * 0.02}), transparent)`,
-                          transform: `translateX(-50%) translateY(${pulseY}px)`,
-                          borderRadius: 2,
-                        }}
-                      />
+                      {/* Animated brainwave/EKG line inside O */}
+                      <svg width="80" height="50" viewBox="0 0 80 50">
+                        <path
+                          d={`M 0 25
+                              L 15 25
+                              L 20 ${25 + Math.sin(frame * 0.15) * 8}
+                              L 28 ${25 - Math.sin(frame * 0.15 + 0.5) * 12}
+                              L 35 ${25 + Math.cos(frame * 0.12) * 6}
+                              L 40 ${15 - Math.abs(Math.sin(frame * 0.1)) * 8}
+                              L 45 ${25 - Math.sin(frame * 0.15) * 6}
+                              L 52 ${25 + Math.sin(frame * 0.15 + 1) * 10}
+                              L 60 ${25 - Math.cos(frame * 0.12) * 5}
+                              L 65 25
+                              L 80 25`}
+                          stroke="#40d8ff"
+                          strokeWidth="2.5"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          style={{
+                            filter: 'drop-shadow(0 0 4px rgba(64, 216, 255, 0.9))',
+                          }}
+                        />
+                        {/* Pulsing dot at peak */}
+                        <circle
+                          cx="40"
+                          cy={15 - Math.abs(Math.sin(frame * 0.1)) * 8}
+                          r="3"
+                          fill="#ffffff"
+                          style={{
+                            filter: 'drop-shadow(0 0 6px rgba(100, 220, 255, 1))',
+                          }}
+                        />
+                      </svg>
                     </div>
                   );
                 })()}
