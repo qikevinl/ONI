@@ -12,3 +12,5 @@ export { RotatingText } from './RotatingText';
 
 // Background animations
 export { Threads } from './Threads';
+export { Aurora } from './Aurora';
+export { FloatingOrbs } from './FloatingOrbs';

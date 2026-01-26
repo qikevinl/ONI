@@ -4,6 +4,7 @@ import { videoConfig } from "./data/oni-theme";
 import { LayersCanvasScene } from "./scenes/LayersCanvasScene";
 import { TitleSceneEnhanced } from "./scenes/TitleSceneEnhanced";
 import { TitleThreadsScene } from "./scenes/TitleThreadsScene";
+import { TitleCalmScene } from "./scenes/TitleCalmScene";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -48,6 +49,15 @@ export const RemotionRoot: React.FC = () => {
         id="TitleThreads"
         component={TitleThreadsScene}
         durationInFrames={240} // 8 seconds
+        fps={videoConfig.fps}
+        width={videoConfig.width}
+        height={videoConfig.height}
+      />
+      {/* Calm Title - Relaxed, Safe, Trustworthy */}
+      <Composition
+        id="TitleCalm"
+        component={TitleCalmScene}
+        durationInFrames={360} // 12 seconds - slower pace
         fps={videoConfig.fps}
         width={videoConfig.width}
         height={videoConfig.height}
