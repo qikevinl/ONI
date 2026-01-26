@@ -94,10 +94,7 @@ python --version  # Should show Python 3.9+
 # Basic installation (includes oni-framework as dependency)
 pip install oni-academy
 
-# With interactive UI
-pip install oni-academy[ui]
-
-# Full installation (includes TARA platform)
+# Full installation (with interactive UI)
 pip install oni-academy[full]
 ```
 

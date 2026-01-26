@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "oni-academy"
-version = "0.1.0"
+version = "0.1.1"
 description = "ONI Academy - Educational platform for neurosecurity and brain-computer interface security concepts"
 readme = "README.md"
 license = {text = "Apache-2.0"}
@@ -51,7 +51,6 @@ ui = [
 ]
 full = [
     "oni-academy[ui]",
-    "oni-tara>=0.8.0",
 ]
 dev = [
     "pytest>=7.0.0",

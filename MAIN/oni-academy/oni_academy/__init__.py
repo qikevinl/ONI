@@ -22,7 +22,7 @@ try:
     __name_full__ = ONI.full_name
     __tagline__ = ONI.tagline
 except ImportError:
-    __version__ = "0.1.0"
+    __version__ = "0.1.1"
     __name_full__ = "Open Neurosecurity Interoperability"
     __tagline__ = "The OSI of Mind"
 

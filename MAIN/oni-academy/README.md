@@ -26,10 +26,7 @@ For the full vision and detailed documentation, see [ONI_ACADEMY.md](ONI_ACADEMY
 # Basic installation
 pip install oni-academy
 
-# With interactive UI
-pip install oni-academy[ui]
-
-# Full installation (includes TARA platform)
+# Full installation (with interactive UI)
 pip install oni-academy[full]
 ```
 
