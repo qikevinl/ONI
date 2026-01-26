@@ -137,10 +137,10 @@ jobs:
 
           # ONI Framework imports
           python -c "
-          from oni import calculate_cs, NeuralFirewall, CoherenceMetric, Layer
+          from oni import ONIStack, Layer, NeuralFirewall, CoherenceMetric
           from oni.coherence import CoherenceMetric, VarianceComponents
           from oni.firewall import Signal, FilterResult, NeuralFirewall
-          from oni.layers import ONI_LAYERS, Layer
+          from oni.layers import ONIStack, Layer, Domain
           from oni.brand import ONI, TARA
           print('oni-framework imports: OK')
           " || { echo "::error::oni-framework import failed"; exit 1; }
@@ -151,7 +151,7 @@ jobs:
           from tara_mvp import AttackSimulator, AttackPattern
           from tara_mvp.core.coherence import CoherenceMetric
           from tara_mvp.core.firewall import NeuralFirewall
-          from tara_mvp.core.layers import ONI_LAYERS
+          from tara_mvp.core.layers import ONIStack
           from tara_mvp._brand import TARA, ONI
           print('tara_mvp imports: OK')
           " || { echo "::error::tara_mvp import failed"; exit 1; }
