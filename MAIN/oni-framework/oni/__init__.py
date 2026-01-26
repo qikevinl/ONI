@@ -48,6 +48,11 @@ __version__ = "0.2.1"
 __author__ = "Kevin L. Qi"
 
 # =============================================================================
+# BRAND: Project Identity (Single Source of Truth)
+# =============================================================================
+from .brand import ONI, TARA, ONI_VERSION, TARA_VERSION, get_brand
+
+# =============================================================================
 # CORE: Signal Trust & Validation
 # =============================================================================
 from .coherence import CoherenceMetric, calculate_cs, VarianceComponents
@@ -101,6 +106,13 @@ __all__ = [
     "__version__",
     "__author__",
 
+    # Brand Identity
+    "ONI",
+    "TARA",
+    "ONI_VERSION",
+    "TARA_VERSION",
+    "get_brand",
+
     # Signal Trust
     "CoherenceMetric",
     "calculate_cs",
@@ -147,8 +159,9 @@ def get_version() -> str:
 def print_summary():
     """Print a summary of available modules and their purposes."""
     print(f"""
-ONI Framework v{__version__}
+{ONI.name} v{__version__} — {ONI.tagline}
 {'=' * 50}
+{ONI.slogan}
 
 SIGNAL TRUST
   CoherenceMetric      Calculate Cₛ trust scores (0-1)

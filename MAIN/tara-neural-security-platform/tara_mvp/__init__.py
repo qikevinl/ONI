@@ -43,7 +43,18 @@ Repository: https://github.com/qikevinl/ONI
 
 __version__ = "0.8.0"
 __author__ = "Kevin L. Qi"
-__name_full__ = "Telemetry Analysis & Response Automation"  # TARA
+
+# Import brand constants from oni-framework (single source of truth)
+try:
+    from oni.brand import TARA as _TARA_BRAND, ONI as _ONI_BRAND
+    __name_full__ = _TARA_BRAND.full_name
+    __tagline__ = _TARA_BRAND.tagline
+    __mission__ = _TARA_BRAND.mission
+except ImportError:
+    # Fallback if oni-framework not installed
+    __name_full__ = "Telemetry Analysis & Response Automation"
+    __tagline__ = "Protection for the neural frontier"
+    __mission__ = "Real-time neural security monitoring aligned with ONI."
 
 # Core security components (from oni-framework)
 from .core import (
