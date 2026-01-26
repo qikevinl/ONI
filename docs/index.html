@@ -66,17 +66,89 @@
         nav { z-index: 100; }
         .hero, .section, section, footer { position: relative; z-index: 1; }
 
-        /* Layers reveal animation */
-        #layers-image {
-            transition: clip-path 0.1s ease-out;
+        /* ONI Layers Animation */
+        .oni-layers-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
-        #layer-indicator {
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            font-weight: 600;
-            text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        .oni-layer-bar {
+            height: 42px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            opacity: 0;
+            transform: translateX(-30px) scale(0.95);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out, box-shadow 0.3s ease;
         }
+
+        .oni-layer-bar.visible {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+        }
+
+        .oni-layer-bar.active {
+            transform: translateX(0) scale(1.03);
+        }
+
+        .oni-layer-bar.gateway {
+            height: 52px;
+            border-radius: 10px;
+        }
+
+        .oni-layer-bar.gateway.active {
+            box-shadow: 0 0 30px rgba(255, 150, 50, 0.6), 0 0 60px rgba(255, 150, 50, 0.3);
+            transform: translateX(0) scale(1.06);
+        }
+
+        .oni-layer-id {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #fff;
+            font-family: 'SF Mono', 'Monaco', monospace;
+            min-width: 32px;
+        }
+
+        .oni-layer-name {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.9);
+            flex: 1;
+            margin-left: 12px;
+        }
+
+        .oni-layer-zone {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .oni-zone-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 8px 0 4px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .oni-zone-label.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .oni-zone-label.silicon { color: #60a5fa; }
+        .oni-zone-label.gateway { color: #ff9632; text-align: center; }
+        .oni-zone-label.biology { color: #4ade80; }
 
         /* Navigation */
         nav {
@@ -959,12 +1031,83 @@
     </div>
 
     <section class="section" id="install" style="padding-top: 2rem;">
-        <!-- ONI Layers Diagram - Scroll Reveal -->
+        <!-- ONI Layers Animation - Scroll Reveal -->
         <div style="text-align: center; margin-bottom: 2rem;">
-            <div id="layers-reveal-container" style="display: inline-block; position: relative; max-width: 780px; width: 100%;">
-                <!-- Layer labels that appear as image reveals -->
-                <div id="layer-indicator" style="position: absolute; left: -80px; top: 50%; transform: translateY(-50%); font-family: monospace; font-size: 0.9rem; color: var(--accent-cyan); opacity: 0; transition: opacity 0.3s;">L1</div>
-                <img id="layers-image" src="images/oni-14-layer-hourglass.png" alt="ONI 14-Layer Model - Extending OSI into the biological domain" style="width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); clip-path: inset(100% 0 0 0);">
+            <div id="layers-reveal-container" style="display: inline-block; position: relative; max-width: 600px; width: 100%;">
+                <div class="oni-layers-stack">
+                    <!-- Silicon Layers (L1-L7) -->
+                    <div class="oni-zone-label silicon">Silicon Layers — OSI Model</div>
+                    <div class="oni-layer-bar" data-layer="1" style="background: linear-gradient(135deg, #1e3a5f, #2d4a6f);">
+                        <span class="oni-layer-id">L1</span>
+                        <span class="oni-layer-name">Physical Carrier</span>
+                        <span class="oni-layer-zone">Physical</span>
+                    </div>
+                    <div class="oni-layer-bar" data-layer="2" style="background: linear-gradient(135deg, #1e4d6f, #2d5d7f);">
+                        <span class="oni-layer-id">L2</span>
+                        <span class="oni-layer-name">Signal Processing</span>
+                        <span class="oni-layer-zone">Data Link</span>
+                    </div>
+                    <div class="oni-layer-bar" data-layer="3" style="background: linear-gradient(135deg, #1e5f7f, #2d6f8f);">
+                        <span class="oni-layer-id">L3</span>
+                        <span class="oni-layer-name">Protocol</span>
+                        <span class="oni-layer-zone">Network</span>
+                    </div>
+                    <div class="oni-layer-bar" data-layer="4" style="background: linear-gradient(135deg, #1e6f8f, #2d7f9f);">
+                        <span class="oni-layer-id">L4</span>
+                        <span class="oni-layer-name">Transport</span>
+                        <span class="oni-layer-zone">Transport</span>
+                    </div>
+                    <div class="oni-layer-bar" data-layer="5" style="background: linear-gradient(135deg, #1e7f9f, #2d8faf);">
+                        <span class="oni-layer-id">L5</span>
+                        <span class="oni-layer-name">Session</span>
+                        <span class="oni-layer-zone">Session</span>
+                    </div>
+                    <div class="oni-layer-bar" data-layer="6" style="background: linear-gradient(135deg, #1e8faf, #3d9fbf);">
+                        <span class="oni-layer-id">L6</span>
+                        <span class="oni-layer-name">Presentation</span>
+                        <span class="oni-layer-zone">Presentation</span>
+                    </div>
+                    <div class="oni-layer-bar" data-layer="7" style="background: linear-gradient(135deg, #2d9fbf, #4dafcf);">
+                        <span class="oni-layer-id">L7</span>
+                        <span class="oni-layer-name">Application Interface</span>
+                        <span class="oni-layer-zone">Application</span>
+                    </div>
+
+                    <!-- Neural Gateway (L8) -->
+                    <div class="oni-zone-label gateway">★ Neural Gateway — The Bridge ★</div>
+                    <div class="oni-layer-bar gateway" data-layer="8" style="background: linear-gradient(135deg, #b45309, #d97706, #f59e0b);">
+                        <span class="oni-layer-id" style="font-size: 1.1rem;">L8</span>
+                        <span class="oni-layer-name" style="font-weight: 600;">Neural Gateway</span>
+                        <span class="oni-layer-zone" style="color: rgba(255,255,255,0.7);">Firewall</span>
+                    </div>
+
+                    <!-- Biology Layers (L9-L14) -->
+                    <div class="oni-zone-label biology">Biology Layers — Neural Processing</div>
+                    <div class="oni-layer-bar" data-layer="9" style="background: linear-gradient(135deg, #14532d, #166534);">
+                        <span class="oni-layer-id">L9</span>
+                        <span class="oni-layer-name">Ion Channel Encoding</span>
+                    </div>
+                    <div class="oni-layer-bar" data-layer="10" style="background: linear-gradient(135deg, #166534, #15803d);">
+                        <span class="oni-layer-id">L10</span>
+                        <span class="oni-layer-name">Spike Train</span>
+                    </div>
+                    <div class="oni-layer-bar" data-layer="11" style="background: linear-gradient(135deg, #15803d, #16a34a);">
+                        <span class="oni-layer-id">L11</span>
+                        <span class="oni-layer-name">Neural Population</span>
+                    </div>
+                    <div class="oni-layer-bar" data-layer="12" style="background: linear-gradient(135deg, #16a34a, #22c55e);">
+                        <span class="oni-layer-id">L12</span>
+                        <span class="oni-layer-name">Circuit Dynamics</span>
+                    </div>
+                    <div class="oni-layer-bar" data-layer="13" style="background: linear-gradient(135deg, #22c55e, #4ade80);">
+                        <span class="oni-layer-id">L13</span>
+                        <span class="oni-layer-name">Cognitive Function</span>
+                    </div>
+                    <div class="oni-layer-bar" data-layer="14" style="background: linear-gradient(135deg, #4ade80, #86efac);">
+                        <span class="oni-layer-id">L14</span>
+                        <span class="oni-layer-name">Identity & Ethics</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1554,58 +1697,88 @@
         // ONI Layers scroll reveal animation
         function initLayersReveal() {
             const container = document.getElementById('layers-reveal-container');
-            const image = document.getElementById('layers-image');
-            const indicator = document.getElementById('layer-indicator');
+            const layerBars = document.querySelectorAll('.oni-layer-bar');
+            const zoneLabels = document.querySelectorAll('.oni-zone-label');
 
-            if (!container || !image) return;
+            if (!container || layerBars.length === 0) return;
 
-            // Layer positions (approximate % from bottom of image)
-            const layers = [
-                { name: 'L1', pos: 0 },
-                { name: 'L2', pos: 7 },
-                { name: 'L3', pos: 14 },
-                { name: 'L4', pos: 21 },
-                { name: 'L5', pos: 28 },
-                { name: 'L6', pos: 35 },
-                { name: 'L7', pos: 42 },
-                { name: 'L8', pos: 50 },  // Firewall - center
-                { name: 'L9', pos: 58 },
-                { name: 'L10', pos: 65 },
-                { name: 'L11', pos: 72 },
-                { name: 'L12', pos: 79 },
-                { name: 'L13', pos: 86 },
-                { name: 'L14', pos: 93 },
-            ];
+            // Total elements to animate (3 zone labels + 14 layer bars = 17)
+            const totalElements = 17;
+            let lastActiveIndex = -1;
 
             function updateReveal() {
                 const rect = container.getBoundingClientRect();
                 const windowHeight = window.innerHeight;
 
                 // Calculate how much of the container is visible
-                // Start revealing when container enters viewport, complete when it's centered
+                // Start revealing when container enters viewport, complete when it's mostly visible
                 const startPoint = windowHeight;
-                const endPoint = windowHeight * 0.3;
+                const endPoint = windowHeight * 0.2;
 
                 // Progress from 0 (just entering) to 1 (fully revealed)
                 let progress = (startPoint - rect.top) / (startPoint - endPoint);
                 progress = Math.max(0, Math.min(1, progress));
 
-                // Apply clip-path: inset(top right bottom left)
-                // We reveal from bottom, so we animate the TOP inset from 100% to 0%
-                const clipTop = 100 - (progress * 100);
-                image.style.clipPath = `inset(${clipTop}% 0 0 0)`;
+                // Calculate which elements should be visible based on scroll progress
+                const visibleCount = Math.floor(progress * totalElements);
 
-                // Update layer indicator
-                if (progress > 0 && progress < 1) {
-                    const layerIndex = Math.min(13, Math.floor(progress * 14));
-                    indicator.textContent = layers[layerIndex].name;
-                    indicator.style.opacity = '1';
+                // Animate zone labels and layer bars sequentially
+                // Order: Silicon label, L1-L7, Gateway label, L8, Biology label, L9-L14
+                const animationOrder = [];
 
-                    // Position indicator based on current layer
-                    const indicatorY = 100 - (progress * 100);
-                    indicator.style.top = `${indicatorY}%`;
-                } else {
-                    indicator.style.opacity = '0';
+                // Silicon zone label
+                animationOrder.push({ type: 'zone', element: zoneLabels[0], layer: 0 });
+                // L1-L7
+                for (let i = 0; i < 7; i++) {
+                    animationOrder.push({ type: 'bar', element: layerBars[i], layer: i + 1 });
+                }
+                // Gateway zone label
+                animationOrder.push({ type: 'zone', element: zoneLabels[1], layer: 8 });
+                // L8 (gateway)
+                animationOrder.push({ type: 'bar', element: layerBars[7], layer: 8 });
+                // Biology zone label
+                animationOrder.push({ type: 'zone', element: zoneLabels[2], layer: 9 });
+                // L9-L14
+                for (let i = 8; i < 14; i++) {
+                    animationOrder.push({ type: 'bar', element: layerBars[i], layer: i + 1 });
+                }
+
+                // Apply visibility and active states
+                animationOrder.forEach((item, index) => {
+                    if (!item.element) return;
+
+                    if (index < visibleCount) {
+                        item.element.classList.add('visible');
+
+                        // Add active class only to the most recently revealed layer bar
+                        if (item.type === 'bar') {
+                            if (index === visibleCount - 1 ||
+                                (index < visibleCount - 1 && animationOrder[index + 1].type === 'zone')) {
+                                item.element.classList.add('active');
+                            } else {
+                                item.element.classList.remove('active');
+                            }
+                        }
+                    } else {
+                        item.element.classList.remove('visible');
+                        if (item.type === 'bar') {
+                            item.element.classList.remove('active');
+                        }
+                    }
+                });
+
+                // Keep all visible once fully scrolled
+                if (progress >= 1) {
+                    animationOrder.forEach(item => {
+                        if (item.element) {
+                            item.element.classList.add('visible');
+                            item.element.classList.remove('active');
+                        }
+                    });
+                    // Keep L8 gateway with subtle glow when complete
+                    if (layerBars[7]) {
+                        layerBars[7].classList.add('active');
+                    }
                 }
             }
 

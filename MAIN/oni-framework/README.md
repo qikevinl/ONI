@@ -82,7 +82,7 @@ valid = sfi.validate(frequency=40, spatial_scale=1e-4)  # → True/False
 
 ## Package Architecture
 
-> **This package is the core API library.** For educational content and interactive learning, see [ONI Academy](../oni-academy/ONI_ACADEMY.md) (`pip install oni-academy`).
+> **This package is the core API library.** For educational content and interactive learning, see [ONI Academy](https://github.com/qikevinl/ONI/blob/main/MAIN/oni-academy/ONI_ACADEMY.md) (`pip install oni-academy`).
 
 ```
 oni-framework (pip install oni-framework)
