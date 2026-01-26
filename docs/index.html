@@ -104,11 +104,79 @@
         .oni-layer-bar.gateway {
             height: 52px;
             border-radius: 10px;
+            transition: opacity 0.4s ease-out, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s ease, height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .oni-layer-bar.gateway.active {
             box-shadow: 0 0 30px rgba(255, 150, 50, 0.6), 0 0 60px rgba(255, 150, 50, 0.3);
             transform: translateX(0) scale(1.06);
+        }
+
+        /* L8 Expanded state - DRAMATIC expansion during scroll snap */
+        .oni-layer-bar.gateway.expanded {
+            height: 120px;
+            transform: translateX(0) scale(1.35);
+            box-shadow:
+                0 0 60px rgba(255, 150, 50, 1),
+                0 0 120px rgba(255, 150, 50, 0.7),
+                0 0 180px rgba(255, 150, 50, 0.4),
+                0 0 240px rgba(255, 100, 0, 0.2),
+                inset 0 0 30px rgba(255, 255, 255, 0.15);
+            z-index: 100;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: gatewayBreathing 2s ease-in-out infinite;
+        }
+
+        @keyframes gatewayBreathing {
+            0%, 100% {
+                transform: translateX(0) scale(1.35);
+                box-shadow:
+                    0 0 60px rgba(255, 150, 50, 1),
+                    0 0 120px rgba(255, 150, 50, 0.7),
+                    0 0 180px rgba(255, 150, 50, 0.4);
+            }
+            50% {
+                transform: translateX(0) scale(1.4);
+                box-shadow:
+                    0 0 80px rgba(255, 150, 50, 1),
+                    0 0 160px rgba(255, 150, 50, 0.8),
+                    0 0 240px rgba(255, 150, 50, 0.5),
+                    0 0 300px rgba(255, 100, 0, 0.3);
+            }
+        }
+
+        .oni-layer-bar.gateway.expanded .oni-layer-id {
+            font-size: 1.8rem !important;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .oni-layer-bar.gateway.expanded .oni-layer-name {
+            font-size: 1.4rem !important;
+            font-weight: 700 !important;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .oni-layer-bar.gateway.expanded .oni-layer-zone {
+            font-size: 1.1rem !important;
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        /* Zone label pulse during L8 expansion */
+        .oni-zone-label.gateway.expanded {
+            animation: gatewayPulse 1.5s ease-in-out infinite;
+            font-size: 1.3rem;
+            letter-spacing: 0.1em;
+        }
+
+        @keyframes gatewayPulse {
+            0%, 100% {
+                text-shadow: 0 0 15px rgba(255, 150, 50, 0.6), 0 0 30px rgba(255, 150, 50, 0.3);
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(255, 150, 50, 1), 0 0 60px rgba(255, 150, 50, 0.6), 0 0 90px rgba(255, 100, 0, 0.3);
+                transform: translateY(-3px) scale(1.05);
+            }
         }
 
         .oni-layer-id {
@@ -1554,7 +1622,7 @@
             <strong>ONI Framework</strong> &mdash; Open-source neural interface security
         </p>
         <p style="margin-top: 1rem; font-size: 0.75rem; color: var(--text-muted); max-width: 800px; line-height: 1.6; text-align: center; margin-left: auto; margin-right: auto;">
-            © 2024-2026 Kevin L. Qi. All rights reserved. ONI Framework™, Open Neurosecurity Interoperability™, and TARA Stack™ are trademarks of Kevin L. Qi. Source code is Apache 2.0 licensed; brand, logos, and trademarks require written permission for use.
+            © 2024-2026 Kevin L. Qi / Qinnovate. All rights reserved. ONI Framework™, Open Neurosecurity Interoperability™, and TARA Stack™ are trademarks of Kevin L. Qi / Qinnovate. Source code is licensed under Apache 2.0. You may use these trademarks to accurately describe or refer to this project. Use of logos or trademarks implying endorsement, or incorporation into other product names, requires written permission.
         </p>
     </footer>
 
@@ -1727,6 +1795,12 @@
 
             // Total elements to animate (3 zone labels + 14 layer bars = 17)
             const totalElements = 17;
+            // L8 is at index 9 (0: silicon label, 1-7: L1-L7, 8: gateway label, 9: L8)
+            // For L8 to be visible, visibleCount must be >= 10, so progress >= 10/17
+            const L8_VISIBLE_PROGRESS = 10 / totalElements;     // ~0.588 - when L8 first appears
+            // Scroll snap zone: when raw progress would show L8, we "pause" here
+            const L8_SNAP_START = L8_VISIBLE_PROGRESS;
+            const L8_SNAP_END = (10 + 2) / totalElements;       // ~0.706 - extra scroll needed to continue
             let lastActiveIndex = -1;
 
             function updateReveal() {
@@ -1738,8 +1812,49 @@
                 const startPoint = windowHeight;
                 const endPoint = windowHeight * 0.2;
 
-                // Progress from 0 (just entering) to 1 (fully revealed)
-                let progress = (startPoint - rect.top) / (startPoint - endPoint);
+                // Raw progress from 0 (just entering) to 1 (fully revealed)
+                let rawProgress = (startPoint - rect.top) / (startPoint - endPoint);
+                rawProgress = Math.max(0, Math.min(1, rawProgress));
+
+                // Apply scroll snap transformation at L8
+                // This creates a "sticky" zone where L8 stays expanded while user scrolls more
+                let progress;
+                const gatewayBar = layerBars[7]; // L8
+                const gatewayLabel = zoneLabels[1]; // Gateway zone label
+
+                if (rawProgress < L8_SNAP_START) {
+                    // Before L8: normal linear progress
+                    progress = rawProgress;
+                    if (gatewayBar) {
+                        gatewayBar.classList.remove('expanded');
+                    }
+                    if (gatewayLabel) {
+                        gatewayLabel.classList.remove('expanded');
+                    }
+                } else if (rawProgress >= L8_SNAP_START && rawProgress < L8_SNAP_END) {
+                    // In the snap zone: hold at showing L8, keep it expanded
+                    progress = L8_VISIBLE_PROGRESS; // Exactly enough to show L8
+                    if (gatewayBar) {
+                        gatewayBar.classList.add('expanded');
+                    }
+                    if (gatewayLabel) {
+                        gatewayLabel.classList.add('expanded');
+                    }
+                } else {
+                    // After snap zone: resume from Biology label onwards
+                    // Map remaining scroll (L8_SNAP_END to 1) to remaining elements (index 10+ to 17)
+                    const remainingRaw = rawProgress - L8_SNAP_END;
+                    const remainingRange = 1 - L8_SNAP_END;
+                    const biologyStartProgress = 11 / totalElements; // Biology label is index 10
+                    progress = biologyStartProgress + (remainingRaw / remainingRange) * (1 - biologyStartProgress);
+                    if (gatewayBar) {
+                        gatewayBar.classList.remove('expanded');
+                    }
+                    if (gatewayLabel) {
+                        gatewayLabel.classList.remove('expanded');
+                    }
+                }
+
                 progress = Math.max(0, Math.min(1, progress));
 
                 // Calculate which elements should be visible based on scroll progress
