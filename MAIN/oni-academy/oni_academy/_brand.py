@@ -71,7 +71,7 @@ else:
         full_name="Open Neurosecurity Interoperability",
         name="ONI Framework",
         tagline="The OSI of Mind",
-        slogan="My mind. My rules. My future.",
+        slogan="Our minds. Our rules. Our future.",
         mission="The mind is the last frontier.",
         version="0.2.0",
     )

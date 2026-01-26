@@ -53,7 +53,7 @@ try:
     __mission__ = _TARA_BRAND.mission
 except ImportError:
     # Fallback if _brand.py fails
-    __version__ = "0.8.0"
+    __version__ = "0.8.1"
     __name_full__ = "Telemetry Analysis & Response Automation"
     __tagline__ = "Protection for the neural frontier"
     __mission__ = "Real-time neural security monitoring aligned with ONI."

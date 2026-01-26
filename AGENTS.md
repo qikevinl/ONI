@@ -35,7 +35,7 @@
 | 2026-01-25 | **GitHub Pages made dynamic with CDN-based animations** | AOS.js for scroll animations, CSS keyframes for hero effects, neural network background, counter animations. No build step required — CDN libraries auto-update. |
 | 2026-01-26 | **Brand sync script enhanced** | Now syncs: full_name, tagline, slogan (ONI) + full_name (TARA) to README.md; mission to docs/index.html. Generic regex patterns allow any slogan value. |
 | 2026-01-26 | **brand.json moved to MAIN/resources/** | Centralized with other resources. All brand loaders updated with new paths. GitHub workflow trigger path updated. docs/index.html fetch URL updated. |
-| 2026-01-26 | **Slogan changed to singular form** | "My mind. My rules. My future." — Updated across 6 files: brand.json, README.md, CLAUDE.md, and 3 _brand.py fallbacks. |
+| 2026-01-26 | **Slogan changed to singular form** | "Our minds. Our rules. Our future." — Updated across 6 files: brand.json, README.md, CLAUDE.md, and 3 _brand.py fallbacks. |
 | 2026-01-26 | **.gitignore consolidated to repo root** | Removed duplicate .github/.gitignore. Standard location is repo root, not .github/. Added node_modules/, .vite/ for JavaScript projects. |
 | 2026-01-26 | **Removed .vite cache from git tracking** | Build artifacts should never be committed. Used `git rm --cached` to untrack without deleting local files. |
 
