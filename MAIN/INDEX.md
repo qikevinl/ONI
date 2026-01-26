@@ -489,6 +489,8 @@ MAIN/
 | Python Packages | oni-framework v0.2.0, oni-tara v0.8.0 |
 | Unit Tests | 182 (77 + 105) |
 | CI/CD Workflows | 3 (tests, publish, security) |
+| Dependabot | Enabled (weekly security updates) |
+| GitHub Pages | Animated with AOS.js (CDN, auto-updated) |
 | Planned Topics | 5 |
 
 ---

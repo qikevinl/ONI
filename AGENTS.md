@@ -3,7 +3,7 @@
 > **Purpose:** Persistent learnings from Ralph Loop iterations. AI agents read this file at the start of each session to benefit from discovered patterns, gotchas, and conventions.
 
 **Last Updated:** 2026-01-25
-**Loop Iterations:** 9
+**Loop Iterations:** 10
 
 ---
 
@@ -31,12 +31,16 @@
 | 2026-01-25 | **Bidirectional BCI security implemented in L8 firewall** | StimulationCommand validation with 7 safety checks: auth, region, amplitude, frequency, pulse width, charge density, rate limit. Based on Shannon (1992) safety bounds. |
 | 2026-01-25 | **MOABB dataset integration tests added** | 42 tests covering 5 datasets, 5 attack types, coherence benchmarking. Uses mock data for CI/CD without requiring actual dataset downloads. |
 | 2026-01-25 | **CI/CD pipeline fully implemented** | tests.yml (matrix: Python 3.9-3.12, Ubuntu/macOS), security.yml (Bandit, Safety, CodeQL), publish.yml (trusted publishing). Weekly security scans. |
+| 2026-01-25 | **Dependabot configured for automated security updates** | Weekly updates for: pip (oni-framework, oni-tara), npm (oni-demo-video), GitHub Actions. Groups minor/patch updates. |
+| 2026-01-25 | **GitHub Pages made dynamic with CDN-based animations** | AOS.js for scroll animations, CSS keyframes for hero effects, neural network background, counter animations. No build step required — CDN libraries auto-update. |
 
 ### Patterns Established
 
 - **Authoritative Source:** `TechDoc-ONI_Framework.md` is the single source of truth for 14-layer definitions
 - **Cascade Sync:** Changes to TechDoc must propagate to README.md, INDEX.md, and verify against Python code
 - **Hybrid Validation:** Auto-fix mechanical issues (dates, counts), require approval for content changes
+- **CDN for GitHub Pages:** Use unpkg.com/CDN for JavaScript libraries (AOS, GSAP) to avoid npm dependencies and get auto-updates
+- **Dependabot Grouping:** Group minor/patch updates together to reduce PR noise while catching security issues
 
 ### Gotchas Avoided
 

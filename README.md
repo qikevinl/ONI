@@ -46,10 +46,18 @@ One framework to understand, build, and secure brain-computer interfaces. Open. 
 
 | Start Here | Purpose |
 |------------|---------|
-| **[Live Demo](https://qikevinl.github.io/ONI/)** | **Interactive visualizations** — explore the framework in your browser |
+| **[Live Demo](https://qikevinl.github.io/ONI/)** | **Interactive visualizations** — animated, dynamic exploration of the framework |
 | **[MAIN/](MAIN/)** | All research content — publications, visualizations, resources |
 | **[INDEX.md](MAIN/INDEX.md)** | **Main Wiki** — central hub for navigation, dependencies, cross-references, roadmap |
 | **This README** | Public overview — key concepts, quick reference |
+
+### Security & Maintenance
+
+| Feature | Description |
+|---------|-------------|
+| **Dependabot** | Automated weekly security updates for all dependencies |
+| **CI/CD** | GitHub Actions for tests (Python 3.9-3.12) and security scanning |
+| **CDN Libraries** | GitHub Pages uses CDN-hosted AOS.js — auto-updated, no maintenance |
 
 ### Governance & Ethics
 
