@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
   models: read
 
 jobs:
@@ -80,7 +81,7 @@ jobs:
               with open("MAIN/INDEX.md", "r") as f:
                   current_index = f.read()[:2000]  # First 2000 chars for context
 
-          prompt = f"""Based on this repository structure, generate a GENERATED_INDEX.md file.
+          prompt = f"""Based on this repository structure, generate a TLDR.md file.
 
           Current structure:
           {structure}
@@ -109,26 +110,39 @@ jobs:
 
           content = response.choices[0].message.content
 
-          with open("GENERATED_INDEX.md", "w") as f:
+          with open("TLDR.md", "w") as f:
               f.write(content)
 
           print("Generated index successfully")
           EOF
 
-      - name: Commit generated index
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: |
+            docs: auto-generate repository index
 
-          if [ -f "GENERATED_INDEX.md" ]; then
-            git add GENERATED_INDEX.md
-            git diff --staged --quiet || git commit -m "docs: auto-generate repository index
+            Auto-generated using GitHub Models (gpt-4o-mini)
+            Triggered by: ${{ github.event_name }}
+          branch: auto-index-update
+          delete-branch: true
+          title: "docs: auto-generate repository index"
+          body: |
+            ## Auto-generated Index Update
 
-          Auto-generated using GitHub Models (gpt-4o-mini)
-          Triggered by: ${{ github.event_name }}
+            This PR was automatically created by the `auto-index.yml` workflow.
 
-          Co-Authored-By: github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
-            git push
-          else
-            echo "No index generated"
-          fi
+            **Changes:**
+            - Updated `TLDR.md` with current repository structure
+
+            **Generated using:** GitHub Models (gpt-4o-mini)
+            **Triggered by:** `${{ github.event_name }}`
+
+            ---
+            *This is an automated PR. Review and merge if the changes look correct.*
+          labels: |
+            documentation
+            automated
+          add-paths: |
+            TLDR.md
