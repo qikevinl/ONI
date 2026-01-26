@@ -4,10 +4,21 @@ on:
   release:
     types: [published]
   workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package to publish'
+        required: true
+        default: 'both'
+        type: choice
+        options:
+          - both
+          - oni-framework
+          - oni-tara
 
 jobs:
-  build:
+  build-oni-framework:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'release' || inputs.package == 'both' || inputs.package == 'oni-framework' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -21,7 +32,39 @@ jobs:
           python -m pip install --upgrade pip
           pip install build twine
 
-      - name: Build package
+      - name: Build oni-framework
+        run: |
+          cd MAIN/oni-framework
+          python -m build
+
+      - name: Check package
+        run: |
+          cd MAIN/oni-framework
+          twine check dist/*
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-oni-framework
+          path: MAIN/oni-framework/dist/
+
+  build-oni-tara:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'release' || inputs.package == 'both' || inputs.package == 'oni-tara' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install build twine
+
+      - name: Build oni-tara
         run: |
           cd MAIN/tara-neural-security-platform
           python -m build
@@ -34,11 +77,35 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: dist
+          name: dist-oni-tara
           path: MAIN/tara-neural-security-platform/dist/
 
-  publish:
-    needs: build
+  publish-oni-framework:
+    needs: build-oni-framework
+    if: ${{ github.event_name == 'release' || inputs.package == 'both' || inputs.package == 'oni-framework' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/oni-framework
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-oni-framework
+          path: dist/
+
+      - name: Publish oni-framework to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/
+          skip-existing: true
+
+  publish-oni-tara:
+    needs: build-oni-tara
+    if: ${{ github.event_name == 'release' || inputs.package == 'both' || inputs.package == 'oni-tara' }}
     runs-on: ubuntu-latest
     environment:
       name: pypi
@@ -50,12 +117,11 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: dist
+          name: dist-oni-tara
           path: dist/
 
-      - name: Publish to PyPI
+      - name: Publish oni-tara to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: dist/
-          # Skip if version already exists on PyPI (prevents failures on re-runs)
           skip-existing: true
