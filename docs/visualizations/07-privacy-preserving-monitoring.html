@@ -669,6 +669,44 @@
             </div>
         </div>
 
+        <!-- Security Considerations -->
+        <div class="equations-section" style="border-color: var(--accent-amber);">
+            <h2 style="color: var(--accent-amber);">⚠️ Security Consideration: Score Fingerprinting</h2>
+            <div style="padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 8px; border: 1px solid rgba(245, 158, 11, 0.3); margin-bottom: 1rem;">
+                <p style="font-size: 0.9rem; color: var(--text-primary); margin-bottom: 0.75rem;">
+                    <strong>Even Cₛ scores can be a fingerprint.</strong> Time-series of coherence values may create identifiable patterns unique to each user, enabling:
+                </p>
+                <ul style="font-size: 0.85rem; color: var(--text-secondary); margin-left: 1.5rem;">
+                    <li><strong>Neural Fingerprinting:</strong> Unique variance patterns in how coherence fluctuates</li>
+                    <li><strong>Activity Inference:</strong> Sudden drops correlate with specific cognitive states</li>
+                    <li><strong>Re-identification:</strong> Matching score patterns across sessions</li>
+                </ul>
+            </div>
+            <div class="equation-grid">
+                <div class="equation-box">
+                    <h4 style="color: var(--accent-green);">✓ Differential Privacy</h4>
+                    <div class="equation" style="font-size: 0.9rem;">Cₛ' = Cₛ + Lap(1/ε)</div>
+                    <p class="equation-desc">Add calibrated Laplacian noise before transmission. ε ≈ 1.0 balances utility and privacy.</p>
+                </div>
+                <div class="equation-box">
+                    <h4 style="color: var(--accent-green);">✓ Bucketed Transmission</h4>
+                    <div class="equation" style="font-size: 0.9rem;">LOW | MED | HIGH</div>
+                    <p class="equation-desc">Transmit category instead of exact value: LOW (&lt;0.3), MED (0.3-0.6), HIGH (&gt;0.6).</p>
+                </div>
+                <div class="equation-box">
+                    <h4 style="color: var(--accent-green);">✓ Temporal Aggregation</h4>
+                    <div class="equation" style="font-size: 0.9rem;">C̄ₛ = (1/n)ΣCₛᵢ</div>
+                    <p class="equation-desc">Transmit windowed averages (30s-5min) instead of individual readings.</p>
+                </div>
+            </div>
+            <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-secondary); border-radius: 8px;">
+                <p style="font-size: 0.85rem; color: var(--accent-purple);">
+                    <strong>Future Implementation (M8):</strong> ONI will implement layered defense: ε-differential privacy + temporal aggregation + session pseudonyms.
+                    See <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/project/PROJECT_MANAGEMENT.md" style="color: var(--accent-cyan);">PROJECT_MANAGEMENT.md</a> for roadmap.
+                </p>
+            </div>
+        </div>
+
         <footer>
             <p>ONI Framework — Privacy-Preserving Neural Security</p>
             <p><a href="../">← Back to ONI Hub</a> | <a href="https://github.com/qikevinl/ONI">GitHub</a></p>

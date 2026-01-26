@@ -429,12 +429,36 @@ When assigning priority, score each criterion (0-2):
 2. **Federated Learning:** AI models train locally; only encrypted gradients shared for collective improvement
 3. **Differential Privacy:** Noise added to gradients to prevent model inversion attacks
 4. **Zero Raw Data Exposure:** Raw neural signals never leave the user's device
+5. **Score Anonymization:** Prevent Cₛ fingerprinting (see vulnerability below)
+
+**⚠️ Known Vulnerability: Score Fingerprinting**
+
+Even without raw neural data, Cₛ scores over time can create identifiable patterns:
+- **Neural Fingerprinting:** Unique variance patterns in how coherence fluctuates
+- **Activity Inference:** Sudden drops may correlate with specific cognitive states
+- **Re-identification:** Matching score patterns across sessions
+
+**Mitigations (REQUIRED for M8):**
+
+| Mitigation | Description | Trade-off |
+|------------|-------------|-----------|
+| **Differential Privacy** | Add calibrated noise (ε-DP) to Cₛ before transmission | Utility vs privacy budget |
+| **Bucketed Transmission** | Transmit LOW/MEDIUM/HIGH instead of 0.847 | Loses precision for trend analysis |
+| **Temporal Aggregation** | Send windowed averages (e.g., 5-min windows) | Delayed anomaly detection |
+| **k-Anonymity** | Only transmit when indistinguishable from k-1 others | May delay critical alerts |
+| **Session Unlinkability** | Rotating pseudonyms per session | Cannot track long-term trends |
+
+**Recommended Approach:** Layered defense combining:
+1. ε-differential privacy on raw scores (ε ≈ 1.0)
+2. Temporal aggregation (30-second windows for monitoring, 5-minute for training)
+3. Session pseudonyms with optional user-controlled linking
 
 **Research Dependencies:**
 - TensorFlow Federated or PySyft integration
 - Homomorphic encryption (CKKS scheme) implementation
 - Privacy budget (ε) optimization for neural data
 - Byzantine fault tolerance for distributed training
+- Score fingerprinting attack analysis
 
 **See Also:** `prd.json` epic `epic-federated-ai-training` for detailed implementation plan.
 

@@ -256,6 +256,14 @@
           "title": "Secure Aggregation Server",
           "description": "Central server that combines encrypted gradients without seeing individual updates",
           "status": "not-started"
+        },
+        {
+          "id": "fl-score-anonymization",
+          "title": "Score Anonymization Layer",
+          "description": "Prevent Cₛ fingerprinting via: (1) differential privacy noise injection, (2) bucketed transmission (LOW/MED/HIGH), (3) temporal aggregation windows, (4) session unlinkability with rotating pseudonyms",
+          "status": "not-started",
+          "priority": "critical",
+          "rationale": "Raw Cₛ time-series can fingerprint users even without neural data"
         }
       ],
       "technical_approach": {
@@ -269,8 +277,22 @@
         "How to handle non-IID neural data distributions across users?",
         "What privacy budget (ε) balances utility vs privacy?",
         "How to detect and handle Byzantine/malicious participants?",
-        "Can model updates leak information about neural patterns?"
+        "Can model updates leak information about neural patterns?",
+        "Can Cₛ score time-series be used for user fingerprinting/re-identification?"
       ],
+      "known_vulnerabilities": {
+        "score_fingerprinting": {
+          "description": "Cₛ scores over time may create identifiable patterns unique to each user",
+          "risk": "Re-identification, activity inference, neural fingerprinting",
+          "mitigations": [
+            "Differential privacy on scores (calibrated noise before transmission)",
+            "Bucketed/quantized transmission (e.g., LOW/MEDIUM/HIGH instead of 0.847)",
+            "Temporal aggregation (transmit windowed averages, not individual readings)",
+            "k-anonymity enforcement (only transmit when indistinguishable from k-1 others)",
+            "Session unlinkability (rotating pseudonyms per session)"
+          ]
+        }
+      },
       "references": [
         "McMahan et al. (2017) - Communication-Efficient Learning of Deep Networks from Decentralized Data",
         "Bonawitz et al. (2017) - Practical Secure Aggregation for Privacy-Preserving Machine Learning",
