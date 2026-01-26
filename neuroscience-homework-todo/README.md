@@ -53,31 +53,32 @@ neuroscience-homework-todo/
 │   ├── blender/                        # Blender scene files and renders
 │   └── manim/                          # Manim animation scripts
 │
-├── cerebral-cortex/                    # Outer brain layer (higher functions)
-│   ├── motor-cortex/                   # Movement control (BCI primary target)
-│   ├── sensory-cortex/                 # Touch, proprioception
-│   ├── prefrontal-cortex/              # Executive function, planning
-│   ├── visual-cortex/                  # Vision processing
-│   ├── auditory-cortex/                # Hearing processing
-│   └── parietal-cortex/                # Spatial awareness, integration
-│
-├── cerebellum/                         # Movement coordination, balance
-│
-├── brainstem/                          # Vital functions
-│   ├── medulla/                        # Heart rate, breathing
-│   ├── pons/                           # Sleep, arousal
-│   └── midbrain/                       # Eye movement, hearing
-│
-├── limbic-system/                      # Emotion, memory
-│   ├── amygdala/                       # Fear, emotion processing
-│   ├── hippocampus/                    # Memory formation
-│   └── cingulate-cortex/               # Decision-making, emotion
-│
-├── thalamus/                           # Sensory relay station
-├── hypothalamus/                       # Hormones, homeostasis
-├── basal-ganglia/                      # Movement initiation, habits
-├── corpus-callosum/                    # Hemispheric communication
-└── neural-pathways/                    # Major fiber tracts
+└── brain-regions/                      # Anatomical brain region research
+    ├── cerebral-cortex/                # Outer brain layer (higher functions)
+    │   ├── motor-cortex/               # Movement control (BCI primary target)
+    │   ├── sensory-cortex/             # Touch, proprioception
+    │   ├── prefrontal-cortex/          # Executive function, planning
+    │   ├── visual-cortex/              # Vision processing
+    │   ├── auditory-cortex/            # Hearing processing
+    │   └── parietal-cortex/            # Spatial awareness, integration
+    │
+    ├── cerebellum/                     # Movement coordination, balance
+    │
+    ├── brainstem/                      # Vital functions
+    │   ├── medulla/                    # Heart rate, breathing
+    │   ├── pons/                       # Sleep, arousal
+    │   └── midbrain/                   # Eye movement, hearing
+    │
+    ├── limbic-system/                  # Emotion, memory
+    │   ├── amygdala/                   # Fear, emotion processing
+    │   ├── hippocampus/                # Memory formation
+    │   └── cingulate-cortex/           # Decision-making, emotion
+    │
+    ├── thalamus/                       # Sensory relay station
+    ├── hypothalamus/                   # Hormones, homeostasis
+    ├── basal-ganglia/                  # Movement initiation, habits
+    ├── corpus-callosum/                # Hemispheric communication
+    └── neural-pathways/                # Major fiber tracts
 ```
 
 ---
