@@ -1,6 +1,6 @@
 # Claude AI Instructions for TARA
 
-> **TARA**: Telemetry Analysis and Response Automation
+> **TARA**: Telemetry Analysis & Response Automation
 > Neural Security Platform for Brain-Computer Interfaces
 
 This file provides instructions for Claude to follow when updating, maintaining, or extending TARA. Read this file at the start of any session involving TARA development.

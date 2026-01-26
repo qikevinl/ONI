@@ -1,7 +1,7 @@
 """
 TARA Unified Dashboard
 
-Telemetry Analysis and Response Automation
+Telemetry Analysis & Response Automation
 
 Streamlit-based dashboard combining:
 - Neural network simulation
@@ -306,7 +306,7 @@ def _create_node_network_viz(network: BCINodeNetwork) -> go.Figure:
 def render_dashboard():
     """Render the main dashboard page."""
     st.title("TARA Dashboard")
-    st.caption("*Telemetry Analysis and Response Automation*")
+    st.caption("*Telemetry Analysis & Response Automation*")
 
     # Real-time Signal Monitor at top
     st.subheader("Real-time Signal Monitor")

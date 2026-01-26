@@ -135,7 +135,7 @@ export const script: ScriptLine[] = [
   // Scene 5: TARA Platform (1:50-2:25)
   {
     scene: 'tara',
-    text: "For security professionals, there's TARA—the Threat Assessment and Risk Analysis platform.",
+    text: "For security professionals, there's TARA—the Telemetry Analysis & Response Automation platform.",
     startFrame: 3300,
     endFrame: 3540,
   },

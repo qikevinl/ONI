@@ -1,7 +1,7 @@
 """
 TARA Command Line Interface
 
-Telemetry Analysis and Response Automation
+Telemetry Analysis & Response Automation
 
 Provides CLI access to TARA functionality:
 - Launch web dashboard
@@ -19,7 +19,7 @@ def create_parser() -> argparse.ArgumentParser:
     """Create the argument parser."""
     parser = argparse.ArgumentParser(
         prog="tara",
-        description="TARA - Telemetry Analysis and Response Automation for neural security",
+        description="TARA - Telemetry Analysis & Response Automation for neural security",
         epilog="For more information, visit: https://github.com/qikevinl/ONI",
     )
 

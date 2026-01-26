@@ -1,5 +1,5 @@
 """
-TARA - Telemetry Analysis and Response Automation
+TARA - Telemetry Analysis & Response Automation
 
 A comprehensive neural security platform for brain-computer interfaces.
 Combines neural simulation, attack modeling, and real-time monitoring
@@ -43,7 +43,7 @@ Repository: https://github.com/qikevinl/ONI
 
 __version__ = "0.8.0"
 __author__ = "Kevin L. Qi"
-__name_full__ = "Telemetry Analysis and Response Automation"  # TARA
+__name_full__ = "Telemetry Analysis & Response Automation"  # TARA
 
 # Core security components (from oni-framework)
 from .core import (

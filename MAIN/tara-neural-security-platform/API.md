@@ -1,6 +1,6 @@
 # TARA API Reference
 
-> **TARA v0.8.0** - Telemetry Analysis and Response Automation
+> **TARA v0.8.0** - Telemetry Analysis & Response Automation
 > Neural Security Platform for Brain-Computer Interfaces
 
 ---

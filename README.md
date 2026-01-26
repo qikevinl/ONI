@@ -177,7 +177,7 @@ ONI builds directly on pioneering research from leading institutions in BCI secu
 
 [![PyPI version](https://badge.fury.io/py/oni-tara.svg)](https://badge.fury.io/py/oni-tara)
 
-**TARA** (Telemetry Analysis and Response Automation) is a neural security platform for BCI monitoring, simulation, and attack testing. Named after the Buddhist goddess of protection, TARA provides real-time security analysis aligned with the ONI 14-layer model.
+**TARA** (Telemetry Analysis & Response Automation) is a neural security platform for BCI monitoring, simulation, and attack testing. Named after the Buddhist goddess of protection, TARA provides real-time security analysis aligned with the ONI 14-layer model.
 
 **Features:** Neural network simulation, attack pattern testing, Neural Signal Assurance Monitoring (NSAM), 3D brain topology visualization, and a Streamlit web dashboard.
 
