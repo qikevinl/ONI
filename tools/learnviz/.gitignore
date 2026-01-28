@@ -1,0 +1,21 @@
+# Manim render artifacts
+media/
+
+# Generated output (keep in repo for examples, or exclude)
+# output/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
