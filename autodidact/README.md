@@ -1,8 +1,23 @@
 # Autodidact
 
+> **Status:** ✅ **COMPLETE** (Phase 1 Foundation)
+
 > **Ultimate Goal:** Build a self-directed learning system that adapts to how each individual learns — making complex knowledge accessible through personalized visualizations, pacing, and pathways.
 
 The `autodidact` module is the educational arm of the ONI Framework. It's not just documentation — it's a living system for learning and teaching neurosecurity concepts, built on the principle that **education should adapt to the learner, not the other way around**.
+
+## AI-Powered Learning Pipeline
+
+Autodidact leverages AI and automation to accelerate content creation and personalization:
+
+| Component | AI/Automation Role |
+|-----------|-------------------|
+| **LearnViz** | LLM-powered concept → visualization pipeline |
+| **ONI Academy** | Automated module generation from research notes |
+| **Research Synthesis** | AI-assisted paper summarization and knowledge extraction |
+| **Content Pipeline** | Automated rendering, publishing, and cross-linking |
+
+This isn't AI replacing learning — it's AI **enabling** self-directed learning at scale.
 
 ---
 

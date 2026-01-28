@@ -218,15 +218,19 @@ tara ui
 
 **Full documentation:** [MAIN/tara-nsec-platform/README.md](MAIN/tara-nsec-platform/README.md)
 
-### Autodidact - Educational Ecosystem
+### Autodidact - Educational Ecosystem ✅
+
+> **Status:** Phase 1 Foundation **COMPLETE**
 
 The `autodidact/` directory contains tools for learning and teaching ONI concepts. **Ultimate goal:** Adaptive learning that adjusts to each individual's cognitive patterns, pace, and style.
 
 | Component | Purpose | Status |
 |-----------|---------|--------|
 | **[LearnViz](autodidact/learnviz/)** | Adaptive visualization engine — concept → code → video | v0.1 ✅ |
-| **[ONI Academy](autodidact/oni-academy/)** | Structured curriculum with learning modules | `pip install oni-academy` |
+| **[ONI Academy](autodidact/oni-academy/)** | Structured curriculum with learning modules | `pip install oni-academy` ✅ |
 | **[Neuroscience-BCI](autodidact/neuroscience-bci/)** | Research notes on the biological substrate | Active research |
+
+**AI-Powered Pipeline:** Autodidact leverages AI and automation for content creation — LLM-powered concept→visualization generation, automated module creation from research notes, and AI-assisted knowledge extraction.
 
 **How they align:**
 ```
