@@ -53,8 +53,13 @@ export const TitleScene: React.FC = () => {
   const oniOpacity = appleEase(oniRaw);
   const oniY = interpolate(oniOpacity, [0, 1], [40, 0]);
 
-  // Neural stripe draws from left to right
-  const stripeRaw = interpolate(frame, [180, 280], [0, 1], {
+  // ONI pulsing glow effect - white outline that pulses
+  const pulseSpeed = 0.12;
+  const pulseIntensity = 0.4 + 0.2 * Math.sin(frame * pulseSpeed);
+  const glowSize = 8 + 6 * Math.sin(frame * pulseSpeed);
+
+  // Neural stripe draws from left to right - starts sooner
+  const stripeRaw = interpolate(frame, [100, 200], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
@@ -152,9 +157,10 @@ export const TitleScene: React.FC = () => {
           justifyContent: 'center',
         }}
       >
-        {/* ONI - Bold, warm, confident */}
+        {/* ONI - Bold, warm, confident with pulsing glow */}
         <div
           style={{
+            position: 'relative',
             fontSize: 200,
             fontWeight: 600,
             fontFamily: "'SF Pro Display', -apple-system, 'Helvetica Neue', sans-serif",
@@ -162,9 +168,91 @@ export const TitleScene: React.FC = () => {
             color: '#ffffff',
             opacity: oniOpacity,
             transform: `translateY(${oniY}px)`,
+            textShadow: `
+              0 0 ${glowSize}px rgba(255, 255, 255, ${pulseIntensity}),
+              0 0 ${glowSize * 2}px rgba(255, 255, 255, ${pulseIntensity * 0.6}),
+              0 0 ${glowSize * 3}px rgba(200, 220, 255, ${pulseIntensity * 0.4}),
+              0 0 ${glowSize * 5}px rgba(150, 200, 255, ${pulseIntensity * 0.2})
+            `,
           }}
         >
           ONI
+          {/* Electron with comet trail - 3D orbit around ONI */}
+          {(() => {
+            const orbitSpeed = 0.06;
+            const orbitRadiusX = 320;
+            const orbitRadiusZ = 150;
+            const orbitRadiusY = 20;
+
+            // Trail: array of past positions
+            const trailLength = 12;
+            const trailElements = [];
+
+            for (let i = trailLength; i >= 0; i--) {
+              const trailDelay = i * 0.08;
+              const t = frame * orbitSpeed - trailDelay;
+
+              const electronX = Math.sin(t) * orbitRadiusX;
+              const electronZ = Math.cos(t) * orbitRadiusZ;
+              const electronY = Math.sin(t * 2) * orbitRadiusY;
+
+              const isBehind = electronZ < 0;
+              const depthScale = 0.6 + 0.4 * ((electronZ + orbitRadiusZ) / (orbitRadiusZ * 2));
+              const depthOpacity = 0.4 + 0.6 * ((electronZ + orbitRadiusZ) / (orbitRadiusZ * 2));
+
+              // Trail fades out
+              const trailFade = 1 - (i / trailLength);
+              const trailScale = trailFade * 0.8 + 0.2;
+
+              // Pulsing glow for main electron
+              const isMain = i === 0;
+              const glowPulse = isMain ? 0.7 + 0.3 * Math.sin(frame * 0.15) : 0.5;
+              const sizePulse = isMain ? 12 + 4 * Math.sin(frame * 0.12) : 6 * trailScale;
+
+              const opacity = oniOpacity * depthOpacity * trailFade * (isMain ? 1 : 0.6);
+
+              trailElements.push(
+                <div
+                  key={i}
+                  style={{
+                    position: 'absolute',
+                    left: '50%',
+                    top: '50%',
+                    width: sizePulse * depthScale * trailScale,
+                    height: sizePulse * depthScale * trailScale,
+                    borderRadius: '50%',
+                    background: isMain
+                      ? `radial-gradient(circle at 30% 30%,
+                          rgba(180, 240, 255, 1) 0%,
+                          rgba(100, 200, 255, 0.95) 20%,
+                          rgba(50, 160, 255, 0.9) 50%,
+                          rgba(20, 120, 255, 0.7) 100%
+                        )`
+                      : `radial-gradient(circle,
+                          rgba(100, 180, 255, ${0.8 * trailFade}) 0%,
+                          rgba(60, 140, 255, ${0.4 * trailFade}) 50%,
+                          transparent 100%
+                        )`,
+                    transform: `translate(${electronX}px, ${electronY}px) scale(${depthScale})`,
+                    opacity: opacity,
+                    zIndex: isBehind ? -1 : 1,
+                    boxShadow: isMain
+                      ? `
+                        0 0 ${8 * glowPulse * depthScale}px rgba(150, 220, 255, 1),
+                        0 0 ${16 * glowPulse * depthScale}px rgba(100, 200, 255, 0.9),
+                        0 0 ${32 * glowPulse * depthScale}px rgba(70, 170, 255, 0.7),
+                        0 0 ${50 * glowPulse * depthScale}px rgba(50, 150, 255, 0.5),
+                        0 0 ${80 * glowPulse * depthScale}px rgba(30, 130, 255, 0.3)
+                      `
+                      : `0 0 ${8 * trailFade * depthScale}px rgba(80, 160, 255, ${0.5 * trailFade})`,
+                    filter: `blur(${isBehind ? 1.5 : 0}px)`,
+                  }}
+                />
+              );
+            }
+
+            return <>{trailElements}</>;
+          })()}
         </div>
 
         {/* Neural stripe - the signature */}
