@@ -1,8 +1,13 @@
 # Manim render artifacts
 media/
 
-# Generated output (keep in repo for examples, or exclude)
-# output/
+# Generated output (large files, regenerate as needed)
+output/*.mp4
+output/*.mp3
+output/*.json
+output/*.txt
+output/*_narration.*
+output/*_narrated.*
 
 # Python
 __pycache__/
