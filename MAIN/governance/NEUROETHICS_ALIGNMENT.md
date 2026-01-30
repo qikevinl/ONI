@@ -2,8 +2,8 @@
 
 > How the ONI Framework addresses core principles of neuroethics and cognitive liberty.
 
-**Last Updated:** 2026-01-24
-**Version:** 1.1
+**Last Updated:** 2026-01-30
+**Version:** 1.2
 
 ---
 
@@ -52,7 +52,9 @@ The framework provides security without requiring surveillance. Signal integrity
 
 ## Core Neuroethics Principles
 
-The following principles are widely recognized in neuroethics literature (Ienca & Andorno, 2017; Yuste et al., 2017; UNESCO, 2021):
+The following principles are widely recognized in neuroethics literature (Ienca & Andorno, 2017; Yuste et al., 2017; UNESCO IBC, 2021; UNESCO Recommendation on the Ethics of Neurotechnology, 2025):
+
+> **See also:** [UNESCO_ALIGNMENT.md](UNESCO_ALIGNMENT.md) — comprehensive mapping of ONI to all three pillars of the UNESCO Recommendation on the Ethics of Neurotechnology (2025), the first global normative framework adopted by 194 Member States.
 
 | Principle | Definition | Threat Without Protection |
 |-----------|------------|---------------------------|
@@ -276,10 +278,13 @@ For populations requiring additional protections, see:
 
 | Framework | ONI Alignment |
 |-----------|---------------|
-| **UNESCO Recommendation on Neuroethics (2021)** | Cognitive liberty, mental privacy, mental integrity explicitly addressed |
+| **UNESCO Recommendation on Ethics of Neurotechnology (2025)** | **15 of 17 elements fully implemented** — see [UNESCO_ALIGNMENT.md](UNESCO_ALIGNMENT.md) for complete mapping |
+| **UNESCO IBC Report on Ethical Issues of Neurotechnology (2021)** | All five ethical challenges addressed: mental integrity, psychological continuity, autonomy, mental privacy, accessibility |
 | **EU AI Act (2024)** | High-risk AI system transparency requirements met via documentation |
 | **FDA Neural Device Guidance (2023)** | Security-by-design principles implemented |
 | **IEEE Neuroethics Framework (2020)** | Human agency and oversight emphasized |
+| **OECD Responsible Innovation in Neurotechnology (2019)** | Accountability, transparency, safety, and public engagement |
+| **Chile Constitutional Neurorights Amendment (2021)** | Brain data protection precedent; regulatory compliance maps this framework |
 
 ---
 
@@ -300,7 +305,11 @@ Ienca, M., & Andorno, R. (2017). Towards new human rights in the age of neurosci
 
 Yuste, R., Goering, S., Arcas, B. A. Y., et al. (2017). Four ethical priorities for neurotechnologies and AI. *Nature*, 551(7679), 159-163.
 
-UNESCO. (2021). *Recommendation on the Ethics of Artificial Intelligence*.
+UNESCO. (2025). *Recommendation on the Ethics of Neurotechnology*. Adopted at the 43rd session of the General Conference. https://www.unesco.org/en/ethics-neurotech/recommendation
+
+UNESCO. (2021). *Ethical Issues of Neurotechnology*. International Bioethics Committee (IBC). https://unesdoc.unesco.org/ark:/48223/pf0000378724
+
+OECD. (2019). *Recommendation on Responsible Innovation in Neurotechnology*. https://legalinstruments.oecd.org/api/print?ids=658&Lang=en
 
 Lázaro-Muñoz, G., Pham, M. T., Muñoz, K. A., et al. (2020). Researcher Perspectives on Ethical Considerations in Adaptive Deep Brain Stimulation Trials. *Frontiers in Human Neuroscience*, 14, 578695. https://doi.org/10.3389/fnhum.2020.578695
 
@@ -310,4 +319,4 @@ Muñoz, K. A., Blumenthal-Barby, J., Storch, E. A., Torgerson, L., & Lázaro-Mu�
 
 ---
 
-← Back to [INDEX.md](../INDEX.md) | [TRANSPARENCY.md](TRANSPARENCY.md)
+← Back to [INDEX.md](../INDEX.md) | [UNESCO_ALIGNMENT.md](UNESCO_ALIGNMENT.md) | [TRANSPARENCY.md](TRANSPARENCY.md)
