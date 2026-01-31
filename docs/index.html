@@ -375,6 +375,7 @@
             padding: 8rem 0;
             position: relative;
             z-index: 1;
+            opacity: 0.5;
             background: linear-gradient(180deg,
                 rgba(5, 10, 20, 0) 0%,
                 rgba(5, 10, 20, 1) 15%,
@@ -449,18 +450,19 @@
         #scene-framework {
             position: relative;
             z-index: 1;
-            background: var(--bg-deep);
+            background: transparent;
         }
 
         .framework-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            position: relative;
             min-height: 100vh;
         }
 
         .framework-text-track {
+            position: relative;
+            z-index: 2;
             padding: 6rem 0;
+            pointer-events: none;
         }
 
         .framework-panel {
@@ -468,7 +470,23 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 2rem 0;
+            padding: 1.5rem 2rem;
+            max-width: 480px;
+            pointer-events: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            background: rgba(5, 10, 20, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(30, 41, 59, 0.4);
+            border-radius: 16px;
+            margin-bottom: 1rem;
+        }
+
+        .framework-panel.panel-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .framework-panel.layer-panel {
@@ -476,11 +494,17 @@
         }
 
         .framework-panel.layer-panel[data-layer="L8"] {
-            min-height: 55vh;
+            min-height: 50vh;
         }
 
         .framework-panel.closing-panel {
             min-height: 50vh;
+            background: rgba(5, 10, 20, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(30, 41, 59, 0.4);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
         }
 
         .framework-panel h3 {
@@ -595,12 +619,7 @@
         .framework-link:hover { gap: 0.75rem; }
 
         .framework-3d-pin {
-            position: sticky;
-            top: 80px;
-            height: calc(100vh - 100px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: none; /* 3D handled by the fixed three-canvas behind framework section */
         }
 
         #framework-stack-canvas {
@@ -1163,14 +1182,9 @@
            RESPONSIVE
            ============================================ */
         @media (max-width: 1024px) {
-            .framework-container {
-                grid-template-columns: 1fr;
-            }
-            .framework-3d-pin {
-                position: relative;
-                top: auto;
-                height: 60vh;
-                order: -1;
+            .framework-panel.layer-panel,
+            .framework-panel.closing-panel {
+                max-width: 100%;
             }
         }
 
@@ -2383,6 +2397,21 @@
                 layerIdToShellIndex[layer.id] = idx;
             });
 
+            // Show/hide all framework panels as they scroll into view
+            var allFrameworkPanels = document.querySelectorAll('.framework-panel');
+            allFrameworkPanels.forEach(function(panel) {
+                ScrollTrigger.create({
+                    trigger: panel,
+                    start: 'top 75%',
+                    end: 'bottom 25%',
+                    onEnter: function() { panel.classList.add('panel-visible'); },
+                    onLeave: function() { panel.classList.remove('panel-visible'); },
+                    onEnterBack: function() { panel.classList.add('panel-visible'); },
+                    onLeaveBack: function() { panel.classList.remove('panel-visible'); }
+                });
+            });
+
+            // Track active layer for 3D glow
             layerPanels.forEach(function(panel) {
                 ScrollTrigger.create({
                     trigger: panel,
@@ -2468,20 +2497,24 @@
                     // Compute grow/snap target for this shell
                     var scaleTarget = 1.0;
                     var targetOpacity;
+                    var targetFresnel = 1.0; // Fresnel power multiplier for glow
 
                     if (i === activeLayerIndex) {
-                        // Active layer: grow
+                        // Active layer: grow + intense glow
                         scaleTarget = isGW ? 1.8 : 1.4;
-                        targetOpacity = isGW ? 0.95 : 0.8;
+                        targetOpacity = isGW ? 1.0 : 0.95;
+                        targetFresnel = 0.4; // Lower = more glow coverage
                     } else if (activeLayerIndex === -1) {
                         // No specific layer active (overview/closing) — use zone matching
                         var zoneMatch = (activeZone === 'all') || (activeZone === layer.zone);
                         scaleTarget = 1.0;
                         targetOpacity = zoneMatch ? (isGW ? 0.85 : 0.55) : (isGW ? 0.3 : 0.15);
+                        targetFresnel = 1.0;
                     } else {
-                        // Different layer is active: dim
+                        // Different layer is active: dim significantly
                         scaleTarget = 1.0;
-                        targetOpacity = isGW ? 0.25 : 0.12;
+                        targetOpacity = isGW ? 0.15 : 0.08;
+                        targetFresnel = 1.5; // Higher = less glow, more dim
                     }
 
                     // Lerp scale multiplier (slower grow, quicker snap-back)
@@ -2516,9 +2549,11 @@
                         mesh.scale.set(scaleXZ, scaleY, scaleXZ);
                         mesh.position.y = targetY * mp;
 
-                        // Opacity lerp
+                        // Opacity + Fresnel glow lerp
                         shellUniforms[i].uOpacity.value +=
                             (targetOpacity - shellUniforms[i].uOpacity.value) * 0.05;
+                        shellUniforms[i].uFresnelPower.value +=
+                            (targetFresnel - shellUniforms[i].uFresnelPower.value) * 0.05;
                     }
                 });
 
