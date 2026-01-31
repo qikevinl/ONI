@@ -263,7 +263,7 @@
             z-index: 2;
             text-align: center;
             max-width: 900px;
-            padding: 13vh 2rem 0;
+            padding: 12vh 2rem 0;
         }
 
         .hero-mission {
@@ -2596,26 +2596,21 @@
                 }
             }, { passive: true });
 
-            // TODO: Arrow key easter egg (future implementation)
-            // When user presses ArrowDown or ArrowUp at the top of the page:
-            //   - Each press shifts L14 through the visible spectrum (same as spring pull)
-            //   - After a few presses, show a message: "Come back for another easter egg and more surprises!"
-            //   - Could reuse the #easter-egg-overlay with custom text
-            //   - ArrowDown = advance spectrum forward, ArrowUp = advance spectrum backward
-            //   - Track arrow presses separately from scroll spring (e.g. arrowSpectrumPos 0→1)
-
             // Spring coil: scroll-up at top of page compresses L14→L8 downward
             // Like a tension spring — L14 moves most, L9 barely, L8 anchored
             var springCompress = 0; // 0 = normal, 1 = fully compressed
             var springTarget = 0;
             window.addEventListener('wheel', function(e) {
-                if (window.scrollY < 10 && e.deltaY < 0 && introProgress.value > 0.9) {
+                if (window.scrollY < 5 && e.deltaY < 0 && introProgress.value > 0.9) {
                     // Scrolling up at top of page — compress spring
-                    springTarget = Math.min(1, springTarget + Math.abs(e.deltaY) * 0.008);
+                    springTarget = Math.min(1, springTarget + Math.abs(e.deltaY) * 0.003);
                 } else if (e.deltaY > 0) {
                     // Scrolling down — release spring
-                    springTarget = Math.max(0, springTarget - Math.abs(e.deltaY) * 0.006);
+                    springTarget = Math.max(0, springTarget - Math.abs(e.deltaY) * 0.005);
                 }
+            }, { passive: true });
+            window.addEventListener('touchmove', function(e) {
+                // Touch: handled by tracking deltaY from touchstart
             }, { passive: true });
             // Touch support for spring
             var touchStartY = 0;
@@ -2625,10 +2620,10 @@
             window.addEventListener('touchmove', function(e) {
                 var dy = e.touches[0].clientY - touchStartY;
                 touchStartY = e.touches[0].clientY;
-                if (window.scrollY < 10 && dy > 0 && introProgress.value > 0.9) {
-                    springTarget = Math.min(1, springTarget + dy * 0.008);
+                if (window.scrollY < 5 && dy > 0 && introProgress.value > 0.9) {
+                    springTarget = Math.min(1, springTarget + dy * 0.005);
                 } else if (dy < 0) {
-                    springTarget = Math.max(0, springTarget + dy * 0.006);
+                    springTarget = Math.max(0, springTarget + dy * 0.005);
                 }
             }, { passive: true });
 
@@ -2663,14 +2658,14 @@
                 ease: 'none'
             });
 
-            // Foundations transition: layers face camera, then canvas fades
-            var closingShrink = { value: 0 }; // 0 = stack discs, 1 = 2D circles + shrunk
+            // v3-style: fade + shrink the 3D canvas as Research section scrolls up
+            var closingShrink = { value: 0 }; // 0 = full size, 1 = shrunk away
             gsap.to(closingShrink, {
                 value: 1,
                 scrollTrigger: {
                     trigger: '#scene-proof',
-                    start: 'top 95%',
-                    end: 'top 40%',
+                    start: 'top 90%',
+                    end: 'top 30%',
                     scrub: 1
                 },
                 ease: 'none'
@@ -2678,8 +2673,8 @@
             gsap.to(threeContainer, {
                 scrollTrigger: {
                     trigger: '#scene-proof',
-                    start: 'top 55%',
-                    end: 'top 20%',
+                    start: 'top 80%',
+                    end: 'top 40%',
                     scrub: 1
                 },
                 opacity: 0
@@ -2985,9 +2980,9 @@
 
                 // Spring coil: lerp toward target with damped spring feel
                 // Auto-release: spring slowly returns to 0 when not actively scrolling up
-                if (springTarget > 0 && window.scrollY >= 10) springTarget = 0;
+                if (springTarget > 0 && window.scrollY >= 5) springTarget = 0;
                 // Slower decay when easter egg is active so user can hold the cone
-                var springDecay = easterEggActive ? 0.997 : 0.992;
+                var springDecay = easterEggActive ? 0.995 : 0.98;
                 springTarget *= springDecay;
                 springCompress += (springTarget - springCompress) * 0.08; // damped lerp
 
@@ -3170,14 +3165,8 @@
                         targetFace = Math.max(targetFace, introTilt);
                     }
 
-                    // Foundations scroll: layers tilt to face camera as 2D circles
-                    var foundationsFace = closingShrink.value;
-                    if (foundationsFace > 0.01) {
-                        targetFace = Math.max(targetFace, foundationsFace);
-                    }
-
-                    // Phase 3: Face-camera tilt — gates on Z being >50% done (or intro/foundations tilt)
-                    var faceGate = (introTilt > 0 || foundationsFace > 0.01) ? 1.0 : Math.max(0, (zProgress - 0.5) / 0.5);
+                    // Phase 3: Face-camera tilt — gates on Z being >50% done (or intro tilt)
+                    var faceGate = (introTilt > 0) ? 1.0 : Math.max(0, (zProgress - 0.5) / 0.5);
                     var gatedFace = targetFace * faceGate;
                     var faceLerpIn = 0.12;
                     var faceLerp = (gatedFace > shellFaceCamera[i]) ? faceLerpIn : 0.15;
@@ -3274,29 +3263,15 @@
                         mesh.position.y = baseY + shellYOffsets[i];
                         mesh.position.z = shellZOffsets[i];
 
-                        // L14 visible spectrum: maps spring pull distance to full spectrum
-                        // 0% = Violet (380nm, resting purple) → Red (700nm, fully compressed)
-                        // Ratio: color position = pull distance / max pull distance
-                        if (i === totalLayers - 1) {
-                            var s = springCompress; // 0→1 maps to violet→red (380nm→700nm)
-                            // 7 stops across the visible spectrum
-                            var spectrum = [
-                                [0.580, 0.300, 0.950],  // 0.000 — Violet  (~380nm)
-                                [0.220, 0.340, 0.980],  // 0.167 — Blue    (~470nm)
-                                [0.150, 0.800, 0.920],  // 0.333 — Cyan    (~490nm)
-                                [0.200, 0.900, 0.350],  // 0.500 — Green   (~530nm)
-                                [0.950, 0.920, 0.200],  // 0.667 — Yellow  (~570nm)
-                                [0.960, 0.550, 0.120],  // 0.833 — Orange  (~600nm)
-                                [0.950, 0.180, 0.150]   // 1.000 — Red     (~700nm)
-                            ];
-                            var seg = s * 6; // 6 segments between 7 stops
-                            var idx = Math.min(5, Math.floor(seg));
-                            var frac = seg - idx;
-                            var c0 = spectrum[idx], c1 = spectrum[idx + 1];
+                        // L14 color shift: purple → red as spring compresses
+                        if (i === totalLayers - 1 && springCompress > 0.01) {
+                            var l14Purple = [0.620, 0.380, 0.920]; // initial
+                            var l14Red = [0.920, 0.200, 0.250];    // compressed
+                            var blend14 = Math.min(1, springCompress * 1.2); // reaches red before full compress
                             shellUniforms[i].uColor.value.set(
-                                c0[0] + (c1[0] - c0[0]) * frac,
-                                c0[1] + (c1[1] - c0[1]) * frac,
-                                c0[2] + (c1[2] - c0[2]) * frac
+                                l14Purple[0] + (l14Red[0] - l14Purple[0]) * blend14,
+                                l14Purple[1] + (l14Red[1] - l14Purple[1]) * blend14,
+                                l14Purple[2] + (l14Red[2] - l14Purple[2]) * blend14
                             );
                         }
 
@@ -3489,8 +3464,8 @@
                 // Stack-fit scale: shrink the stack so all 14 layers fit in viewport
                 // Use effectiveMorph so it applies during both intro and scroll
                 var stackFitScale = 1 - effectiveMorph * 0.22;
-                // ONI shrink: scale down AFTER face-tilt is mostly done (delayed start)
-                var shrinkVal = Math.max(0, (closingShrink.value - 0.5) / 0.5); // 0 until 50% tilt, then ramps to 1
+                // ONI shrink: further scale down as Foundations section scrolls up
+                var shrinkVal = closingShrink.value;
                 var closingShrinkScale = 1 - shrinkVal * 0.6; // 1.0 → 0.4
                 var finalGroupScale = stackFitScale * closingShrinkScale;
                 autoRotateGroup.scale.setScalar(finalGroupScale);
