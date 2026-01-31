@@ -1313,12 +1313,12 @@
     <canvas id="hyperspeed-canvas"></canvas>
     <nav>
         <div class="nav-inner">
-            <a href="#" class="nav-logo" id="nav-logo-text">ONI</a>
+            <a href="#" class="nav-logo">ONI Neurosecurity Standards for BCIs</a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#install" data-section="install">Framework</a></li>
                 <li><a href="#explore" data-section="explore">Explore</a></li>
                 <li><a href="#research-statement" data-section="research-statement">Research</a></li>
-                <li><a href="documentation/">Docs</a></li>
+                <li><a href="#ecosystem" data-section="ecosystem">Docs</a></li>
                 <li><a href="https://github.com/qikevinl/ONI" style="display:inline-flex;align-items:center;">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
                 </a></li>
@@ -1770,327 +1770,190 @@
     </section>
 
 
-    <!-- Mission Section (loads from brand.json) -->
-    <section class="section" id="mission" style="background: var(--bg-secondary); margin: 0; max-width: 100%; padding: 5rem 2rem;">
-        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-            <div class="section-header">
-                <h2>Mission</h2>
-            </div>
-            <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)); border-left: 3px solid var(--accent-blue); padding: 1.5rem 2rem; border-radius: 0 12px 12px 0; text-align: left;">
-                <p id="mission-text" style="font-size: 1.15rem; color: var(--text-primary); font-weight: 500; line-height: 1.6; margin: 0;">The power of mind is our frontier. We're making sure it's protected from day one with a universal, open standard that leaves no brain behind. Because important connections <span class="text-reveal">deserve the most thought.</span></p>
-            </div>
-        </div>
-    </section>
+    <!-- Research Section (merges Mission, Vision/Roadmap, Research Statement) -->
 
-    <!-- Vision / Roadmap Section -->
-    <section class="section" id="vision" style="background: var(--bg-secondary); margin: 0; max-width: 100%; padding: 5rem 2rem;">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <div class="section-header">
-                <h2>Vision & Roadmap</h2>
-                <p>Where we're going</p>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;">
-                <!-- Vision -->
-                <div>
-                    <h3 style="color: var(--accent-blue); margin-bottom: 1rem; font-size: 1.1rem;">THE VISION</h3>
-                    <p id="vision-text" style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">
-                        A world where brain-computer interfaces are as secure as they are powerful.
-                        Where neural data is protected by law and by design. Where the boundary
-                        between mind and machine is guarded by open standards, with security and privacy built in from inception.
-                    </p>
-                    <p id="vision-goal" style="color: var(--text-primary); font-weight: 500;">
-                        ONI takes a technical implementation approach — grounding neurosecurity in
-                        current science, using the framework to identify what's missing, and applying
-                        math and first principles to develop what comes next.
-                    </p>
-                </div>
-
-                <!-- Roadmap -->
-                <div>
-                    <h3 style="color: var(--accent-purple); margin-bottom: 1rem; font-size: 1.1rem;">ROADMAP</h3>
-                    <div style="border-left: 2px solid var(--border); padding-left: 1.5rem;">
-                        <div style="margin-bottom: 1.25rem; position: relative;">
-                            <div style="position: absolute; left: -1.85rem; top: 0.25rem; width: 10px; height: 10px; background: var(--accent-emerald); border-radius: 50%;"></div>
-                            <div style="color: var(--accent-emerald); font-size: 0.8rem; font-weight: 600;">COMPLETE</div>
-                            <div style="color: var(--text-primary);">14-layer neuroethics framework, 10 governance documents, UNESCO alignment (15/17), regulatory mapping, Coherence Metric, mathematical self-audit, 20+ publications</div>
-                        </div>
-                        <div style="margin-bottom: 1.25rem; position: relative;">
-                            <div style="position: absolute; left: -1.85rem; top: 0.25rem; width: 10px; height: 10px; background: var(--accent-amber); border-radius: 50%;"></div>
-                            <div style="color: var(--accent-amber); font-size: 0.8rem; font-weight: 600;">IN PROGRESS</div>
-                            <div style="color: var(--text-primary);">Academic collaboration, neuroethics peer review, PhD research pursuit</div>
-                        </div>
-                        <div style="margin-bottom: 1.25rem; position: relative;">
-                            <div style="position: absolute; left: -1.85rem; top: 0.25rem; width: 10px; height: 10px; background: var(--border); border-radius: 50%;"></div>
-                            <div style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600;">PLANNED</div>
-                            <div style="color: var(--text-secondary);">Institutional partnerships, empirical validation with neuroscience labs, standards proposals</div>
-                        </div>
-                        <div style="position: relative;">
-                            <div style="position: absolute; left: -1.85rem; top: 0.25rem; width: 10px; height: 10px; background: var(--border); border-radius: 50%;"></div>
-                            <div style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600;">FUTURE</div>
-                            <div style="color: var(--text-secondary);">Clinical trial integration, hardware validation, international adoption</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Research Statement Section -->
-    <section class="section" id="research-statement" style="padding: 5rem 2rem;">
+    <section class="section" id="research-statement" style="padding: 4rem 2rem;">
         <div style="max-width: 900px; margin: 0 auto;">
             <div class="section-header" data-aos="fade-up">
-                <h2>Research Statement</h2>
-                <p>Core mission, direction, and what comes next</p>
+                <h2>Research</h2>
+                <p>An honest account of what ONI is, what it isn't, and where it's going</p>
             </div>
-            <div data-aos="fade-up" data-aos-delay="200" style="line-height: 1.8; color: var(--text-secondary);">
-                <h3 style="color: var(--accent-cyan); margin-bottom: 1rem; font-size: 1.1rem;">CORE MISSION</h3>
-                <p style="margin-bottom: 1.5rem;">Brain-computer interfaces are here — and the field lacks a universal security standard. I am building that standard, grounded in neuroethics, informed by neuroscience, and enforced through engineering. My research sits at the intersection of neurosecurity, neuroethics, and neural engineering.</p>
 
-                <h3 style="color: var(--accent-cyan); margin-bottom: 1rem; font-size: 1.1rem;">THE FRAMEWORK</h3>
-                <p style="margin-bottom: 1.5rem;">ONI extends the OSI networking model with 7 additional layers for neural and cognitive systems. It provides a shared vocabulary for neurosecurity across disciplines, technical enforcement of neurorights (cognitive liberty, mental privacy, mental integrity, psychological continuity), and governance frameworks aligned with UNESCO, FDA, and emerging neurorights legislation. <a href="whitepaper/" style="color: var(--accent-cyan);">Read the whitepaper</a> for the full technical overview.</p>
+            <div data-aos="fade-up" data-aos-delay="100" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)); border-left: 3px solid var(--accent-blue); padding: 1.25rem 1.5rem; border-radius: 0 12px 12px 0; margin-bottom: 2rem;">
+                <p id="mission-text" style="font-size: 1.05rem; color: var(--text-primary); font-weight: 500; line-height: 1.6; margin: 0;">The power of mind is our frontier. We're making sure it's protected from day one with a universal, open standard that leaves no brain behind.</p>
+            </div>
 
-                <h3 style="color: var(--accent-cyan); margin-bottom: 1rem; font-size: 1.1rem;">WHAT I'VE BUILT</h3>
-                <ul style="margin-bottom: 1.5rem; padding-left: 1.5rem;">
-                    <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-primary);">14-layer security model</strong> bridging networking and neuroscience</li>
-                    <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-primary);">10 governance documents</strong> including neuroethics alignment, UNESCO alignment (15/17 elements), informed consent, pediatric considerations, and regulatory compliance</li>
-                    <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-primary);">Coherence Metric (Cₛ)</strong> — entropy-based signal validation with self-published <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/publications/mathematical-foundations/TechDoc-Mathematical_Audit.md" style="color: var(--accent-cyan);">mathematical audit</a></li>
-                    <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-primary);">TARA prototype</strong> — proof-of-concept translating ONI's math into coherence scoring, a rule-based neural firewall, and defensive validation (foundational — future development requires research collaboration)</li>
-                    <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-primary);">20+ publications</strong> — technical documents and blog posts across 8 research areas</li>
-                    <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-primary);">Full transparency audit</strong> — human-AI collaboration methodology documented</li>
-                </ul>
+            <div data-aos="fade-up" data-aos-delay="200" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <details class="oni-details" open>
+                    <summary>Core Mission</summary>
+                    <div class="details-content" style="color: var(--text-secondary); line-height: 1.8;">
+                        <p>Brain-computer interfaces are here — and the field lacks a universal security standard. I am building that standard, grounded in neuroethics, informed by neuroscience, and enforced through engineering. My research sits at the intersection of neurosecurity, neuroethics, and neural engineering.</p>
+                    </div>
+                </details>
 
-                <h3 style="color: var(--accent-cyan); margin-bottom: 1rem; font-size: 1.1rem;">RESEARCH DIRECTION</h3>
-                <p style="margin-bottom: 0.75rem;">Key questions I want to pursue:</p>
-                <ol style="margin-bottom: 1.5rem; padding-left: 1.5rem;">
-                    <li style="margin-bottom: 0.5rem;">How do we translate neurorights into testable technical controls?</li>
-                    <li style="margin-bottom: 0.5rem;">What does informed consent look like for closed-loop BCIs that modify neural activity?</li>
-                    <li style="margin-bottom: 0.5rem;">How do we build security standards proactively — before exploits emerge?</li>
-                </ol>
+                <details class="oni-details">
+                    <summary>The Framework</summary>
+                    <div class="details-content" style="color: var(--text-secondary); line-height: 1.8;">
+                        <p>ONI extends the OSI networking model with 7 additional layers for neural and cognitive systems. It provides a shared vocabulary for neurosecurity across disciplines, technical enforcement of neurorights (cognitive liberty, mental privacy, mental integrity, psychological continuity), and governance frameworks aligned with UNESCO, FDA, and emerging neurorights legislation. <a href="whitepaper/" style="color: var(--accent-cyan);">Read the whitepaper</a> for the full technical overview.</p>
+                    </div>
+                </details>
 
-                <h3 style="color: var(--accent-cyan); margin-bottom: 1rem; font-size: 1.1rem;">WHAT I'M LOOKING FOR</h3>
-                <p style="margin-bottom: 1.5rem;">Academic mentorship and collaboration. Peer review of the ONI framework's assumptions. Integration with empirical neuroscience research. Guidance on bridging independent research into institutional work.</p>
+                <details class="oni-details">
+                    <summary>What I've Built</summary>
+                    <div class="details-content" style="color: var(--text-secondary); line-height: 1.8;">
+                        <ul style="padding-left: 1.5rem;">
+                            <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-primary);">14-layer security model</strong> bridging networking and neuroscience</li>
+                            <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-primary);">10 governance documents</strong> — neuroethics alignment, UNESCO (15/17), informed consent, pediatric, regulatory compliance</li>
+                            <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-primary);">Coherence Metric (Cₛ)</strong> — entropy-based signal validation with <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/publications/mathematical-foundations/TechDoc-Mathematical_Audit.md" style="color: var(--accent-cyan);">mathematical audit</a></li>
+                            <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-primary);">TARA prototype</strong> — coherence scoring, rule-based neural firewall, defensive validation</li>
+                            <li style="margin-bottom: 0.5rem;"><strong style="color: var(--text-primary);">20+ publications</strong> across 8 research areas</li>
+                        </ul>
+                    </div>
+                </details>
 
-                <h3 style="color: var(--accent-cyan); margin-bottom: 1rem; font-size: 1.1rem;">A NOTE ON TERMINOLOGY</h3>
-                <p style="margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text-muted);">Foundational research in this space — Kohno (2009), Bonaci (2015), and others — established the term <em>"BCI security."</em> ONI honors that terminology when referencing their work. Moving forward, ONI uses <strong style="color: var(--text-secondary);">neurosecurity</strong> as the broader discipline name. "BCI security" is anchored to today's hardware — electrodes, implants, computers. But the threats ONI models (cognitive manipulation, identity fragmentation, semantic interference at L11–L14) aren't limited to computer interfaces. Future interfaces may be biological, chemical, optical, or technologies that don't exist yet. <em>Neurosecurity</em> protects the neural system itself, regardless of what interfaces with it.</p>
+                <details class="oni-details">
+                    <summary>Research Direction & Roadmap</summary>
+                    <div class="details-content" style="color: var(--text-secondary); line-height: 1.8;">
+                        <p style="margin-bottom: 1rem;">Key questions I want to pursue:</p>
+                        <ol style="padding-left: 1.5rem; margin-bottom: 1.5rem;">
+                            <li style="margin-bottom: 0.5rem;">How do we translate neurorights into testable technical controls?</li>
+                            <li style="margin-bottom: 0.5rem;">What does informed consent look like for closed-loop BCIs that modify neural activity?</li>
+                            <li style="margin-bottom: 0.5rem;">How do we build security standards proactively — before exploits emerge?</li>
+                        </ol>
+                        <div style="border-left: 2px solid var(--border); padding-left: 1.5rem; margin-top: 1rem;">
+                            <div style="margin-bottom: 1rem; position: relative;">
+                                <div style="position: absolute; left: -1.85rem; top: 0.25rem; width: 10px; height: 10px; background: var(--accent-emerald); border-radius: 50%;"></div>
+                                <div style="color: var(--accent-emerald); font-size: 0.8rem; font-weight: 600;">COMPLETE</div>
+                                <div style="color: var(--text-primary); font-size: 0.9rem;">14-layer framework, 10 governance docs, UNESCO (15/17), Coherence Metric, 20+ publications</div>
+                            </div>
+                            <div style="margin-bottom: 1rem; position: relative;">
+                                <div style="position: absolute; left: -1.85rem; top: 0.25rem; width: 10px; height: 10px; background: var(--accent-amber); border-radius: 50%;"></div>
+                                <div style="color: var(--accent-amber); font-size: 0.8rem; font-weight: 600;">IN PROGRESS</div>
+                                <div style="color: var(--text-primary); font-size: 0.9rem;">Academic collaboration, neuroethics peer review, PhD research pursuit</div>
+                            </div>
+                            <div style="position: relative;">
+                                <div style="position: absolute; left: -1.85rem; top: 0.25rem; width: 10px; height: 10px; background: var(--border); border-radius: 50%;"></div>
+                                <div style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600;">PLANNED</div>
+                                <div style="color: var(--text-secondary); font-size: 0.9rem;">Institutional partnerships, empirical validation, clinical trial integration</div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
 
-                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <a href="https://github.com/qikevinl/ONI/blob/main/ABOUT.md" class="btn btn-secondary" style="font-size: 0.9rem;">Read the Full Story</a>
-                    <a href="whitepaper/" class="btn btn-secondary" style="font-size: 0.9rem;">Read the Whitepaper</a>
-                    <a href="https://github.com/qikevinl/ONI/tree/main/MAIN/governance" class="btn btn-secondary" style="font-size: 0.9rem;">View Governance Documents</a>
-                </div>
+                <details class="oni-details">
+                    <summary>What I'm Looking For</summary>
+                    <div class="details-content" style="color: var(--text-secondary); line-height: 1.8;">
+                        <p>Academic mentorship and collaboration. Peer review of the ONI framework's assumptions. Integration with empirical neuroscience research. Guidance on bridging independent research into institutional work.</p>
+                    </div>
+                </details>
+
+                <details class="oni-details">
+                    <summary>A Note on Terminology</summary>
+                    <div class="details-content" style="color: var(--text-muted); line-height: 1.8; font-size: 0.9rem;">
+                        <p>Foundational research — Kohno (2009), Bonaci (2015), and others — established the term <em>"BCI security."</em> ONI honors that terminology when referencing their work. Moving forward, ONI uses <strong style="color: var(--text-secondary);">neurosecurity</strong> as the broader discipline name. "BCI security" is anchored to today's hardware. The threats ONI models (cognitive manipulation, identity fragmentation, semantic interference at L11–L14) aren't limited to computer interfaces. <em>Neurosecurity</em> protects the neural system itself, regardless of what interfaces with it.</p>
+                    </div>
+                </details>
+            </div>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;" data-aos="fade-up" data-aos-delay="300">
+                <a href="https://github.com/qikevinl/ONI/blob/main/ABOUT.md" class="btn btn-secondary" style="font-size: 0.9rem;">Read the Full Story</a>
+                <a href="whitepaper/" class="btn btn-secondary" style="font-size: 0.9rem;">Read the Whitepaper</a>
+                <a href="https://github.com/qikevinl/ONI/tree/main/MAIN/governance" class="btn btn-secondary" style="font-size: 0.9rem;">View Governance Docs</a>
             </div>
         </div>
     </section>
 
-    <!-- Tools & Implementation Section (Pip Install Cards + Interactive Learning moved here) -->
-    <section class="section" id="tools" style="background: var(--bg-secondary); margin: 0; max-width: 100%; padding: 4rem 2rem;">
+    <!-- Ecosystem Section (Bento Grid: Docs + Audience + Tools) -->
+    <section class="section" id="ecosystem" style="background: var(--bg-secondary); margin: 0; max-width: 100%; padding: 4rem 2rem;">
         <div style="max-width: 1200px; margin: 0 auto;">
             <div class="section-header" data-aos="fade-up">
-                <h2>Tools & Implementation</h2>
-                <p>Open-source packages that bring the framework to life</p>
+                <h2>Ecosystem</h2>
+                <p>Documentation, tools, and who ONI is built for</p>
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 800px; margin: 0 auto;" data-aos="fade-up" data-aos-delay="200">
-                <a href="https://pypi.org/project/oni-framework/" class="quick-card">
-                    <div class="icon" style="background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));">
-                        <span style="font-size: 1.2rem;">Cₛ</span>
+
+            <div class="bento-grid" data-aos="fade-up" data-aos-delay="200">
+                <!-- Left panel: Documentation -->
+                <div class="bento-card" id="resources">
+                    <h3 style="margin-bottom: 1rem; font-size: 1.1rem; color: var(--text-primary);">Documentation</h3>
+                    <div class="doc-group">
+                        <details class="oni-details">
+                            <summary>Governance (5 docs)</summary>
+                            <div class="details-content">
+                                <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/governance/NEUROETHICS_ALIGNMENT.md" style="color: var(--accent-cyan); display: block; margin-bottom: 0.4rem; font-size: 0.9rem;">Neuroethics Alignment</a>
+                                <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/governance/UNESCO_ALIGNMENT.md" style="color: var(--accent-cyan); display: block; margin-bottom: 0.4rem; font-size: 0.9rem;">UNESCO Alignment (15/17)</a>
+                                <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/governance/REGULATORY_COMPLIANCE.md" style="color: var(--accent-cyan); display: block; margin-bottom: 0.4rem; font-size: 0.9rem;">Regulatory Compliance</a>
+                                <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/governance/INFORMED_CONSENT_FRAMEWORK.md" style="color: var(--accent-cyan); display: block; margin-bottom: 0.4rem; font-size: 0.9rem;">Informed Consent Framework</a>
+                                <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/governance/TRANSPARENCY.md" style="color: var(--accent-cyan); display: block; font-size: 0.9rem;">Transparency Statement</a>
+                            </div>
+                        </details>
+                        <details class="oni-details">
+                            <summary>Technical (4 docs)</summary>
+                            <div class="details-content">
+                                <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/INDEX.md" style="color: var(--accent-cyan); display: block; margin-bottom: 0.4rem; font-size: 0.9rem;">Main Wiki (INDEX.md)</a>
+                                <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/oni-framework/ONI_LAYERS.md" style="color: var(--accent-cyan); display: block; margin-bottom: 0.4rem; font-size: 0.9rem;">ONI Layers Reference (14-layer spec)</a>
+                                <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/publications/mathematical-foundations/TechDoc-Equations_Reference.md" style="color: var(--accent-cyan); display: block; margin-bottom: 0.4rem; font-size: 0.9rem;">Equations Reference</a>
+                                <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/publications/mathematical-foundations/TechDoc-Mathematical_Audit.md" style="color: var(--accent-cyan); display: block; font-size: 0.9rem;">Mathematical Audit</a>
+                            </div>
+                        </details>
+                        <details class="oni-details">
+                            <summary>Resources (3 docs)</summary>
+                            <div class="details-content">
+                                <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/RELATED_WORK.md" style="color: var(--accent-cyan); display: block; margin-bottom: 0.4rem; font-size: 0.9rem;">Related Work</a>
+                                <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/ACADEMIC_LANDSCAPE.md" style="color: var(--accent-cyan); display: block; margin-bottom: 0.4rem; font-size: 0.9rem;">Academic Landscape</a>
+                                <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/resources/EXTERNAL_TOOLS.md" style="color: var(--accent-cyan); display: block; font-size: 0.9rem;">External Tools & Libraries</a>
+                            </div>
+                        </details>
                     </div>
-                    <h3>ONI Framework <span style="font-size: 0.6rem; padding: 0.2rem 0.5rem; background: rgba(59, 130, 246, 0.2); color: #60a5fa; border-radius: 4px; vertical-align: middle; margin-left: 0.5rem;">API</span></h3>
-                    <p>Core library — 14-layer model, Coherence Metric, Neural Firewall, and neurosecurity primitives.</p>
-                    <div class="code-block">pip install oni-framework</div>
-                    <span style="color: var(--accent-blue); font-weight: 500; font-size: 0.9rem;">View on PyPI &rarr;</span>
-                </a>
-                <a href="https://pypi.org/project/oni-tara/" class="quick-card">
-                    <div class="icon" style="background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));">
-                        <span>T</span>
+                </div>
+
+                <!-- Right panels -->
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <!-- Who It's For -->
+                    <div class="bento-card" id="audience">
+                        <h3 style="margin-bottom: 1rem; font-size: 1.1rem; color: var(--text-primary);">Who It's For</h3>
+                        <div class="audience-pills">
+                            <span class="audience-pill">Researchers</span>
+                            <span class="audience-pill">BCI Developers</span>
+                            <span class="audience-pill">Regulators</span>
+                            <span class="audience-pill">Security Teams</span>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.75rem;">A shared vocabulary for everyone building, securing, and governing neural interfaces.</p>
                     </div>
-                    <h3>TARA <span style="font-size: 0.6rem; padding: 0.2rem 0.5rem; background: rgba(139, 92, 246, 0.2); color: #a78bfa; border-radius: 4px; vertical-align: middle; margin-left: 0.5rem;">PROTOTYPE</span></h3>
-                    <p style="padding: 0 1.5rem;">Proof-of-concept: ONI's math translated into coherence scoring, a rule-based neural firewall, and defensive validation against real EEG data.</p>
-                    <div class="code-block">pip install oni-tara</div>
-                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">Foundational math &amp; theory — future product requires research collaboration</p>
-                    <span style="color: var(--accent-purple); font-weight: 500; font-size: 0.9rem;">View on PyPI &rarr;</span>
-                </a>
+
+                    <!-- Tools & Install -->
+                    <div class="bento-card" id="tools">
+                        <h3 style="margin-bottom: 1rem; font-size: 1.1rem; color: var(--text-primary);">Install</h3>
+                        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <a href="https://pypi.org/project/oni-framework/" style="text-decoration: none; color: inherit;">
+                                <div class="code-block" style="margin: 0; font-size: 0.85rem;">pip install oni-framework</div>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">14-layer model, Coherence Metric, Neural Firewall</p>
+                            </a>
+                            <a href="https://pypi.org/project/oni-tara/" style="text-decoration: none; color: inherit;">
+                                <div class="code-block" style="margin: 0; font-size: 0.85rem;">pip install oni-tara</div>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">TARA prototype — coherence scoring & neural firewall</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
-
-    <section class="section" id="resources">
-        <div class="section-header">
-            <h2>Documentation & Resources</h2>
-            <p>Everything you need to understand and contribute to ONI</p>
-        </div>
-
-        <div class="resources-grid">
-            <!-- Ethics & Governance docs first -->
-            <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/governance/NEUROETHICS_ALIGNMENT.md" class="resource-card">
-                <div class="icon" style="background: var(--accent-emerald);"><span>E</span></div>
-                <div>
-                    <h4>Neuroethics Alignment</h4>
-                    <p>How ONI maps to neuroethics principles. Privacy-first, not surveillance.</p>
-                </div>
-            </a>
-
-            <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/governance/UNESCO_ALIGNMENT.md" class="resource-card">
-                <div class="icon" style="background: var(--accent-emerald);"><span>UN</span></div>
-                <div>
-                    <h4>UNESCO Alignment</h4>
-                    <p>UNESCO Recommendation on Ethics of Neurotechnology (2025). 15 of 17 elements implemented.</p>
-                </div>
-            </a>
-
-            <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/governance/REGULATORY_COMPLIANCE.md" class="resource-card">
-                <div class="icon" style="background: var(--accent-amber);"><span>RC</span></div>
-                <div>
-                    <h4>Regulatory Compliance</h4>
-                    <p>US & international regulatory mapping — FDA, state neurorights laws, MIND Act, UNESCO, Chile, EU.</p>
-                </div>
-            </a>
-
-            <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/governance/INFORMED_CONSENT_FRAMEWORK.md" class="resource-card">
-                <div class="icon" style="background: var(--accent-cyan);"><span>IC</span></div>
-                <div>
-                    <h4>Informed Consent Framework</h4>
-                    <p>Consent architecture for BCIs — continuous consent, capacity assessment, pediatric considerations.</p>
-                </div>
-            </a>
-
-            <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/governance/TRANSPARENCY.md" class="resource-card">
-                <div class="icon" style="background: var(--accent-pink);"><span>T</span></div>
-                <div>
-                    <h4>Transparency Statement</h4>
-                    <p>Human-AI collaboration audit trail. How this framework was built.</p>
-                </div>
-            </a>
-
-            <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/ACADEMIC_LANDSCAPE.md" class="resource-card">
-                <div class="icon" style="background: var(--accent-cyan);"><span>A</span></div>
-                <div>
-                    <h4>Academic Landscape</h4>
-                    <p>Key researchers, leading institutions, and collaboration opportunities.</p>
-                </div>
-            </a>
-
-            <!-- Technical docs second -->
-            <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/INDEX.md" class="resource-card">
-                <div class="icon" style="background: var(--accent-blue);"><span>W</span></div>
-                <div>
-                    <h4>Main Wiki (INDEX.md)</h4>
-                    <p>Central hub for navigation, dependencies, cross-references, and roadmap.</p>
-                </div>
-            </a>
-
-            <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/oni-framework/ONI_LAYERS.md" class="resource-card">
-                <div class="icon" style="background: var(--accent-purple);"><span>14</span></div>
-                <div>
-                    <h4>ONI Layers Reference</h4>
-                    <p>Complete 14-layer model specification with attack surfaces and defenses.</p>
-                </div>
-            </a>
-
-            <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/RELATED_WORK.md" class="resource-card">
-                <div class="icon" style="background: var(--accent-amber);"><span>R</span></div>
-                <div>
-                    <h4>Related Work</h4>
-                    <p>Prior BCI security research. Kohno, Bonaci, and foundational contributions.</p>
-                </div>
-            </a>
-
-            <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/publications/mathematical-foundations/TechDoc-Equations_Reference.md" class="resource-card">
-                <div class="icon" style="background: var(--accent-blue);"><span>Eq</span></div>
-                <div>
-                    <h4>Equations Reference</h4>
-                    <p>Master catalog of all equations — Maxwell, Boltzmann, Nernst, Hodgkin-Huxley, Fourier to Cₛ(S).</p>
-                </div>
-            </a>
-
-            <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/publications/mathematical-foundations/TechDoc-Mathematical_Audit.md" class="resource-card">
-                <div class="icon" style="background: var(--accent-amber);"><span>Au</span></div>
-                <div>
-                    <h4>Mathematical Audit</h4>
-                    <p>Self-audit of every mathematical claim — what's valid, what's corrected, what's open.</p>
-                </div>
-            </a>
-
-            <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/resources/EXTERNAL_TOOLS.md" class="resource-card">
-                <div class="icon" style="background: var(--accent-emerald);"><span>Lib</span></div>
-                <div>
-                    <h4>External Tools & Libraries</h4>
-                    <p>BrainFlow, MNE-Python, MOABB, SciPy, and every tool ONI builds on.</p>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <!-- Who It's For Section -->
-    <section class="section" id="audience">
-        <div class="section-header" data-aos="fade-up">
-            <h2>Who ONI Is For</h2>
-            <p>A shared vocabulary for everyone building, securing, and governing BCIs</p>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;">
-            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center;">
-                <div style="font-size: 2rem; margin-bottom: 0.75rem;">🔬</div>
-                <h4 style="margin-bottom: 0.5rem;">Researchers</h4>
-                <p style="color: var(--text-muted); font-size: 0.85rem;">Academic teams studying neurosecurity, neuroethics, and neural engineering.</p>
-            </div>
-            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center;">
-                <div style="font-size: 2rem; margin-bottom: 0.75rem;">💻</div>
-                <h4 style="margin-bottom: 0.5rem;">Developers</h4>
-                <p style="color: var(--text-muted); font-size: 0.85rem;">Engineers building neural interfaces who need security primitives.</p>
-            </div>
-            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center;">
-                <div style="font-size: 2rem; margin-bottom: 0.75rem;">⚖️</div>
-                <h4 style="margin-bottom: 0.5rem;">Regulators</h4>
-                <p style="color: var(--text-muted); font-size: 0.85rem;">FDA, FCC, and policy makers defining neural device requirements.</p>
-            </div>
-            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center;">
-                <div style="font-size: 2rem; margin-bottom: 0.75rem;">🛡️</div>
-                <h4 style="margin-bottom: 0.5rem;">Security Teams</h4>
-                <p style="color: var(--text-muted); font-size: 0.85rem;">Red teams, pentesters, and security researchers in medical devices.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Get Involved Section -->
-    <section class="section" id="contribute">
-        <div class="section-header">
-            <h2>Get Involved</h2>
-            <p>ONI is open-source and community-driven</p>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
-            <a href="https://github.com/qikevinl/ONI" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; text-decoration: none; color: inherit; transition: all 0.2s; text-align: center;" onmouseover="this.style.borderColor='var(--accent-blue)'" onmouseout="this.style.borderColor='var(--border)'">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">⭐</div>
-                <h4 style="margin-bottom: 0.5rem;">Star on GitHub</h4>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Help us reach more researchers and developers.</p>
-            </a>
-            <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/CONTRIBUTING.md" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; text-decoration: none; color: inherit; transition: all 0.2s; text-align: center;" onmouseover="this.style.borderColor='var(--accent-purple)'" onmouseout="this.style.borderColor='var(--border)'">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">🔧</div>
-                <h4 style="margin-bottom: 0.5rem;">Contribute Code</h4>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Improve defensive validation, extend the framework, refine TARA.</p>
-            </a>
-            <a href="https://github.com/qikevinl/ONI/issues" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; text-decoration: none; color: inherit; transition: all 0.2s; text-align: center;" onmouseover="this.style.borderColor='var(--accent-cyan)'" onmouseout="this.style.borderColor='var(--border)'">
-                <div style="font-size: 2rem; margin-bottom: 1rem;">💬</div>
-                <h4 style="margin-bottom: 0.5rem;">Join Discussion</h4>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Share ideas, report issues, propose new features.</p>
-            </a>
         </div>
     </section>
 
     <footer>
+        <div class="footer-cta">
+            <a href="https://github.com/qikevinl/ONI" class="btn btn-secondary" style="font-size: 0.9rem;">Star on GitHub</a>
+            <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/CONTRIBUTING.md" class="btn btn-secondary" style="font-size: 0.9rem;">Contribute</a>
+            <a href="https://github.com/qikevinl/ONI/issues" class="btn btn-secondary" style="font-size: 0.9rem;">Discuss</a>
+        </div>
         <div class="footer-links">
-            <a href="https://github.com/qikevinl/ONI/blob/main/ABOUT.md">About the Author</a>
+            <a href="https://github.com/qikevinl/ONI/blob/main/ABOUT.md">About</a>
             <a href="https://github.com/qikevinl/ONI">GitHub</a>
-            <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/INDEX.md">Documentation</a>
+            <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/INDEX.md">Docs</a>
             <a href="https://pypi.org/project/oni-framework/">PyPI</a>
             <a href="https://github.com/qikevinl/ONI/blob/main/LICENSE">Apache 2.0</a>
         </div>
-        <p style="margin-top: 1rem;">
-            <strong>ONI Framework</strong> &mdash; Open-source neural interface security
-        </p>
-        <p style="margin-top: 1rem; font-size: 0.5rem; color: var(--text-muted); max-width: 800px; line-height: 1.4; text-align: center; margin-left: auto; margin-right: auto; opacity: 0.5;">
-            © 2024-2026 Kevin L. Qi / Qinnovate. All rights reserved. Source code is licensed under Apache 2.0.
+        <p style="margin-top: 0.75rem; font-size: 0.5rem; color: var(--text-muted); opacity: 0.5;">
+            &copy; 2024-2026 Kevin L. Qi / Qinnovate. All rights reserved. Source code is licensed under Apache 2.0.
         </p>
     </footer>
 
@@ -2202,23 +2065,6 @@
 
             resize();
             animate();
-        }
-
-        // Create neural network background dots
-        function createNeuralBackground() {
-            const container = document.getElementById('neuralBg');
-            if (!container) return;
-
-            const dotCount = 20;
-            for (let i = 0; i < dotCount; i++) {
-                const dot = document.createElement('div');
-                dot.className = 'neural-dot';
-                dot.style.left = Math.random() * 100 + '%';
-                dot.style.top = Math.random() * 100 + '%';
-                dot.style.animationDelay = Math.random() * 4 + 's';
-                dot.style.animationDuration = (3 + Math.random() * 2) + 's';
-                container.appendChild(dot);
-            }
         }
 
         // Counter animation for stats
@@ -2405,28 +2251,6 @@
             });
         }
 
-        // Slogan scroll-scale effect: grows from small to full size as user scrolls into view
-        (function() {
-            var slogan = document.getElementById('slogan-text');
-            if (!slogan) return;
-            var minSize = 0.75;
-            var maxSize = 1.75;
-            function updateSloganScale() {
-                var rect = slogan.getBoundingClientRect();
-                var windowH = window.innerHeight;
-                // Progress: 0 when element enters bottom of viewport, 1 when it reaches center
-                var progress = 1 - (rect.top - windowH * 0.5) / (windowH * 0.5);
-                progress = Math.max(0, Math.min(1, progress));
-                // Ease out cubic for smooth deceleration
-                var eased = 1 - Math.pow(1 - progress, 3);
-                var size = minSize + (maxSize - minSize) * eased;
-                slogan.style.fontSize = size + 'rem';
-                slogan.style.opacity = 0.3 + 0.7 * eased;
-            }
-            window.addEventListener('scroll', updateSloganScale, { passive: true });
-            updateSloganScale();
-        })();
-
         // Security: Sanitize and validate brand.json input
         function sanitizeText(input, maxLength = 500) {
             if (typeof input !== 'string') return null;
@@ -2463,20 +2287,6 @@
                 const safeMission = sanitizeText(brand.oni.mission, 500);
                 if (missionEl && safeMission) {
                     missionEl.textContent = safeMission;
-                }
-
-                // Update slogan text (with validation)
-                const sloganEl = document.getElementById('slogan-text');
-                const safeSlogan = sanitizeText(brand.oni.slogan, 200);
-                if (sloganEl && safeSlogan) {
-                    sloganEl.textContent = '"' + safeSlogan + '"';
-                }
-
-                // Update vision text (with validation)
-                const visionEl = document.getElementById('vision-text');
-                const safeVision = sanitizeText(brand.oni.vision, 600);
-                if (visionEl && safeVision) {
-                    visionEl.textContent = safeVision;
                 }
 
                 // Update MANUAL stats from brand.json (with validation)
@@ -2539,14 +2349,88 @@
                 observer.observe(el);
             });
         }
+
+        // Tab system for Explore & Learn section
+        function initTabs() {
+            const tabNav = document.getElementById('exploreTabNav');
+            if (!tabNav) return;
+            tabNav.addEventListener('click', function(e) {
+                const btn = e.target.closest('.tab-btn');
+                if (!btn) return;
+                const tabId = btn.getAttribute('data-tab');
+                // Deactivate all
+                tabNav.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+                // Activate selected
+                btn.classList.add('active');
+                const panel = document.getElementById('tab-' + tabId);
+                if (panel) panel.classList.add('active');
+            });
+        }
+
+        // Active nav tracking via IntersectionObserver
+        function initNavTracking() {
+            const navLinks = document.querySelectorAll('.nav-links a[data-section]');
+            if (!navLinks.length) return;
+            const sections = [];
+            navLinks.forEach(link => {
+                const id = link.getAttribute('data-section');
+                const section = document.getElementById(id);
+                if (section) sections.push({ el: section, link: link });
+            });
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        const match = sections.find(s => s.el === entry.target);
+                        if (match) match.link.classList.add('active');
+                    }
+                });
+            }, { rootMargin: '-20% 0px -70% 0px' });
+            sections.forEach(s => observer.observe(s.el));
+        }
+
+        // Scroll progress bar
+        function initScrollProgress() {
+            const bar = document.getElementById('scrollProgress');
+            if (!bar) return;
+            window.addEventListener('scroll', function() {
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+                bar.style.width = progress + '%';
+            }, { passive: true });
+        }
+
+        // Mobile hamburger menu
+        function initMobileNav() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            if (!hamburger || !navLinks) return;
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('open');
+                hamburger.classList.toggle('active');
+            });
+            // Close menu when clicking a link
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('open');
+                    hamburger.classList.remove('active');
+                });
+            });
+        }
+
         // Initialize on load
         document.addEventListener('DOMContentLoaded', function() {
             initHyperspeed();
-            createNeuralBackground();
             animateCounters();
             loadBrandConstants();
             initLayersReveal();
             initTextReveal();
+            initTabs();
+            initNavTracking();
+            initScrollProgress();
+            initMobileNav();
         });
     </script>
 </body>
