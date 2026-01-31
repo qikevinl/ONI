@@ -1177,8 +1177,8 @@
     </section>
 
     <!-- Slogan Banner -->
-    <div style="text-align: center; padding: 3rem 2rem;" data-aos="fade-up">
-        <p id="slogan-text" style="font-size: 1.75rem; font-style: italic; color: var(--text-secondary); font-weight: 300; letter-spacing: 0.02em;">Only life's most important connections deserve the most thought.</p>
+    <div style="text-align: center; padding: 3rem 2rem;">
+        <p id="slogan-text" style="font-size: 0.75rem; font-style: italic; color: var(--text-secondary); font-weight: 300; letter-spacing: 0.02em; transition: none;">Only life's most important connections deserve the most thought.</p>
     </div>
 
     <!-- Research Mission Section -->
@@ -2195,6 +2195,28 @@
                 });
             });
         }
+
+        // Slogan scroll-scale effect: grows from small to full size as user scrolls into view
+        (function() {
+            var slogan = document.getElementById('slogan-text');
+            if (!slogan) return;
+            var minSize = 0.75;
+            var maxSize = 1.75;
+            function updateSloganScale() {
+                var rect = slogan.getBoundingClientRect();
+                var windowH = window.innerHeight;
+                // Progress: 0 when element enters bottom of viewport, 1 when it reaches center
+                var progress = 1 - (rect.top - windowH * 0.5) / (windowH * 0.5);
+                progress = Math.max(0, Math.min(1, progress));
+                // Ease out cubic for smooth deceleration
+                var eased = 1 - Math.pow(1 - progress, 3);
+                var size = minSize + (maxSize - minSize) * eased;
+                slogan.style.fontSize = size + 'rem';
+                slogan.style.opacity = 0.3 + 0.7 * eased;
+            }
+            window.addEventListener('scroll', updateSloganScale, { passive: true });
+            updateSloganScale();
+        })();
 
         // Security: Sanitize and validate brand.json input
         function sanitizeText(input, maxLength = 500) {
