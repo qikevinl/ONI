@@ -229,25 +229,34 @@ ONI builds directly on pioneering research from leading institutions in BCI secu
 
 🎯 **[Explore Interactive Gap Analysis →](https://qikevinl.github.io/ONI/visualizations/03-academic-alignment.html)**
 
-### TARA — Adaptive Neural Threat Detection
+### TARA — From Framework to Protection
+
+Because ONI defines a universal layer model for neural security, it becomes possible to build tools that enforce it. **TARA** (Telemetry Analysis & Response Automation) is a proof-of-concept showing how ONI's mathematical foundations translate into working security logic.
+
+> **The vision:** A system that learns each person's unique neural patterns, continuously validates signal integrity, and adapts its defenses as threats evolve — ensuring protection keeps pace with the brain-computer interface itself.
+>
+> **What exists today:** The foundational math and theoretical framework. TARA is not a production system. It is a research prototype that demonstrates these concepts are technically viable.
 
 [![PyPI version](https://badge.fury.io/py/oni-tara.svg)](https://badge.fury.io/py/oni-tara)
 [![Tests](https://github.com/qikevinl/ONI/actions/workflows/tests.yml/badge.svg)](https://github.com/qikevinl/ONI/actions/workflows/tests.yml)
 [![Security](https://github.com/qikevinl/ONI/actions/workflows/security.yml/badge.svg)](https://github.com/qikevinl/ONI/actions/workflows/security.yml)
 
-**TARA** (Telemetry Analysis & Response Automation) learns an individual's unique neural baseline — then detects, in real time, when something deviates from it. Using entropy-based coherence scoring (Cₛ), ML-trained behavioral models, and a 7-layer neural firewall (L8–L14), TARA can identify signal injection, neural ransomware, cognitive eavesdropping, and other BCI attack patterns *before they reach the brain*.
+**What's built:**
+- **Coherence scoring (Cₛ)** — an entropy-based formula that evaluates whether a neural signal is consistent or anomalous, based on phase, transport, and gain variance
+- **Rule-based neural firewall** — a decision engine at the silicon-biology boundary (L8) that accepts, flags, or rejects signals using coherence thresholds and authentication
+- **Biophysical neural simulation** — LIF, Izhikevich, and Hodgkin-Huxley neuron models with synaptic dynamics, used to generate realistic test signals
+- **Defensive stress-testing** — a library of known threat patterns (signal injection, suppression, eavesdropping) used to *validate that protections work*, the same way a fire drill tests emergency response
+- **Threat taxonomy** — implements Kohno (2009) threat classification and Bonaci et al. (2015) privacy rules, mapped to ONI layers
+- **Real EEG benchmarking** — coherence validation against real brain data via MOABB datasets
 
-**Core capabilities:**
-- **Personalized baselining** — trains on an individual's neural patterns to distinguish normal variance from anomalous signals
-- **Real-time anomaly detection** — NSAM (Neural Signal Assurance Monitoring) continuously validates signal integrity across all ONI layers
-- **Attack simulation & testing** — comprehensive attack library (ransomware, DoS, gateway bypass) tested against real EEG data via MOABB
-- **7-layer neural firewall** — bidirectional signal validation at the silicon-biology boundary with stimulation safety bounds
-- **Neurosecurity integration** — implements Kohno (2009) threat taxonomy and Bonaci et al. (2015) BCI privacy filtering
-
-> **Pre-clinical research tool.** TARA demonstrates that principled neural security is technically achievable. It is designed for security researchers and academic collaboration, not yet deployed in clinical BCI systems.
+**What's next (requires research collaboration):**
+- Personalized baselining — adapting thresholds to an individual's neural signature, not generic statistics
+- ML-trained anomaly detection — moving from rule-based to learned classifiers
+- Closed-loop adaptive defense — a system that improves itself as it encounters new patterns
+- Hardware integration — testing against live BCI data streams
 
 ```bash
-pip install oni-tara[full]  # Full installation with UI and simulation
+pip install oni-tara[full]  # Full installation with simulation
 tara ui                     # Launch the dashboard
 ```
 
