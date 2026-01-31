@@ -1115,7 +1115,7 @@ def render_attack_simulator_page():
 def _render_neural_attack_matrix():
     """Render the Neural ATT&CK matrix in MITRE style."""
     st.subheader("Neural ATT&CK Matrix")
-    st.markdown("*7 Tactics | 18 Techniques | Mapped to ONI Layers*")
+    st.markdown("*10 Tactics | 46 Techniques | Mapped to ONI Layers*")
 
     # Matrix header
     tactics = list(NEURAL_ATTACK_MATRIX.keys())

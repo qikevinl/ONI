@@ -63,7 +63,7 @@ These web-based visualizations are available immediately at [qikevinl.github.io/
 | **ONI Layer Explorer** | Navigate all 14 layers interactively | How data flows from silicon to cognition |
 | **NSAM Checkpoint Simulator** | Become the firewall — analyze and block signals | Real-time security decision making |
 | **Scale-Frequency Navigator** | Explore neural patterns across time scales | From femtoseconds to years in neural processing |
-| **ONI Threat Matrix** | 7 tactics, 21 techniques mapped to ONI layers | How attackers think about neural systems |
+| **ONI Threat Matrix** | 10 tactics, 46 techniques mapped to ONI layers | How attackers think about neural systems |
 | **Academic Alignment** | Research foundation from 12+ universities | The science behind the framework |
 
 ### Advanced Platform (Downloadable)

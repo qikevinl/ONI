@@ -86,7 +86,7 @@ Five interactive HTML applications for education and demonstration:
 | [Kill Chain Visualizer](../docs/visualizations/03-neural-killchain-visualizer.html) | Attack propagation animation | Attack patterns (Bonaci 2015) |
 | [NSAM Checkpoint Sim](../docs/visualizations/04-nsam-checkpoint-simulator.html) | Gamified signal validation | NSAM pipeline |
 | [Scale-Frequency Nav](../docs/visualizations/05-scale-frequency-navigator.html) | Temporal scale exploration | f × S ≈ k invariant |
-| [ONI Threat Matrix](../docs/visualizations/06-oni-threat-matrix.html) | MITRE ATT&CK-inspired neural framework | 7 tactics, 18 techniques, Kohno integration |
+| [ONI Threat Matrix](../docs/visualizations/06-oni-threat-matrix.html) | MITRE ATT&CK-inspired neural framework | 10 tactics, 46 techniques, Kohno integration |
 
 **Quick Start:** Open `../docs/visualizations/index.html` in a browser.
 
@@ -468,7 +468,7 @@ MAIN/
 │
 ├── oni-framework/              # Python library (pip install oni-framework)
 │   ├── ONI_LAYERS.md           # **Authoritative 14-layer reference**
-│   ├── ONI_THREAT_MATRIX.md    # **7 tactics, 21 techniques (MITRE-inspired)**
+│   ├── ONI_THREAT_MATRIX.md    # **10 tactics, 46 techniques (MITRE-inspired)**
 │   ├── NEUROSECURITY_IMPLEMENTATION.md  # Kohno/BCI integration guide
 │   ├── oni/                    # Source modules
 │   │   ├── coherence.py        # Cₛ calculation

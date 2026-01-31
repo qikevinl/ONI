@@ -400,7 +400,7 @@ The Attack Simulator implements a **MITRE ATT&CK-inspired framework** adapted fo
 
 > MITRE ATT&CK organizes adversary behavior into tactics (objectives) and techniques (methods). TARA's Neural ATT&CK applies this methodology to brain-computer interfaces.
 
-#### Neural ATT&CK Matrix (7 Tactics × 18 Techniques)
+#### Neural ATT&CK Matrix (10 Tactics × 46 Techniques)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────┐
@@ -571,7 +571,7 @@ tara_mvp/
 - **ONI Layer Stack**: Visual representation of full layer model
 
 ### Attack Simulator Page
-- **Neural ATT&CK Matrix**: MITRE-style grid with 7 tactics and 18 techniques mapped to ONI layers
+- **Neural ATT&CK Matrix**: MITRE-style grid with 10 tactics and 46 techniques mapped to ONI layers
 - **Attack Simulation**: Configure and launch attacks with intensity/duration controls
 - **Pew-Pew Visualization**: Real-time attack packet animation across ONI layers with L8 shield effects
 - **Attack Timeline**: Stage-by-stage visualization with detection/block status
@@ -903,7 +903,7 @@ If you use TARA in your research, please cite:
 - **Documentation Overhaul**:
   - Added comprehensive Neural Simulator brain region documentation with MNI coordinates and Brodmann areas
   - Added detailed Neurosecurity module documentation with Kohno (2009) threat taxonomy
-  - Added Neural ATT&CK Matrix documentation with 7 tactics and 18 techniques
+  - Added Neural ATT&CK Matrix documentation with 10 tactics and 46 techniques
   - Added visual ASCII diagrams for ONI layer hierarchy and attack coverage maps
   - Added ERP privacy risk matrix with component-level analysis
   - Cross-referenced all mappings with peer-reviewed neuroscience literature
@@ -925,7 +925,7 @@ If you use TARA in your research, please cite:
   - Attack injection (5 types: spike, noise, frequency, phase, dc_shift)
   - Coherence benchmark with detection metrics (accuracy, precision, recall, F1)
 - **Attack Simulator Enhancements**:
-  - Neural ATT&CK Matrix with 7 tactics and 18 techniques mapped to ONI layers
+  - Neural ATT&CK Matrix with 10 tactics and 46 techniques mapped to ONI layers
   - Pew-pew attack animation with L8 shield effect
   - Attack report export capability
 - Updated documentation (README.md, CLAUDE.md)

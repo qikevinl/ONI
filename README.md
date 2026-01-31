@@ -304,7 +304,7 @@ ONI/
     │
     ├── oni-framework/           # Python library (pip install oni-framework)
     │   ├── ONI_LAYERS.md        # **Authoritative 14-layer reference**
-    │   ├── ONI_THREAT_MATRIX.md # **7 tactics, 21 techniques (MITRE-inspired)**
+    │   ├── ONI_THREAT_MATRIX.md # **10 tactics, 46 techniques (MITRE-inspired)**
     │   ├── NEUROSECURITY_IMPLEMENTATION.md  # Kohno/BCI integration guide
     │   ├── oni/                 # Source code
     │   │   ├── coherence.py     # Cₛ calculation
@@ -472,10 +472,10 @@ Physiology-first defense framework with checkpoints:
 - MRI exposure, electromagnetic interference, physical trauma, intentional jamming, proximity attacks (ProxMark-style)
 
 **For comprehensive threat documentation, see [ONI_THREAT_MATRIX.md](MAIN/oni-framework/ONI_THREAT_MATRIX.md):**
-- 7 tactics, 21 techniques mapped to ONI layers
+- 10 tactics, 46 techniques mapped to ONI layers
 - Methodology inspired by [MITRE ATT&CK](https://attack.mitre.org/)® (not affiliated)
-- Integrated with Kohno (2009) and Yale (2025) threat models
-- CIA impact ratings, mitigations, and detection methods
+- Integrated with Kohno (2009), Martinovic (2012), Bonaci (2015), Bernal (2023), and Yale (2025) threat models
+- CIA impact ratings, neurorights mapping, mitigations, and detection methods
 
 ### Hardware Constraints (Neuralink N1 Reference)
 

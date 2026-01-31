@@ -290,7 +290,7 @@ Edit `MAIN/resources/brand/brand.json`:
 {
   "stats": {
     "security_layers": 14,
-    "threat_signatures": 25,
+    "threat_signatures": 46,
     "learning_portals": 1
   }
 }

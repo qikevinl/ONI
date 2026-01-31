@@ -38,7 +38,7 @@ This documentation is released under the Apache 2.0 License, consistent with the
 
 ## Overview
 
-The ONI Threat Matrix provides a structured approach to understanding adversarial threats against brain-computer interfaces (BCIs). It maps **7 tactics** containing **21 techniques** across the ONI 14-layer model (L7-L14).
+The ONI Threat Matrix provides a structured approach to understanding adversarial threats against brain-computer interfaces (BCIs). It maps **10 tactics** containing **46 techniques** across the ONI 14-layer model (L1-L14).
 
 ### Key Concepts
 
@@ -55,7 +55,7 @@ The ONI Threat Matrix provides a structured approach to understanding adversaria
 ┌─────────────────────────────────────────────────────────────────┐
 │                    ONI THREAT MATRIX                            │
 ├─────────────────────────────────────────────────────────────────┤
-│  7 Tactics    │  21 Techniques  │  8 ONI Layers  │  63 Mitigations │
+│  10 Tactics   │  46 Techniques  │  14 ONI Layers │  63+ Mitigations│
 └─────────────────────────────────────────────────────────────────┘
 
 Tactics: Reconnaissance → Initial Access → Execution → Persistence →
@@ -793,6 +793,7 @@ To propose new techniques or modifications:
 | Version | Date | Changes |
 |---------|------|---------|
 | 1.0.0 | 2026-01-25 | Initial release with 7 tactics, 21 techniques |
+| 2.0.0 | 2026-01-30 | Expanded to 10 tactics, 46 techniques across L1-L14 |
 
 ---
 

@@ -53,7 +53,7 @@
   "stats": {
     "_comment": "Manual stats only. Auto-updating stats (commits, tools) are fetched via GitHub API in docs/index.html",
     "security_layers": 14,
-    "threat_signatures": 25,
+    "threat_signatures": 46,
     "learning_portals": 1
   },
   "_meta": {
