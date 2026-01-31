@@ -945,6 +945,145 @@
             transform: translateY(-50%);
         }
 
+        .vision-parallel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            text-align: left;
+        }
+
+        .parallel-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .parallel-card .parallel-era {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .parallel-card.then .parallel-era { color: var(--text-muted); }
+        .parallel-card.now .parallel-era { color: var(--accent-amber); }
+
+        .parallel-card h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .parallel-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .parallel-card .parallel-result {
+            margin-top: 0.75rem;
+            font-size: 0.8rem;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .parallel-card.now .parallel-result {
+            color: var(--accent-blue);
+        }
+
+        .vision-roadmap {
+            text-align: left;
+            margin-bottom: 3rem;
+        }
+
+        .vision-roadmap h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            text-align: center;
+        }
+
+        .roadmap-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .roadmap-timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-blue), var(--accent-purple), var(--accent-amber));
+            border-radius: 1px;
+        }
+
+        .roadmap-step {
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .roadmap-step:last-child {
+            padding-bottom: 0;
+        }
+
+        .roadmap-step::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 6px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-blue);
+            background: var(--bg-deep);
+        }
+
+        .roadmap-step.active::before {
+            background: var(--accent-blue);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+        }
+
+        .roadmap-step .step-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+            margin-bottom: 0.2rem;
+        }
+
+        .roadmap-step .step-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .roadmap-step .step-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .roadmap-step .step-body {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            margin-top: 0.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .vision-parallel {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .cta-buttons {
             display: flex;
             gap: 1rem;
@@ -1554,11 +1693,61 @@
         <div class="scene-inner">
             <div class="vision-content">
                 <div class="section-label fade-up">Vision</div>
-                <h2 class="fade-up">The mind deserves the same security architecture we built for our networks.</h2>
+                <h2 class="fade-up">Standardization unlocked the internet.<br>The brain is still waiting.</h2>
+
+                <!-- Historical Parallel -->
+                <div class="vision-parallel fade-up">
+                    <div class="parallel-card then">
+                        <div class="parallel-era">1970s &ndash; 1980s</div>
+                        <h4>Before OSI</h4>
+                        <p>Every manufacturer had proprietary networking protocols. Nothing could talk to anything else. No interoperability, no security baselines, no shared language.</p>
+                        <div class="parallel-result">Then came OSI, TCP/IP, IEEE 802 &rarr; the internet.</div>
+                    </div>
+                    <div class="parallel-card now">
+                        <div class="parallel-era">Today</div>
+                        <h4>Before neurosecurity standards</h4>
+                        <p>Every BCI manufacturer builds proprietary signal processing. No shared security model. No interoperability standards. No ethical baselines for neural data.</p>
+                        <div class="parallel-result">ONI is the draft that formal standards bodies can adopt.</div>
+                    </div>
+                </div>
 
                 <div class="vision-terminology fade-up">
-                    <h4>A Note on Terminology</h4>
-                    <p>Foundational researchers established "BCI security" as the discipline. ONI adopts <em>neurosecurity</em> &mdash; protecting the neural system itself, regardless of what interfaces with it. The scope is broader: not just the interface, but everything it connects to.</p>
+                    <h4>Why &ldquo;Neurosecurity&rdquo;</h4>
+                    <p>Foundational researchers established &ldquo;BCI security&rdquo; as the discipline. ONI adopts <em>neurosecurity</em> &mdash; protecting the neural system itself, regardless of what interfaces with it. The scope is broader: not just the interface, but everything it connects to.</p>
+                </div>
+
+                <!-- Roadmap -->
+                <div class="vision-roadmap fade-up">
+                    <h4>Roadmap to Formal Standardization</h4>
+                    <div class="roadmap-timeline">
+                        <div class="roadmap-step active">
+                            <div class="step-label">Current</div>
+                            <div class="step-title">Open Framework &amp; Research</div>
+                            <div class="step-desc">14-layer model, coherence metric, 46 threat signatures, 9 governance documents. Open source, peer-reviewable, Apache 2.0.</div>
+                        </div>
+                        <div class="roadmap-step">
+                            <div class="step-label">Next</div>
+                            <div class="step-title">Academic Validation &amp; Collaboration</div>
+                            <div class="step-desc">Partner with BCI security researchers and neuroscience labs to validate layers, refine threat models, and test the coherence metric against real neural data.</div>
+                        </div>
+                        <div class="roadmap-step">
+                            <div class="step-label">IEEE</div>
+                            <div class="step-title">Technical Standard Proposal</div>
+                            <div class="step-desc">Submit ONI's technical layers (signal security, transport integrity, gateway coherence) as a proposal to IEEE &mdash; like IEEE 802 standardized wireless networking.</div>
+                            <div class="step-body">Target: IEEE Standards Association &mdash; Neurotechnology Working Group</div>
+                        </div>
+                        <div class="roadmap-step">
+                            <div class="step-label">ISO / IEC</div>
+                            <div class="step-title">Governance &amp; Compliance Framework</div>
+                            <div class="step-desc">Propose ONI's governance layers (neuroethics alignment, informed consent, data policy) as an ISO/IEC standard &mdash; like ISO 27001 for information security.</div>
+                            <div class="step-body">Target: ISO/IEC JTC 1 &mdash; Information Security &amp; Emerging Technologies</div>
+                        </div>
+                        <div class="roadmap-step">
+                            <div class="step-label">Long-Term</div>
+                            <div class="step-title">Dedicated Neurotechnology Standards Body</div>
+                            <div class="step-desc">UNESCO's 2025 Recommendation on Neurotechnology calls for a dedicated standards body. ONI is designed to be the technical foundation it can build on.</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="vision-questions fade-up">
