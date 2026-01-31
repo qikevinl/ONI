@@ -361,14 +361,15 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--text-primary);
-            margin-top: 0.5rem;
             text-align: center;
         }
 
         .hero-scroll-indicator svg {
+            display: block;
+            margin: 0.5rem auto 0;
             width: 24px;
             height: 24px;
-            stroke: var(--text-dim);
+            stroke: #ffffff;
             fill: none;
             stroke-width: 2;
         }
@@ -469,6 +470,7 @@
             position: relative;
         }
 
+        .layer-trigger[data-layer="OSI"],
         .layer-trigger[data-layer="L8"] {
             height: 60vh;
         }
@@ -1249,8 +1251,8 @@
             </a>
         </div>
         <div class="hero-scroll-indicator" id="scroll-indicator">
-            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
             <span class="hero-scroll-text">Scroll to explore the framework</span>
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
         </div>
     </section>
 
@@ -1291,14 +1293,9 @@
             <!-- Intro trigger -->
             <div class="framework-intro-trigger" data-zone="all"></div>
 
-            <!-- Layer triggers (invisible scroll regions) -->
-            <div class="layer-trigger layer-panel" data-layer="L1" data-zone="silicon"></div>
-            <div class="layer-trigger layer-panel" data-layer="L2" data-zone="silicon"></div>
-            <div class="layer-trigger layer-panel" data-layer="L3" data-zone="silicon"></div>
-            <div class="layer-trigger layer-panel" data-layer="L4" data-zone="silicon"></div>
-            <div class="layer-trigger layer-panel" data-layer="L5" data-zone="silicon"></div>
-            <div class="layer-trigger layer-panel" data-layer="L6" data-zone="silicon"></div>
-            <div class="layer-trigger layer-panel" data-layer="L7" data-zone="silicon"></div>
+            <!-- OSI group trigger (L1-L7 converge as one) -->
+            <div class="layer-trigger layer-panel" data-layer="OSI" data-zone="silicon"></div>
+            <!-- Individual layer triggers -->
             <div class="layer-trigger layer-panel" data-layer="L8" data-zone="gateway"></div>
             <div class="layer-trigger layer-panel" data-layer="L9" data-zone="biology"></div>
             <div class="layer-trigger layer-panel" data-layer="L10" data-zone="biology"></div>
@@ -2123,6 +2120,7 @@
                 transparent: true, depthWrite: true,
             });
             var coreMesh = new THREE.Mesh(coreGeo, coreMat);
+            coreMesh.renderOrder = 5; // render above shells so dissipation is visible
             parallaxGroup.add(coreMesh);
 
             // Inner glow
@@ -2131,6 +2129,7 @@
                 depthWrite: false, blending: THREE.AdditiveBlending,
             });
             var glowMesh = new THREE.Mesh(new THREE.SphereGeometry(0.45,24,16), glowMat);
+            glowMesh.renderOrder = 5;
             parallaxGroup.add(glowMesh);
 
             // Neural Nodes
@@ -2249,6 +2248,20 @@
             // =============================================
             // INTRO: Stack → Sphere (on page load)
             // =============================================
+            // Scroll-driven brightness: each wheel tick progressively restores layers
+            // scrollBrightness 0→14: how many layers have been fully restored (L14 first)
+            var scrollBrightness = 0;
+            window.addEventListener('wheel', function() {
+                if (scrollBrightness < 14) {
+                    scrollBrightness = Math.min(14, scrollBrightness + 1.5); // ~1.5 layers per tick
+                }
+            }, { passive: true });
+            window.addEventListener('touchmove', function() {
+                if (scrollBrightness < 14) {
+                    scrollBrightness = Math.min(14, scrollBrightness + 1.5);
+                }
+            }, { passive: true });
+
             var introProgress = { value: 1.0 }; // Start fully stacked
 
             // Animate from stack to sphere over 2.5s after a brief pause
@@ -2302,6 +2315,7 @@
             // =============================================
             var activeLayerIndex = -1;
             var activeZone = 'all';
+            var activeGroupMode = null; // 'osi' when L1-L7 converge
             var layerPanels = document.querySelectorAll('.layer-panel');
 
             // HUD elements
@@ -2312,6 +2326,9 @@
 
             // Layer data lookup
             var layerData = {
+                OSI: { name:'Classical OSI Layers', tag:'Layers 1\u20137 \u00B7 The Foundation', tagClass:'osi',
+                    desc:'These 7 layers mirror the OSI model that powers every network on Earth \u2014 from physical hardware to application software. ONI maps them directly to the silicon side of brain-computer interfaces.',
+                    context:'Physical \u00B7 Data Link \u00B7 Network \u00B7 Transport \u00B7 Session \u00B7 Presentation \u00B7 Application' },
                 L1: { name:'Physical Carrier', tag:'OSI: Physical Layer', tagClass:'osi',
                     desc:'The hardware that touches your body \u2014 electrodes, wires, wireless signals carrying neural data from brain to device.',
                     context:'Think: the cables and radio waves that carry internet traffic' },
@@ -2376,7 +2393,7 @@
                 var data = lid ? layerData[lid] : null;
                 if (data) {
                     // Bottom HUD
-                    layerHudBadge.textContent = lid;
+                    layerHudBadge.textContent = (lid === 'OSI') ? 'L1\u20137' : lid;
                     layerHudBadge.className = 'layer-hud-badge ' + zone;
                     layerHudName.textContent = data.name;
                     layerHudZone.textContent = zoneLabels[zone] || '';
@@ -2408,7 +2425,14 @@
                     onToggle: function(self) {
                         if (self.isActive) {
                             var lid = panel.dataset.layer;
-                            activeLayerIndex = (lid && layerIdToShellIndex[lid] !== undefined) ? layerIdToShellIndex[lid] : -1;
+                            if (lid === 'OSI') {
+                                // Group mode: converge L1-L7
+                                activeGroupMode = 'osi';
+                                activeLayerIndex = -1;
+                            } else {
+                                activeGroupMode = null;
+                                activeLayerIndex = (lid && layerIdToShellIndex[lid] !== undefined) ? layerIdToShellIndex[lid] : -1;
+                            }
                             activeZone = panel.dataset.zone || 'all';
                             updateHud(lid, activeZone);
                         }
@@ -2425,7 +2449,7 @@
                     end: 'bottom 30%',
                     onToggle: function(self) {
                         if (self.isActive) {
-                            activeLayerIndex = -1; activeZone = 'all'; updateHud(null);
+                            activeLayerIndex = -1; activeZone = 'all'; activeGroupMode = null; updateHud(null);
                         }
                     }
                 });
@@ -2435,6 +2459,7 @@
             var shellScaleMultipliers = activeLayers.map(function() { return 1.0; });
             var shellZOffsets = activeLayers.map(function() { return 0; });
             var shellYOffsets = activeLayers.map(function() { return 0; });
+            var shellXOffsets = activeLayers.map(function() { return 0; });
             var shellFaceCamera = activeLayers.map(function() { return 0; });
 
             // =============================================
@@ -2484,15 +2509,55 @@
                     }
                 }
 
-                // Brain pulse — dissolve early so it's gone before layers separate
+                // Global darken for brain/glow (uses scrollBrightness)
+                var globalBright = Math.min(1, scrollBrightness / 3); // full after ~2 ticks
+                var darkenMult = 0.3 + globalBright * 0.7; // 0.3→1.0
+
+                // Brain paint-drop dissipation — happens during INTRO animation (stack→sphere)
+                // introProgress: 1.0 = stacked (brain visible), 0.0 = sphere (brain gone)
                 var pulse = 1 + Math.sin(t*1.2)*0.025;
-                var coreFade = Math.max(0, 1 - effectiveMorph * 2.5); // Gone by 40% morph
-                var coreScale = coreFade;
-                coreMesh.scale.set(pulse*coreScale, pulse*0.85*coreScale, pulse*coreScale);
-                nodeCloud.scale.set(pulse*coreScale, pulse*0.85*coreScale, pulse*coreScale);
-                if (synapseLines) synapseLines.scale.set(pulse*coreScale, pulse*0.85*coreScale, pulse*coreScale);
-                coreMesh.material.opacity = coreFade;
-                glowMat.opacity = (0.12 + Math.sin(t*1.8)*0.05) * coreFade;
+                var mp = effectiveMorph;
+
+                // Position brain at L8 in the stack
+                var gwIdx = -1;
+                for (var gi = 0; gi < activeLayers.length; gi++) {
+                    if (activeLayers[gi].zone === 'gateway') { gwIdx = gi; break; }
+                }
+                var l8StackY = 0;
+                if (gwIdx >= 0) {
+                    var stackSpacingCore = 0.4;
+                    l8StackY = (gwIdx - (activeLayers.length - 1) / 2) * stackSpacingCore;
+                }
+                coreMesh.position.y = l8StackY * mp;
+                glowMesh.position.y = l8StackY * mp;
+                nodeCloud.position.y = l8StackY * mp;
+                if (synapseLines) synapseLines.position.y = l8StackY * mp;
+
+                // Brain fade during intro flatten
+                var introProg = introProgress.value;
+                var bangProgress = Math.min(1, Math.max(0, 1.0 - introProg));
+                // Brain fades as stack morphs to sphere
+                var coreFade = Math.max(0, 1 - bangProgress * 1.2);
+                coreMesh.scale.setScalar(pulse * Math.max(coreFade, 0.01));
+                coreMesh.visible = coreFade > 0.01;
+                coreMesh.material.opacity = coreFade * 0.9 * darkenMult;
+
+                // Nodes and synapses fade with brain
+                var nodeFade = Math.max(0, 1 - bangProgress * 1.5);
+                var nodeScale = pulse * nodeFade;
+                nodeCloud.scale.set(nodeScale, nodeScale*0.85, nodeScale);
+                if (synapseLines) {
+                    synapseLines.scale.set(nodeScale, nodeScale*0.85, nodeScale);
+                    synapseLines.material.opacity = 0.15 * nodeFade * darkenMult;
+                }
+                glowMesh.visible = coreFade > 0.02;
+                glowMesh.scale.setScalar(pulse * 0.8 * Math.max(coreFade, 0.01));
+                glowMat.opacity = (0.12 + Math.sin(t*1.8)*0.05) * coreFade * darkenMult;
+
+                // Stack offset: shift left 20% during layer walkthrough, back to center after
+                var wantStackLeft = (effectiveMorph > 0.5 && (activeGroupMode === 'osi' || activeLayerIndex >= 0));
+                var stackXTarget = wantStackLeft ? -2.0 : 0;
+                autoRotateGroup.position.x += (stackXTarget - autoRotateGroup.position.x) * 0.06;
 
                 // MORPH: Spheres → Flat Discs → Vertical Stack + Jenga Pull-Out
                 var mp = effectiveMorph;
@@ -2510,13 +2575,44 @@
                     var targetZ = 0;
                     var targetFace = 0;
 
-                    if (i === activeLayerIndex && mp > 0.5) {
-                        // Active layer: pull out like a Jenga block
-                        scaleTarget = isGW ? 1.6 : 1.3;
+                    var isSilicon = layer.zone === 'silicon';
+
+                    if (activeGroupMode === 'osi' && isSilicon && mp > 0.5) {
+                        // OSI group: 3-phase animation
+                        var currentGlow = shellUniforms[i].uActiveGlow.value;
+                        var glowReady = currentGlow > 0.55;
+                        var expandReady = shellScaleMultipliers[i] > 1.3;
+
+                        if (glowReady && expandReady) {
+                            // Phase 3: converge to center
+                            scaleTarget = 1.5;
+                            targetZ = 4.0;
+                            targetFace = 1.0;
+                        } else if (glowReady) {
+                            // Phase 2: expand in stack
+                            scaleTarget = 1.5;
+                            targetZ = 0;
+                            targetFace = 0;
+                        } else {
+                            // Phase 1: glow in stack (staggered bottom-up)
+                            scaleTarget = 1.05;
+                            targetZ = 0;
+                            targetFace = 0;
+                        }
+                        // Outermost (L1) fully visible, inner shells layered glass
+                        targetOpacity = (i === 0) ? 1.0 : 0.2 + (1 - i / 7) * 0.3;
+                    } else if (activeGroupMode === 'osi' && !isSilicon && mp > 0.5) {
+                        // Non-silicon during OSI group: dim
+                        scaleTarget = 0.9;
+                        targetOpacity = isGW ? 0.15 : 0.07;
+                    } else if (i === activeLayerIndex && mp > 0.5) {
+                        // Active layer: expand first, then pull out
+                        var expandReady = shellScaleMultipliers[i] > 1.3;
+                        scaleTarget = isGW ? 1.8 : 1.5;
                         targetOpacity = 1.0;
-                        targetZ = isGW ? 5.0 : 4.0;
-                        targetFace = 1.0;
-                    } else if (activeLayerIndex === -1) {
+                        targetZ = expandReady ? (isGW ? 5.0 : 4.0) : 0;
+                        targetFace = 1.0; // gated by zProgress anyway
+                    } else if (activeLayerIndex === -1 && activeGroupMode === null) {
                         // No specific layer active — all visible
                         var zoneMatch = (activeZone === 'all') || (activeZone === layer.zone);
                         scaleTarget = 1.0;
@@ -2531,8 +2627,10 @@
                     var scaleLerp = (scaleTarget > shellScaleMultipliers[i]) ? 0.1 : 0.12;
                     shellScaleMultipliers[i] += (scaleTarget - shellScaleMultipliers[i]) * scaleLerp;
 
-                    // Phase 1: Z pull-out (fastest — starts immediately)
-                    var zLerp = (targetZ > shellZOffsets[i]) ? 0.12 : 0.14;
+                    // Phase 1: Z pull-out (slower for OSI group convergence)
+                    var osiConverge = (activeGroupMode === 'osi' && isSilicon);
+                    var zLerpIn = osiConverge ? 0.05 : 0.12;
+                    var zLerp = (targetZ > shellZOffsets[i]) ? zLerpIn : 0.14;
                     shellZOffsets[i] += (targetZ - shellZOffsets[i]) * zLerp;
 
                     // How far along is the Z pull-out? (0→1)
@@ -2544,7 +2642,8 @@
                     // Phase 3: Face-camera tilt — gates on Z being >50% done
                     var faceGate = Math.max(0, (zProgress - 0.5) / 0.5);
                     var gatedFace = targetFace * faceGate;
-                    var faceLerp = (gatedFace > shellFaceCamera[i]) ? 0.12 : 0.15;
+                    var faceLerpIn = osiConverge ? 0.06 : 0.12;
+                    var faceLerp = (gatedFace > shellFaceCamera[i]) ? faceLerpIn : 0.15;
                     shellFaceCamera[i] += (gatedFace - shellFaceCamera[i]) * faceLerp;
 
                     if (mp < 0.01) {
@@ -2587,10 +2686,17 @@
                         var baseY = stackY * mp;
 
                         // Y centering: snap disc to exact screen center (match actual camera Y)
-                        var targetYCenter = (i === activeLayerIndex && mp > 0.5) ? (camera.position.y - baseY) : 0;
-                        shellYOffsets[i] += (targetYCenter - shellYOffsets[i]) * 0.2;
+                        var shouldCenter = (i === activeLayerIndex && mp > 0.5) || (activeGroupMode === 'osi' && isSilicon && mp > 0.5);
+                        var targetYCenter = shouldCenter ? (camera.position.y - baseY) : 0;
+                        var yLerpSpeed = osiConverge ? 0.08 : 0.2;
+                        shellYOffsets[i] += (targetYCenter - shellYOffsets[i]) * yLerpSpeed;
+
+                        // X centering: cancel group X offset for active discs
+                        var targetXCenter = shouldCenter ? -autoRotateGroup.position.x : 0;
+                        shellXOffsets[i] += (targetXCenter - shellXOffsets[i]) * 0.15;
 
                         mesh.scale.set(scaleXZ, scaleY, scaleXZ);
+                        mesh.position.x = shellXOffsets[i];
                         mesh.position.y = baseY + shellYOffsets[i];
                         mesh.position.z = shellZOffsets[i];
 
@@ -2603,13 +2709,100 @@
                             mesh.rotation.set(0, 0, 0);
                         }
 
-                        // Opacity lerp
+                        // Per-layer brightness: scrollBrightness cascades L14→L1
+                        // stepsFromTop: 0=L14 (restores first), 13=L1 (restores last)
+                        var lastIdx = activeLayers.length - 1;
+                        var stepsFromTop = lastIdx - i;
+                        // How bright is this layer? scrollBrightness counts layers restored
+                        var layerBright = Math.min(1, Math.max(0, scrollBrightness - stepsFromTop));
+                        // Start at 50% opacity, ramp to full. Boost targetOpacity for restored layers.
+                        var dimmedOpacity = targetOpacity * (0.5 + layerBright * 0.5) + layerBright * 0.3;
+                        // Also boost glow intensity as layer restores
+                        var scrollGlowBoost = layerBright * 0.4;
                         shellUniforms[i].uOpacity.value +=
-                            (targetOpacity - shellUniforms[i].uOpacity.value) * 0.1;
+                            (dimmedOpacity - shellUniforms[i].uOpacity.value) * 0.2;
 
                         // Active glow lerp
-                        var glowTarget = (i === activeLayerIndex) ? 1.0 : 0.0;
-                        var glowLerp = (glowTarget > shellUniforms[i].uActiveGlow.value) ? 0.03 : 0.06;
+                        var osiGlow = (activeGroupMode === 'osi' && isSilicon);
+                        var glowTarget;
+                        if (osiGlow) {
+                            // Staggered bottom-up: each layer waits for the one below
+                            var prevGlow = 1.0;
+                            for (var pi = i - 1; pi >= 0; pi--) {
+                                if (activeLayers[pi].zone === 'silicon') {
+                                    prevGlow = shellUniforms[pi].uActiveGlow.value;
+                                    break;
+                                }
+                            }
+                            glowTarget = (prevGlow > 0.3) ? 1.0 : 0.0;
+                        } else {
+                            glowTarget = (i === activeLayerIndex) ? 1.0 : 0.0;
+                        }
+
+                        // Intro ripple cascade: L14 lights up first, then L13→L8, then L7→L1
+                        var isBioOrGW = (layer.zone === 'biology' || layer.zone === 'gateway');
+                        var introRippling = (bangProgress > 0.05 && bangProgress < 0.99 && activeLayerIndex < 0 && !osiGlow);
+                        if (introRippling) {
+                            var lastIdx = activeLayers.length - 1; // L14 = topmost
+                            var totalLayers = activeLayers.length;
+
+                            // Stagger order: L14 first (index 13), down to L8 (index 7), then L7→L1
+                            var stepsFromTop;
+                            if (isBioOrGW) {
+                                stepsFromTop = lastIdx - i; // 0 for L14, 6 for L8
+                            } else {
+                                // Silicon: continue after all bio layers, L7 first then L1 last
+                                var bioCount = lastIdx - gwIndex + 1; // 7 bio/gw layers
+                                stepsFromTop = bioCount + (gwIndex - 1 - i); // L7=7, L6=8... L1=13
+                            }
+
+                            var layerStart = 0.08 + (stepsFromTop / totalLayers) * 0.7;
+                            var layerRamp = (bangProgress - layerStart) / 0.12;
+                            var chargeAmt = Math.max(0, Math.min(1, layerRamp));
+
+                            // Ripple scale: incremental per layer — L1 largest, L14 smallest
+                            // layerRank: 0 for L14 (top), 13 for L1 (bottom/outermost)
+                            var layerRank = (lastIdx - i);
+                            var maxBoost = 0.05 + (1 - layerRank / lastIdx) * 0.25; // L1=0.30, L14=0.05
+                            var ripplePeak = Math.max(0, Math.min(1, (bangProgress - layerStart) / 0.08));
+                            var rippleDecay = Math.max(0, Math.min(1, (bangProgress - layerStart - 0.08) / 0.20));
+                            var rippleScale = ripplePeak * (1 - rippleDecay); // peaks then returns to 1.0
+                            shellScaleMultipliers[i] = Math.max(shellScaleMultipliers[i], 1.0 + rippleScale * maxBoost);
+
+                            // Vibrancy boost: subtle — enough to brighten without washing white
+                            var glowBoost = isBioOrGW ? chargeAmt * 0.6 : chargeAmt * 0.3;
+                            shellUniforms[i].uGlowIntensity.value = 1.2 + glowBoost;
+
+                            glowTarget = Math.max(glowTarget, chargeAmt * 0.35);
+                        } else {
+                            // Once fully flattened (scroll morph done), L14→L8 pulse breathing
+                            var morphDone = morphProgress.value > 0.95;
+                            var defaultGlow = isGW ? 2.5 : 1.2;
+                            if (isBioOrGW && morphDone && activeLayerIndex < 0 && !osiGlow) {
+                                var lastIdx = activeLayers.length - 1;
+                                var stepsFromTop = lastIdx - i; // 0=L14, 6=L8
+                                // Each layer pulses with a phase offset so L14 peaks first, then L13...
+                                var phaseOffset = stepsFromTop * 0.9; // ~0.9 rad apart
+                                var pulseSin = Math.sin(t * 2.0 - phaseOffset);
+                                // pulseSin -1→1, map to 0→1 for opacity/vibrancy boost
+                                var pulseAmt = pulseSin * 0.5 + 0.5; // 0→1
+
+                                // Opacity pulse: base + subtle swing
+                                targetOpacity = Math.max(targetOpacity, 0.4 + pulseAmt * 0.2);
+                                // Vibrancy pulse: gentle swing, stays colorful not white
+                                shellUniforms[i].uGlowIntensity.value = defaultGlow + pulseAmt * 0.5;
+                                // ActiveGlow pulse: kept low to avoid white wash
+                                glowTarget = Math.max(glowTarget, pulseAmt * 0.2);
+                            } else {
+                                var targetGI = defaultGlow + scrollGlowBoost;
+                                shellUniforms[i].uGlowIntensity.value += (targetGI - shellUniforms[i].uGlowIntensity.value) * 0.08;
+                            }
+                        }
+
+                        // Glow lerp speed: fast during intro ripple, slower for OSI group
+                        var introRippleActive = (isBioOrGW && bangProgress > 0.05 && bangProgress < 0.99 && activeLayerIndex < 0 && !osiGlow);
+                        var glowLerpIn = osiGlow ? 0.02 : (introRippleActive ? 0.12 : 0.03);
+                        var glowLerp = (glowTarget > shellUniforms[i].uActiveGlow.value) ? glowLerpIn : 0.06;
                         shellUniforms[i].uActiveGlow.value +=
                             (glowTarget - shellUniforms[i].uActiveGlow.value) * glowLerp;
 
@@ -2626,7 +2819,9 @@
                         var labelScale = scaleXZ * 0.82;
                         lm.scale.set(labelScale, labelScale, 1);
                         // Fade in with cubic ease — text appears after disc mostly faces camera
-                        var labelOpacity = Math.pow(Math.max(0, faceAmt - 0.3) / 0.7, 2.5) * 0.85;
+                        // Hide individual silicon labels during OSI group mode
+                        var hideLabel = (activeGroupMode === 'osi' && isSilicon);
+                        var labelOpacity = hideLabel ? 0 : Math.pow(Math.max(0, faceAmt - 0.3) / 0.7, 2.5) * 0.85;
                         lm.material.opacity = labelOpacity;
                     }
 
