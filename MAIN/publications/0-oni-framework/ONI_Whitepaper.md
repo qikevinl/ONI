@@ -27,6 +27,7 @@ Independent Researcher | qikevinl@github
 10. [Regulatory Alignment](#10-regulatory-alignment)
 11. [Quantum-Ready Security](#11-quantum-ready-security)
 12. [Conclusion](#12-conclusion)
+    - [12.4 Toward Formal Standardization](#124-toward-formal-standardization)
 13. [References](#13-references)
 
 ---
@@ -41,9 +42,11 @@ Neuralink has implanted its N1 chip in human patients. Synchron's Stentrode is i
 
 **But there is no OSI model for the brain.**
 
-No standardized framework tells engineers which layer an attack targets, which signals to trust, or how to validate that a stimulation command is safe. No common vocabulary bridges the neuroscientist studying oscillatory synchronization and the security engineer building intrusion detection systems.
+No standardized framework tells engineers which layer an attack targets, which signals to trust, or how to validate that a stimulation command is safe. No common vocabulary bridges the neuroscientist studying oscillatory synchronization and the security engineer building intrusion detection systems. Every company — Neuralink, Synchron, Blackrock, Paradromics — is building its own proprietary stack, its own signal protocols, its own safety logic. There is no shared language, no interoperability, no way to compare one device's security posture against another's.
 
-The ONI Framework — **Open Neurosecurity Interoperability** — fills this gap.
+This is not a new problem. Before IEEE 802, every computer network was an island. Before TCP/IP, machines from different manufacturers couldn't talk to each other. The internet didn't become the internet until committees of engineers agreed on common standards. **The BCI industry today is where networking was in the 1970s — powerful technology, zero standardization.**
+
+The ONI Framework — **Open Neurosecurity Interoperability** — exists to change that.
 
 > *"Only life's most important connections deserve the most thought."*
 
@@ -107,6 +110,27 @@ This bidirectionality creates attack vectors that have no precedent in cybersecu
 ![Figure 8: BCI vs 5G Requirements](figures/fig8_bci_vs_5g_radar.png)
 
 *Figure 2. BCI requirements dramatically exceed 5G NR across every dimension — latency, reliability, power constraint, error consequence, security overhead, and feedback latency. BCIs operate under constraints no existing standard was designed for.*
+
+### 2.4 The Standardization Bottleneck
+
+The biggest bottleneck in BCI today is not just security — it is **standardization**.
+
+Every BCI company builds its own proprietary signal processing pipeline, its own safety validation, its own data formats. Neuralink's N1 chip speaks a different protocol than Synchron's Stentrode, which is incompatible with Blackrock's Utah array. A security researcher who finds a vulnerability in one system has no framework to describe whether the same class of vulnerability exists in others. A regulator evaluating one device has no common baseline to compare it against.
+
+This is exactly where computer networking was before standardization:
+
+| Era | Before Standard | After Standard | What Changed |
+|-----|----------------|---------------|--------------|
+| **Networking (1970s)** | Every manufacturer had proprietary protocols (IBM SNA, DECnet, AppleTalk) | OSI model (1983), TCP/IP suite | Engineers could reason about *layers*, not *vendors*. Any device could talk to any other. |
+| **Wireless (1990s)** | Proprietary wireless protocols, no interoperability | IEEE 802.11 (Wi-Fi), Bluetooth SIG | A single standard enabled an entire ecosystem. |
+| **Web (1990s)** | Competing document formats, browser wars | W3C standards (HTML, HTTP, CSS) | The open web became possible because everyone agreed on the format. |
+| **BCIs (today)** | **Every company builds its own stack** | **?** | **This is the problem ONI is designed to solve.** |
+
+The pattern is consistent: **transformative technology only scales when the industry agrees on a shared abstraction.** The OSI model didn't tell Cisco how to build a router — it told every engineer what a router *does*, which layer it operates at, and how to reason about its security. That shared vocabulary is what enabled the internet security industry to exist.
+
+ONI provides that same shared vocabulary for the brain. It doesn't prescribe implementation — it defines the layers, the boundaries, the metrics, and the threat surfaces. Any company can build to the ONI model, just as any manufacturer can build to TCP/IP.
+
+**The ultimate goal of the ONI Framework is not to be a product — it is to be the standard that makes an entire industry of neural security products possible.** ONI is designed as a proposal — a seed specification that could be submitted to formal standards bodies like IEEE and ISO/IEC, or serve as the foundation for a dedicated neurotech standards organization. The path from open research to ratified standard is long, but every successful standard started as someone's proposal.
 
 ---
 
@@ -638,9 +662,9 @@ This positions BCIs not as classical endpoints requiring encryption, but as pote
 
 ### 12.1 The Thesis
 
-Brain-computer interfaces are here. They are bidirectional, wireless, and connected to the cloud. They can read neural signals and write stimulation patterns directly to living tissue. And they have no universal security standard.
+Brain-computer interfaces are here. They are bidirectional, wireless, and connected to the cloud. They can read neural signals and write stimulation patterns directly to living tissue. And they have no universal security standard. Every company builds its own proprietary stack — incompatible, unauditable, and impossible to compare. The biggest bottleneck is not the technology. It is the absence of a shared language.
 
-The ONI Framework provides that standard.
+The ONI Framework provides that language.
 
 ### 12.2 What ONI Delivers
 
@@ -660,9 +684,24 @@ The ONI Framework provides that standard.
 
 > *"A world where brain-computer interfaces are as secure as they are powerful. Where neural data is protected by law and by design. Where the boundary between mind and machine is guarded by open standards, with security and privacy built in from inception."*
 
-The OSI model didn't prevent every network attack. But it gave the security community a shared language for reasoning about threats, building defenses, and coordinating response. It made the internet securable.
+The OSI model didn't prevent every network attack. But it gave the security community a shared language for reasoning about threats, building defenses, and coordinating response. It made the internet *securable*. Before OSI, every vendor's network was an island. After OSI, an entire industry could collaborate on defense.
 
-The ONI Framework does the same for the mind.
+The BCI industry is at that same inflection point. The technology works. The companies are building. But without a shared standard, every device is an island — and islands are indefensible.
+
+The ONI Framework does for the brain what OSI did for the network: it provides the common abstraction that makes a *field* possible, not just individual products. The ultimate goal is not a product — it is a standard that enables an entire ecosystem of neural security to emerge.
+
+### 12.4 Toward Formal Standardization
+
+ONI is an open research framework today. The long-term vision is formal standardization — the same path that TCP/IP, IEEE 802.11, and IEC 62443 traveled from research proposals to ratified standards that entire industries build upon.
+
+| Phase | Target Body | Scope | Milestone |
+|-------|-------------|-------|-----------|
+| **Phase 1: Community adoption** | Open source (current) | Build consensus around the 14-layer model, coherence metric, and threat taxonomy through open publication and peer review | ONI cited in BCI security research; community contributions to the framework |
+| **Phase 2: IEEE standardization** | IEEE Standards Association | Submit the technical layers (L1-L14 definitions, signal validation protocols, firewall architecture) as a proposed standard — modeled after IEEE 802 (networking) and IEEE 11073 (health device communication) | IEEE working group established for neural interface security |
+| **Phase 3: ISO/IEC governance** | ISO/IEC JTC 1 | Submit governance and compliance mapping (regulatory alignment, neuroethics integration, consent frameworks) for international standardization — complementing ISO 14971 (risk management) and IEC 62443 (industrial cybersecurity) | ISO/IEC standard for neurotechnology security governance |
+| **Phase 4: Dedicated neurotech body** | New or existing consortium | As the field matures, a dedicated neurotechnology standards organization — analogous to the Bluetooth SIG, Wi-Fi Alliance, or 3GPP — may be needed to maintain, extend, and certify compliance with neural security standards | Industry consortium for BCI interoperability and security certification |
+
+This roadmap is aspirational, not guaranteed. But the pattern is clear: every transformative technology eventually requires formal standardization, and the organizations that propose the initial framework shape the standards that follow. ONI's goal is to be that initial framework for neurosecurity.
 
 **The mind is the last frontier. We're making sure it's protected from day one.**
 
