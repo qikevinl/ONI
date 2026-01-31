@@ -557,9 +557,9 @@
         }
         .landing-options {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.8fr 1fr;
             gap: 20px;
-            max-width: 640px;
+            max-width: 700px;
             width: 100%;
         }
         .landing-card {
@@ -572,22 +572,40 @@
             text-align: center;
         }
         .landing-card:hover {
-            border-color: #58a6ff;
             background: rgba(22, 27, 34, 1);
             transform: translateY(-4px);
             box-shadow: 0 12px 40px rgba(0,0,0,0.4);
         }
-        .landing-card:first-child:hover {
+        .landing-card-primary {
+            border-color: rgba(240, 136, 62, 0.3);
+            position: relative;
+        }
+        .landing-card-primary::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 16px;
+            border: 1px solid rgba(240, 136, 62, 0.15);
+            animation: pulse-card 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes pulse-card {
+            0%, 100% { border-color: rgba(240, 136, 62, 0.15); box-shadow: 0 0 0 rgba(240,136,62,0); }
+            50% { border-color: rgba(240, 136, 62, 0.4); box-shadow: 0 0 20px rgba(240,136,62,0.08); }
+        }
+        .landing-card-primary:hover {
+            border-color: #f0883e;
+            box-shadow: 0 12px 40px rgba(240, 136, 62, 0.15);
+        }
+        .landing-card:last-child:hover {
             border-color: #58a6ff;
             box-shadow: 0 12px 40px rgba(88, 166, 255, 0.15);
         }
-        .landing-card:nth-child(2):hover {
-            border-color: #3fb950;
-            box-shadow: 0 12px 40px rgba(63, 185, 80, 0.15);
-        }
-        .landing-card:last-child:hover {
-            border-color: #f0883e;
-            box-shadow: 0 12px 40px rgba(240, 136, 62, 0.15);
+        .landing-card-sub {
+            font-size: 11px;
+            color: #8b949e;
+            margin-bottom: 12px;
+            letter-spacing: 0.03em;
         }
         .landing-card-icon {
             font-size: 48px;
@@ -610,15 +628,14 @@
             display: inline-block;
             margin-top: 16px;
             font-size: 11px;
-            color: #58a6ff;
             font-weight: 500;
             letter-spacing: 0.05em;
         }
-        .landing-card:nth-child(2) .landing-hint {
-            color: #3fb950;
+        .landing-card-primary .landing-hint {
+            color: #f0883e;
         }
         .landing-card:last-child .landing-hint {
-            color: #f0883e;
+            color: #58a6ff;
         }
         .landing-footer {
             margin-top: 32px;
@@ -999,9 +1016,9 @@
             color: #f0f6fc;
         }
         .scenario-desc {
-            font-size: 11px;
+            font-size: 12px;
             color: #8b949e;
-            line-height: 1.4;
+            line-height: 1.5;
         }
         .scenario-btns {
             display: flex;
@@ -1021,6 +1038,47 @@
         .scenario-btns button:hover { background: rgba(48,54,61,0.8); color: #f0f6fc; }
         .scenario-btns .primary { border-color: #58a6ff; color: #58a6ff; }
         .scenario-btns .primary:hover { background: rgba(88,166,255,0.15); }
+        .scenario-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            width: 0%;
+            background: #58a6ff;
+            border-radius: 0 1px 1px 0;
+        }
+
+        /* Hide control panel during guided tour */
+        body.scenario-active #control-panel { display: none !important; }
+
+        /* Tour annotation overlay */
+        .tour-annotation {
+            position: fixed;
+            z-index: 35;
+            background: rgba(13, 17, 23, 0.92);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 12px;
+            color: #c9d1d9;
+            max-width: 240px;
+            pointer-events: none;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .tour-annotation.hidden {
+            opacity: 0;
+            transform: translateY(8px);
+            pointer-events: none;
+        }
+        .annotation-label {
+            font-size: 9px;
+            letter-spacing: 0.15em;
+            color: #58a6ff;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
 
         /* Hide new panels in explorer/landing views */
         body.view-explorer #control-panel,
@@ -1103,31 +1161,25 @@
 
     <!-- Landing Screen -->
     <div id="landing-screen">
-        <div class="landing-label">NEUROSECURITY & ETHICS STANDARD</div>
+        <div class="landing-label">BCI SECURITY RESEARCH</div>
         <div class="landing-title">ONI Framework</div>
-        <div class="landing-sub">14-Layer Security Model for Brain-Computer Interfaces</div>
-        <div class="landing-prompt">Choose how to explore the framework</div>
-        <div class="landing-options" style="grid-template-columns:1fr 1fr 1fr">
-            <div class="landing-card" onclick="launchView('3d')">
-                <span class="landing-card-icon">🌐</span>
-                <h3>3D Model</h3>
-                <p>Interactive 3D visualization. Click layers to inspect them, inject signals, and see how threats are blocked at the Neural Gateway.</p>
-                <span class="landing-hint">Click &amp; rotate to explore &rarr;</span>
+        <div class="landing-sub">What happens when brain-computer interfaces have no security standard?</div>
+        <div class="landing-options">
+            <div class="landing-card landing-card-primary" onclick="launchScenario()">
+                <span class="landing-card-icon">&#9654;&#65039;</span>
+                <h3>See the Problem</h3>
+                <div class="landing-card-sub">2-minute interactive walkthrough</div>
+                <p>Watch how signals travel from silicon to brain, see the firewall that protects neural tissue, and discover the attack that bypasses it.</p>
+                <span class="landing-hint">Start the Experience &rarr;</span>
             </div>
             <div class="landing-card" onclick="launchView('explorer')">
-                <span class="landing-card-icon">📋</span>
-                <h3>Layer Explorer</h3>
-                <p>Scrollable reference with every layer's details, threat vectors, and defenses &mdash; all 14 layers at a glance.</p>
-                <span class="landing-hint">Read &amp; scroll through layers &rarr;</span>
-            </div>
-            <div class="landing-card" onclick="launchScenario()" style="border-color:rgba(240,136,62,0.3)">
-                <span class="landing-card-icon">🎯</span>
-                <h3>Guided Tour</h3>
-                <p>6-step walkthrough: see a normal signal pass, a threat blocked, and a dangerous attack slip through &mdash; learn why ONI matters.</p>
-                <span class="landing-hint" style="color:#f0883e">Start the tour &rarr;</span>
+                <span class="landing-card-icon">&#128203;</span>
+                <h3>Layer Reference</h3>
+                <p>All 14 layers, 46 threat signatures, and defense mappings. For researchers and security engineers.</p>
+                <span class="landing-hint">Browse Layers &rarr;</span>
             </div>
         </div>
-        <div class="landing-footer">You can switch views anytime using the toggle in the header</div>
+        <div class="landing-footer">You can switch views anytime from the header</div>
     </div>
 
     <!-- Header -->
@@ -1139,8 +1191,8 @@
         </div>
         <div class="header-right">
             <div class="view-toggle">
-                <button class="view-btn active" data-view="3d" onclick="switchView('3d')">3D Model</button>
-                <button class="view-btn" data-view="explorer" onclick="switchView('explorer')">Layer Explorer</button>
+                <button class="view-btn active" data-view="3d" onclick="switchView('3d')">3D View</button>
+                <button class="view-btn" data-view="explorer" onclick="switchView('explorer')">Layer Reference</button>
             </div>
             <div class="header-divider"></div>
             <div class="header-stat">
@@ -1194,11 +1246,12 @@
     <!-- Control Panel -->
     <div id="control-panel">
         <div>
-            <div class="cp-section-label">DIRECTION</div>
+            <div class="cp-section-label">SIGNAL DIRECTION</div>
             <div class="cp-row">
                 <button class="cp-btn active" id="cp-dir-write" onclick="setDirection('write')">WRITE (L1&rarr;L14)</button>
                 <button class="cp-btn" id="cp-dir-read" onclick="setDirection('read')">READ (L14&rarr;L1)</button>
             </div>
+            <div style="font-size:9px;color:#484f58;margin-top:4px;line-height:1.3">WRITE = device&rarr;brain &nbsp;|&nbsp; READ = brain&rarr;device</div>
         </div>
         <div>
             <div class="cp-section-label">QUICK INJECT</div>
@@ -1209,7 +1262,15 @@
             </div>
         </div>
         <div>
-            <div class="cp-section-label">ATTACK INJECTION</div>
+            <div class="cp-section-label">SCENARIO PRESETS</div>
+            <div class="cp-row">
+                <button class="cp-btn" onclick="runPreset('stealth')" title="T7.3 + T14.4 — both pass the firewall">Stealth</button>
+                <button class="cp-btn" onclick="runPreset('brute')" title="T4.1 + T9.1 — both rejected hard">Brute Force</button>
+                <button class="cp-btn" onclick="runPreset('spoof')" title="T8.3 + T12.4 — one passes, one flagged">Spoofing</button>
+            </div>
+        </div>
+        <div>
+            <div class="cp-section-label">ATTACK INJECTION <span style="font-weight:400;color:#484f58">(46 attacks)</span></div>
             <select id="cp-attack-select" class="cp-select">
                 <option value="">-- Select an attack --</option>
             </select>
@@ -1272,7 +1333,11 @@
             <button class="primary" onclick="scenarioNext()" id="scenario-next-btn">Next</button>
             <button onclick="scenarioExit()">Exit</button>
         </div>
+        <div class="scenario-progress" id="scenario-progress"></div>
     </div>
+
+    <!-- Tour Annotation -->
+    <div id="tour-annotation" class="tour-annotation hidden"></div>
 
     <!-- Control Panel FAB (mobile) -->
     <div id="control-panel-fab" onclick="toggleMobileCP()">&#9881;</div>
@@ -2676,6 +2741,28 @@
         if (cp) cp.classList.toggle('mobile-open');
     }
 
+    function runPreset(preset) {
+        if (preset === 'stealth') {
+            injectAttackById('T7.3');
+            setTimeout(function() { injectAttackById('T14.4'); }, 1500);
+        } else if (preset === 'brute') {
+            injectAttackById('T4.1');
+            setTimeout(function() { injectAttackById('T9.1'); }, 1500);
+        } else if (preset === 'spoof') {
+            injectAttackById('T8.3');
+            setTimeout(function() { injectAttackById('T12.4'); }, 1500);
+        }
+    }
+
+    function injectAttackById(id) {
+        var profile = ATTACK_PROFILES[id];
+        if (!profile) return;
+        createSignalGlobal('attack', profile.dir || cpDirection, {
+            attackId: id, pV: profile.pV, tV: profile.tV, gV: profile.gV,
+            auth: profile.auth, narrative: profile.narrative
+        });
+    }
+
     // Global references (set after 3D init)
     var createSignalGlobal = function() {};
     var ATTACK_PROFILES = {};
@@ -2705,22 +2792,93 @@
     var scenarioTimer = null;
 
     var SCENARIO_STEPS = [
-        { title: 'The 14 Layers', desc: 'Three zones: Silicon (L1-L7) for networking, the L8 Gateway firewall, and Biology (L9-L14) for cognition.', duration: 6000 },
-        { title: 'Normal Signal', desc: 'A WRITE signal travels from L1 inward toward the brain core. Watch it pass through each shell.', duration: 6000 },
-        { title: 'The Coherence Check', desc: 'Every signal pauses at L8 for inspection. The coherence gauge shows C\u209B = e^(\u2212(\u03C3\u00B2\u03C6 + \u03C3\u00B2\u03C4 + \u03C3\u00B2\u03B3)).', duration: 8000 },
-        { title: 'Threat Blocked', desc: 'A threat signal has high variance = low coherence. L8 rejects it with a red flash.', duration: 6000 },
-        { title: 'A Dangerous Attack', desc: 'T8.3 Coherence Spoofing forges a valid C\u209B score. It PASSES the gateway \u2014 this is why ongoing research matters.', duration: 8000 },
-        { title: 'Your Turn', desc: 'Use the control panel on the right to inject signals, select attacks, and tune variance. Explore freely!', duration: 0 }
+        {
+            title: 'The Problem',
+            desc: 'Brain-computer interfaces are here. Neuralink, Synchron, and Blackrock Microsystems connect silicon directly to living neural tissue. But there is no security standard protecting the boundary between machine and mind.',
+            duration: 8000,
+            action: null,
+            annotation: null
+        },
+        {
+            title: 'A Signal Enters',
+            desc: 'Every BCI command is a signal traveling from silicon hardware (the outer blue shells) inward through 14 layers toward the brain core. Watch this normal, authenticated signal pass through.',
+            duration: 7000,
+            action: function() { createSignalGlobal('normal', 'write'); },
+            annotation: { label: 'L1 PHYSICAL', text: 'Where signals enter the stack', x: '18%', y: '35%' }
+        },
+        {
+            title: 'The Firewall',
+            desc: 'Layer 8 \u2014 the Neural Gateway \u2014 is the critical boundary between silicon and biology. Every signal pauses here for inspection. The coherence metric measures phase stability, transport timing, and gain consistency.',
+            duration: 9000,
+            action: function() { createSignalGlobal('normal', 'write', { narrative: 'Authenticated signal. Low variance across all three channels. This signal is safe.' }); },
+            annotation: { label: 'L8 NEURAL GATEWAY', text: 'The firewall \u2014 every signal stops here', x: '18%', y: '45%' }
+        },
+        {
+            title: 'Threat Rejected',
+            desc: 'Now watch a malicious signal. High variance across all three channels produces a low coherence score. The gateway blocks it \u2014 the signal never reaches neural tissue.',
+            duration: 8000,
+            action: function() { createSignalGlobal('threat', 'write', { narrative: 'Threat detected: high variance = low coherence = REJECTED. Signal destroyed at the gateway.' }); },
+            annotation: { label: 'BLOCKED', text: 'High variance = low trust = rejected', x: '18%', y: '45%', color: '#f85149' }
+        },
+        {
+            title: 'The Attack That Gets Through',
+            desc: 'T8.3: Coherence Metric Spoofing. This attack forges low-variance readings to produce a valid coherence score. Watch carefully \u2014 it passes the gateway. This attack reaches the brain. This is why this research exists.',
+            duration: 10000,
+            action: function() {
+                createSignalGlobal('attack', 'write', {
+                    attackId: 'T8.3', pV: 0.03, tV: 0.04, gV: 0.02, auth: true,
+                    narrative: 'DANGER: T8.3 Coherence Spoofing. Forged variance readings produce valid score. This attack passes the firewall.'
+                });
+            },
+            annotation: { label: 'DANGER', text: 'Forged coherence \u2014 PASSES inspection', x: '18%', y: '45%', color: '#f85149' }
+        },
+        {
+            title: 'A Complete Threat Taxonomy',
+            desc: 'The ONI Framework maps 46 attack techniques across 10 MITRE ATT&CK-aligned tactics to specific layers. From EM side-channel capture at L1 to brainprint theft at L14. Each has a unique variance profile.',
+            duration: 8000,
+            action: function() {
+                createSignalGlobal('attack', 'write', {
+                    attackId: 'T7.3', pV: 0.05, tV: 0.04, gV: 0.03, auth: true,
+                    narrative: 'T7.3 Brain Spyware: looks normal, silently exfiltrates neural data'
+                });
+                setTimeout(function() {
+                    createSignalGlobal('attack', 'read', {
+                        attackId: 'T14.4', pV: 0.02, tV: 0.02, gV: 0.01, auth: true,
+                        narrative: 'T14.4 Brainprint Theft: neural identity extraction \u2014 invisible to coherence alone'
+                    });
+                }, 2500);
+            },
+            annotation: null
+        },
+        {
+            title: 'An Open Standard',
+            desc: 'The ONI Framework extends OSI into the biological domain \u2014 creating the first unified security language for brain-computer interfaces. 14 layers. 46 threat signatures. A mathematical coherence metric. Open-source.',
+            duration: 8000,
+            action: null,
+            annotation: { label: '', text: '14 Layers. 46 Threats. 1 Standard.', x: '50%', y: '50%', center: true }
+        },
+        {
+            title: 'Your Turn',
+            desc: 'Inject signals, launch attacks, tune variance parameters. Click any layer shell for details. Switch to Layer Reference in the header for the complete taxonomy.',
+            duration: 0,
+            action: function() {
+                document.body.classList.remove('scenario-active');
+                autoSignalsEnabled = true;
+                var autoCheck = document.getElementById('cp-auto');
+                if (autoCheck) autoCheck.checked = true;
+            },
+            annotation: null
+        }
     ];
 
     function launchScenario() {
         document.getElementById('landing-screen').classList.add('hidden');
         document.body.classList.remove('view-landing');
+        document.body.classList.add('scenario-active');
         switchView('3d');
         scenarioActive = true;
         scenarioStep = 0;
         document.getElementById('scenario-bar').classList.add('active');
-        // Disable auto signals during scenario
         autoSignalsEnabled = false;
         var autoCheck = document.getElementById('cp-auto');
         if (autoCheck) autoCheck.checked = false;
@@ -2733,7 +2891,7 @@
             return;
         }
         var step = SCENARIO_STEPS[scenarioStep];
-        document.getElementById('scenario-title').textContent = 'Step ' + (scenarioStep + 1) + ': ' + step.title;
+        document.getElementById('scenario-title').textContent = step.title;
         document.getElementById('scenario-desc').textContent = step.desc;
 
         // Update dots
@@ -2747,24 +2905,30 @@
         }
         dotsEl.innerHTML = dotsHtml;
 
-        // Execute step actions
-        if (scenarioStep === 1 && oni3dInitialized) {
-            createSignalGlobal('normal', 'write');
-        } else if (scenarioStep === 2 && oni3dInitialized) {
-            createSignalGlobal('normal', 'write', { narrative: 'Normal signal: low variance, authenticated \u2192 high coherence' });
-        } else if (scenarioStep === 3 && oni3dInitialized) {
-            createSignalGlobal('threat', 'write', { narrative: 'Threat signal: high variance \u2192 low coherence \u2192 REJECTED' });
-        } else if (scenarioStep === 4 && oni3dInitialized) {
-            var profile = { pV: 0.03, tV: 0.04, gV: 0.02, auth: true, narrative: 'T8.3 Coherence Spoofing: forged C\u209B passes inspection! This is why this attack is dangerous.' };
-            createSignalGlobal('attack', 'write', {
-                attackId: 'T8.3',
-                pV: profile.pV, tV: profile.tV, gV: profile.gV,
-                auth: profile.auth, narrative: profile.narrative
-            });
-        } else if (scenarioStep === 5) {
-            autoSignalsEnabled = true;
-            var autoCheck = document.getElementById('cp-auto');
-            if (autoCheck) autoCheck.checked = true;
+        // Execute step action
+        if (step.action && oni3dInitialized) {
+            step.action();
+        }
+
+        // Show annotation
+        hideAnnotation();
+        if (step.annotation) {
+            setTimeout(function() { showAnnotation(step.annotation); }, 800);
+        }
+
+        // Progress bar animation
+        var progBar = document.getElementById('scenario-progress');
+        if (progBar) {
+            progBar.style.transition = 'none';
+            progBar.style.width = '0%';
+            if (step.duration > 0) {
+                requestAnimationFrame(function() {
+                    requestAnimationFrame(function() {
+                        progBar.style.transition = 'width ' + step.duration + 'ms linear';
+                        progBar.style.width = '100%';
+                    });
+                });
+            }
         }
 
         // Auto-advance (except last step)
@@ -2780,8 +2944,40 @@
         if (nextBtn) nextBtn.textContent = scenarioStep === SCENARIO_STEPS.length - 1 ? 'Finish' : 'Next';
     }
 
+    function showAnnotation(opts) {
+        var el = document.getElementById('tour-annotation');
+        if (!el) return;
+        var labelHtml = opts.label ? '<div class="annotation-label">' + opts.label + '</div>' : '';
+        el.innerHTML = labelHtml + '<div>' + opts.text + '</div>';
+        el.style.borderColor = opts.color ? opts.color + '66' : 'rgba(88,166,255,0.3)';
+        if (opts.center) {
+            el.style.left = '50%';
+            el.style.top = '50%';
+            el.style.transform = 'translate(-50%, -50%)';
+            el.style.textAlign = 'center';
+            el.style.fontSize = '16px';
+            el.style.fontWeight = '600';
+            el.style.color = '#f0f6fc';
+        } else {
+            el.style.left = opts.x || '18%';
+            el.style.top = opts.y || '45%';
+            el.style.transform = 'translateY(-50%)';
+            el.style.textAlign = 'left';
+            el.style.fontSize = '12px';
+            el.style.fontWeight = '400';
+            el.style.color = '#c9d1d9';
+        }
+        el.classList.remove('hidden');
+    }
+
+    function hideAnnotation() {
+        var el = document.getElementById('tour-annotation');
+        if (el) el.classList.add('hidden');
+    }
+
     function scenarioNext() {
         if (scenarioTimer) clearTimeout(scenarioTimer);
+        hideAnnotation();
         scenarioStep++;
         if (scenarioStep >= SCENARIO_STEPS.length) {
             scenarioExit();
@@ -2792,14 +2988,19 @@
 
     function scenarioSkip() {
         if (scenarioTimer) clearTimeout(scenarioTimer);
+        hideAnnotation();
         scenarioStep = SCENARIO_STEPS.length - 1;
         runScenarioStep();
     }
 
     function scenarioExit() {
         if (scenarioTimer) clearTimeout(scenarioTimer);
+        hideAnnotation();
         scenarioActive = false;
+        document.body.classList.remove('scenario-active');
         document.getElementById('scenario-bar').classList.remove('active');
+        var progBar = document.getElementById('scenario-progress');
+        if (progBar) { progBar.style.transition = 'none'; progBar.style.width = '0%'; }
         autoSignalsEnabled = true;
         var autoCheck = document.getElementById('cp-auto');
         if (autoCheck) autoCheck.checked = true;
