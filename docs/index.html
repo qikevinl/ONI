@@ -370,6 +370,26 @@
             max-width: 480px;
         }
 
+        .hero-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            font-weight: 400;
+            margin-bottom: 1.25rem;
+            max-width: 520px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.35rem 0.85rem;
+            background: rgba(148, 163, 184, 0.1);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            border-radius: 6px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            letter-spacing: 0.02em;
+            margin-bottom: 1.5rem;
+        }
+
         .hero-actions {
             display: flex;
             gap: 1rem;
@@ -734,6 +754,7 @@
         @media (max-width: 900px) {
             .hero-inner { grid-template-columns: 1fr; text-align: center; }
             .hero-content h1 { font-size: 2.5rem; }
+            .hero-subtitle { margin: 0 auto 1.25rem; }
             .hero-desc { margin: 0 auto 2rem; }
             .hero-actions { justify-content: center; }
             .layer-pills { justify-content: center; }
@@ -1133,20 +1154,25 @@
 
         <div class="hero-inner" style="position: relative; z-index: 1;">
             <div class="hero-content">
-                <p data-aos="fade-down" data-aos-delay="100" style="font-size: 0.9rem; color: var(--accent-cyan); font-weight: 600; letter-spacing: 0.1em; margin-bottom: 0.5rem;">NEUROETHICS & NEURAL SECURITY</p>
+                <p data-aos="fade-down" data-aos-delay="100" style="font-size: 0.9rem; color: var(--accent-cyan); font-weight: 600; letter-spacing: 0.1em; margin-bottom: 0.5rem;">OPEN-SOURCE BCI SECURITY RESEARCH</p>
                 <h1 data-aos="fade-up" data-aos-delay="200"><span>ONI</span> Framework</h1>
                 <p class="hero-tagline" data-aos="fade-up" data-aos-delay="300"><em>"The OSI of Mind"</em></p>
+                <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="350">A 14-layer reference model for brain-computer interface security and neuroethics</p>
 
                 <p class="hero-desc" data-aos="fade-up" data-aos-delay="400">
-                    A neuroethics-first framework for brain-computer interface security. 14 layers. 10 governance documents. Open and inviting scrutiny.
+                    Just as the OSI model standardized how computers communicate over networks, ONI proposes a layered model for how brain-computer interfaces should be secured &mdash; from the physical electrode to cognitive identity. Independent research by Kevin Qi. Open-source. Inviting scrutiny.
                 </p>
+
+                <div data-aos="fade-up" data-aos-delay="450">
+                    <span class="status-badge">Status: Independent Research &mdash; Pre-Peer-Review</span>
+                </div>
 
                 <div class="hero-actions" data-aos="fade-up" data-aos-delay="500">
                     <a href="whitepaper/" class="btn btn-primary">
                         Read Whitepaper
                     </a>
                     <a href="#research-statement" class="btn btn-secondary">
-                        Research Statement
+                        About This Research
                     </a>
                 </div>
 
@@ -1196,6 +1222,46 @@
                     <a href="https://github.com/qikevinl/ONI/blob/main/ABOUT.md" class="btn btn-secondary" style="font-size: 0.9rem;">About the Researcher</a>
                     <a href="#research-statement" class="btn btn-secondary" style="font-size: 0.9rem;">Research Statement</a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Where to Start Section -->
+    <section class="section" id="where-to-start" style="padding: 4rem 2rem;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Where to Start</h2>
+                <p>ONI serves different needs &mdash; find your path</p>
+            </div>
+            <div class="resources-grid" data-aos="fade-up" data-aos-delay="200">
+                <a href="visualizations/06-oni-threat-matrix.html" class="resource-card">
+                    <div class="icon" style="background: var(--accent-blue);"><span>S</span></div>
+                    <div>
+                        <h4>BCI Developers & Security</h4>
+                        <p>Use the 14-layer model to map threats and defenses for neural interfaces.</p>
+                    </div>
+                </a>
+                <a href="#governance" class="resource-card">
+                    <div class="icon" style="background: var(--accent-emerald);"><span>E</span></div>
+                    <div>
+                        <h4>Ethicists & Regulators</h4>
+                        <p>See how ONI maps to UNESCO recommendations, neurorights frameworks, and FDA guidance.</p>
+                    </div>
+                </a>
+                <a href="visualizations/" class="resource-card">
+                    <div class="icon" style="background: var(--accent-purple);"><span>T</span></div>
+                    <div>
+                        <h4>Professors & Students</h4>
+                        <p>Interactive tools for teaching BCI security concepts in the classroom.</p>
+                    </div>
+                </a>
+                <a href="whitepaper/" class="resource-card">
+                    <div class="icon" style="background: var(--accent-cyan);"><span>D</span></div>
+                    <div>
+                        <h4>Deep Dive</h4>
+                        <p>Read the whitepaper, explore the math, review the Python implementation.</p>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -1292,12 +1358,12 @@
 
         <div class="stats-row" data-aos="fade-up">
             <a href="visualizations/06-oni-threat-matrix.html" class="stat" data-aos="zoom-in" data-aos-delay="100">
-                <div class="stat-value" id="stat-threats" data-count="46" data-suffix="+">46+</div>
-                <div class="stat-label">Threat Signatures</div>
+                <div class="stat-value" id="stat-threats" data-count="46">46</div>
+                <div class="stat-label">Identified Threat Vectors</div>
             </a>
             <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/oni-framework/ONI_LAYERS.md" class="stat" data-aos="zoom-in" data-aos-delay="200">
                 <div class="stat-value" id="stat-layers" data-count="14">14</div>
-                <div class="stat-label">Layers</div>
+                <div class="stat-label">Security Layers</div>
             </a>
             <a href="visualizations/" class="stat" data-aos="zoom-in" data-aos-delay="300">
                 <div class="stat-value" id="stat-tools" data-count="10">10</div>
@@ -1305,12 +1371,12 @@
             </a>
             <a href="https://github.com/qikevinl/ONI/wiki" class="stat" data-aos="zoom-in" data-aos-delay="400">
                 <div class="stat-value" id="stat-portals" data-count="1">1</div>
-                <div class="stat-label">Framework</div>
+                <div class="stat-label">Open Framework</div>
             </a>
-            <div class="stat" data-aos="zoom-in" data-aos-delay="500">
-                <div class="stat-value" style="font-size: 2.5rem;">∞</div>
-                <div class="stat-label">Possibilities</div>
-            </div>
+            <a href="#governance" class="stat" data-aos="zoom-in" data-aos-delay="500">
+                <div class="stat-value" data-count="9">9</div>
+                <div class="stat-label">Governance Docs</div>
+            </a>
         </div>
 
     </section>
@@ -1334,7 +1400,7 @@
                     <div class="icon" style="background: var(--accent-emerald);"><span>UN</span></div>
                     <div>
                         <h4>UNESCO Alignment</h4>
-                        <p>UNESCO Recommendation on Ethics of Neurotechnology (2025) — 15 of 17 elements implemented.</p>
+                        <p>UNESCO Recommendation on Ethics of Neurotechnology (2025) — 15 of 17 elements addressed.</p>
                     </div>
                 </a>
                 <a href="https://github.com/qikevinl/ONI/blob/main/MAIN/governance/REGULATORY_COMPLIANCE.md" class="resource-card">
@@ -2282,7 +2348,7 @@
                 if (brand.stats && typeof brand.stats === 'object') {
                     const manualStats = {
                         'stat-layers': { value: sanitizeNumber(brand.stats.security_layers, 1, 100), suffix: '' },
-                        'stat-threats': { value: sanitizeNumber(brand.stats.threat_signatures, 1, 1000), suffix: '+' },
+                        'stat-threats': { value: sanitizeNumber(brand.stats.threat_signatures, 1, 1000), suffix: '' },
                         'stat-portals': { value: sanitizeNumber(brand.stats.learning_portals, 1, 100), suffix: '' }
                     };
                     for (const [id, config] of Object.entries(manualStats)) {
