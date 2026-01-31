@@ -81,7 +81,7 @@ This principle is well-established across multiple domains:
 
 ### Application to Neural Defense
 
-In the ONI framework, destructive interference extends naturally to BCI security:
+In the ONI framework, destructive interference extends naturally to neurosecurity:
 
 1. **Baseline establishment** — A patient's authentic neural signature is decomposed into its Fourier components, establishing per-channel frequency, amplitude, and phase baselines
 2. **Injection detection** — Incoming signals are decomposed via Short-Time FFT; components deviating from baseline are flagged as potential injections

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ONI Model | Neural Security Standard</title>
     <meta name="description" content="BCIs are being implanted in humans today — with no security standard. ONI is building one. 14 layers extending OSI into the biological domain.">
-    <meta name="keywords" content="BCI security, neural interface, brain-computer interface, neurosecurity, ONI model, neural security standard, neuroethics">
+    <meta name="keywords" content="neurosecurity, neural interface, brain-computer interface, neurosecurity, ONI model, neural security standard, neuroethics">
 
     <!-- Content Security Policy -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' https: data:; connect-src 'self' https://raw.githubusercontent.com https://api.github.com; font-src 'self';">
@@ -37,7 +37,15 @@
             --text-primary: #f1f5f9;
             --text-secondary: #94a3b8;
             --text-muted: #64748b;
+            --text-quaternary: #475569;
             --border: #1e293b;
+            /* Typography scale */
+            --font-display: 4rem;
+            --font-h1: 2.5rem;
+            --font-h2: 2rem;
+            --font-h3: 1.25rem;
+            --font-body: 1rem;
+            --font-caption: 0.85rem;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -342,7 +350,7 @@
         }
 
         .hero-content h1 {
-            font-size: 3.5rem;
+            font-size: var(--font-display);
             font-weight: 700;
             letter-spacing: -0.03em;
             line-height: 1.1;
@@ -802,17 +810,9 @@
             animation: gradient-shift 6s ease infinite;
         }
 
-        /* Floating animation for pills */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-6px); }
-        }
-
-        .pill {
-            animation: float 3s ease-in-out infinite;
-        }
-        .pill:nth-child(2) { animation-delay: 0.5s; }
-        .pill:nth-child(3) { animation-delay: 1s; }
+        /* Pills - static, clickable */
+        .pill { cursor: pointer; transition: all 0.2s; }
+        .pill:hover { transform: translateY(-2px); filter: brightness(1.2); }
 
         /* Pulse animation for stats */
         @keyframes pulse-glow {
@@ -854,68 +854,11 @@
             position: relative;
         }
 
-        /* Animated background gradient for hero */
+        /* Static hero background gradient */
         .hero {
             background:
                 radial-gradient(ellipse at 30% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.04) 0%, transparent 60%);
-            animation: bg-pulse 8s ease-in-out infinite alternate;
-        }
-
-        @keyframes bg-pulse {
-            0% {
-                background:
-                    radial-gradient(ellipse at 30% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-                    radial-gradient(ellipse at 70% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
-                    radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.04) 0%, transparent 60%);
-            }
-            100% {
-                background:
-                    radial-gradient(ellipse at 40% 30%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-                    radial-gradient(ellipse at 60% 70%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-                    radial-gradient(ellipse at 50% 50%, rgba(236, 72, 153, 0.05) 0%, transparent 60%);
-            }
-        }
-
-        /* Typing cursor effect */
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        .hero-desc::after {
-            content: '|';
-            animation: blink 1s step-end infinite;
-            margin-left: 2px;
-            color: var(--accent-cyan);
-        }
-
-        /* Neural network dots animation in background */
-        .neural-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .neural-dot {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--accent-blue);
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: neural-pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes neural-pulse {
-            0%, 100% { transform: scale(1); opacity: 0.2; }
-            50% { transform: scale(1.5); opacity: 0.5; }
+                radial-gradient(ellipse at 70% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 50%);
         }
 
         /* Text reveal animation - left to right */
@@ -1127,30 +1070,269 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
+
+        /* ============================================
+           TAB SYSTEM
+           ============================================ */
+        .tab-nav {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .tab-btn {
+            padding: 0.875rem 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+        .tab-btn:hover { color: var(--text-secondary); }
+        .tab-btn.active {
+            color: var(--text-primary);
+            border-bottom-color: var(--accent-blue);
+        }
+        .tab-panel { display: none; }
+        .tab-panel.active {
+            display: block;
+            animation: fadeIn 0.25s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================================
+           ACCORDION / DETAILS
+           ============================================ */
+        .oni-details {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
+            overflow: hidden;
+            background: var(--bg-card);
+        }
+        .oni-details summary {
+            cursor: pointer;
+            padding: 1rem 1.25rem;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: background 0.2s;
+        }
+        .oni-details summary::-webkit-details-marker { display: none; }
+        .oni-details summary::before {
+            content: '\25B8';
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+        .oni-details[open] summary::before { transform: rotate(90deg); }
+        .oni-details summary:hover { background: rgba(255,255,255,0.02); }
+        .oni-details .details-body {
+            padding: 0 1.25rem 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           BENTO GRID
+           ============================================ */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 1.5rem;
+        }
+        .bento-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.75rem;
+        }
+        .bento-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        .bento-card-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Audience pills */
+        .audience-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .audience-pill {
+            padding: 0.5rem 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Doc group accordion */
+        .doc-group summary {
+            font-size: 0.9rem;
+            padding: 0.6rem 0;
+            border: none;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        .doc-group {
+            border: none;
+            background: none;
+            margin-bottom: 0;
+        }
+        .doc-group a {
+            display: block;
+            padding: 0.4rem 0 0.4rem 1.25rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+        .doc-group a:hover { color: var(--accent-cyan); }
+
+        /* ============================================
+           SCROLL PROGRESS
+           ============================================ */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            z-index: 200;
+            width: 0%;
+            transition: width 0.05s linear;
+        }
+
+        /* ============================================
+           MOBILE HAMBURGER
+           ============================================ */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 101;
+        }
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text-primary);
+            margin: 5px 0;
+            transition: all 0.3s;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        @media (max-width: 900px) {
+            .hamburger { display: block; }
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 280px;
+                height: 100vh;
+                background: rgba(10, 15, 26, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 5rem 2rem 2rem;
+                gap: 1.5rem;
+                border-left: 1px solid var(--border);
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .bento-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Active nav link */
+        .nav-links a.active {
+            color: var(--text-primary);
+        }
+
+        /* ============================================
+           REDUCED MOTION
+           ============================================ */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Footer CTA row */
+        .footer-cta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem 0;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .footer-cta a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .footer-cta a:hover { color: var(--accent-blue); }
     </style>
 </head>
 <body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
     <!-- Hyperspeed Starfield Background -->
     <canvas id="hyperspeed-canvas"></canvas>
     <nav>
         <div class="nav-inner">
-            <a href="#" class="nav-logo">Neurosecurity &amp; Ethics</a>
-            <ul class="nav-links">
-                <li><a href="#research-mission">Mission</a></li>
-                <li><a href="#governance">Ethics</a></li>
-                <li><a href="#research-statement">Research</a></li>
-                <li><a href="#explore">Explore</a></li>
-                <li><a href="#vision">Roadmap</a></li>
+            <a href="#" class="nav-logo" id="nav-logo-text">ONI</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#install" data-section="install">Framework</a></li>
+                <li><a href="#explore" data-section="explore">Explore</a></li>
+                <li><a href="#research-statement" data-section="research-statement">Research</a></li>
                 <li><a href="documentation/">Docs</a></li>
-                <li><a href="https://github.com/qikevinl/ONI">GitHub</a></li>
+                <li><a href="https://github.com/qikevinl/ONI" style="display:inline-flex;align-items:center;">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                </a></li>
                 <li><a href="visualizations/08-oni-framework-viz.html" class="nav-model">ONI Explorer</a></li>
             </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
     <section class="hero">
-        <!-- Animated neural network background dots -->
-        <div class="neural-bg" id="neuralBg"></div>
 
         <div class="hero-inner" style="position: relative; z-index: 1;">
             <div class="hero-content">
@@ -1252,7 +1434,7 @@
                     <div class="icon" style="background: var(--accent-purple);"><span>T</span></div>
                     <div>
                         <h4>Professors & Students</h4>
-                        <p>Interactive tools for teaching BCI security concepts in the classroom.</p>
+                        <p>Interactive tools for teaching neurosecurity concepts in the classroom.</p>
                     </div>
                 </a>
                 <a href="whitepaper/" class="resource-card">
@@ -1660,7 +1842,7 @@
                         between mind and machine is guarded by open standards, with security and privacy built in from inception.
                     </p>
                     <p id="vision-goal" style="color: var(--text-primary); font-weight: 500;">
-                        ONI takes a technical implementation approach — grounding BCI security in
+                        ONI takes a technical implementation approach — grounding neurosecurity in
                         current science, using the framework to identify what's missing, and applying
                         math and first principles to develop what comes next.
                     </p>
@@ -1705,10 +1887,10 @@
             </div>
             <div data-aos="fade-up" data-aos-delay="200" style="line-height: 1.8; color: var(--text-secondary);">
                 <h3 style="color: var(--accent-cyan); margin-bottom: 1rem; font-size: 1.1rem;">CORE MISSION</h3>
-                <p style="margin-bottom: 1.5rem;">Brain-computer interfaces are here — and the field lacks a universal security standard. I am building that standard, grounded in neuroethics, informed by neuroscience, and enforced through engineering. My research sits at the intersection of BCI security, neuroethics, and neural engineering.</p>
+                <p style="margin-bottom: 1.5rem;">Brain-computer interfaces are here — and the field lacks a universal security standard. I am building that standard, grounded in neuroethics, informed by neuroscience, and enforced through engineering. My research sits at the intersection of neurosecurity, neuroethics, and neural engineering.</p>
 
                 <h3 style="color: var(--accent-cyan); margin-bottom: 1rem; font-size: 1.1rem;">THE FRAMEWORK</h3>
-                <p style="margin-bottom: 1.5rem;">ONI extends the OSI networking model with 7 additional layers for neural and cognitive systems. It provides a shared vocabulary for BCI security across disciplines, technical enforcement of neurorights (cognitive liberty, mental privacy, mental integrity, psychological continuity), and governance frameworks aligned with UNESCO, FDA, and emerging neurorights legislation. <a href="whitepaper/" style="color: var(--accent-cyan);">Read the whitepaper</a> for the full technical overview.</p>
+                <p style="margin-bottom: 1.5rem;">ONI extends the OSI networking model with 7 additional layers for neural and cognitive systems. It provides a shared vocabulary for neurosecurity across disciplines, technical enforcement of neurorights (cognitive liberty, mental privacy, mental integrity, psychological continuity), and governance frameworks aligned with UNESCO, FDA, and emerging neurorights legislation. <a href="whitepaper/" style="color: var(--accent-cyan);">Read the whitepaper</a> for the full technical overview.</p>
 
                 <h3 style="color: var(--accent-cyan); margin-bottom: 1rem; font-size: 1.1rem;">WHAT I'VE BUILT</h3>
                 <ul style="margin-bottom: 1.5rem; padding-left: 1.5rem;">
@@ -1848,7 +2030,7 @@
                 <div class="icon" style="background: var(--accent-amber);"><span>R</span></div>
                 <div>
                     <h4>Related Work</h4>
-                    <p>Prior BCI security research. Kohno, Bonaci, and foundational contributions.</p>
+                    <p>Prior neurosecurity research. Kohno, Bonaci, and foundational contributions.</p>
                 </div>
             </a>
 
@@ -1889,7 +2071,7 @@
             <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center;">
                 <div style="font-size: 2rem; margin-bottom: 0.75rem;">🔬</div>
                 <h4 style="margin-bottom: 0.5rem;">Researchers</h4>
-                <p style="color: var(--text-muted); font-size: 0.85rem;">Academic teams studying BCI security, neuroethics, and neural engineering.</p>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">Academic teams studying neurosecurity, neuroethics, and neural engineering.</p>
             </div>
             <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center;">
                 <div style="font-size: 2rem; margin-bottom: 0.75rem;">💻</div>
