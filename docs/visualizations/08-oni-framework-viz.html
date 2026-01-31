@@ -557,9 +557,9 @@
         }
         .landing-options {
             display: grid;
-            grid-template-columns: 1.8fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 20px;
-            max-width: 700px;
+            max-width: 860px;
             width: 100%;
         }
         .landing-card {
@@ -593,13 +593,17 @@
             0%, 100% { border-color: rgba(240, 136, 62, 0.15); box-shadow: 0 0 0 rgba(240,136,62,0); }
             50% { border-color: rgba(240, 136, 62, 0.4); box-shadow: 0 0 20px rgba(240,136,62,0.08); }
         }
+        .landing-card:first-child:hover {
+            border-color: #58a6ff;
+            box-shadow: 0 12px 40px rgba(88, 166, 255, 0.15);
+        }
+        .landing-card:nth-child(2):hover {
+            border-color: #3fb950;
+            box-shadow: 0 12px 40px rgba(63, 185, 80, 0.15);
+        }
         .landing-card-primary:hover {
             border-color: #f0883e;
             box-shadow: 0 12px 40px rgba(240, 136, 62, 0.15);
-        }
-        .landing-card:last-child:hover {
-            border-color: #58a6ff;
-            box-shadow: 0 12px 40px rgba(88, 166, 255, 0.15);
         }
         .landing-card-sub {
             font-size: 11px;
@@ -631,11 +635,14 @@
             font-weight: 500;
             letter-spacing: 0.05em;
         }
+        .landing-card:first-child .landing-hint {
+            color: #58a6ff;
+        }
+        .landing-card:nth-child(2) .landing-hint {
+            color: #3fb950;
+        }
         .landing-card-primary .landing-hint {
             color: #f0883e;
-        }
-        .landing-card:last-child .landing-hint {
-            color: #58a6ff;
         }
         .landing-footer {
             margin-top: 32px;
@@ -1165,18 +1172,24 @@
         <div class="landing-title">ONI Framework</div>
         <div class="landing-sub">What happens when brain-computer interfaces have no security standard?</div>
         <div class="landing-options">
-            <div class="landing-card landing-card-primary" onclick="launchScenario()">
-                <span class="landing-card-icon">&#9654;&#65039;</span>
-                <h3>See the Problem</h3>
-                <div class="landing-card-sub">2-minute interactive walkthrough</div>
-                <p>Watch how signals travel from silicon to brain, see the firewall that protects neural tissue, and discover the attack that bypasses it.</p>
-                <span class="landing-hint">Start the Experience &rarr;</span>
+            <div class="landing-card" onclick="window.location.href='02-oni-layer-explorer.html'">
+                <span class="landing-card-icon">&#128196;</span>
+                <h3>Layer Overview</h3>
+                <p>The 14-layer model explained &mdash; function, capacity, attack surfaces, and defenses for each layer.</p>
+                <span class="landing-hint">Read the Layers &rarr;</span>
             </div>
             <div class="landing-card" onclick="launchView('explorer')">
                 <span class="landing-card-icon">&#128203;</span>
-                <h3>Layer Reference</h3>
-                <p>All 14 layers, 46 threat signatures, and defense mappings. For researchers and security engineers.</p>
-                <span class="landing-hint">Browse Layers &rarr;</span>
+                <h3>Interactive Explorer</h3>
+                <p>All 14 layers with 46 threat signatures, attack patterns, and defense mappings &mdash; filterable and searchable.</p>
+                <span class="landing-hint">Explore Layers &rarr;</span>
+            </div>
+            <div class="landing-card landing-card-primary" onclick="launchScenario()">
+                <span class="landing-card-icon">&#127912;</span>
+                <h3>3D Signal Simulator</h3>
+                <div class="landing-card-sub">2-minute interactive walkthrough</div>
+                <p>Watch signals travel from silicon to brain, see the firewall inspect them in real-time, and discover the attack that bypasses it.</p>
+                <span class="landing-hint">Start the Experience &rarr;</span>
             </div>
         </div>
         <div class="landing-footer">You can switch views anytime from the header</div>
@@ -1191,8 +1204,8 @@
         </div>
         <div class="header-right">
             <div class="view-toggle">
-                <button class="view-btn active" data-view="3d" onclick="switchView('3d')">3D View</button>
-                <button class="view-btn" data-view="explorer" onclick="switchView('explorer')">Layer Reference</button>
+                <button class="view-btn active" data-view="3d" onclick="switchView('3d')">3D Simulator</button>
+                <button class="view-btn" data-view="explorer" onclick="switchView('explorer')">Interactive Explorer</button>
             </div>
             <div class="header-divider"></div>
             <div class="header-stat">
