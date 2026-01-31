@@ -354,3 +354,7 @@ For questions about this transparency statement or the human-AI collaboration me
 ---
 
 *This transparency statement itself was drafted with AI assistance for structure and formatting. The content, examples, and methodological decisions are human contributions.*
+
+---
+
+← Back to [INDEX.md](../INDEX.md) | [NEUROETHICS_ALIGNMENT.md](NEUROETHICS_ALIGNMENT.md) | [REGULATORY_COMPLIANCE.md](REGULATORY_COMPLIANCE.md)

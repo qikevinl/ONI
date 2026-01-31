@@ -353,3 +353,7 @@ Settings → Privacy → Opt Out Options:
 | Version | Date | Changes |
 |---------|------|---------|
 | 1.0 | 2026-01-26 | Initial release |
+
+---
+
+← Back to [INDEX.md](../INDEX.md) | [NEUROETHICS_ALIGNMENT.md](NEUROETHICS_ALIGNMENT.md) | [REGULATORY_COMPLIANCE.md](REGULATORY_COMPLIANCE.md)

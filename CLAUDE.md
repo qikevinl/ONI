@@ -75,9 +75,16 @@ ONI/
     ├── RELATED_WORK.md                 # Prior BCI security research
     ├── ACADEMIC_LANDSCAPE.md           # Universities, researchers, collaboration
     │
-    ├── governance/                     # Ethics & transparency
+    ├── governance/                     # Ethics, transparency & regulatory
     │   ├── TRANSPARENCY.md             # Human-AI collaboration audit trail
-    │   └── NEUROETHICS_ALIGNMENT.md    # Framework-to-ethics principle mapping
+    │   ├── NEUROETHICS_ALIGNMENT.md    # Framework-to-ethics principle mapping
+    │   ├── UNESCO_ALIGNMENT.md         # UNESCO Recommendation (2025) — 15/17 elements implemented
+    │   ├── REGULATORY_COMPLIANCE.md    # US & international regulatory mapping (FDA, state laws, MIND Act, EU)
+    │   ├── INFORMED_CONSENT_FRAMEWORK.md  # Consent requirements (Lázaro-Muñoz framework)
+    │   ├── POST_DEPLOYMENT_ETHICS.md   # Device lifecycle, maintenance, abandonment prevention
+    │   ├── PEDIATRIC_CONSIDERATIONS.md # Minors and limited capacity guidelines
+    │   ├── DATA_POLICY_FAQ.md          # Privacy FAQ, anonymization, user rights
+    │   └── ACCESSIBILITY.md            # Accessibility standards and compliance
     │
     ├── project/                        # Project management
     │   ├── PROJECT_MANAGEMENT.md       # Master PM doc (scope, risks, priorities)
@@ -115,14 +122,17 @@ ONI/
     │   └── tests/                      # Unit tests
     │
     ├── publications/                   # CONTENT ONLY
-    │   ├── 0-oni-framework/            # Base/foundational content
+    │   ├── 0-oni-framework/            # Base/foundational content + whitepaper
     │   ├── coherence-metric/
+    │   ├── detection-theory/           # Detection algorithms, privacy-preserving ML
+    │   ├── mathematical-foundations/   # Equations reference, audit, corrected physics
     │   ├── neural-firewall/
     │   ├── neural-ransomware/
     │   ├── quantum-encryption/         # Consolidated: quantum security, keys, TTT
     │   └── scale-frequency/
     │
     └── resources/                      # NON-CONTENT (infrastructure)
+        ├── EXTERNAL_TOOLS.md           # External tools & libraries reference
         ├── brand/                      # Brand configuration (CODEOWNERS protected)
         │   ├── brand.json              # Single source of truth for naming, versions
         │   └── sync_brand.py           # Syncs brand.json → README.md
@@ -307,7 +317,7 @@ Push to GitHub → website auto-updates on next page load.
 
 | Folder | Purpose | What Goes Here |
 |--------|---------|----------------|
-| `governance/` | **Ethics & transparency** | TRANSPARENCY.md, NEUROETHICS_ALIGNMENT.md |
+| `governance/` | **Ethics, transparency & regulatory** | 9 documents: TRANSPARENCY, NEUROETHICS_ALIGNMENT, UNESCO_ALIGNMENT, REGULATORY_COMPLIANCE, INFORMED_CONSENT, POST_DEPLOYMENT, PEDIATRIC, DATA_POLICY_FAQ, ACCESSIBILITY |
 | `project/` | **Project management** | prd.json, processes/ (workflows, improvements) |
 | `oni-framework/` | **Python library** | Source code, tests, package config (pip installable) |
 | `tara-nsec-platform/` | **TARA package** | Source, tests, visualizations, pyproject.toml |

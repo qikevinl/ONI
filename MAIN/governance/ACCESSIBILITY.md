@@ -250,3 +250,7 @@ This ensures every published package version is verified for accessibility compl
 
 *This accessibility statement was created on 2026-01-26.*
 *ONI Framework is committed to continuous accessibility improvement.*
+
+---
+
+← Back to [INDEX.md](../INDEX.md) | [NEUROETHICS_ALIGNMENT.md](NEUROETHICS_ALIGNMENT.md) | [TRANSPARENCY.md](TRANSPARENCY.md)

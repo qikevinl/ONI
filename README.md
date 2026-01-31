@@ -77,8 +77,13 @@ One framework to understand, build, and secure brain-computer interfaces. Open. 
 |----------|---------|
 | **[DATA_POLICY_FAQ.md](MAIN/governance/DATA_POLICY_FAQ.md)** | **FAQ & Data Policy** — privacy, anonymization, user rights, known vulnerabilities |
 | **[TRANSPARENCY.md](MAIN/governance/TRANSPARENCY.md)** | Human-AI collaboration audit trail — documents cognitive boundary, HITL methodology |
-| **[NEUROETHICS_ALIGNMENT.md](MAIN/governance/NEUROETHICS_ALIGNMENT.md)** | Maps framework components to neuroethics principles |
+| **[NEUROETHICS_ALIGNMENT.md](MAIN/governance/NEUROETHICS_ALIGNMENT.md)** | Maps framework components to neuroethics principles (Ienca & Andorno, Yuste et al.) |
+| **[UNESCO_ALIGNMENT.md](MAIN/governance/UNESCO_ALIGNMENT.md)** | **UNESCO Recommendation on Ethics of Neurotechnology (2025)** — 15 of 17 elements implemented |
+| **[REGULATORY_COMPLIANCE.md](MAIN/governance/REGULATORY_COMPLIANCE.md)** | **US & international regulatory mapping** — FDA, HIPAA, NIST, state neurorights, MIND Act, UNESCO, Chile, EU |
 | **[INFORMED_CONSENT_FRAMEWORK.md](MAIN/governance/INFORMED_CONSENT_FRAMEWORK.md)** | Consent architecture for BCIs — continuous consent, pediatric considerations |
+| **[POST_DEPLOYMENT_ETHICS.md](MAIN/governance/POST_DEPLOYMENT_ETHICS.md)** | Device lifecycle obligations — maintenance, abandonment prevention, post-trial access |
+| **[PEDIATRIC_CONSIDERATIONS.md](MAIN/governance/PEDIATRIC_CONSIDERATIONS.md)** | Guidelines for minors and individuals with limited capacity |
+| **[ACCESSIBILITY.md](MAIN/governance/ACCESSIBILITY.md)** | Accessibility standards and compliance for ONI tools and documentation |
 | **[RELATED_WORK.md](MAIN/RELATED_WORK.md)** | Prior BCI security research — acknowledges foundational work, positions ONI contribution |
 | **[ACADEMIC_LANDSCAPE.md](MAIN/ACADEMIC_LANDSCAPE.md)** | Research landscape — top universities, key researchers, collaboration opportunities |
 
