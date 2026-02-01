@@ -341,8 +341,8 @@
         }
 
         .hero-scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
+            position: fixed;
+            bottom: 1.5rem;
             left: 50%;
             transform: translateX(-50%);
             z-index: 2;
@@ -1498,10 +1498,11 @@
          SCENE 1: HERO
          ============================================= -->
     <section id="scene-hero" class="scene">
-        <div style="position: relative; z-index: 2; text-align: center; width: 100%; padding-top: 72vh;">
-            <p id="hero-osi-tagline" style="font-family: 'Inter', sans-serif; font-size: 1.1rem; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin: 0; transition: opacity 0.3s;">The OSI of Mind</p>
+        <div id="hero-osi-tagline" style="position: fixed; z-index: 2; text-align: center; top: 25%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 520px; transition: opacity 0.3s;">
+            <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin: 0;">The OSI of Mind</p>
         </div>
         <div class="hero-scroll-indicator" id="scroll-indicator">
+            <p style="font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(212,175,55,0.85); margin: 0 0 0.8rem 0;">Neurosecurity Standards for Brain-Computer Interfaces</p>
             <span class="hero-scroll-text">Scroll to explore the framework</span>
             <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
         </div>
@@ -2016,22 +2017,12 @@
             return '<span class="word">' + w + '</span>';
         }).join(' ');
 
-        // Animate hero elements after intro completes
-        var heroDelay = 3.8;
-        gsap.to('#hero-label', { opacity: 1, duration: 0.8, delay: heroDelay });
-
-        gsap.to('.hero-title .word', {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.08,
-            delay: heroDelay + 0.3,
-            ease: 'power2.out'
-        });
-
-        gsap.to('#hero-subtitle', { opacity: 1, duration: 0.8, delay: heroDelay + 1.5 });
-        gsap.to('#hero-cta', { opacity: 1, duration: 0.8, delay: heroDelay + 1.9 });
-        gsap.to('#scroll-indicator', { opacity: 1, duration: 0.8, delay: heroDelay + 2.5 });
+        // Hero elements appear instantly
+        gsap.set('#hero-label', { opacity: 1 });
+        gsap.set('.hero-title .word', { opacity: 1, y: 0 });
+        gsap.set('#hero-subtitle', { opacity: 1 });
+        gsap.set('#hero-cta', { opacity: 1 });
+        gsap.set('#scroll-indicator', { opacity: 1 });
 
         // Fade in hero content as user scrolls to problem section
         gsap.from('.hero-content', {
@@ -2176,7 +2167,7 @@
             var scene = new THREE.Scene();
             scene.fog = new THREE.FogExp2(0x050a14, 0.035);
             var camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 100);
-            camera.position.set(0, 2.2, 7);
+            camera.position.set(0, 1.07, 7.87);
 
             // Groups
             var autoRotateGroup = new THREE.Group();
@@ -2288,13 +2279,13 @@
                 { id:'L5',  r:2.22, c:[0.271,0.561,0.969], zone:'silicon',  fp:2.6 },
                 { id:'L6',  r:2.06, c:[0.310,0.612,0.976], zone:'silicon',  fp:2.5 },
                 { id:'L7',  r:1.90, c:[0.376,0.647,0.980], zone:'silicon',  fp:2.4 },
-                { id:'L8',  r:1.72, c:[0.10,0.55,0.70], zone:'gateway',  fp:2.0 },
+                { id:'L8',  r:1.72, c:[0.83,0.69,0.22], zone:'gateway',  fp:2.0 },
                 { id:'L9',  r:1.52, c:[0.063,0.725,0.506], zone:'biology',  fp:2.8 },
                 { id:'L10', r:1.38, c:[0.204,0.827,0.600], zone:'biology',  fp:2.6 },
                 { id:'L11', r:1.24, c:[0.431,0.906,0.718], zone:'biology',  fp:2.4 },
                 { id:'L12', r:1.10, c:[0.655,0.545,0.984], zone:'biology',  fp:2.3 },
                 { id:'L13', r:0.96, c:[0.753,0.518,0.988], zone:'biology',  fp:2.2 },
-                { id:'L14', r:0.82, c:[0.90,0.30,0.30], zone:'biology',  fp:2.0 },
+                { id:'L14', r:0.82, c:[0.90,0.15,0.65], zone:'biology',  fp:2.0 },
             ];
 
             var mobileIdx = [0,2,4,6,7,9,11,13];
@@ -2306,18 +2297,20 @@
 
             activeLayers.forEach(function(layer) {
                 var isGW = layer.zone === 'gateway';
+                var isL14 = layer.id === 'L14';
+                var useGatewayShader = isGW || isL14;
                 var u = {
                     uColor: { value: new THREE.Vector3(layer.c[0], layer.c[1], layer.c[2]) },
-                    uOpacity: { value: isGW ? 0.7 : 0.45 },
+                    uOpacity: { value: useGatewayShader ? 0.7 : 0.45 },
                     uFresnelPower: { value: layer.fp },
-                    uGlowIntensity: { value: isGW ? 2.5 : 1.2 },
+                    uGlowIntensity: { value: useGatewayShader ? 2.5 : 1.2 },
                     uTime: { value: 0 },
                     uActiveGlow: { value: 0.0 }
                 };
                 var mat = new THREE.ShaderMaterial({
                     uniforms: u,
                     vertexShader: fresnelVert,
-                    fragmentShader: isGW ? gatewayFrag : fresnelFrag,
+                    fragmentShader: useGatewayShader ? gatewayFrag : fresnelFrag,
                     transparent: true,
                     side: THREE.FrontSide,
                     depthWrite: false,
@@ -2464,10 +2457,15 @@
 
             // Mouse parallax + gyroscope for mobile/tablet
             var mouseX = 0, mouseY = 0;
+            var prevMouseX = 0, prevMouseY = 0, mouseDist = 0;
             if (!isMobile && !isTablet) {
                 document.addEventListener('mousemove', function(e) {
-                    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-                    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+                    var newMX = (e.clientX / window.innerWidth - 0.5) * 2;
+                    var newMY = (e.clientY / window.innerHeight - 0.5) * 2;
+                    var dx = newMX - prevMouseX, dy = newMY - prevMouseY;
+                    mouseDist += Math.sqrt(dx * dx + dy * dy);
+                    prevMouseX = newMX; prevMouseY = newMY;
+                    mouseX = newMX; mouseY = newMY;
                 });
             }
 
@@ -2526,6 +2524,9 @@
             var raycaster = new THREE.Raycaster();
             var rayMouse = new THREE.Vector2();
             var hoveredShellIndex = -1;
+            var prevHoveredShellIndex = -1;
+            var hoverRippleCenter = -1;
+            var hoverRippleStart = -1;
             var canvasInteractive = false;
             var clickHint = document.getElementById('click-hint');
             var hasInteracted = false; // hide hint permanently after first hover/click
@@ -2717,13 +2718,7 @@
             var springRevealLevel = 0;
 
             // Intro: biology layers emerge from L8 with slinky bounce
-            var introProgress = { value: 0 };
-            gsap.to(introProgress, {
-                value: 1,
-                duration: 3.5,
-                delay: 0.3,
-                ease: 'power2.inOut'
-            });
+            var introProgress = { value: 1 };
 
             // =============================================
             // SPHERE → STACK MORPH (GSAP ScrollTrigger)
@@ -3028,13 +3023,13 @@
                     if (tunnelProgress.value > 0.01) {
                         parallaxStr *= (1 - tunnelProgress.value * 0.85);
                     }
-                    var tiltMultX = 1.8;
-                    var tiltMultY = 0.08;
+                    var tiltMultX = 0.09;
+                    var tiltMultY = 0.005;
                     // During spring: stronger tilt range on both axes
                     if (springCompress > 0.05) {
                         var springTiltBoost = Math.min(1, springCompress * 2);
-                        tiltMultX = 1.8 + springTiltBoost * 1.2;
-                        tiltMultY = 0.08 + springTiltBoost * 0.12;
+                        tiltMultX = 2.0 + springTiltBoost * 1.0;
+                        tiltMultY = 0.25 + springTiltBoost * 0.2;
                     }
                     var lerpX = 0.06, lerpY = 0.04;
                     if (springCompress > 0.05) {
@@ -3043,8 +3038,11 @@
                     }
                     // During spring: disable group-level parallax (per-layer handles it)
                     if (springCompress < 0.05) {
-                        parallaxGroup.rotation.x += (pyInput*tiltMultX*parallaxStr - parallaxGroup.rotation.x)*lerpX;
-                        parallaxGroup.rotation.y += (pxInput*tiltMultY*parallaxStr - parallaxGroup.rotation.y)*lerpY;
+                        // Auto-breathe tilt: more forward/back, less left/right
+                        var autoTiltX = Math.sin(t * 0.3) * 0.12;
+                        var autoTiltY = Math.sin(t * 0.19) * 0.03;
+                        parallaxGroup.rotation.x += (autoTiltX - parallaxGroup.rotation.x) * 0.06;
+                        parallaxGroup.rotation.y += (autoTiltY - parallaxGroup.rotation.y) * 0.04;
                     } else {
                         parallaxGroup.rotation.x *= 0.92;
                         parallaxGroup.rotation.y *= 0.92;
@@ -3399,18 +3397,12 @@
                                 targetOpacity = 0;
                             } else {
                                 mesh.visible = true;
-                                // Elastic easing: overshoot + settle
-                                var elastic = 1 - Math.pow(2, -8 * layerProg) * Math.cos(layerProg * Math.PI * 3.0);
-                                elastic = Math.max(0, elastic);
+                                // Spring uncompress: all layers start at L8's Y, spread outward
+                                var spreadEase = layerProg * layerProg * (3 - 2 * layerProg);
+                                introYTarget = l8Y + (ownY - l8Y) * spreadEase;
 
-                                // Rise from L8's Y to own Y with elastic bounce
-                                introYTarget = l8Y + (ownY - l8Y) * elastic;
-
-                                // Scale: emerge from tiny with bounce
-                                var scaleElastic = 1 - Math.pow(2, -6 * layerProg) * Math.cos(layerProg * Math.PI * 2.0);
-                                scaleElastic = Math.max(0, scaleElastic);
-                                var introScale = layerProg < 0.1 ? layerProg * 10 * scaleElastic : scaleElastic;
-                                shellScaleMultipliers[i] = Math.max(shellScaleMultipliers[i], introScale);
+                                // Scale: fade in
+                                shellScaleMultipliers[i] = Math.max(shellScaleMultipliers[i], spreadEase);
 
                                 // Opacity: fade in
                                 targetOpacity *= Math.max(0.15, layerProg);
@@ -3763,6 +3755,8 @@
                             shellUniforms[i].uGlowIntensity.value = 2.5 + whitePhase * 3.0;
                         }
 
+                        // (Hover glow removed for hero)
+
                         // L8 spring: scale up toward perfect circle + cycling spectrum
                         if (isGW && springCompress > 0.01) {
                             // Scale grows with compression — larger the more you scroll
@@ -3822,7 +3816,12 @@
                             mesh.rotation.x = tiltX + (-autoRotateGroup.rotation.x - parallaxGroup.rotation.x) * faceAmt;
                             mesh.rotation.y = (-autoRotateGroup.rotation.y - parallaxGroup.rotation.y) * faceAmt;
                         } else {
-                            mesh.rotation.set(0, 0, 0);
+                            // Hero: orbital spin per layer — visible gradient rotation
+                            // Each layer spins on Y at a different speed, alternating direction
+                            var spinDir = (i % 2 === 0) ? 1 : -1;
+                            var layerNorm = i / (totalLayers - 1);
+                            var spinSpeed = 0.08 + layerNorm * 0.15; // outer=slow, inner=faster
+                            mesh.rotation.y = t * spinSpeed * spinDir;
                         }
 
                         // L8 spin: X-axis rotation only after sphere fully forms
@@ -3861,42 +3860,79 @@
                         shellUniforms[i].uOpacity.value +=
                             (dimmedOpacity - shellUniforms[i].uOpacity.value) * 0.2;
 
-                        // L8: blue/teal base with white glow pulse
-                        if (isGW && springCompress < 0.01) {
-                            // Slow sine pulse 0→1→0 for white glow
-                            var glowPulse = (Math.sin(t * 1.2) + 1) * 0.5; // 0→1, ~5.2s cycle
-                            glowPulse = glowPulse * glowPulse; // sharpen: mostly blue/teal, brief white
-                            var btr = 0.10, btg = 0.55, btb = 0.70; // blue-teal base
+                        // All layers: synced white glow pulse + ripple breathing on hero
+                        var heroBreathing = (springCompress < 0.01 && !introActive);
+                        if (heroBreathing) {
+                            // Staggered white pulse: sweeps up then down the stack
+                            // Each layer has a phase offset so white cascades through layers
+                            var wavePhase = i * 0.4; // stagger per layer
+                            var glowPulse = (Math.sin(t * 1.2 - wavePhase) + 1) * 0.5;
+                            glowPulse = glowPulse * glowPulse; // sharpen: mostly base color, brief white
+                            glowPulse *= 0.7; // cap so it never goes full white
+                            // L13: use L14's color faded toward white instead of own base
+                            var l14i = activeLayers.length - 1;
+                            var l13i = l14i - 1;
+                            var bcc;
+                            if (i === l13i) {
+                                // L13: faded version of L14's color
+                                var l14c = activeLayers[l14i].c;
+                                bcc = [
+                                    l14c[0] + (1.0 - l14c[0]) * 0.5,
+                                    l14c[1] + (1.0 - l14c[1]) * 0.5,
+                                    l14c[2] + (1.0 - l14c[2]) * 0.5
+                                ];
+                            } else if (layer.zone === 'gateway') {
+                                // L8: slowly cycle through gold, teal, blue
+                                var l8Pal = [
+                                    [0.83, 0.69, 0.22],  // gold
+                                    [0.10, 0.55, 0.70],  // teal
+                                    [0.15, 0.30, 0.85],  // blue
+                                    [0.83, 0.69, 0.22]   // gold (loop)
+                                ];
+                                var l8Cyc = (t * 0.12) % 3.0; // slow cycle through 3 colors
+                                var l8ci = Math.floor(l8Cyc);
+                                var l8cf = l8Cyc - l8ci;
+                                l8cf = l8cf * l8cf * (3 - 2 * l8cf); // smoothstep
+                                var lc0 = l8Pal[l8ci], lc1 = l8Pal[l8ci + 1];
+                                bcc = [
+                                    lc0[0] + (lc1[0] - lc0[0]) * l8cf,
+                                    lc0[1] + (lc1[1] - lc0[1]) * l8cf,
+                                    lc0[2] + (lc1[2] - lc0[2]) * l8cf
+                                ];
+                            } else {
+                                bcc = activeLayers[i].c;
+                            }
                             shellUniforms[i].uColor.value.set(
-                                btr + (1.0 - btr) * glowPulse,
-                                btg + (1.0 - btg) * glowPulse,
-                                btb + (1.0 - btb) * glowPulse
+                                bcc[0] + (1.0 - bcc[0]) * glowPulse,
+                                bcc[1] + (1.0 - bcc[1]) * glowPulse,
+                                bcc[2] + (1.0 - bcc[2]) * glowPulse
                             );
+                            shellUniforms[i].uGlowIntensity.value = 2.0 + glowPulse * 4.0;
+                            shellUniforms[i].uOpacity.value = 0.6 + glowPulse * 0.4;
+
+                            // L14 + L8: drive uActiveGlow for electric pool shader effect
+                            if (i === l14i || layer.zone === 'gateway') {
+                                shellUniforms[i].uActiveGlow.value = 0.3 + glowPulse * 0.4;
+                            }
+
+                            // Pool ripple: staggered scale pulse per layer like water rings
+                            var ripplePhase = i * 0.45;
+                            var ripple1 = Math.sin(t * 0.8 - ripplePhase) * 0.012;
+                            var ripple2 = Math.sin(t * 1.3 - ripplePhase * 1.3) * 0.006;
+                            var rippleScale = 1.0 + ripple1 + ripple2;
+                            mesh.scale.x *= rippleScale;
+                            mesh.scale.z *= rippleScale;
+
+                            // Accordion Y breathing: exponential — top layers compress most
+                            var layerRatio = i / (totalLayers - 1); // 0=L1(bottom), 1=L14(top)
+                            var expCompress = Math.pow(layerRatio, 2.5); // exponential: bottom ~0, top ~1
+                            var accPhase = i * 0.35;
+                            var accBreath = Math.sin(t * 0.7 - accPhase) * (0.005 + expCompress * 0.12);
+                            mesh.position.y += accBreath;
+
                         }
 
-                        // L14: slow rainbow cycle
-                        if (i === activeLayers.length - 1) {
-                            var rbw = [
-                                [1.0, 0.2, 0.2],   // red
-                                [1.0, 0.5, 0.1],   // orange
-                                [1.0, 0.9, 0.2],   // yellow
-                                [0.2, 0.9, 0.3],   // green
-                                [0.1, 0.7, 0.9],   // cyan
-                                [0.3, 0.3, 1.0],   // blue
-                                [0.6, 0.2, 0.9]    // violet
-                            ];
-                            var rbwT = (t * 0.15) % 1.0; // slow: full cycle ~6.7s
-                            var rbwSeg = rbwT * rbw.length;
-                            var rbwI = Math.floor(rbwSeg) % rbw.length;
-                            var rbwF = rbwSeg - Math.floor(rbwSeg);
-                            var rbwN = (rbwI + 1) % rbw.length;
-                            var rc0 = rbw[rbwI], rc1 = rbw[rbwN];
-                            shellUniforms[i].uColor.value.set(
-                                rc0[0] + (rc1[0] - rc0[0]) * rbwF,
-                                rc0[1] + (rc1[1] - rc0[1]) * rbwF,
-                                rc0[2] + (rc1[2] - rc0[2]) * rbwF
-                            );
-                        }
+                        // (L13 tracking moved inside heroBreathing block)
 
                         // Active/hover glow lerp
                         var glowTarget;
@@ -3969,14 +4005,14 @@
                                 // L8 flamboyant: intense pulsing glow intensity
                                 var gwGlowPulse = 4.0 + Math.sin(t * 6.0) * 1.5;
                                 shellUniforms[i].uGlowIntensity.value += (gwGlowPulse - shellUniforms[i].uGlowIntensity.value) * 0.1;
-                            } else {
+                            } else if (!heroBreathing) {
                                 var targetGI = defaultGlow + scrollGlowBoost;
                                 shellUniforms[i].uGlowIntensity.value += (targetGI - shellUniforms[i].uGlowIntensity.value) * 0.08;
                             }
                         }
 
-                        // Glow lerp (skip during closing — it manages glow directly)
-                        if (activeGroupMode !== 'closing') {
+                        // Glow lerp (skip during closing and hero breathing — they manage glow directly)
+                        if (activeGroupMode !== 'closing' && !heroBreathing) {
                             var introRippleActive = (isBioOrGW && bangProgress > 0.05 && bangProgress < 0.99 && activeLayerIndex < 0 && activeGroupMode !== 'closing');
                             var glowLerpIn = introRippleActive ? 0.12 : 0.03;
                             var glowLerp = (glowTarget > shellUniforms[i].uActiveGlow.value) ? glowLerpIn : 0.06;
@@ -4050,6 +4086,8 @@
                             }
                         }
 
+                        // (Old hover ripple removed — replaced by inline hover glow above)
+
                         // Position laser-etched label to match disc
                         var lm = labelMeshes[i];
                         lm.position.x = mesh.position.x;
@@ -4103,6 +4141,10 @@
                     }
 
                     document.body.style.cursor = (hoveredShellIndex >= 0) ? 'pointer' : '';
+                } else if (introProgress.value > 0.95 && activeGroupMode !== 'closing' && tunnelProgress.value < 0.05) {
+                    // Hero/spring scene: no hover interaction
+                    hoveredShellIndex = -1;
+                    hoverTooltip.classList.remove('visible');
                 } else {
                     hoveredShellIndex = -1;
                     hoverTooltip.classList.remove('visible');
@@ -4255,7 +4297,7 @@
                     l8CameraZoom = 1.0; // pull back farther to show the drama
                 }
                 var pullOutCamOffset = (activeLayerIndex >= 0) ? ((isGWActive ? 2.5 : 1.5) * Math.min(1, Math.max(0, (rawMorph - 0.15) / 0.35))) : 0;
-                var targetCamY = 0.3 + mp * 0.5;
+                var targetCamY = 5.0 + mp * (-4.5);
                 var targetCamZ = 7 + mp * 1 + l8CameraZoom + pullOutCamOffset;
                 // Tunnel: reposition camera to view the slinky
                 if (tunnelProgress.value > 0.01) {
@@ -4263,8 +4305,9 @@
                     targetCamY += (1.0 - targetCamY) * tt;
                     targetCamZ += (10 - targetCamZ) * tt;
                 }
-                camera.position.y += (targetCamY - camera.position.y) * 0.03;
-                camera.position.z += (targetCamZ - camera.position.z) * 0.03;
+                var camLerp = (t < 0.5) ? 1.0 : 0.03; // snap on first frame
+                camera.position.y += (targetCamY - camera.position.y) * camLerp;
+                camera.position.z += (targetCamZ - camera.position.z) * camLerp;
 
                 // Apply closing shrink to NI overlay (scale block is above, before NI projection)
                 var shrinkValNI = closingShrink.value;

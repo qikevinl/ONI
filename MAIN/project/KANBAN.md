@@ -3,7 +3,7 @@
 > **Visual task board for tracking work in progress.**
 > Synced with `prd.json` — update both when tasks move.
 
-**Last Updated:** 2026-01-29
+**Last Updated:** 2026-02-01
 **Sprint:** Q1 2026
 
 ---
@@ -22,20 +22,21 @@
 | [P1] BrainFlow   | Code Sync        |                  |                  | [P0] Editor      |
 | Integration      |                  |                  |                  | Agent            |
 |                  | [P2] MOABB       |                  |                  |                  |
-| [P2] MOABB       | Attack Scenarios |                  |                  | [P0] PM Agent    |
-| Benchmarks       |                  |                  |                  |                  |
+| [P1] BCI         | Attack Scenarios |                  |                  | [P0] PM Agent    |
+| Accessibility    |                  |                  |                  |                  |
 |                  |                  |                  |                  | [P0] ONI Layer   |
-|                  |                  |                  |                  | Correction       |
+| [P1] WCAG/ADA    |                  |                  |                  |                  |
+| Compliance       |                  |                  |                  | Correction       |
 |                  |                  |                  |                  |                  |
-|                  |                  |                  |                  | [P1] SIEM→NSAM   |
-|                  |                  |                  |                  |                  |
+| [P2] Accessible  |                  |                  |                  | [P1] SIEM→NSAM   |
+| Landing Site     |                  |                  |                  |                  |
 |                  |                  |                  |                  | [P1] ONI_LAYERS  |
-|                  |                  |                  |                  | Reference        |
-|                  |                  |                  |                  |                  |
+| [P2] MOABB       |                  |                  |                  | Reference        |
+| Benchmarks       |                  |                  |                  |                  |
 |                  |                  |                  |                  | ...+21 more      |
 |                  |                  |                  |                  |                  |
 +------------------+------------------+------------------+------------------+------------------+
-     4 items            3 items           0 items           0 items           27 items
+     7 items            3 items           0 items           0 items           27 items
 ```
 
 ---
@@ -76,6 +77,54 @@
 - **Exit Condition:** `tara/data/brainflow_adapter.py` exists with OpenBCI Cyton support; can stream live EEG into coherence pipeline
 - **Risk:** Medium (hardware dependency — need physical board for testing)
 - **Dependencies:** layer-aware-coherence-implementation
+- **Estimate:** Medium effort
+
+### [P1] bci-accessibility-layer ⭐ NEW
+- **Description:** Make the entire ONI GitHub Pages site accessible for P300/EEG-based BCI browser users who cannot scroll, hover, or use keyboard input. Implement a "BCI Mode" toggle that switches all pages to paginated menu navigation with large targets (80x80px min, 9 targets max per screen), disables all animations, replaces WebGL/SVG with static diagram fallbacks, and adds auto-narration for interactive visualizations. Also add `prefers-reduced-motion` support, semantic HTML/ARIA landmarks, and proper `<button>` elements throughout.
+- **Exit Condition:** BCI Mode toggle visible on all pages; all content navigable via grid-based menu selection without scrolling, hovering, or keyboard; `prefers-reduced-motion` disables all animations; all interactive elements have `aria-label`; Lighthouse accessibility score ≥ 95
+- **Risk:** Medium (large surface area across all viz pages, but no architectural changes needed)
+- **Dependencies:** Site visualizations finalized (do this after all viz work is complete)
+- **When:** After site is done — do not start until all visualization pages are finalized
+- **Key subtasks:**
+  1. Add `prefers-reduced-motion` media query to all pages (low effort, do first)
+  2. Add semantic HTML landmarks + ARIA labels to all pages
+  3. Replace all `<div onclick>` with `<button>` elements
+  4. Build BCI Mode toggle component (persistent header element, first focusable item)
+  5. Build paginated menu navigation system (replaces scrolling)
+  6. Target sizing + spacing overrides in BCI mode (80x80px, 20px gaps, max 9 per screen)
+  7. Static diagram fallbacks for WebGL (08) and SVG animations (10)
+  8. Auto-narration mode for 08-oni-framework-viz and 10-attack-defense-flow (replaces manual play/step)
+  9. Add site note: "This site is accessible via P300-based BCI browsers"
+- **Estimate:** Large effort
+
+### [P1] wcag-ada-compliance ⭐ NEW
+- **Description:** Bring all GitHub Pages site pages (landing, visualizations hub, 12+ interactive viz, whitepaper, documentation) into WCAG 2.2 AA compliance. Addresses ADA Title II/III, Section 508, EN 301 549, and EAA requirements. Covers all disability types: visual (blindness, low vision, color blindness), auditory, motor/physical, cognitive/neurological, and seizure/vestibular.
+- **Exit Condition:** `lang="en"` on all HTML; skip links on all pages; `<main>` landmark on all pages; all `<div onclick>` replaced with `<button>`; `prefers-reduced-motion` media query on all pages; `:focus-visible` styles on all pages; `aria-label` on all interactive elements; Lighthouse accessibility score >= 95 on all pages; axe-core 0 critical/serious violations
+- **Risk:** Medium (many pages to update, but changes are systematic)
+- **Dependencies:** bci-accessibility-layer (can be done in parallel — Phase 1-3 from ACCESSIBILITY.md)
+- **When:** After site is done — implement alongside BCI accessibility
+- **Key subtasks:**
+  1. Phase 1 — Foundation: `lang`, viewport, `<title>`, `prefers-reduced-motion`, `<button>`, skip links, `<main>`, `:focus-visible`
+  2. Phase 2 — Semantic: ARIA landmarks, heading hierarchy, `aria-label`, `aria-live`, SVG alt text, WebGL fallback
+  3. Phase 3 — Keyboard & Motor: keyboard audit, trap prevention, target sizing (24px min), spacing
+  4. Phase 6 — Verification: Lighthouse, axe-core, VoiceOver, NVDA, keyboard-only, 200% zoom
+- **Reference:** `MAIN/governance/ACCESSIBILITY.md` (full requirements document)
+- **Estimate:** Large effort
+
+### [P2] accessible-landing-site ⭐ NEW
+- **Description:** Build a separate accessible version of the ONI site at `docs/accessible/` for users who need simplified, no-JS, single-column, high-contrast content. Includes theme selector (light/dark/high-contrast), font size controls, BCI Mode toggle, and all core ONI content in accessible `<table>` format. Cross-linked from main site header/footer.
+- **Exit Condition:** `docs/accessible/index.html` exists with no-JS core content; 14-layer model as accessible table; attack taxonomy as searchable table; "Accessible Version" link on all main site pages; `<link rel="alternate">` on all pages; theme and font size controls functional
+- **Risk:** Medium (new pages to build, but content already exists to port)
+- **Dependencies:** wcag-ada-compliance (main site should be compliant first)
+- **When:** After WCAG/ADA compliance work is done
+- **Key subtasks:**
+  1. Create `docs/accessible/` directory with index, layers, threats, whitepaper, visualizations, about pages
+  2. Port 14-layer model to accessible `<table>` with proper `<th>` headers
+  3. Port 46-technique attack taxonomy to searchable accessible table
+  4. Add theme selector (light/dark/high-contrast) with localStorage persistence
+  5. Add font size controls (small/medium/large/extra-large)
+  6. Add "Accessible Version" link to all main site page headers/footers
+  7. Add `<link rel="alternate">` pointing to accessible version
 - **Estimate:** Medium effort
 
 ### [P2] moabb-coherence-benchmark
@@ -224,6 +273,11 @@ Done: layer-validation, oni-layer-correction, oni-layers-reference, nsam-externa
       equations-reference-document
 ```
 
+### Accessibility
+```
+Backlog: bci-accessibility-layer, wcag-ada-compliance, accessible-landing-site
+```
+
 ### Visualization
 ```
 Done: hourglass-diagram-prompt
@@ -246,10 +300,10 @@ Done: hourglass-diagram-prompt
 
 | Metric | Value |
 |--------|-------|
-| Total Tasks | 34 |
-| Completed | 28 (82%) |
+| Total Tasks | 36 |
+| Completed | 28 (78%) |
 | In Progress | 0 |
-| Pending | 6 |
+| Pending | 8 |
 | Blocked | 0 |
 
 ---
