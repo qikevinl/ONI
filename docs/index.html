@@ -1499,7 +1499,7 @@
          ============================================= -->
     <section id="scene-hero" class="scene">
         <div style="position: relative; z-index: 2; text-align: center; width: 100%; padding-top: 72vh;">
-            <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin: 0;">The OSI of Mind</p>
+            <p id="hero-osi-tagline" style="font-family: 'Inter', sans-serif; font-size: 1.1rem; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin: 0; transition: opacity 0.3s;">The OSI of Mind</p>
         </div>
         <div class="hero-scroll-indicator" id="scroll-indicator">
             <span class="hero-scroll-text">Scroll to explore the framework</span>
@@ -2016,21 +2016,22 @@
             return '<span class="word">' + w + '</span>';
         }).join(' ');
 
-        // Animate hero elements on load
-        gsap.to('#hero-label', { opacity: 1, duration: 0.8, delay: 0.3 });
+        // Animate hero elements after intro completes
+        var heroDelay = 3.8;
+        gsap.to('#hero-label', { opacity: 1, duration: 0.8, delay: heroDelay });
 
         gsap.to('.hero-title .word', {
             opacity: 1,
             y: 0,
             duration: 0.6,
             stagger: 0.08,
-            delay: 0.6,
+            delay: heroDelay + 0.3,
             ease: 'power2.out'
         });
 
-        gsap.to('#hero-subtitle', { opacity: 1, duration: 0.8, delay: 1.8 });
-        gsap.to('#hero-cta', { opacity: 1, duration: 0.8, delay: 2.2 });
-        gsap.to('#scroll-indicator', { opacity: 1, duration: 0.8, delay: 2.8 });
+        gsap.to('#hero-subtitle', { opacity: 1, duration: 0.8, delay: heroDelay + 1.5 });
+        gsap.to('#hero-cta', { opacity: 1, duration: 0.8, delay: heroDelay + 1.9 });
+        gsap.to('#scroll-indicator', { opacity: 1, duration: 0.8, delay: heroDelay + 2.5 });
 
         // Fade in hero content as user scrolls to problem section
         gsap.from('.hero-content', {
@@ -2419,6 +2420,7 @@
             var springArtOverlay = document.getElementById('spring-art-overlay');
             var springEggEl = document.getElementById('spring-egg');
             var seizureWarningEl = document.getElementById('seizure-warning');
+            var heroOsiTagline = document.getElementById('hero-osi-tagline');
             var seizureWarningDismissed = false;
             springEggEl.addEventListener('click', function() {
                 if (springEggActive) {
@@ -2714,8 +2716,14 @@
             // Once revealed, layers stay visible even when spring releases
             var springRevealLevel = 0;
 
-            // Intro: stack is fully expanded from first frame (no peel animation)
-            var introProgress = { value: 1 };
+            // Intro: biology layers emerge from L8 with slinky bounce
+            var introProgress = { value: 0 };
+            gsap.to(introProgress, {
+                value: 1,
+                duration: 3.5,
+                delay: 0.3,
+                ease: 'power2.inOut'
+            });
 
             // =============================================
             // SPHERE → STACK MORPH (GSAP ScrollTrigger)
@@ -2980,8 +2988,8 @@
                 // Use max so whichever is higher wins — intro keeps stack visible even before scroll.
                 var introVal = introProgress.value;
                 var introActive = introVal < 0.99;
-                // introVal > 0.01 means intro has started — keep layers as discs (morphCap)
-                var introMorph = (introVal > 0.01) ? morphCap : 0;
+                // Gradual sphere→disc morph during intro (spheres at 0, flat discs at 1)
+                var introMorph = introVal * morphCap;
                 var effectiveMorph = Math.max(introMorph, clampedMorph);
 
                 // Auto-rotation (slows during morph, near-zero when layer pulled out)
@@ -3011,12 +3019,36 @@
                 }
                 {
                     var parallaxStr = (1 - effectiveMorph * 0.7) * pullDampen;
+                    // Spring compression: boost parallax for full mouse-driven tilt
+                    if (springCompress > 0.05) {
+                        var springParallax = Math.min(1, springCompress * 2);
+                        parallaxStr = Math.max(parallaxStr, springParallax) * pullDampen;
+                    }
                     // Tunnel: reduce parallax to subtle
                     if (tunnelProgress.value > 0.01) {
                         parallaxStr *= (1 - tunnelProgress.value * 0.85);
                     }
-                    parallaxGroup.rotation.x += (pyInput*1.8*parallaxStr - parallaxGroup.rotation.x)*0.06;
-                    parallaxGroup.rotation.y += (pxInput*0.08*parallaxStr - parallaxGroup.rotation.y)*0.04;
+                    var tiltMultX = 1.8;
+                    var tiltMultY = 0.08;
+                    // During spring: stronger tilt range on both axes
+                    if (springCompress > 0.05) {
+                        var springTiltBoost = Math.min(1, springCompress * 2);
+                        tiltMultX = 1.8 + springTiltBoost * 1.2;
+                        tiltMultY = 0.08 + springTiltBoost * 0.12;
+                    }
+                    var lerpX = 0.06, lerpY = 0.04;
+                    if (springCompress > 0.05) {
+                        lerpX = 0.12;
+                        lerpY = 0.10;
+                    }
+                    // During spring: disable group-level parallax (per-layer handles it)
+                    if (springCompress < 0.05) {
+                        parallaxGroup.rotation.x += (pyInput*tiltMultX*parallaxStr - parallaxGroup.rotation.x)*lerpX;
+                        parallaxGroup.rotation.y += (pxInput*tiltMultY*parallaxStr - parallaxGroup.rotation.y)*lerpY;
+                    } else {
+                        parallaxGroup.rotation.x *= 0.92;
+                        parallaxGroup.rotation.y *= 0.92;
+                    }
                     // Reset parallax rotation when pulled out
                     if (maxFace > 0.3) {
                         parallaxGroup.rotation.x *= (1 - maxFace * 0.1);
@@ -3336,33 +3368,58 @@
                     var totalLayers = activeLayers.length;
                     var stackSpacing = 0.4;
 
-                    // Intro expand: reverse of collapse — flat circle → stack
-                    // introVal: 0 = all layers merged at top (flat circle), 1 = fully expanded
+                    // Intro: biology layers emerge from L8 with slinky bounce
                     var introYTarget = -999; // sentinel: no override
                     var introTilt = 0; // 1 = face camera (flat), 0 = stack orientation
                     if (introActive) {
-                        // Reverse the collapse: expand top-down
-                        var topY = ((totalLayers - 1) - (totalLayers - 1) / 2) * stackSpacing;
-                        if (gwIdx >= 0 && (totalLayers - 1) > gwIdx) topY += 0.15;
+                        // Silicon layers hidden during intro
+                        if (i < gwIdx) {
+                            mesh.visible = false;
+                            shellUniforms[i].uOpacity.value = 0;
+                            targetOpacity = 0;
+                        } else {
+                            // L8's final stack Y
+                            var l8Y = (gwIdx - (totalLayers - 1) / 2) * stackSpacing;
+                            if (gwIdx >= 0 && gwIdx > gwIdx) l8Y += 0.15; // won't trigger for L8 itself
 
-                        var ownY = (i - (totalLayers - 1) / 2) * stackSpacing;
-                        if (gwIdx >= 0) {
-                            if (i < gwIdx) ownY -= 0.15;
-                            if (i > gwIdx) ownY += 0.15;
+                            // This layer's final stack Y
+                            var ownY = (i - (totalLayers - 1) / 2) * stackSpacing;
+                            if (gwIdx >= 0 && i > gwIdx) ownY += 0.15;
+
+                            // Per-layer staggered emergence from L8
+                            var stepsFromL8 = i - gwIdx; // L8=0, L9=1, ..., L14=6
+                            var layerDelay = stepsFromL8 * 0.09;
+                            var layerProg = Math.max(0, Math.min(1, (introVal - layerDelay) / 0.28));
+                            // Smoothstep
+                            layerProg = layerProg * layerProg * (3 - 2 * layerProg);
+
+                            if (layerProg < 0.001) {
+                                mesh.visible = false;
+                                shellUniforms[i].uOpacity.value = 0;
+                                targetOpacity = 0;
+                            } else {
+                                mesh.visible = true;
+                                // Elastic easing: overshoot + settle
+                                var elastic = 1 - Math.pow(2, -8 * layerProg) * Math.cos(layerProg * Math.PI * 3.0);
+                                elastic = Math.max(0, elastic);
+
+                                // Rise from L8's Y to own Y with elastic bounce
+                                introYTarget = l8Y + (ownY - l8Y) * elastic;
+
+                                // Scale: emerge from tiny with bounce
+                                var scaleElastic = 1 - Math.pow(2, -6 * layerProg) * Math.cos(layerProg * Math.PI * 2.0);
+                                scaleElastic = Math.max(0, scaleElastic);
+                                var introScale = layerProg < 0.1 ? layerProg * 10 * scaleElastic : scaleElastic;
+                                shellScaleMultipliers[i] = Math.max(shellScaleMultipliers[i], introScale);
+
+                                // Opacity: fade in
+                                targetOpacity *= Math.max(0.15, layerProg);
+                            }
                         }
 
-                        var layerIdx = totalLayers - 1 - i;
-                        var staggerStart = layerIdx * 0.06;
-                        var staggerEnd = staggerStart + 0.4;
-                        var layerExpand = Math.max(0, Math.min(1, (introVal - staggerStart) / (staggerEnd - staggerStart)));
-                        layerExpand = 1 - Math.pow(1 - layerExpand, 3);
-
-                        introYTarget = topY + (ownY - topY) * layerExpand;
-
+                        // Global tilt: start facing camera (sphere), un-tilt
                         introTilt = Math.max(0, 1 - introVal * 1.5);
                         introTilt = introTilt * introTilt;
-
-                        targetOpacity *= Math.max(0.15, layerExpand);
                     }
 
                     // Lerp scale
@@ -3564,6 +3621,30 @@
 
                         }
 
+                        // === SILICON LAYER GROWTH: L7→L1 scale up with spring tension ===
+                        // L1 grows most, L7 grows least, proportional to springCompress
+                        if (gwIdx >= 0 && i < gwIdx && springCompress > 0.1) {
+                            var stepsFromGW = gwIdx - 1 - i; // 0=L7, 6=L1
+                            var maxSteps = gwIdx - 1; // 6 on desktop
+                            var growRatio = (stepsFromGW + 1) / (maxSteps + 1); // L7=0.14, L1=1.0
+                            var siliconGrow = 1 + springCompress * 0.25 * growRatio;
+                            mesh.scale.x *= siliconGrow;
+                            mesh.scale.z *= siliconGrow;
+                            // Blend Y toward X for rounder shape
+                            var sTargetY = mesh.scale.x;
+                            mesh.scale.y += (sTargetY - mesh.scale.y) * springCompress * growRatio * 0.5;
+                        }
+
+                        // === PER-LAYER MOUSE PARALLAX during spring ===
+                        // L14 locked (center), outward layers tilt more with mouse
+                        if (springCompress > 0.05) {
+                            var l14Idx = activeLayers.length - 1;
+                            var distFromCenter = Math.abs(i - l14Idx); // 0=L14, 13=L1
+                            var layerParallax = (distFromCenter / l14Idx) * Math.min(1, springCompress * 2);
+                            mesh.position.x += pxInput * layerParallax * 0.4;
+                            mesh.position.y += -pyInput * layerParallax * 0.3;
+                        }
+
                         // === WHITE RIPPLE WAVE: scroll-driven color pulse through layers ===
                         // Each scroll burst sends a white wave rippling from inner (L14) to outer (L1)
                         if (rippleIntensity > 0.01 && springCompress > 0.3 && shellUniforms[i] && layer.zone !== 'silicon') {
@@ -3667,6 +3748,19 @@
                                 shellUniforms[i].uGlowIntensity.value += l14Pulse * (1.0 + springCompress * 1.5);
                                 shellUniforms[i].uActiveGlow.value = Math.max(shellUniforms[i].uActiveGlow.value, l14Pulse * springCompress * 0.4);
                             }
+                        }
+
+                        // L8 intro: start white, transition to base color
+                        if (isGW && introActive) {
+                            var whitePhase = Math.max(0, 1 - introVal * 3.0);
+                            whitePhase = whitePhase * whitePhase;
+                            var bc = activeLayers[i].c;
+                            shellUniforms[i].uColor.value.set(
+                                bc[0] + (1.0 - bc[0]) * whitePhase,
+                                bc[1] + (1.0 - bc[1]) * whitePhase,
+                                bc[2] + (1.0 - bc[2]) * whitePhase
+                            );
+                            shellUniforms[i].uGlowIntensity.value = 2.5 + whitePhase * 3.0;
                         }
 
                         // L8 spring: scale up toward perfect circle + cycling spectrum
@@ -3970,7 +4064,7 @@
                         lm.scale.set(labelScale, labelScale, 1);
                         // Fade in with cubic ease — text appears after disc mostly faces camera
                         // Hide labels during OSI group and closing mode
-                        var hideLabel = activeGroupMode === 'closing';
+                        var hideLabel = activeGroupMode === 'closing' || introActive;
                         var labelOpacity = hideLabel ? 0 : Math.pow(Math.max(0, faceAmt - 0.3) / 0.7, 2.5) * 0.85;
                         lm.material.opacity = labelOpacity;
                     }
@@ -4080,6 +4174,9 @@
                     niOpacity += (0 - niOpacity) * 0.12;
                     niOverlay.style.opacity = niOpacity;
                 }
+
+                // "The OSI of Mind" tagline: fade out as spring compresses
+                heroOsiTagline.style.opacity = Math.max(0, 1 - springCompress * 4);
 
                 // Seizure warning: shows at springCompress ~1.0, fades out once dismissed or passed
                 if (!seizureWarningDismissed && springCompress > 1.5 && springCompress < 1.95) {
