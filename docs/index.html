@@ -2232,7 +2232,130 @@
                 '  float alpha = fresnel * uOpacity * shimmer * electricPool;',
                 '  alpha += outerGlow * 0.35;',
                 '  vec3 col = glowColor * (1.0 + fresnel * uGlowIntensity + outerGlow * 1.5);',
+                '',
                 '  gl_FragColor = vec4(col, alpha);',
+                '}'
+            ].join('\n');
+
+            // Blend shader — mix of standard fresnel + bubble thin-film (uBubbleMix controls ratio)
+            var blendFrag = [
+                'uniform vec3 uColor;',
+                'uniform float uOpacity;',
+                'uniform float uFresnelPower;',
+                'uniform float uGlowIntensity;',
+                'uniform float uTime;',
+                'uniform float uActiveGlow;',
+                'uniform float uBubbleMix;',
+                'varying vec3 vNormal;',
+                'varying vec3 vViewPos;',
+                'varying vec3 vWorldPos;',
+                'void main() {',
+                '  vec3 vd = normalize(vViewPos);',
+                '  float NdotV = abs(dot(vd, vNormal));',
+                '  float fresnel = pow(1.0 - NdotV, uFresnelPower);',
+                '  float shimmer = 1.0 + 0.08 * sin(uTime * 2.0 + vNormal.x * 12.0);',
+                '',
+                '  // Standard fresnel path',
+                '  float ripple1 = sin(vWorldPos.x * 4.0 + uTime * 0.8) * cos(vWorldPos.z * 3.5 + uTime * 0.6);',
+                '  float ripple2 = sin(vWorldPos.x * 6.0 - uTime * 0.5 + 1.7) * cos(vWorldPos.z * 5.0 + uTime * 0.4);',
+                '  float poolEffect = 0.5 + 0.3 * ripple1 + 0.2 * ripple2;',
+                '  float electricPool = mix(1.0, poolEffect * 1.4 + 0.3, uActiveGlow);',
+                '  float outerGlow = pow(fresnel, 1.2) * uActiveGlow;',
+                '  vec3 stdColor = mix(uColor, vec3(1.0), outerGlow * 0.6);',
+                '  float stdAlpha = fresnel * uOpacity * shimmer * electricPool + outerGlow * 0.35;',
+                '  vec3 stdCol = stdColor * (1.0 + fresnel * uGlowIntensity + outerGlow * 1.5);',
+                '',
+                '  // Bubble thin-film path',
+                '  float thickness = NdotV * 2.5',
+                '    + sin(vWorldPos.x * 3.0 + vWorldPos.z * 2.0 + uTime * 0.2) * 0.3',
+                '    + sin(vWorldPos.y * 4.0 - vWorldPos.x * 1.5 + uTime * 0.15) * 0.2;',
+                '  float filmR = 0.5 + 0.5 * cos(thickness * 6.2832 * 1.0);',
+                '  float filmG = 0.5 + 0.5 * cos(thickness * 6.2832 * 1.15 + 1.2);',
+                '  float filmB = 0.5 + 0.5 * cos(thickness * 6.2832 * 1.35 + 2.5);',
+                '  vec3 filmColor = vec3(filmR, filmG, filmB);',
+                '  float iriStrength = 0.3 + fresnel * 0.7;',
+                '  vec3 bubbleCol = mix(uColor * 0.4, filmColor, iriStrength);',
+                '  float rim = pow(fresnel, 2.0);',
+                '  bubbleCol += mix(filmColor, vec3(1.0), 0.5) * rim * 0.6;',
+                '  float bubbleAlpha = rim * 0.5 + (1.0 - fresnel) * 0.08 + fresnel * 0.35 * uOpacity;',
+                '',
+                '  // Purple inner glow (scales with bubbleMix — strongest on L14)',
+                '  float purplePulse = 0.5 + 0.5 * sin(uTime * 0.5 + vWorldPos.y * 2.0);',
+                '  vec3 purpleGlow = vec3(0.85, 0.15, 0.95) * purplePulse * (1.0 - fresnel) * uBubbleMix * 1.4;',
+                '  bubbleCol += purpleGlow;',
+                '',
+                '  // White core glow (bright center, fades to edges)',
+                '  float coreGlow = pow(NdotV, 3.0) * uBubbleMix * 0.35;',
+                '  bubbleCol += vec3(1.0) * coreGlow;',
+                '  bubbleAlpha += coreGlow * 0.3;',
+                '',
+                '  // White outer rim glow (bright edge bloom, strongest on L14)',
+                '  float outerRim = pow(fresnel, 1.5) * uBubbleMix * 0.7;',
+                '  bubbleCol += vec3(1.0) * outerRim;',
+                '  bubbleAlpha += outerRim * 0.5;',
+                '',
+                '  // Blend by uBubbleMix',
+                '  vec3 col = mix(stdCol, bubbleCol, uBubbleMix);',
+                '  float alpha = mix(stdAlpha, bubbleAlpha, uBubbleMix);',
+                '',
+                '  gl_FragColor = vec4(col, alpha);',
+                '}'
+            ].join('\n');
+
+            // L14 Identity Shader — soap bubble: translucent with thin-film interference
+            var identityFrag = [
+                'uniform vec3 uColor;',
+                'uniform float uOpacity;',
+                'uniform float uTime;',
+                'uniform float uActiveGlow;',
+                'uniform float uGlowIntensity;',
+                'varying vec3 vNormal;',
+                'varying vec3 vViewPos;',
+                'varying vec3 vWorldPos;',
+                'void main() {',
+                '  vec3 vd = normalize(vViewPos);',
+                '  float NdotV = abs(dot(vd, vNormal));',
+                '  float fresnel = pow(1.0 - NdotV, 3.0);',
+                '',
+                '  // Thin-film interference: bubble-like scattered light',
+                '  // Film thickness varies across surface (like soap)',
+                '  float thickness = NdotV * 2.5',
+                '    + sin(vWorldPos.x * 3.0 + vWorldPos.z * 2.0 + uTime * 0.2) * 0.3',
+                '    + sin(vWorldPos.y * 4.0 - vWorldPos.x * 1.5 + uTime * 0.15) * 0.2;',
+                '',
+                '  // Interference colors: each RGB channel has different period',
+                '  float filmR = 0.5 + 0.5 * cos(thickness * 6.2832 * 1.0 + 0.0);',
+                '  float filmG = 0.5 + 0.5 * cos(thickness * 6.2832 * 1.15 + 1.2);',
+                '  float filmB = 0.5 + 0.5 * cos(thickness * 6.2832 * 1.35 + 2.5);',
+                '  vec3 filmColor = vec3(filmR, filmG, filmB);',
+                '',
+                '  // Stronger interference at glancing angles (like a real bubble)',
+                '  float iriStrength = 0.3 + fresnel * 0.7;',
+                '  vec3 bubbleCol = mix(uColor * 0.4, filmColor, iriStrength);',
+                '',
+                '  // Gentle heartbeat — subtle brightness pulse',
+                '  float heartCycle = mod(uTime * 0.7, 6.2832);',
+                '  float lub = exp(-8.0 * pow(heartCycle - 1.0, 2.0));',
+                '  float dub = exp(-10.0 * pow(heartCycle - 1.6, 2.0));',
+                '  float heartbeat = (lub + dub * 0.7) * 0.3;',
+                '',
+                '  // Bubble edge: bright rim like light catching the membrane',
+                '  float rim = pow(fresnel, 2.0);',
+                '  vec3 rimColor = mix(filmColor, vec3(1.0), 0.5);',
+                '  bubbleCol += rimColor * rim * 0.6;',
+                '',
+                '  // Interior: mostly transparent, faint scattered color visible through',
+                '  float interior = (1.0 - fresnel) * 0.08 * (1.0 + heartbeat);',
+                '',
+                '  // Translucent alpha: thin at center, visible at edges',
+                '  float alpha = rim * 0.5 + interior + fresnel * 0.35 * uOpacity;',
+                '  alpha *= (0.85 + heartbeat * 0.15);',
+                '  alpha += uActiveGlow * rim * 0.2;',
+                '',
+                '  // Boost color brightness at rim',
+                '  bubbleCol *= (1.0 + rim * uGlowIntensity * 0.3 + heartbeat * 0.2);',
+                '',
+                '  gl_FragColor = vec4(bubbleCol, alpha);',
                 '}'
             ].join('\n');
 
@@ -2266,26 +2389,27 @@
                 '  energy *= electricPool;',
                 '  energy += outerGlow * 0.4;',
                 '  vec3 col = glowColor * (1.0 + energy * 2.0 + outerGlow * 2.0);',
+                '',
                 '  gl_FragColor = vec4(col, energy * uOpacity + outerGlow * 0.3);',
                 '}'
             ].join('\n');
 
             // Layer Config
             var allLayers = [
-                { id:'L1',  r:2.90, c:[0.145,0.388,0.922], zone:'silicon',  fp:3.5 },
-                { id:'L2',  r:2.72, c:[0.173,0.424,0.941], zone:'silicon',  fp:3.2 },
-                { id:'L3',  r:2.55, c:[0.200,0.463,0.953], zone:'silicon',  fp:3.0 },
-                { id:'L4',  r:2.38, c:[0.231,0.510,0.965], zone:'silicon',  fp:2.8 },
-                { id:'L5',  r:2.22, c:[0.271,0.561,0.969], zone:'silicon',  fp:2.6 },
-                { id:'L6',  r:2.06, c:[0.310,0.612,0.976], zone:'silicon',  fp:2.5 },
-                { id:'L7',  r:1.90, c:[0.376,0.647,0.980], zone:'silicon',  fp:2.4 },
-                { id:'L8',  r:1.72, c:[0.83,0.69,0.22], zone:'gateway',  fp:2.0 },
-                { id:'L9',  r:1.52, c:[0.063,0.725,0.506], zone:'biology',  fp:2.8 },
-                { id:'L10', r:1.38, c:[0.204,0.827,0.600], zone:'biology',  fp:2.6 },
-                { id:'L11', r:1.24, c:[0.431,0.906,0.718], zone:'biology',  fp:2.4 },
-                { id:'L12', r:1.10, c:[0.655,0.545,0.984], zone:'biology',  fp:2.3 },
-                { id:'L13', r:0.96, c:[0.753,0.518,0.988], zone:'biology',  fp:2.2 },
-                { id:'L14', r:0.82, c:[0.90,0.15,0.65], zone:'biology',  fp:2.0 },
+                { id:'L1',  r:2.90, c:[1.00,1.00,1.00], zone:'silicon',  fp:3.5 },
+                { id:'L2',  r:2.72, c:[1.00,1.00,1.00], zone:'silicon',  fp:3.2 },
+                { id:'L3',  r:2.55, c:[1.00,1.00,1.00], zone:'silicon',  fp:3.0 },
+                { id:'L4',  r:2.38, c:[1.00,1.00,1.00], zone:'silicon',  fp:2.8 },
+                { id:'L5',  r:2.22, c:[1.00,1.00,1.00], zone:'silicon',  fp:2.6 },
+                { id:'L6',  r:2.06, c:[1.00,1.00,1.00], zone:'silicon',  fp:2.5 },
+                { id:'L7',  r:1.90, c:[1.00,1.00,1.00], zone:'silicon',  fp:2.4 },
+                { id:'L8',  r:1.72, c:[0.20,0.55,0.60], zone:'gateway',  fp:2.0 },
+                { id:'L9',  r:1.52, c:[0.20,0.87,0.87], zone:'biology',  fp:2.8 },
+                { id:'L10', r:1.38, c:[0.50,0.93,0.93], zone:'biology',  fp:2.6 },
+                { id:'L11', r:1.24, c:[1.00,1.00,1.00], zone:'biology',  fp:2.4 },
+                { id:'L12', r:1.10, c:[1.00,1.00,1.00], zone:'biology',  fp:2.3 },
+                { id:'L13', r:0.96, c:[1.00,1.00,1.00], zone:'biology',  fp:2.2 },
+                { id:'L14', r:0.82, c:[0.80,0.55,0.75], zone:'biology',  fp:2.0 },
             ];
 
             var mobileIdx = [0,2,4,6,7,9,11,13];
@@ -2295,22 +2419,27 @@
             var shellGeo = new THREE.SphereGeometry(1, isMobile ? 32 : 64, isMobile ? 24 : 48);
             var shellMeshes = [], shellUniforms = [];
 
-            activeLayers.forEach(function(layer) {
+            activeLayers.forEach(function(layer, idx) {
                 var isGW = layer.zone === 'gateway';
-                var isL14 = layer.id === 'L14';
-                var useGatewayShader = isGW || isL14;
+                // Bubble gradient: L14=0.80, L13=0.70, ..., L9=0.30, L8 and below=0
+                var layerNum = parseInt(layer.id.replace('L',''));
+                var bubbleMix = layerNum >= 9 ? Math.max(0, 0.80 - (14 - layerNum) * 0.10) : 0;
+                var hasBlend = bubbleMix > 0;
+                var useSpecialShader = isGW || hasBlend;
                 var u = {
                     uColor: { value: new THREE.Vector3(layer.c[0], layer.c[1], layer.c[2]) },
-                    uOpacity: { value: useGatewayShader ? 0.7 : 0.45 },
+                    uOpacity: { value: useSpecialShader ? 0.7 : 0.45 },
                     uFresnelPower: { value: layer.fp },
-                    uGlowIntensity: { value: useGatewayShader ? 2.5 : 1.2 },
+                    uGlowIntensity: { value: useSpecialShader ? 2.5 : 1.2 },
                     uTime: { value: 0 },
                     uActiveGlow: { value: 0.0 }
                 };
+                if (hasBlend) u.uBubbleMix = { value: bubbleMix };
+                var fragShader = hasBlend ? blendFrag : (isGW ? gatewayFrag : fresnelFrag);
                 var mat = new THREE.ShaderMaterial({
                     uniforms: u,
                     vertexShader: fresnelVert,
-                    fragmentShader: useGatewayShader ? gatewayFrag : fresnelFrag,
+                    fragmentShader: fragShader,
                     transparent: true,
                     side: THREE.FrontSide,
                     depthWrite: false,
@@ -3023,8 +3152,8 @@
                     if (tunnelProgress.value > 0.01) {
                         parallaxStr *= (1 - tunnelProgress.value * 0.85);
                     }
-                    var tiltMultX = 0.09;
-                    var tiltMultY = 0.005;
+                    var tiltMultX = 0.20;
+                    var tiltMultY = 0.08;
                     // During spring: stronger tilt range on both axes
                     if (springCompress > 0.05) {
                         var springTiltBoost = Math.min(1, springCompress * 2);
@@ -3038,9 +3167,9 @@
                     }
                     // During spring: disable group-level parallax (per-layer handles it)
                     if (springCompress < 0.05) {
-                        // Auto-breathe tilt: more forward/back, less left/right
-                        var autoTiltX = Math.sin(t * 0.3) * 0.12;
-                        var autoTiltY = Math.sin(t * 0.19) * 0.03;
+                        // Auto-breathe tilt + mouse-driven tilt
+                        var autoTiltX = Math.sin(t * 0.25) * 0.04 + pyInput * tiltMultX * parallaxStr;
+                        var autoTiltY = Math.sin(t * 0.15) * 0.01 + pxInput * tiltMultY * parallaxStr;
                         parallaxGroup.rotation.x += (autoTiltX - parallaxGroup.rotation.x) * 0.06;
                         parallaxGroup.rotation.y += (autoTiltY - parallaxGroup.rotation.y) * 0.04;
                     } else {
@@ -3820,7 +3949,7 @@
                             // Each layer spins on Y at a different speed, alternating direction
                             var spinDir = (i % 2 === 0) ? 1 : -1;
                             var layerNorm = i / (totalLayers - 1);
-                            var spinSpeed = 0.08 + layerNorm * 0.15; // outer=slow, inner=faster
+                            var spinSpeed = 0.03 + layerNorm * 0.05; // gentle orbital drift
                             mesh.rotation.y = t * spinSpeed * spinDir;
                         }
 
@@ -3863,12 +3992,12 @@
                         // All layers: synced white glow pulse + ripple breathing on hero
                         var heroBreathing = (springCompress < 0.01 && !introActive);
                         if (heroBreathing) {
-                            // Staggered white pulse: sweeps up then down the stack
-                            // Each layer has a phase offset so white cascades through layers
-                            var wavePhase = i * 0.4; // stagger per layer
-                            var glowPulse = (Math.sin(t * 1.2 - wavePhase) + 1) * 0.5;
+                            // Staggered white pulse: cascades from L14 (top) down to L1 (bottom)
+                            var stepsFromTop = (totalLayers - 1) - i; // 0=L14, 13=L1
+                            var wavePhase = stepsFromTop * 0.4;
+                            var glowPulse = (Math.sin(t * 0.6 - wavePhase) + 1) * 0.5;
                             glowPulse = glowPulse * glowPulse; // sharpen: mostly base color, brief white
-                            glowPulse *= 0.7; // cap so it never goes full white
+                            glowPulse *= 0.35; // cap low for subtle warmth
                             // L13: use L14's color faded toward white instead of own base
                             var l14i = activeLayers.length - 1;
                             var l13i = l14i - 1;
@@ -3882,43 +4011,44 @@
                                     l14c[2] + (1.0 - l14c[2]) * 0.5
                                 ];
                             } else if (layer.zone === 'gateway') {
-                                // L8: slowly cycle through gold, teal, blue
-                                var l8Pal = [
-                                    [0.83, 0.69, 0.22],  // gold
-                                    [0.10, 0.55, 0.70],  // teal
-                                    [0.15, 0.30, 0.85],  // blue
-                                    [0.83, 0.69, 0.22]   // gold (loop)
-                                ];
-                                var l8Cyc = (t * 0.12) % 3.0; // slow cycle through 3 colors
-                                var l8ci = Math.floor(l8Cyc);
-                                var l8cf = l8Cyc - l8ci;
-                                l8cf = l8cf * l8cf * (3 - 2 * l8cf); // smoothstep
-                                var lc0 = l8Pal[l8ci], lc1 = l8Pal[l8ci + 1];
+                                // L8: flash glow between blue and teal
+                                var l8Cycle = (Math.sin(t * 0.25) + 1.0) * 0.5; // 0→1 smooth
+                                var l8Blue = [0.15, 0.35, 0.85];
+                                var l8Teal = [0.10, 0.55, 0.60];
                                 bcc = [
-                                    lc0[0] + (lc1[0] - lc0[0]) * l8cf,
-                                    lc0[1] + (lc1[1] - lc0[1]) * l8cf,
-                                    lc0[2] + (lc1[2] - lc0[2]) * l8cf
+                                    l8Teal[0] + (l8Blue[0] - l8Teal[0]) * l8Cycle,
+                                    l8Teal[1] + (l8Blue[1] - l8Teal[1]) * l8Cycle,
+                                    l8Teal[2] + (l8Blue[2] - l8Teal[2]) * l8Cycle
                                 ];
                             } else {
                                 bcc = activeLayers[i].c;
                             }
+                            var gp = (layer.zone === 'gateway') ? 0 : glowPulse;
+                            // Color intensity wave: cascades top→bottom then back up
+                            var wavePos = (Math.sin(t * 0.3) + 1.0) * 0.5 * (totalLayers - 1); // bounces 0→13
+                            var waveDist = Math.abs(i - wavePos);
+                            var colorBoost = Math.max(0, 1.0 - waveDist * 0.25); // wide gradient
+                            colorBoost = colorBoost * 0.6; // intensity multiplier
+                            var isGateway = (layer.zone === 'gateway');
+                            var cb = isGateway ? 0 : colorBoost;
+                            // Boost: push color toward itself (more saturated) + slight brightness
                             shellUniforms[i].uColor.value.set(
-                                bcc[0] + (1.0 - bcc[0]) * glowPulse,
-                                bcc[1] + (1.0 - bcc[1]) * glowPulse,
-                                bcc[2] + (1.0 - bcc[2]) * glowPulse
+                                bcc[0] + (1.0 - bcc[0]) * gp + (bcc[0] - 0.5) * cb * 0.5,
+                                bcc[1] + (1.0 - bcc[1]) * gp + (bcc[1] - 0.5) * cb * 0.5,
+                                bcc[2] + (1.0 - bcc[2]) * gp + (bcc[2] - 0.5) * cb * 0.5
                             );
-                            shellUniforms[i].uGlowIntensity.value = 2.0 + glowPulse * 4.0;
-                            shellUniforms[i].uOpacity.value = 0.6 + glowPulse * 0.4;
+                            shellUniforms[i].uGlowIntensity.value = 1.5 + glowPulse * 2.0 + cb * 1.5;
+                            shellUniforms[i].uOpacity.value = 0.6 + glowPulse * 0.2 + cb * 0.15;
 
                             // L14 + L8: drive uActiveGlow for electric pool shader effect
                             if (i === l14i || layer.zone === 'gateway') {
                                 shellUniforms[i].uActiveGlow.value = 0.3 + glowPulse * 0.4;
                             }
 
-                            // Pool ripple: staggered scale pulse per layer like water rings
+                            // Pool ripple: gentle scale pulse per layer
                             var ripplePhase = i * 0.45;
-                            var ripple1 = Math.sin(t * 0.8 - ripplePhase) * 0.012;
-                            var ripple2 = Math.sin(t * 1.3 - ripplePhase * 1.3) * 0.006;
+                            var ripple1 = Math.sin(t * 0.5 - ripplePhase) * 0.004;
+                            var ripple2 = Math.sin(t * 0.8 - ripplePhase * 1.3) * 0.002;
                             var rippleScale = 1.0 + ripple1 + ripple2;
                             mesh.scale.x *= rippleScale;
                             mesh.scale.z *= rippleScale;
@@ -3927,8 +4057,31 @@
                             var layerRatio = i / (totalLayers - 1); // 0=L1(bottom), 1=L14(top)
                             var expCompress = Math.pow(layerRatio, 2.5); // exponential: bottom ~0, top ~1
                             var accPhase = i * 0.35;
-                            var accBreath = Math.sin(t * 0.7 - accPhase) * (0.005 + expCompress * 0.12);
+                            var accBreath = Math.sin(t * 0.4 - accPhase) * (0.012 + expCompress * 0.16);
                             mesh.position.y += accBreath;
+
+                            // Track total stack compression distance this frame
+                            // Sum all layers' absolute Y displacement for color speed
+                            if (typeof window._accTotalDelta === 'undefined') {
+                                window._accTotalDelta = 0;
+                                window._accPrevSum = 0;
+                            }
+                            if (typeof window._accFrameSum === 'undefined') window._accFrameSum = 0;
+                            window._accFrameSum += Math.abs(accBreath);
+                            if (i === totalLayers - 1) {
+                                window._accTotalDelta = Math.abs(window._accFrameSum - window._accPrevSum);
+                                window._accPrevSum = window._accFrameSum;
+                                window._accFrameSum = 0;
+                            }
+
+                            // Scale breathing: bottom layers scale up as top layers compress down
+                            // Inverse ratio: L1 scales most (1.0), L14 scales least (0.0)
+                            var invRatio = 1.0 - layerRatio;
+                            // Scale proportional to this layer's compression displacement
+                            var compressAmt = Math.abs(accBreath) / 0.30; // normalize to max amplitude
+                            var scaleBoost = 1.0 + (1.0 - compressAmt) * invRatio * 0.06;
+                            mesh.scale.x *= scaleBoost;
+                            mesh.scale.z *= scaleBoost;
 
                         }
 
