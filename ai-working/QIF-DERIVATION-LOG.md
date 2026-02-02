@@ -674,6 +674,93 @@ Each brain region occupies a position on this 2D map. The diagonal band from low
 
 ---
 
+## Entry 14: QIF v3.0 Hourglass Layer Model — Finalized and Implemented
+
+**Date:** 2026-02-02, evening
+**Context:** After 13 entries of conceptual development — from rejecting OSI layers (Entry 1) through the hourglass model (Entry 7) to the 2D framework (Entry 13) — the v3.0 8-band hourglass architecture was finalized and implemented across the entire codebase. This entry documents the final structure, the neuroscience validation that refined it, and the complete propagation from config to whitepaper.
+**Builds on:** Entries 1-13 (culmination of all prior work)
+**Status:** Implemented and validated
+
+### What Was Built
+
+The 14-layer OSI-derived model (v2.0) has been fully replaced by an 8-band hourglass architecture (v3.0) with three zones:
+
+**Neural Domain (Upper Hourglass — Quantum-dominant)**
+- **N4** — Identity & Consciousness: PFC, ACC. Quantum indeterminate. QI 0.9–1.0
+- **N3** — Cognitive Integration: Broca, Wernicke, HIPP, amygdala, insula. Quantum uncertain. QI 0.7–0.9
+- **N2** — Sensorimotor Processing: M1, S1, V1, A1, PMC, SMA, PPC. Chaotic→stochastic. QI 0.4–0.7
+- **N1** — Subcortical Relay: Thalamus, basal ganglia, cerebellum, brainstem. Stochastic. QI 0.2–0.4
+
+**Interface Zone (Bottleneck — Quasi-quantum)**
+- **I0** — Neural Interface: Electrode-tissue boundary. Where quantum states collapse into classical data. QI 0.1–0.3
+
+**Silicon Domain (Lower Hourglass — Classical)**
+- **S1** — Analog Front-End: Amplification, filtering, ADC/DAC. Stochastic (analog noise). QI 0.01–0.1
+- **S2** — Digital Processing: Decoding, algorithms, classification. Deterministic. QI ≈ 0
+- **S3** — Application: Clinical software, UI, data storage. Deterministic. QI 0
+
+### Naming Convention
+
+Format: `{Zone}{Number}` — numbers increase **away from the interface** in both directions. This is not arbitrary: it reflects the physical reality that band number correlates with distance from the measurement bottleneck. N4 is deepest in the brain (highest abstraction), S3 is furthest in the software stack. I0 is zero because it is the origin — the point where quantum meets classical.
+
+### Neuroscience Validation
+
+During implementation, a neuroscience audit identified and corrected several issues:
+
+1. **PFC consolidation** — The initial model split PFC into "PFC (executive)" and "PFC (decisions)" at different bands. This is anatomically imprecise — the prefrontal cortex is one region with subregions (dlPFC, vmPFC, etc.), but at QIF's resolution, it belongs at a single band (N4). Collapsed to single "PFC" node.
+
+2. **ACC placement** — Anterior cingulate cortex was initially bundled as a label rather than a proper region. ACC is a distinct cortical region with its own cytoarchitecture (Brodmann areas 24, 32, 33). Placed at N4 with connections to PFC, amygdala, insula, and brainstem — reflecting its role in the salience network.
+
+3. **Insula added** — Missing from the original model despite being critical for interoception and the salience network. Placed at N3 (cognitive integration) with connections to ACC, amygdala, PFC, and S1 (somatosensory).
+
+4. **PPC (posterior parietal cortex) added** — Missing despite being essential for sensorimotor integration, spatial attention, and visuomotor planning. Placed at N2 with connections to V1, M1, PMC, and PFC.
+
+5. **Thalamus connections fixed** — Original model had thalamus receiving FROM sensory cortex. In reality, thalamus is the sensory gateway that feeds TO V1, A1, S1 (with feedback loops). Direction corrected.
+
+6. **HIPP↔amygdala bidirectional connection** — Added. These structures have massive reciprocal connections critical for emotional memory.
+
+7. **Brainstem neuromodulation** — Added connections from brainstem to thalamus, cerebellum, PFC, amygdala, and ACC. The brainstem houses locus coeruleus (norepinephrine), raphe nuclei (serotonin), VTA (dopamine) — all of which modulate higher regions.
+
+All corrections were validated with 10 automated tests checking structural consistency (8 bands, 3 zones, symmetric connections, no orphan regions, no dangling references).
+
+### The Classical Ceiling
+
+The boundary between N2 and N3 is the **classical ceiling** — separating two fundamentally different kinds of unpredictability:
+
+- **Below** (deterministic, stochastic, chaotic): unpredictability is epistemic — in principle resolvable with better measurement. Hidden variables exist. Classical security operates here.
+- **Above** (quantum uncertain, quantum indeterminate): unpredictability is ontic — a property of reality, not our knowledge. Bell's theorem applies. No amount of measurement eliminates it. QIF's quantum terms are essential here.
+
+### Hourglass Geometry
+
+Width = state space / possibility space at each band:
+- Widest at N4 (quantum superposition, maximum indeterminacy)
+- Widest at S3 (maximum classical pathways, full deterministic branching)
+- Narrowest at I0 (measurement collapses possibilities — the bottleneck)
+- The bottleneck has real thickness — the quasi-quantum zone is not a mathematical point but a physical band where partial decoherence has occurred (0 < ΓD < 1)
+
+### Files Changed
+
+| File | Change |
+|------|--------|
+| `qif-lab/src/config.py` | Added ZONES, BANDS, BRAIN_REGION_MAP, DETERMINACY_SPECTRUM, V2_TO_V3_MIGRATION. Updated FRAMEWORK version. Deprecated old LAYERS. |
+| `qif-lab/src/visualizations.py` | Replaced fig_layer_stack → fig_hourglass, added fig_brain_dependency_graph |
+| `qif-lab/src/figures.py` | Updated fig_layer_architecture to render hourglass from BANDS/ZONES |
+| `QIF-TRUTH.md` | Section 2 rewritten with v3.0 tables, hourglass geometry, classical ceiling |
+| `qif-lab/whitepaper/chapters/04-layer-architecture.qmd` | Complete rewrite: hourglass, 8 bands, brain region graph, all as-code |
+| `qif-lab/whitepaper/chapters/03-knowns-unknowns.qmd` | L8→I0 reference updated |
+| `qif-lab/whitepaper/qif-whitepaper.qmd` | Abstract, layer section, threat model, conclusion updated |
+| `qif-lab/whitepaper/index.qmd` | Version, abstract, layer section, unknowns table, threat model, footer updated |
+
+### Why This Matters
+
+The v2.0 model was a metaphor. Stacking 7 neural layers on 7 OSI layers implied the neural domain sits "above" silicon in a processing hierarchy. In reality, the electrode-tissue interface is where silicon and biology physically touch — they are adjacent, not stacked.
+
+The v3.0 hourglass captures the actual physics: information flows from wide possibility spaces (quantum neural states or classical software states) through a narrow measurement bottleneck (I0), where quantum states collapse into classical data (recording) or classical commands enter the quantum neural domain (stimulation). The geometry is not decorative — it reflects the state space dimensionality at each stage.
+
+Every band in v3.0 corresponds to a real functional stage in a BCI system. Every brain region maps to a specific band based on its neuroscience, not by analogy to networking protocols. The model is falsifiable: if a brain region's assignment is wrong, the dependency graph produces incorrect predictions about information flow.
+
+---
+
 ## Future Entries
 
 *This space reserved for entries generated in subsequent sessions. Each new insight, correction, or derivation gets a new numbered entry with full timestamp, context, and reasoning.*
@@ -707,6 +794,6 @@ For readers encountering these terms for the first time:
 
 *Document version: 1.0*
 *Created: 2026-02-02*
-*Last entry: #13 (2026-02-02)*
+*Last entry: #14 (2026-02-02)*
 *Maintainer: Quantum Intelligence (Kevin Qi + Claude, Opus 4.5)*
-*Location: @qikevinl/drafts/ai-working/QIF-DERIVATION-LOG.md*
+*Location: qinnovates/mindloft/drafts/ai-working/QIF-DERIVATION-LOG.md*

@@ -4,7 +4,7 @@
 **Authors:** Kevin Qi & Claude (Opus 4.5) -- Quantum Intelligence Collaboration
 **Date:** 2026-02-02
 **Status:** DRAFT -- Active Research
-**Classification:** @qikevinl/drafts (DEV stage)
+**Classification:** qinnovates/mindloft/drafts (DEV stage)
 
 ---
 
@@ -921,7 +921,7 @@ drwxr-xr-x@  4 mac  staff    128 Jan 23 23:00 Quantum Hacking
 **Authors:** Kevin Qi & Claude (Opus 4.5) -- Quantum Intelligence Collaboration
 **Date:** 2026-02-02
 **Status:** DRAFT -- Active Research
-**Classification:** @qikevinl/drafts (DEV stage)
+**Classification:** qinnovates/mindloft/drafts (DEV stage)
 
 ---
 
