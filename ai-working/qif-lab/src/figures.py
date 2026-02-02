@@ -20,8 +20,8 @@ from matplotlib.colors import LinearSegmentedColormap
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from src.config import (
-    LAYERS, COHERENCE_THRESHOLDS, FREQUENCY_BANDS,
-    DECOHERENCE_CAMPS, THREAT_MODEL, DECISION_MATRIX,
+    BANDS, ZONES, BRAIN_REGION_MAP, COHERENCE_THRESHOLDS, FREQUENCY_BANDS,
+    DECOHERENCE_CAMPS, THREAT_MODEL, DECISION_MATRIX, FRAMEWORK,
 )
 from src.qif_equations import (
     coherence_metric, decoherence_factor, quantum_gate,
@@ -64,37 +64,56 @@ def save(fig, name):
 
 
 # ──────────────────────────────────────────────
-# Fig 5.2: Layer Architecture Hourglass
+# Fig 5.2: Hourglass Architecture (v3.0)
 # ──────────────────────────────────────────────
 
 def fig_layer_architecture():
-    """14-layer stack with OSI (blue), Gateway (red), Neural (green)."""
-    fig, ax = plt.subplots(figsize=(8, 10))
+    """8-band hourglass with zone colors, width variation, QI annotations."""
+    fig, ax = plt.subplots(figsize=(10, 10))
 
-    for layer_info in LAYERS:
-        y = 14 - layer_info['layer']
-        color = COLORS['osi'] if layer_info['domain'] == 'OSI' else COLORS['neural']
-        if layer_info['layer'] == 8:
-            color = COLORS['gateway']
-        width = 0.6 if layer_info['layer'] == 8 else 0.8
-        x_offset = (0.8 - width) / 2
+    zone_colors = {z_id: z["color"] for z_id, z in ZONES.items()}
+    n = len(BANDS)
 
-        rect = plt.Rectangle((x_offset, y), width, 0.85, facecolor=color, alpha=0.8,
+    for i, band in enumerate(BANDS):
+        y = n - 1 - i  # N4 at top, S3 at bottom
+        color = zone_colors[band["zone"]]
+        alpha = 0.95 if band["id"] == "I0" else 0.8
+
+        # Width from hourglass_width (scaled to figure)
+        width = 0.2 + band["hourglass_width"] * 0.7
+        x_offset = (1.0 - width) / 2
+
+        rect = plt.Rectangle((x_offset, y), width, 0.85, facecolor=color, alpha=alpha,
                               edgecolor='white', linewidth=2, zorder=2)
         ax.add_patch(rect)
-        ax.text(0.4, y + 0.42, f"L{layer_info['layer']}: {layer_info['name']}",
+        ax.text(0.5, y + 0.42, f"{band['id']}: {band['name']}",
                 ha='center', va='center', fontsize=10, fontweight='bold', color='white', zorder=3)
 
-    # Domain labels
-    ax.text(0.95, 10, 'OSI\nDomain', ha='left', va='center', fontsize=10, color=COLORS['osi'], fontweight='bold')
-    ax.text(0.95, 6.5, 'GATEWAY', ha='left', va='center', fontsize=10, color=COLORS['gateway'], fontweight='bold')
-    ax.text(0.95, 3, 'Neural\nDomain', ha='left', va='center', fontsize=10, color=COLORS['neural'], fontweight='bold')
+        # QI range annotation
+        qi_lo, qi_hi = band["qi_range"]
+        qi_text = f"QI {qi_lo}–{qi_hi}" if qi_hi > 0 else "QI ≈ 0"
+        ax.text(0.5 + width / 2 + 0.15, y + 0.42, qi_text,
+                ha='left', va='center', fontsize=8, color='gray', zorder=3)
 
-    ax.set_xlim(-0.1, 1.3)
-    ax.set_ylim(-0.5, 14.5)
+    # Zone labels
+    ax.text(1.15, 5.5, 'Neural\nDomain', ha='left', va='center', fontsize=10,
+            color=zone_colors['neural'], fontweight='bold')
+    ax.text(1.15, 3.0, 'Interface\nZone', ha='left', va='center', fontsize=10,
+            color=zone_colors['interface'], fontweight='bold')
+    ax.text(1.15, 1.0, 'Silicon\nDomain', ha='left', va='center', fontsize=10,
+            color=zone_colors['silicon'], fontweight='bold')
+
+    # Classical ceiling line
+    ax.axhline(y=4.6, color='#f39c12', linestyle='--', alpha=0.5, linewidth=1.5, xmin=0.05, xmax=0.95)
+    ax.text(0.97, 4.65, 'Classical Ceiling', ha='right', va='bottom', fontsize=8,
+            color='#f39c12', fontstyle='italic')
+
+    ax.set_xlim(-0.15, 1.5)
+    ax.set_ylim(-0.5, n + 0.5)
     ax.set_aspect('auto')
     ax.axis('off')
-    ax.set_title('QIF 14-Layer Architecture (v2.0)', fontsize=14, fontweight='bold', pad=20)
+    ax.set_title(f'QIF {FRAMEWORK["layer_model_version"]} — 8-Band Hourglass Architecture',
+                 fontsize=14, fontweight='bold', pad=20)
 
     save(fig, 'layer_architecture')
 

@@ -11,8 +11,8 @@ import matplotlib.patches as mpatches
 from pathlib import Path
 
 from .config import (
-    LAYERS, COHERENCE_THRESHOLDS, FREQUENCY_BANDS, BRAIN_MAX_DIMENSION_M,
-    DECOHERENCE_CAMPS, DEFAULT_C1_PARAMS, FRAMEWORK,
+    BANDS, ZONES, BRAIN_REGION_MAP, COHERENCE_THRESHOLDS, FREQUENCY_BANDS,
+    BRAIN_MAX_DIMENSION_M, DECOHERENCE_CAMPS, DEFAULT_C1_PARAMS, FRAMEWORK,
 )
 from .qif_equations import (
     coherence_metric, decoherence_factor, quantum_gate,
@@ -187,56 +187,130 @@ def fig_scale_frequency(save=True):
     return fig
 
 
-def fig_layer_stack(save=True):
-    """[VIS 5.2] The 14-layer hourglass stack."""
-    fig, ax = plt.subplots(figsize=(8, 12))
+def fig_hourglass(save=True):
+    """[VIS 5.2] The 8-band hourglass architecture (v3.0)."""
+    fig, ax = plt.subplots(figsize=(10, 12))
     ax.set_xlim(0, 10)
-    ax.set_ylim(-1, 15)
+    ax.set_ylim(-1, len(BANDS) + 1)
     ax.axis('off')
 
-    for layer_info in LAYERS:
-        i = layer_info['layer']
-        y = 14 - i  # Flip so L1 is at top
-        is_neural = layer_info['domain'] == 'Neural'
-        color = COLORS['neural'] if is_neural else COLORS['classical']
-        alpha = 0.9 if i == 8 else 0.6  # Highlight L8
+    zone_colors = {z_id: z["color"] for z_id, z in ZONES.items()}
 
-        # Width: hourglass shape (narrowest at L8)
-        if i <= 7:
-            width = 4 + (7 - i) * 0.5
-        elif i == 8:
-            width = 3
-        else:
-            width = 3 + (i - 8) * 0.4
+    for i, band in enumerate(BANDS):
+        y = len(BANDS) - 1 - i  # N4 at top, S3 at bottom
+        color = zone_colors[band["zone"]]
+        alpha = 0.95 if band["id"] == "I0" else 0.7
 
+        # Width from hourglass_width config (scaled to figure units)
+        width = 2.0 + band["hourglass_width"] * 5.0
         x_start = 5 - width / 2
+
         rect = mpatches.FancyBboxPatch(
-            (x_start, y - 0.4), width, 0.75,
+            (x_start, y - 0.35), width, 0.7,
             boxstyle="round,pad=0.05",
-            facecolor=color, alpha=alpha, edgecolor='white', linewidth=0.5
+            facecolor=color, alpha=alpha, edgecolor='white', linewidth=0.8
         )
         ax.add_patch(rect)
 
-        # Label
-        bold = '**' if is_neural else ''
-        label = f"L{i}: {layer_info['name']}"
-        fontweight = 'bold' if i == 8 else 'normal'
-        ax.text(5, y, label, ha='center', va='center', fontsize=9,
+        # Band label
+        label = f"{band['id']}: {band['name']}"
+        fontweight = 'bold' if band["id"] == "I0" else 'normal'
+        ax.text(5, y, label, ha='center', va='center', fontsize=10,
                 fontweight=fontweight, color='white')
 
-    # Domain labels
-    ax.text(0.5, 10.5, 'OSI\nDomain', ha='center', va='center', fontsize=10,
-            color=COLORS['classical'], fontweight='bold')
-    ax.text(0.5, 3.5, 'Neural\nDomain', ha='center', va='center', fontsize=10,
-            color=COLORS['neural'], fontweight='bold')
-    ax.text(0.5, 6.5, 'L8: Trust\nBoundary', ha='center', va='center', fontsize=10,
-            color=COLORS['danger'], fontweight='bold')
+        # QI annotation on the right
+        qi_lo, qi_hi = band["qi_range"]
+        qi_label = f"QI {qi_lo}–{qi_hi}" if qi_hi > 0 else "QI ≈ 0"
+        ax.text(5 + width / 2 + 0.3, y, qi_label, ha='left', va='center',
+                fontsize=8, color='#8b949e')
 
-    ax.set_title(f'QIF {FRAMEWORK["layer_model_version"]} — 14-Layer Architecture',
-                 fontsize=14, pad=20)
+        # Determinacy annotation on the left
+        ax.text(5 - width / 2 - 0.3, y, band["determinacy"], ha='right',
+                va='center', fontsize=8, color='#8b949e')
+
+    # Zone labels
+    ax.text(0.3, 5.5, 'NEURAL\nDOMAIN', ha='center', va='center', fontsize=11,
+            color=zone_colors['neural'], fontweight='bold')
+    ax.text(0.3, 3.0, 'INTERFACE\nZONE', ha='center', va='center', fontsize=11,
+            color=zone_colors['interface'], fontweight='bold')
+    ax.text(0.3, 1.0, 'SILICON\nDOMAIN', ha='center', va='center', fontsize=11,
+            color=zone_colors['silicon'], fontweight='bold')
+
+    # Classical ceiling line (between N2 and N1, roughly between chaotic and quantum uncertain)
+    ceiling_y = 4.6  # between N2 (y=5) and N3 (y=4) — shifted to between stochastic/chaotic boundary
+    ax.axhline(y=ceiling_y, color=COLORS['warning'], linestyle='--', alpha=0.6, linewidth=1.5)
+    ax.text(9.5, ceiling_y + 0.15, 'Classical\nCeiling', ha='right', va='bottom',
+            fontsize=9, color=COLORS['warning'], fontstyle='italic')
+
+    ax.set_title(f'QIF {FRAMEWORK["layer_model_version"]} — 8-Band Hourglass Architecture',
+                 fontsize=14, pad=20, color='#c9d1d9')
 
     if save:
-        fig.savefig(FIGURES_DIR / 'layer_stack.png', dpi=150, bbox_inches='tight')
+        fig.savefig(FIGURES_DIR / 'hourglass.png', dpi=150, bbox_inches='tight')
+    plt.close(fig)
+    return fig
+
+
+def fig_brain_dependency_graph(save=True):
+    """[VIS 5.3] Brain region dependency graph — regions positioned by band."""
+    try:
+        import networkx as nx
+    except ImportError:
+        print("  [SKIP] brain_dependency_graph: networkx not installed")
+        return None
+
+    fig, ax = plt.subplots(figsize=(14, 10))
+
+    G = nx.DiGraph()
+
+    # Assign y-positions based on band, x-positions spread within band
+    band_y = {b["id"]: len(BANDS) - 1 - i for i, b in enumerate(BANDS)}
+    band_regions = {}
+    for region, info in BRAIN_REGION_MAP.items():
+        band_id = info["band"]
+        band_regions.setdefault(band_id, []).append(region)
+
+    pos = {}
+    for band_id, regions in band_regions.items():
+        y = band_y[band_id]
+        n = len(regions)
+        for j, region in enumerate(regions):
+            x = 2 + (j / max(n - 1, 1)) * 10 if n > 1 else 7
+            pos[region] = (x, y)
+            G.add_node(region)
+
+    # Add edges from connection lists (connections are region names or band IDs)
+    for region, info in BRAIN_REGION_MAP.items():
+        for conn in info["connections"]:
+            if conn in BRAIN_REGION_MAP:
+                G.add_edge(region, conn)
+
+    zone_colors = {z_id: z["color"] for z_id, z in ZONES.items()}
+    node_colors = []
+    for node in G.nodes():
+        band_id = BRAIN_REGION_MAP[node]["band"]
+        zone_id = next(b["zone"] for b in BANDS if b["id"] == band_id)
+        node_colors.append(zone_colors[zone_id])
+
+    nx.draw_networkx_nodes(G, pos, ax=ax, node_color=node_colors,
+                           node_size=1200, alpha=0.85, edgecolors='white', linewidths=1.5)
+    nx.draw_networkx_labels(G, pos, ax=ax, font_size=7, font_color='white', font_weight='bold')
+    nx.draw_networkx_edges(G, pos, ax=ax, edge_color='#8b949e', alpha=0.4,
+                           arrows=True, arrowsize=12, connectionstyle='arc3,rad=0.1')
+
+    # Band labels on left
+    for band_id, y_val in band_y.items():
+        if band_id in band_regions:
+            ax.text(0.5, y_val, band_id, ha='center', va='center', fontsize=12,
+                    fontweight='bold', color='#c9d1d9',
+                    bbox=dict(boxstyle='round,pad=0.3', facecolor='#161b22', edgecolor='#30363d'))
+
+    ax.set_title('Brain Region Dependency Graph (by QIF Band)', fontsize=14,
+                 pad=20, color='#c9d1d9')
+    ax.axis('off')
+
+    if save:
+        fig.savefig(FIGURES_DIR / 'brain_dependency_graph.png', dpi=150, bbox_inches='tight')
     plt.close(fig)
     return fig
 
@@ -442,7 +516,8 @@ def generate_all_figures():
         'coherence_surface': fig_coherence_surface,
         'decoherence_spectrum': fig_decoherence_dial,
         'scale_frequency': fig_scale_frequency,
-        'layer_stack': fig_layer_stack,
+        'hourglass': fig_hourglass,
+        'brain_dependency_graph': fig_brain_dependency_graph,
         'qi_stacked_bar': fig_qi_stacked_bar,
         'tunneling_profiles': fig_tunneling_profiles,
         'entropy_nonmonotonicity': fig_entropy_nonmonotonicity,

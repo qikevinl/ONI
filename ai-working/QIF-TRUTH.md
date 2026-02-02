@@ -26,31 +26,66 @@
 - **Name:** QIF — Quantum Indeterministic Framework for Neural Security
 - **Pronunciation:** "CHIEF"
 - **Predecessor:** ONI (Organic Neural Interface) — deprecated
-- **Layer model version:** v2.0 (2026-01-22)
+- **Layer model version:** v3.0 Hourglass (2026-02-02)
 - **GitHub:** qinnovates/qinnovate
 
 ---
 
-## 2. Layer Architecture (v2.0)
+## 2. Layer Architecture (v3.0 — Hourglass Model)
 
-| Layer | Name | Domain | Description |
-|-------|------|--------|-------------|
-| L1 | Physical | OSI | Physical medium, cabling |
-| L2 | Data Link | OSI | MAC addressing, framing |
-| L3 | Network | OSI | IP routing, addressing |
-| L4 | Transport | OSI | TCP/UDP, flow control |
-| L5 | Session | OSI | Connection management |
-| L6 | Presentation | OSI | Encryption, formatting |
-| L7 | Application | OSI | User-facing protocols |
-| **L8** | **Neural Gateway** | **Neural** | Firewall, trust boundary between silicon and biology |
-| **L9** | **Signal Processing** | **Neural** | Raw signal conditioning, phase coherence checking |
-| **L10** | **Neural Protocol** | **Neural** | Oscillatory encoding, synchronization |
-| **L11** | **Cognitive Transport** | **Neural** | Reliable neural data delivery |
-| **L12** | **Cognitive Session** | **Neural** | Context, working memory |
-| **L13** | **Semantic Layer** | **Neural** | Intent, goals, meaning |
-| **L14** | **Identity Layer** | **Neural** | Agency, sense of self |
+> **v2.0 (14-layer OSI-based) is DEPRECATED.** Replaced 2026-02-02 with 8-band hourglass derived from neuroscience and quantum physics. No OSI heritage. See Derivation Log entries 1–13 for rationale.
 
-**CRITICAL:** L1-L7 are standard OSI. L8-L14 are the neural extension. Blogs published before 2026-01-22 used a deprecated model where L1-L7 were biological — those have been corrected.
+### 3 Zones, 8 Bands
+
+**NEURAL DOMAIN (Upper Hourglass) — Quantum-dominant**
+
+| Band | Name | Brain Regions | Determinacy | QI Range |
+|------|------|---------------|-------------|----------|
+| **N4** | Identity & Consciousness | PFC (executive), anterior cingulate | Quantum Indeterminate | 0.9–1.0 |
+| **N3** | Cognitive Integration | PFC (decisions), Broca, Wernicke, HIPP, amygdala | Quantum Uncertain | 0.7–0.9 |
+| **N2** | Sensorimotor Processing | M1, S1, V1, A1, PMC, SMA | Chaotic → Stochastic | 0.4–0.7 |
+| **N1** | Subcortical Relay | Thalamus, basal ganglia, cerebellum, brainstem | Stochastic | 0.2–0.4 |
+
+**INTERFACE ZONE (Bottleneck) — Quasi-quantum**
+
+| Band | Name | Function | Determinacy | QI Range |
+|------|------|----------|-------------|----------|
+| **I0** | Neural Interface | Electrode-tissue boundary, measurement/collapse | Quasi-quantum (ΓD ∈ (0,1)) | 0.1–0.3 |
+
+**SILICON DOMAIN (Lower Hourglass) — Classical**
+
+| Band | Name | Function | Determinacy | QI Range |
+|------|------|----------|-------------|----------|
+| **S1** | Analog Front-End | Amplification, filtering, ADC/DAC | Stochastic (analog noise) | 0.01–0.1 |
+| **S2** | Digital Processing | Decoding, algorithms, classification | Deterministic | ~0 |
+| **S3** | Application | Clinical software, UI, data storage | Deterministic | 0 |
+
+### Naming Convention
+- Format: `{Zone}{Number}` — N4, N3, N2, N1, I0, S1, S2, S3
+- Numbers increase **away** from interface in both directions
+- No relation to OSI layer numbers
+
+### Hourglass Geometry
+- **Width = state space / possibility space**
+- Widest at N4 (quantum superposition, max indeterminacy) and S3 (max classical pathways)
+- Narrowest at I0 (measurement collapses possibilities)
+- The bottleneck has **real thickness** (quasi-quantum zone, not a line)
+
+### Classical Ceiling
+The boundary between chaotic (N2) and quantum uncertain (N3) is the **classical ceiling** — below it, all unpredictability is in principle resolvable with better measurement; above it, the unpredictability is ontic (Bell's theorem). Classical security tools operate below the ceiling. QIF operates across the full spectrum.
+
+### v2.0 → v3.0 Migration
+
+| v2.0 | v3.0 | Rationale |
+|------|------|-----------|
+| L1–L7 (OSI) | S3 | All classical networking collapses into Application band |
+| L8 (Neural Gateway) | I0 | Electrode-tissue boundary → Interface |
+| L9 (Signal Processing) | I0/N1 | Split between interface and subcortical relay |
+| L10 (Neural Protocol) | N1/N2 | Subcortical/sensorimotor |
+| L11 (Cognitive Transport) | N2 | Sensorimotor Processing |
+| L12 (Cognitive Session) | N3 | Cognitive Integration |
+| L13 (Semantic Layer) | N3 | Cognitive Integration |
+| L14 (Identity Layer) | N4 | Identity & Consciousness |
 
 ---
 
@@ -337,9 +372,25 @@ All 8 questions from QI-EQUATION-RESEARCH.md Section 8, answered by Kevin Qi.
 - QI is NOT a constant — the equation is deterministic (same inputs → same output) but quantum inputs are inherently probabilistic
 - The probabilistic nature is a security feature: attackers can't predict QI values
 
+### 2026-02-02: v3.0 Hourglass Layer Model Implemented
+
+**Context:** Replaced deprecated 14-layer OSI-based model (v2.0) with 8-band hourglass architecture (v3.0).
+
+**Key changes:**
+1. Stripped all OSI heritage — 7 OSI layers collapsed into S3 (Application)
+2. Designed 3-zone / 8-band model from neuroscience: Neural (N4-N1), Interface (I0), Silicon (S1-S3)
+3. Each band maps to real BCI functional stages with brain regions, determinacy levels, and QI ranges
+4. Band numbering increases away from interface in both directions (no relation to OSI)
+5. Hourglass width = state space / possibility space — widest at N4/S3, narrowest at I0
+6. I0 bottleneck has real thickness (quasi-quantum zone, not a thin line)
+7. Classical ceiling defined between N2 (chaotic) and N3 (quantum uncertain)
+8. Threat model remapped: L8→I0, L9-L10→I0/N1, L12-L13→N3, L14→N4, L6-L7→S3
+9. Brain region dependency graph replaces linear layer chain
+10. Updated config.py as single source of truth, all visualizations regenerated
+
 ---
 
-*Document version: 2.0*
+*Document version: 3.0*
 *Created: 2026-02-02*
 *Last updated: 2026-02-02*
 *Maintainer: Quantum Intelligence (Kevin Qi + Claude)*
