@@ -8,7 +8,14 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    AUTHORITATIVE SOURCES                      │
+│                  CANONICAL SOURCE (outside repo)              │
+│  QIF-TRUTH.md  (@qikevinl/drafts/ai-working/)               │
+│  See: PROPAGATION.md for full protocol                       │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    AUTHORITATIVE SOURCES (in repo)            │
 │  TechDoc-*.md  →  oni/*.py  →  INDEX.md  →  README.md        │
 │     (truth)       (impl)       (nav)        (public)          │
 └─────────────────────────────────────────────────────────────┘
@@ -18,11 +25,30 @@
 │                    DEPENDENT FILES                            │
 │  Topic README.md  ←  keywords.json  ←  Root README.md        │
 └─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    EXTERNAL (lowest priority)                 │
+│  Blog posts (qinnovates.github.io/blogs/)                    │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
 ## Sync Rules by File Type
+
+### When QIF-TRUTH.md Changes (HIGHEST PRIORITY)
+
+| Changed In | Update Required | Auto-Fix? |
+|------------|-----------------|-----------|
+| Layer definitions | All TechDocs, ONI_LAYERS.md, layers.py | NO |
+| Equations | All TechDocs referencing that equation, whitepaper | NO |
+| Validated claims | All TechDocs citing those values | NO |
+| Framework identity | brand.json, README.md, qif/README.md | NO |
+| Blog Sync Status | (self-tracking in Section 6) | N/A |
+
+> **Protocol:** Follow PROPAGATION.md Change Protocol (10-step checklist).
+> **Direction:** QIF-TRUTH.md → repo docs → blogs. Never backwards.
 
 ### When TechDoc Changes
 

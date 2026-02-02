@@ -528,6 +528,56 @@ Every claim gets tagged:
 
 ---
 
+## QIF Truth Propagation Protocol (CRITICAL)
+
+> **The QIF Source of Truth lives OUTSIDE this repo:**
+> `@qikevinl/drafts/ai-working/QIF-TRUTH.md`
+>
+> **Truth flows ONE direction:** QIF-TRUTH.md → repo docs → blogs
+> **NEVER update truth based on blogs.** NEVER patch blogs without checking truth first.
+>
+> **Full protocol:** `@qikevinl/drafts/ai-working/PROPAGATION.md`
+
+### Truth Hierarchy (Authoritative Sources)
+
+```
+0. QIF-TRUTH.md          (canonical — outside repo)
+1. TechDoc-*.md           (technical truth within repo)
+2. oni-framework/oni/*.py  (implementation)
+3. INDEX.md               (navigation)
+4. Topic README.md        (summaries)
+5. Root README.md         (public overview)
+6. Blog posts             (external, lowest priority)
+```
+
+### Session Start: Propagation Check
+
+At the start of ANY session involving QIF content:
+
+1. Read `@qikevinl/drafts/ai-working/QIF-TRUTH.md`
+2. Check **"Next audit due"** date — if overdue, **REMIND USER**
+3. Check **Section 6 Sync Dashboard** — if any item is `REVIEW` or `NEEDS_SYNC`, **REMIND USER**
+4. Read `@qikevinl/drafts/ai-working/PROPAGATION.md` for the full protocol
+
+### When Making QIF Changes
+
+Follow the Change Protocol in PROPAGATION.md. The short version:
+
+1. Change **QIF-TRUTH.md** FIRST
+2. Propagate to **repo docs** (use Propagation Map in PROPAGATION.md)
+3. Propagate to **blogs**
+4. Update **Section 6 Sync Dashboard** in QIF-TRUTH.md
+
+### Weekly Audit (Every Sunday)
+
+If it is Sunday (or audit is overdue), prompt the user:
+
+> "The weekly QIF truth audit is due. Want to run through the checklist?"
+
+Then follow the Sunday Audit Checklist in PROPAGATION.md Section D.
+
+---
+
 ## Workflow Instructions
 
 ### When Adding New Content
