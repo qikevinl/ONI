@@ -6,6 +6,8 @@
 
 > *Life's most important connections deserve the best thought.*
 
+![QIF Model Concept — The Hourglass/Funnel Architecture](images/qif-model-concept.png)
+
 ---
 
 ## What This Is

@@ -6,7 +6,7 @@
 
 ## What This Is
 
-This folder contains the original ONI (Open Neurosecurity Interoperability) research — publications, Python packages, interactive tools, and the analytical foundation that informed the [QIF (Quantum Indeterministic Framework for Neural Security)](../neurosecurity-framework/).
+This folder contains the original ONI (Open Neurosecurity Interoperability) research — publications, Python packages, interactive tools, and the analytical foundation that informed the [QIF (Quantum Indeterministic Framework for Neural Security)](../qif/).
 
 ---
 

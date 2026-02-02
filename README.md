@@ -31,17 +31,17 @@ The original model placed the Neural Gateway at Layer 8 (middle of a 14-layer st
 
 | # | Document | What It Covers |
 |---|----------|---------------|
-| 01 | [WHY-REVAMP](neurosecurity-framework/framework/01-WHY-REVAMP.md) | Why the original model was fundamentally flawed |
-| 02 | [KNOWNS-AND-UNKNOWNS](neurosecurity-framework/framework/02-KNOWNS-AND-UNKNOWNS.md) | What neuroscience has confirmed vs. what remains open |
-| 03 | [BCI-CAPABILITIES](neurosecurity-framework/framework/03-BCI-CAPABILITIES.md) | Every proven BCI READ/WRITE/CLOSED-LOOP today |
-| 04 | [FRAMEWORKS-ANALYSIS](neurosecurity-framework/framework/04-FRAMEWORKS-ANALYSIS.md) | OSI, Kandel, biological organization — the math and patterns |
-| 05 | [PROPOSED-MODEL](neurosecurity-framework/framework/05-PROPOSED-MODEL.md) | The funnel model and quantum tunneling thought experiment |
-| 06 | [GAP-ANALYSIS](neurosecurity-framework/framework/06-GAP-ANALYSIS.md) | Known limits vs. open questions |
-| 07 | [QUANTUM-BIOLOGY](neurosecurity-framework/framework/07-QUANTUM-BIOLOGY.md) | What's proven, what's not, and the measurement wall |
-| 08 | [QUANTUM-INTEGER](neurosecurity-framework/framework/08-QUANTUM-INTEGER.md) | Q — the labeled gap for quantum unknowns at each ring |
-| 09 | [QUANTUM-NEUROSECURITY](neurosecurity-framework/framework/09-QUANTUM-NEUROSECURITY.md) | Quantum bridges, DSKE, defense-in-depth rings, NIST CSF lifecycle |
+| 01 | [WHY-REVAMP](qif/framework/01-WHY-REVAMP.md) | Why the original model was fundamentally flawed |
+| 02 | [KNOWNS-AND-UNKNOWNS](qif/framework/02-KNOWNS-AND-UNKNOWNS.md) | What neuroscience has confirmed vs. what remains open |
+| 03 | [BCI-CAPABILITIES](qif/framework/03-BCI-CAPABILITIES.md) | Every proven BCI READ/WRITE/CLOSED-LOOP today |
+| 04 | [FRAMEWORKS-ANALYSIS](qif/framework/04-FRAMEWORKS-ANALYSIS.md) | OSI, Kandel, biological organization — the math and patterns |
+| 05 | [PROPOSED-MODEL](qif/framework/05-PROPOSED-MODEL.md) | The funnel model and quantum tunneling thought experiment |
+| 06 | [GAP-ANALYSIS](qif/framework/06-GAP-ANALYSIS.md) | Known limits vs. open questions |
+| 07 | [QUANTUM-BIOLOGY](qif/framework/07-QUANTUM-BIOLOGY.md) | What's proven, what's not, and the measurement wall |
+| 08 | [QUANTUM-INTEGER](qif/framework/08-QUANTUM-INTEGER.md) | Q — the labeled gap for quantum unknowns at each ring |
+| 09 | [QUANTUM-NEUROSECURITY](qif/framework/09-QUANTUM-NEUROSECURITY.md) | Quantum bridges, DSKE, defense-in-depth rings, NIST CSF lifecycle |
 
-[Read the full framework introduction →](neurosecurity-framework/)
+[Read the full framework introduction →](qif/)
 
 ---
 
@@ -51,15 +51,15 @@ The original model placed the Neural Gateway at Layer 8 (middle of a 14-layer st
 
 | Document | Focus |
 |----------|-------|
-| [Transparency](neurosecurity-framework/governance/TRANSPARENCY.md) | Human-AI collaboration audit trail |
-| [Neuroethics Alignment](neurosecurity-framework/governance/NEUROETHICS_ALIGNMENT.md) | Framework-to-ethics principle mapping |
-| [UNESCO Alignment](neurosecurity-framework/governance/UNESCO_ALIGNMENT.md) | 15 of 17 UNESCO Recommendation elements implemented |
-| [Regulatory Compliance](neurosecurity-framework/governance/REGULATORY_COMPLIANCE.md) | FDA, state laws, MIND Act, EU alignment |
-| [Informed Consent](neurosecurity-framework/governance/INFORMED_CONSENT_FRAMEWORK.md) | Consent requirements (Lazaro-Munoz framework) |
-| [Post-Deployment Ethics](neurosecurity-framework/governance/POST_DEPLOYMENT_ETHICS.md) | Device lifecycle and abandonment prevention |
-| [Pediatric Considerations](neurosecurity-framework/governance/PEDIATRIC_CONSIDERATIONS.md) | Minors and limited capacity guidelines |
-| [Data Policy FAQ](neurosecurity-framework/governance/DATA_POLICY_FAQ.md) | Privacy FAQ and user rights |
-| [Accessibility](neurosecurity-framework/governance/ACCESSIBILITY.md) | Accessibility standards and compliance |
+| [Transparency](qif/governance/TRANSPARENCY.md) | Human-AI collaboration audit trail |
+| [Neuroethics Alignment](qif/governance/NEUROETHICS_ALIGNMENT.md) | Framework-to-ethics principle mapping |
+| [UNESCO Alignment](qif/governance/UNESCO_ALIGNMENT.md) | 15 of 17 UNESCO Recommendation elements implemented |
+| [Regulatory Compliance](qif/governance/REGULATORY_COMPLIANCE.md) | FDA, state laws, MIND Act, EU alignment |
+| [Informed Consent](qif/governance/INFORMED_CONSENT_FRAMEWORK.md) | Consent requirements (Lazaro-Munoz framework) |
+| [Post-Deployment Ethics](qif/governance/POST_DEPLOYMENT_ETHICS.md) | Device lifecycle and abandonment prevention |
+| [Pediatric Considerations](qif/governance/PEDIATRIC_CONSIDERATIONS.md) | Minors and limited capacity guidelines |
+| [Data Policy FAQ](qif/governance/DATA_POLICY_FAQ.md) | Privacy FAQ and user rights |
+| [Accessibility](qif/governance/ACCESSIBILITY.md) | Accessibility standards and compliance |
 
 ---
 
@@ -168,7 +168,7 @@ The more I learn, the more I realize how much I don't know. A framework built on
 
 ```
 qinnovate/
-├── neurosecurity-framework/     # QIF — Quantum Indeterministic Framework
+├── qif/     # QIF — Quantum Indeterministic Framework
 │   ├── framework/               # 9 architectural documents (v2)
 │   └── governance/              # 9 neuroethics and compliance documents
 │
