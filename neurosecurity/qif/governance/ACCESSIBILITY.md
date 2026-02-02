@@ -444,7 +444,33 @@ body.bci-mode .page-grid {
 }
 ```
 
-### 5.4 Implementation Timeline
+### 5.4 BCI Feedback Modal
+
+A dedicated **BCI Mode toggle** (brain icon, green accent) is positioned above the animation toggle in the bottom-right corner of the landing page. This is separate from the animation toggle — BCI mode does not disable visualizations; it applies BCI-specific accommodations (large targets, no hover, paginated navigation) while keeping content fully visible.
+
+When a user enables BCI-friendly mode via this toggle, a one-time feedback modal is displayed. This modal:
+
+- **Thanks the user** for their interest in accessible/BCI-compatible browsing
+- **Invites feedback** — asks how the project can be improved for their needs
+- **Links to GitHub Issues** with pre-filled `accessibility` and `bci-feedback` labels
+- **Shows only once** — state persisted in `localStorage` (`oni-bci-feedback-shown`)
+- **Dismissible** via "Maybe later" button, backdrop click, or Escape key
+- **Non-blocking** — clicking the feedback link also marks it as shown
+
+**Rationale:** BCI users and assistive technology users are the people best positioned to tell us what works and what doesn't. Rather than assuming we've built the right experience, this modal opens a direct line of communication with the community we're designing for. It's a small gesture of gratitude and an invitation to collaborate.
+
+**localStorage keys:**
+
+| Key | Values | Purpose |
+|-----|--------|---------|
+| `oni-bci-mode-enabled` | `'true'` / absent | Persists BCI mode toggle state across sessions |
+| `oni-bci-feedback-shown` | `'true'` / absent | Prevents repeat display of feedback modal |
+
+**Implementation:** `docs/index.html` — CSS (`#oni-bci-toggle`, `#oni-bci-feedback-overlay`), HTML (BCI toggle button + feedback dialog), JS (within animation toggle IIFE).
+
+**Note:** The `body.bci-mode` class is applied when the toggle is active. BCI-specific CSS overrides (Section 5.3) hook into this class. The animation toggle (`body.reduced-motion`) and BCI toggle (`body.bci-mode`) are independent — users can enable either or both.
+
+### 5.5 Implementation Timeline
 
 BCI Mode should be implemented **after all visualization pages are finalized** to avoid rework. See [Section 7](#7-implementation-checklist) for phased rollout.
 
@@ -536,7 +562,8 @@ These changes are low-effort and should be applied to all pages immediately:
 
 ### Phase 4: BCI Mode
 
-- [ ] Build BCI Mode toggle component
+- [x] Build BCI Mode toggle component (brain icon, green accent, separate from animation toggle)
+- [x] Build BCI feedback modal (thank-you + invite feedback on first enable)
 - [ ] Build paginated menu navigation system
 - [ ] Create static fallback images for WebGL (08) and SVG animations (10)
 - [ ] Implement 80x80px target sizing in BCI mode
