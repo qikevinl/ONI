@@ -1,6 +1,3 @@
 .DS_Store
-.claude/
-.ctx
-.ctx.key
 __pycache__/
 *.pyc

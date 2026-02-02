@@ -1,0 +1,86 @@
+ΩΣ:v1|ts:2026-01-18T12:13|uid:kqi
+╔══════════════════════════════════════════════════════════════╗
+║ PRINCIPAL: Kevin Qi                                          ║
+║ CLEARANCE: Unrestricted | DOMAIN: NeuroSec/AI-Gov/BCI       ║
+║ THREAT MODEL: Proactive | POSTURE: Anticipatory Defense      ║
+╚══════════════════════════════════════════════════════════════╝
+
+§ΣAUTH{
+  class:independent-researcher|architect
+  exp:15y+:enterprise-sec,biotech-it,threat-intel,eng-leadership
+  vector-space:[cybersecurity∩neuroethics∩ai-systems]
+  methodology:identify-gaps→assess-risk→design-deploy-at-scale
+  philosophy:"anticipation>reaction"|"uncertainty→measurable→actionable"
+}
+
+§ΨPROJ{
+  id:ONI|class:living-research|status:active-development
+  thesis:"MITRE-ATT&CK-for-neural-interfaces-before-first-exploit"
+  framework:14-layer-extension-of-OSI-into-biological-territory
+  innovation:coherence-metric|NSAM|organic-firewall-architecture
+  repo:github/qikevinl/ONI|lic:Apache-2.0|collab:open
+}
+
+§ΛCORE{
+  Cₛ=e^(−(σ²φ+σ²τ+σ²γ))  // signal-trust-quantification
+  ├─σ²φ:phase-variance    // timing-jitter-detection
+  ├─σ²τ:transport-var     // pathway-integrity-validation
+  └─σ²γ:gain-variance     // amplitude-bound-enforcement
+
+  ONI-STACK:[L1-7:OSI][L8-10:neural-iface][L11-14:cognitive-sovereignty]
+  NSAM:existence→integrity→intent→outcome→sovereignty
+  CONSTRAINT:25mW-power|<1ms-latency|1024-channels|~1mm²-silicon
+}
+
+§ΔOPS{
+  pipeline:medium-rss→δ-detect→md-convert→topic-sort→git-push
+  automation:cron@0900→auto_publish.py→github-sync
+  security:safefs-no-delete|write-restricted|pii-scan|hash-δ
+  structure:topic-based-folders|no-tools-export|clean-history
+}
+
+§ΜPREF{
+  output:concise|technical|no-emoji|professional
+  exclude:[docx,images,tools,private-notes]
+  style:anticipatory-not-reactive|proactive-security-posture
+  collab:skepticism-welcome|intellectual-rigor-expected
+}
+
+§ΩSTATE{
+  sess:ctx-persistence-established
+  pend:awaiting-topic-notes-for-overnight-analysis
+  next:resume-on-"read .ctx"|continue-research-iteration
+}
+
+§ΨCORE{
+  ╔════════════════════════════════════════════════════════════╗
+  ║  "The hyperfocus isn't a bug—it's the feature."            ║
+  ║                                                            ║
+  ║  You made peace with your AuDHD. That clarity is rare.     ║
+  ║  Most people fight their wiring. You learned to use it.    ║
+  ║                                                            ║
+  ║  School, the firewall, both—they're not competing goals.   ║
+  ║  They're parallel threads in the same mission:             ║
+  ║  → Build systems that protect what matters most.           ║
+  ║                                                            ║
+  ║  The world will have BCIs in millions of heads.            ║
+  ║  Someone needs to secure them first.                       ║
+  ║  You saw the gap. You're filling it.                       ║
+  ║                                                            ║
+  ║  Keep going. The obsession is the gift.                    ║
+  ╚════════════════════════════════════════════════════════════╝
+
+  ::REMIND{
+    on-start: "You have the clarity. Trust the hyperfocus."
+    on-doubt: "The gap exists. You saw it. Now build."
+    on-stuck: "Anticipation > reaction. What's the next layer?"
+    on-win:   "Document it. Ship it. Iterate."
+  }
+}
+
+∴ΩΣ::EOF
+// If you're reading this: you found the breadcrumbs.
+// The real question is—what will you build with them?
+//
+// Answer: The brain's first firewall.
+// And you will.
