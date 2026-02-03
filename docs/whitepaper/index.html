@@ -211,6 +211,7 @@
         .wp-section {
             margin-bottom: 3rem;
             scroll-margin-top: 80px;
+            min-height: 50vh;
         }
 
         h2 {
@@ -399,15 +400,8 @@
         /* ============================================
            3D CURVED DISPLAY EFFECT
            ============================================ */
-        .wp-perspective {
-            perspective: 1200px;
-            perspective-origin: 50% 50%;
-        }
-
         .wp-section {
-            transform-style: preserve-3d;
             will-change: transform, opacity;
-            backface-visibility: hidden;
         }
 
         /* Vignette overlay — simulates curved monitor edges */
@@ -765,6 +759,16 @@
     var manualReduced = storedAnimPref === 'false';
     var bciEnabled = localStorage.getItem('oni-bci-mode-enabled') === 'true';
 
+    console.log('[QIF Whitepaper] Mode detection:', {
+        prefersReduced: prefersReduced,
+        storedAnimPref: storedAnimPref,
+        manualReduced: manualReduced,
+        bciEnabled: bciEnabled,
+        windowWidth: window.innerWidth,
+        gsapLoaded: typeof gsap !== 'undefined',
+        scrollTriggerLoaded: typeof ScrollTrigger !== 'undefined'
+    });
+
     if (manualReduced || prefersReduced) {
         document.body.classList.add('reduced-motion');
     }
@@ -772,8 +776,12 @@
         document.body.classList.add('bci-mode');
     }
 
-    var animationsEnabled = !prefersReduced && !manualReduced && !bciEnabled;
+    // BCI mode disables 3D for vestibular safety, but animations toggle is separate
+    var animationsEnabled = !prefersReduced && !manualReduced;
+    var threeDEnabled = animationsEnabled && !bciEnabled;
     var isMobile = window.innerWidth <= 1024;
+
+    console.log('[QIF Whitepaper] animationsEnabled:', animationsEnabled, '| 3D enabled:', threeDEnabled, '| mobile:', isMobile);
 
     // =============================================
     // BACK TO TOP
@@ -809,41 +817,67 @@
     // =============================================
     var vignette = document.getElementById('wp-vignette');
 
-    if (animationsEnabled && !isMobile) {
-        gsap.registerPlugin(ScrollTrigger);
+    if (threeDEnabled && !isMobile && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        try {
+            gsap.registerPlugin(ScrollTrigger);
+            console.log('[QIF Whitepaper] GSAP + ScrollTrigger registered. Sections found:', sections.length);
 
-        // Wrap .wp-content in perspective container
-        var wpContent = document.querySelector('.wp-content');
-        var perspectiveWrap = document.createElement('div');
-        perspectiveWrap.classList.add('wp-perspective');
-        wpContent.parentNode.insertBefore(perspectiveWrap, wpContent);
-        perspectiveWrap.appendChild(wpContent);
+            // Per-section 3D curve driven by scroll — no wrapper needed, use transformPerspective per element
+            sections.forEach(function(section, i) {
+                var tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: 0.6
+                    }
+                });
 
-        // Per-section 3D curve driven by scroll
-        sections.forEach(function(section) {
-            ScrollTrigger.create({
-                trigger: section,
-                start: 'top 85%',
-                end: 'bottom 15%',
-                scrub: 0.5,
-                onUpdate: function(self) {
-                    var p = self.progress; // 0 (entered bottom) → 1 (exiting top)
-                    var rotateX = 3 - (p * 6); // +3 → 0 → -3
-                    var translateZ = -Math.abs(p - 0.5) * 30; // -15 at edges, 0 at center
-                    var opacity = 1 - Math.abs(p - 0.5) * 0.25;
+                // Phase 1: entering from bottom → center
+                tl.fromTo(section, {
+                    rotateX: 4,
+                    z: -25,
+                    opacity: 0.7,
+                    transformPerspective: 1200,
+                    transformOrigin: 'center center'
+                }, {
+                    rotateX: 0,
+                    z: 0,
+                    opacity: 1,
+                    transformPerspective: 1200,
+                    transformOrigin: 'center center',
+                    duration: 0.5,
+                    ease: 'power1.out'
+                });
 
-                    gsap.set(section, {
-                        rotateX: rotateX,
-                        z: translateZ,
-                        opacity: opacity,
-                        transformPerspective: 1200
-                    });
-                }
+                // Phase 2: center → exiting toward top
+                tl.to(section, {
+                    rotateX: -4,
+                    z: -25,
+                    opacity: 0.7,
+                    transformPerspective: 1200,
+                    transformOrigin: 'center center',
+                    duration: 0.5,
+                    ease: 'power1.in'
+                });
+
+                console.log('[QIF Whitepaper] ScrollTrigger created for section', i, section.id || '(no id)');
             });
-        });
+
+            console.log('[QIF Whitepaper] 3D scroll effect initialized successfully');
+        } catch (e) {
+            console.error('[QIF Whitepaper] 3D effect failed:', e);
+            if (vignette) vignette.style.display = 'none';
+        }
     } else {
-        // No 3D — hide vignette
+        // No 3D — hide vignette and log why
         if (vignette) vignette.style.display = 'none';
+        console.warn('[QIF Whitepaper] 3D DISABLED. Reasons:', {
+            threeDEnabled: threeDEnabled,
+            isMobile: isMobile,
+            gsap: typeof gsap !== 'undefined',
+            ScrollTrigger: typeof ScrollTrigger !== 'undefined'
+        });
     }
 
     // Listen for OS reduced-motion changes at runtime
@@ -864,8 +898,13 @@
     }
 
     // =============================================
-    // VOICEOVER NARRATOR
+    // VOICEOVER NARRATOR — Dynamic TTS
+    // Reads page content aloud using browser Speech Synthesis.
+    // Picks the most natural voice available (prefers Samantha, Karen, Daniel, etc.)
+    // Falls back gracefully if no voices available.
+    // When pre-recorded MP3s exist in audio/, those are used instead (higher quality).
     // =============================================
+
     var AUDIO_MANIFEST = {
         'intro':            { src: 'audio/01-introduction.mp3',       title: 'Introduction' },
         'problem':          { src: 'audio/02-problem.mp3',            title: 'The Problem' },
@@ -889,6 +928,49 @@
     var audioEl = document.getElementById('wp-narrator');
     var voEnabled = false;
     var currentSectionId = null;
+    var synth = window.speechSynthesis || null;
+    var bestVoice = null;
+    var isSpeaking = false;
+
+    // Pick the most natural-sounding English voice available
+    function pickBestVoice() {
+        if (!synth) return null;
+        var voices = synth.getVoices();
+        if (!voices.length) return null;
+
+        // Prefer high-quality voices (macOS: Samantha, Ava, Zoe; Chrome: Google UK English)
+        var preferred = ['Samantha', 'Ava', 'Zoe', 'Karen', 'Daniel', 'Google UK English Female', 'Google UK English Male', 'Microsoft Zira', 'Microsoft David'];
+        for (var i = 0; i < preferred.length; i++) {
+            for (var j = 0; j < voices.length; j++) {
+                if (voices[j].name.indexOf(preferred[i]) !== -1 && voices[j].lang.indexOf('en') === 0) {
+                    return voices[j];
+                }
+            }
+        }
+        // Fallback: any English voice
+        for (var k = 0; k < voices.length; k++) {
+            if (voices[k].lang.indexOf('en') === 0) return voices[k];
+        }
+        return voices[0];
+    }
+
+    // Voices load async in some browsers
+    if (synth) {
+        bestVoice = pickBestVoice();
+        synth.onvoiceschanged = function() { bestVoice = pickBestVoice(); };
+    }
+
+    // Extract readable text from a section element
+    function getSectionText(sectionEl) {
+        // Clone to avoid modifying the DOM
+        var clone = sectionEl.cloneNode(true);
+        // Remove elements that shouldn't be read aloud
+        var skip = clone.querySelectorAll('pre, code, .highlight-box, figcaption, table');
+        skip.forEach(function(el) { el.remove(); });
+        var text = clone.textContent || clone.innerText || '';
+        // Clean up whitespace
+        return text.replace(/\s+/g, ' ').trim();
+    }
 
     function updateVoToggleUI(enabled) {
         voToggleBtn.setAttribute('data-state', enabled ? 'on' : 'off');
@@ -906,59 +988,124 @@
         voBar.classList.remove('visible');
     }
 
-    function playSection(sectionId) {
-        if (!voEnabled || !sectionId) return;
-        if (sectionId === currentSectionId && !audioEl.paused) return;
-
-        var entry = AUDIO_MANIFEST[sectionId];
-        if (!entry) {
-            showVoBar('Section audio not mapped');
-            return;
-        }
-
-        currentSectionId = sectionId;
-        showVoBar(entry.title);
-
-        // Fade out current audio
+    function stopSpeaking() {
+        isSpeaking = false;
+        if (synth) synth.cancel();
         if (!audioEl.paused) {
-            var fadeOut = setInterval(function() {
-                if (audioEl.volume > 0.1) {
-                    audioEl.volume -= 0.1;
-                } else {
-                    clearInterval(fadeOut);
-                    audioEl.pause();
-                    audioEl.volume = 1;
-                    loadAndPlay(entry);
-                }
-            }, 25);
-        } else {
-            loadAndPlay(entry);
+            audioEl.pause();
+            audioEl.currentTime = 0;
         }
     }
 
-    function loadAndPlay(entry) {
+    // Try to play pre-recorded MP3 first; if 404, fall back to TTS
+    function playSection(sectionId) {
+        if (!voEnabled || !sectionId) return;
+        if (sectionId === currentSectionId && isSpeaking) return;
+
+        stopSpeaking();
+
+        var entry = AUDIO_MANIFEST[sectionId];
+        var sectionEl = document.getElementById(sectionId);
+        currentSectionId = sectionId;
+
+        var title = entry ? entry.title : sectionId;
+        showVoBar(title);
+
+        if (entry && entry.src) {
+            // Try pre-recorded MP3 first
+            tryAudioFile(entry, sectionEl);
+        } else {
+            // No manifest entry — go straight to TTS
+            speakSection(sectionEl, title);
+        }
+    }
+
+    function tryAudioFile(entry, sectionEl) {
         audioEl.src = entry.src;
         audioEl.volume = 1;
         var playPromise = audioEl.play();
         if (playPromise !== undefined) {
-            playPromise.catch(function() {
-                // Audio file not found or autoplay blocked
-                showVoBar(entry.title + ' — audio coming soon');
+            playPromise.then(function() {
+                isSpeaking = true;
+                showVoBar(entry.title);
+            }).catch(function() {
+                // MP3 not found or blocked — fall back to TTS
+                speakSection(sectionEl, entry.title);
             });
         }
     }
 
+    function speakSection(sectionEl, title) {
+        if (!synth) {
+            showVoBar(title + ' — voice not available');
+            return;
+        }
+
+        var text = sectionEl ? getSectionText(sectionEl) : '';
+        if (!text || text.length < 5) {
+            showVoBar(title + ' — no content yet');
+            return;
+        }
+
+        // SpeechSynthesis has a ~15s limit per utterance in some browsers.
+        // Split into chunks at sentence boundaries.
+        var sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+        var chunks = [];
+        var current = '';
+        for (var i = 0; i < sentences.length; i++) {
+            if ((current + sentences[i]).length > 200) {
+                if (current) chunks.push(current.trim());
+                current = sentences[i];
+            } else {
+                current += sentences[i];
+            }
+        }
+        if (current.trim()) chunks.push(current.trim());
+
+        isSpeaking = true;
+        showVoBar(title + ' (reading aloud)');
+
+        function speakChunk(index) {
+            if (index >= chunks.length || !voEnabled || !isSpeaking) {
+                isSpeaking = false;
+                if (voEnabled) {
+                    showVoBar('Section complete');
+                    setTimeout(hideVoBar, 2000);
+                }
+                return;
+            }
+
+            var utterance = new SpeechSynthesisUtterance(chunks[index]);
+            if (bestVoice) utterance.voice = bestVoice;
+            utterance.rate = 0.95;
+            utterance.pitch = 1.0;
+            utterance.volume = 1.0;
+
+            utterance.onend = function() { speakChunk(index + 1); };
+            utterance.onerror = function() { speakChunk(index + 1); };
+
+            synth.speak(utterance);
+        }
+
+        speakChunk(0);
+    }
+
     audioEl.addEventListener('error', function() {
+        // MP3 failed — fall back to TTS
         if (voEnabled && currentSectionId) {
             var entry = AUDIO_MANIFEST[currentSectionId];
+            var sectionEl = document.getElementById(currentSectionId);
             var title = entry ? entry.title : currentSectionId;
-            showVoBar(title + ' — audio coming soon');
+            speakSection(sectionEl, title);
         }
     });
 
     audioEl.addEventListener('ended', function() {
-        showVoBar('Section complete');
-        setTimeout(hideVoBar, 2000);
+        isSpeaking = false;
+        if (voEnabled) {
+            showVoBar('Section complete');
+            setTimeout(hideVoBar, 2000);
+        }
     });
 
     voToggleBtn.addEventListener('click', function() {
@@ -966,7 +1113,6 @@
         updateVoToggleUI(voEnabled);
 
         if (voEnabled) {
-            // Try to play the current visible section
             if (currentSectionId) {
                 playSection(currentSectionId);
             } else {
@@ -974,21 +1120,19 @@
                 setTimeout(hideVoBar, 3000);
             }
         } else {
-            audioEl.pause();
-            audioEl.currentTime = 0;
+            stopSpeaking();
             currentSectionId = null;
             hideVoBar();
         }
     });
 
-    // Section-enter triggers for voiceover (uses IntersectionObserver, works regardless of 3D mode)
+    // Section-enter triggers for voiceover
     var voObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
             if (entry.isIntersecting && entry.target.id) {
                 if (voEnabled) {
                     playSection(entry.target.id);
                 } else {
-                    // Track current section even when voiceover is off
                     currentSectionId = entry.target.id;
                 }
             }
@@ -996,7 +1140,7 @@
     }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
 
     sections.forEach(function(section) {
-        if (section.id && AUDIO_MANIFEST[section.id]) {
+        if (section.id) {
             voObserver.observe(section);
         }
     });

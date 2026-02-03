@@ -1,21 +1,31 @@
-# Transparency Statement: Human-AI Collaboration in ONI Framework
+# Transparency Statement: Human-AI Collaboration in QIF Framework
 
-> This document serves as an auditable record of how AI tools were integrated into the development of the ONI Framework, demonstrating principles of Responsible AI, cognitive boundary maintenance, and Human-in-the-Loop (HITL) methodology.
+> This document serves as an auditable record of how AI tools were integrated into the development of the QIF (Quantum Indeterministic Framework for Neural Security), demonstrating principles of Responsible AI, cognitive boundary maintenance, and Human-in-the-Loop (HITL) methodology.
 
-**Last Updated:** 2026-01-26
-**Document Version:** 1.1
+**Last Updated:** 2026-02-02
+**Document Version:** 2.0
+**Detailed Derivation Timeline:** [`QIF-DERIVATION-LOG.md`](../../../drafts/ai-working/QIF-DERIVATION-LOG.md) — Complete chronological record of every derivation, decision, AI contribution, and validation result with timestamps and reasoning chains.
 
 ---
 
 ## Purpose
 
-The ONI Framework addresses security for brain-computer interfaces—technology that will fundamentally alter the human-machine boundary. It is therefore essential that the *development process itself* models the transparency and cognitive autonomy principles the framework seeks to protect.
+The QIF Framework addresses security for brain-computer interfaces—technology that will fundamentally alter the human-machine boundary. It is therefore essential that the *development process itself* models the transparency and cognitive autonomy principles the framework seeks to protect.
 
 This document:
 1. Defines the cognitive boundary between human and AI contributions
 2. Documents the Human-in-the-Loop refinement process
 3. Provides an auditable trail for academic and professional review
 4. Serves as a case study in Responsible AI methodology
+
+### Where to Find What
+
+| Document | What It Contains |
+|----------|-----------------|
+| **This file (TRANSPARENCY.md)** | Collaboration methodology, contribution matrix, correction examples, tool disclosure |
+| **[QIF-DERIVATION-LOG.md](../../../drafts/ai-working/QIF-DERIVATION-LOG.md)** | Complete timestamped timeline of every derivation, insight, AI contribution, validation result, and decision — from project inception (2026-01-18) to present. **Start here for the full audit trail.** |
+| **[QIF-RESEARCH-SOURCES.md](../../../drafts/ai-working/QIF-RESEARCH-SOURCES.md)** | All 102+ research sources compiled during AI-assisted validation sessions, with attribution to which agent/tool found each source |
+| **[PROPAGATION.md](../../../drafts/ai-working/PROPAGATION.md)** | Validation pipeline: when and how independent review (including cross-AI review) is triggered |
 
 ---
 
@@ -30,6 +40,7 @@ Every contribution is categorized by its cognitive origin. AI assistance is trea
 | Domain | Human Contribution | AI Contribution | Boundary Notes |
 |--------|-------------------|-----------------|----------------|
 | **Conceptual Architecture** | Original 14-layer ONI model design, attack surface identification, layer-to-ethics mapping | None | Purely human ideation; AI was not consulted on framework structure |
+| **v3.0/v3.1 Hourglass Architecture** | All 6 architectural decisions (7-band, 3-1-3 symmetry, N3 rename, amygdala split, cerebellum spanning, QI range philosophy), rejection of N4 band | Co-derivation of hourglass geometry (Entries 1-13), research agent validation (102 sources), implementation across codebase | Human made all final decisions; AI proposed options and implemented choices. See Derivation Log Entries 14-15. |
 | **Mathematical Formulas** | Cₛ coherence metric conception, variable selection (σ²φ, σ²τ, σ²γ), security interpretations | LaTeX formatting, notation consistency | Human selected which variances matter for security; AI formatted |
 | **Security Decisions** | Zero-trust architecture choice, firewall placement at L8, rejection thresholds | None | All security-critical decisions made by human judgment |
 | **Quantum Security Concepts** | TTT as security primitive, QPUF authentication proposal, liminal phase hypothesis | Literature organization | Novel security applications are human contributions |
@@ -167,13 +178,17 @@ Using AI for efficiency creates a risk: cognitive offloading may trade deep unde
 
 | Tool | Version/Model | Use Case | Contribution Level |
 |------|---------------|----------|-------------------|
-| Claude (Anthropic) | Claude Opus 4.5 | Code assistance, documentation drafting, research synthesis | Primary |
-| Claude Code | CLI | Repository management, file operations, git workflows | Primary |
+| Claude (Anthropic) | Claude Opus 4.5 | Code assistance, documentation drafting, research synthesis, co-derivation of hourglass model | Primary |
+| Claude Code | CLI | Repository management, file operations, git workflows, agent orchestration | Primary |
+| Claude Research Agents | 3 specialized (quantum physics, neuroscience, cybersecurity) | Validation of v3.1 architecture against 102 external sources | Validation |
+| Gemini (Google) | Gemini 2.5 (CLI) | **Independent peer review** — full whitepaper critique with no prior context (cross-AI validation) | Validation |
 | Gemini (Google) | Gemini 1.5/2.0 | Research verification, cross-model validation, alternative perspectives | Secondary |
 | ChatGPT (OpenAI) | GPT-4 | Research queries, concept exploration, literature discovery | Secondary |
 | LMArena (LMSYS) | Blind comparison | Unbiased initial concept exploration, cross-model validation | Exploratory |
 
 **Note on Multi-Model Approach**: Using multiple AI models serves as a form of epistemic hygiene — cross-referencing outputs between Claude, Gemini, ChatGPT, and blind comparisons via LMArena helps identify model-specific biases or hallucinations. When models disagree, human judgment adjudicates by consulting primary sources.
+
+**Note on Cross-AI Validation (added 2026-02-02)**: To counteract potential confirmation bias from the primary development AI (Claude), significant framework changes now trigger an independent review by a different AI system (Gemini 2.5 via CLI). The reviewing AI receives the full whitepaper with no prior context and is instructed to provide unsoftened criticism. This is formalized in the [Validation Pipeline](../../../drafts/ai-working/PROPAGATION.md) (Section E). Results are logged in the [Derivation Log](../../../drafts/ai-working/QIF-DERIVATION-LOG.md).
 
 ### Non-AI Tools
 - Python 3.9+ for implementation
