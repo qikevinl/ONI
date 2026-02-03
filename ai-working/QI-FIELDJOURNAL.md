@@ -164,7 +164,7 @@ The scientific consensus leans toward Tegmark. Most physicists and neuroscientis
 **QIF connection:** If quantum simulation matures enough to model the electrode-tissue interface at quantum scales, it could resolve the decoherence debate directly — simulate what happens to quantum states at the platinum-neural membrane junction without needing to measure it in vivo. That would answer QIF's central open question (Entry QP-001). Instead of building the impossibly difficult instrumentation to measure quantum coherence inside a living neuron, you simulate the neuron quantum-mechanically and observe what the simulation predicts.
 
 **Related:** Feynman 1982 (Int. J. Theor. Phys.), Lloyd 1996 (universal quantum simulation), Entry QP-001 (Tegmark decoherence), QIF-TRUTH.md (decoherence parameter)
-**Visualization:**
+**Visualization:** ![QP-004](../autodidact/learnviz/output/fieldjournal/qp-004_decoherence.png)
 
 ---
 
