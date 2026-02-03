@@ -44,7 +44,9 @@
   }
 
   /* ----------------------------------------------------------
-     Effect 1: Curved Monitor (Barrel Distortion on Scroll)
+     Effect 1: Hourglass Perspective (Edge Pan)
+     Content at top/bottom of viewport gently fans outward
+     along rotateX — like pages curling away. Center stays flat.
      ---------------------------------------------------------- */
   function initCurvedMonitor() {
     if (reducedMotion) return;
@@ -52,22 +54,40 @@
     var content = document.querySelector('main.content');
     if (!content) return;
 
+    // Collect all direct child blocks that should be affected
+    var blocks = content.querySelectorAll(':scope > section, :scope > .quarto-title-block, :scope > #TOC');
+    if (!blocks.length) return;
+
     var ticking = false;
+    var vh = window.innerHeight;
+
+    window.addEventListener('resize', function () { vh = window.innerHeight; });
+
     window.addEventListener('scroll', function () {
       if (!ticking) {
         requestAnimationFrame(function () {
-          var scrollY = window.scrollY;
-          var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-          var progress = docHeight > 0 ? scrollY / docHeight : 0;
+          for (var i = 0; i < blocks.length; i++) {
+            var rect = blocks[i].getBoundingClientRect();
+            // Center of this block relative to viewport center
+            var blockCenter = rect.top + rect.height * 0.5;
+            // Normalised: 0 = viewport center, ±1 = viewport edge
+            var offset = (blockCenter - vh * 0.5) / (vh * 0.5);
+            // Clamp to ±1.2 (allow slight overshoot for blocks partly off-screen)
+            offset = Math.max(-1.2, Math.min(1.2, offset));
 
-          // Subtle barrel: ±2deg rotateY based on scroll position
-          // Creates a gentle curved-monitor feel at edges
-          var rotateY = (progress - 0.5) * 4; // -2 to +2 degrees
-          var rotateX = Math.sin(progress * Math.PI) * 0.5; // 0 to 0.5 degrees arc
+            // rotateX: positive = top edge tilts away, negative = bottom edge tilts away
+            // Quadratic ease — gentle near center, stronger at edges
+            var rotateX = offset * Math.abs(offset) * 2.5; // max ±3deg at edges
 
-          content.style.transform =
-            'rotateY(' + rotateY + 'deg) rotateX(' + rotateX + 'deg)';
+            // Subtle scale-down at extremes for depth
+            var scale = 1 - Math.abs(offset) * 0.015; // min 0.982
 
+            // Slight translateZ push-back at edges
+            var tz = -Math.abs(offset) * 12; // max -14px
+
+            blocks[i].style.transform =
+              'rotateX(' + rotateX + 'deg) scale(' + scale + ') translateZ(' + tz + 'px)';
+          }
           ticking = false;
         });
         ticking = true;
@@ -449,6 +469,54 @@
   }
 
   /* ----------------------------------------------------------
+     Collapsible Callouts
+     Click header to expand/collapse. Starts collapsed.
+     ---------------------------------------------------------- */
+  function initCollapsibleCallouts() {
+    var callouts = document.querySelectorAll('.callout');
+    callouts.forEach(function (callout) {
+      var header = callout.querySelector('.callout-header');
+      var body = callout.querySelector('.callout-body-container');
+      if (!header || !body) return;
+
+      callout.classList.add('qif-collapsible');
+      callout.classList.add('qif-collapsed'); // start collapsed
+
+      // Add hint label
+      var hint = el('span', { className: 'qif-collapse-hint', textContent: 'click to expand' });
+      var arrow = el('span', { className: 'qif-collapse-arrow', textContent: '\u25BC' });
+      header.appendChild(hint);
+      header.appendChild(arrow);
+
+      // Measure real height for smooth animation
+      var fullHeight = body.scrollHeight;
+
+      header.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var isCollapsed = callout.classList.toggle('qif-collapsed');
+        hint.textContent = isCollapsed ? 'click to expand' : 'click to collapse';
+
+        if (!isCollapsed) {
+          // Expanding — set explicit max-height for smooth transition
+          body.style.maxHeight = body.scrollHeight + 'px';
+          // After transition, remove constraint so content can reflow
+          setTimeout(function () {
+            if (!callout.classList.contains('qif-collapsed')) {
+              body.style.maxHeight = 'none';
+            }
+          }, 400);
+        } else {
+          // Collapsing — set current height first so transition has a start value
+          body.style.maxHeight = body.scrollHeight + 'px';
+          // Force reflow then collapse
+          body.offsetHeight; // trigger reflow
+          body.style.maxHeight = '0';
+        }
+      });
+    });
+  }
+
+  /* ----------------------------------------------------------
      Init: Wire everything up on DOMContentLoaded
      ---------------------------------------------------------- */
   function init() {
@@ -457,6 +525,7 @@
     initParticles();
     initNoiseOverlay();
     initSectionReveals();
+    initCollapsibleCallouts();
     buildDictationUI();
     initDictationObserver();
   }

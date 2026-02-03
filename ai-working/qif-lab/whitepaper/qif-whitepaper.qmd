@@ -1,6 +1,6 @@
 ---
-title: "QIF — Quantum Indeterministic Framework for Neural Security"
-subtitle: "Why the Next Generation of Brain-Computer Interfaces Needs Quantum-Aware Protection"
+title: 'The BCI "Neuro Revolution"'
+subtitle: "QIF — Quantum Indeterministic Framework for Neural Security"
 author: "Kevin Qi, with Claude (Anthropic)"
 date: "2026-02-02"
 format:

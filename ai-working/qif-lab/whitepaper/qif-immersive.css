@@ -19,18 +19,22 @@
 }
 
 /* ----------------------------------------------------------
-   Effect 1: Curved Monitor (Barrel Distortion)
-   Perspective container — JS adds rotateY on scroll edges
+   Effect 1: Hourglass Perspective (Edge Pan)
+   Content near viewport top/bottom gently fans outward;
+   center stays flat and fully legible.
+   JS sets --qif-pan on each section based on viewport position.
    ---------------------------------------------------------- */
 #quarto-content {
-  perspective: 1200px;
+  perspective: 1400px;
   perspective-origin: 50% 50%;
 }
 
-main.content {
+main.content > section,
+main.content > .quarto-title-block,
+main.content > #TOC {
   transform-style: preserve-3d;
-  transition: transform 0.15s ease-out;
-  will-change: transform;
+  transition: transform 0.18s ease-out, opacity 0.18s ease-out;
+  will-change: transform, opacity;
 }
 
 /* ----------------------------------------------------------
@@ -43,6 +47,61 @@ main.content {
   border: 1px solid var(--qif-glass-border) !important;
   border-radius: 12px !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* ----------------------------------------------------------
+   Collapsible Callouts
+   ---------------------------------------------------------- */
+.callout.qif-collapsible {
+  cursor: pointer;
+}
+
+.callout.qif-collapsible .callout-header {
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+.callout.qif-collapsible .qif-collapse-hint {
+  margin-left: auto;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.45;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+.callout.qif-collapsible:hover .qif-collapse-hint {
+  opacity: 0.7;
+}
+
+.callout.qif-collapsible .qif-collapse-arrow {
+  margin-left: 0.5rem;
+  font-size: 0.7rem;
+  opacity: 0.5;
+  transition: transform 0.25s ease;
+  display: inline-block;
+}
+
+.callout.qif-collapsible.qif-collapsed .qif-collapse-arrow {
+  transform: rotate(-90deg);
+}
+
+.callout.qif-collapsible .callout-body-container {
+  overflow: hidden;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+  max-height: 2000px;
+  opacity: 1;
+}
+
+.callout.qif-collapsible.qif-collapsed .callout-body-container {
+  max-height: 0;
+  opacity: 0;
 }
 
 .table {
