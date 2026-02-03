@@ -70,6 +70,7 @@
 
 | Date | AI System | Role |
 |------|-----------|------|
+| ~mid-Jan 2026 (pre-repo) | ChatGPT (GPT-4) | Idea bouncing — externalizing and stress-testing framework concepts the author had been envisioning for years |
 | 2026-01-18 – 2026-01-29 | Claude (various) | ONI repo structure, video scripts, publication formatting |
 | 2026-02-02 afternoon | Claude (Opus 4.5) | Co-derivation of hourglass model (Entries 1–13) |
 | 2026-02-02 evening | Claude (Opus 4.5) | v3.0 implementation across codebase (Entry 14) |
@@ -77,6 +78,8 @@
 | 2026-02-02 late night | **Google Gemini 2.5** | Independent peer review — first cross-AI validation (Entry 16) |
 
 **All AI involvement is assistive. Kevin Qi retains authorship and all final decision-making authority.**
+
+> **See also:** [TRANSPARENCY.md](../../main/neurosecurity/qif/governance/TRANSPARENCY.md) — full AI tool disclosure, contribution matrix, documented corrections, and verification methodology.
 
 ---
 
