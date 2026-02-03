@@ -168,6 +168,38 @@ The scientific consensus leans toward Tegmark. Most physicists and neuroscientis
 
 ---
 
+### Entry QP-005: What is a Hamiltonian? Why is it implicit in the QI equation? (2026-02-03)
+
+**Question:** What's a Hamiltonian? Is it implicit in our QI equation?
+
+**Answer:** The Hamiltonian H is the total energy of a system, written as a mathematical operator. It is THE single equation that determines everything a quantum system can do. The Schrödinger equation — the master equation of quantum mechanics — is just:
+
+```
+iℏ (d/dt)|ψ⟩ = H|ψ⟩
+```
+
+Translation: "The Hamiltonian tells the quantum state how to change over time."
+
+**Yes, the Hamiltonian is implicit in the QI equation — and this is a significant insight.** Every quantum term in both QI candidates is downstream of the Hamiltonian without the Hamiltonian itself appearing:
+
+| QI equation term | How the Hamiltonian hides |
+|---|---|
+| **ΓD(t)** (decoherence rate) | Derived from the system-environment interaction Hamiltonian. Tegmark's whole calculation was: write down H for ion + warm brain → compute ΓD. |
+| **SvN(ρ)** (von Neumann entropy) | The density matrix ρ evolves via dρ/dt = −i/ℏ [H, ρ]. Entropy is downstream of H. |
+| **Φtunnel** (tunneling probability) | Calculated directly from the potential energy barrier in H. |
+| **E(ρAB)** (entanglement) | Whether entanglement exists depends on the interaction Hamiltonian between subsystems. |
+
+**Why this matters for QIF:** Right now, the QI equation treats these four terms as independent tunable parameters. But they're NOT independent — they all come from one Hamiltonian. If you wrote down H for the electrode-tissue interface, you could **derive** all four terms from a single equation instead of tuning them separately. Fewer free parameters = stronger predictions = harder to dismiss.
+
+**The missing Hamiltonian:** H_total = H_neuron + H_electrode + H_interface + H_environment. Nobody has formulated this for any BCI system. This is the key future research target, and it's exactly what quantum simulation (Entry QP-004) could solve.
+
+**Named after:** William Rowan Hamilton (1805–1865), Irish mathematician.
+
+**Related:** Entry QP-004 (quantum simulation), Entry QP-001 (Tegmark decoherence), QIF-TRUTH.md Section 3.4 + 4.3, Derivation Log Entry 18
+**Visualization:**
+
+---
+
 ## Neuroethics
 
 *(Future entries)*
@@ -182,4 +214,4 @@ The scientific consensus leans toward Tegmark. Most physicists and neuroscientis
 
 *Part of the [QIF Project](https://github.com/qinnovates/mindloft) — Quantum Intelligence Field Journal*
 *Started: 2026-02-03*
-*Entries: 6 (QP: 4, NS: 2)*
+*Entries: 7 (QP: 5, NS: 2)*
