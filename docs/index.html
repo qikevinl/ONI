@@ -1540,6 +1540,16 @@
         }
         #oni-anim-toggle[data-state="off"] {
             border-color: rgba(71, 85, 105, 0.35);
+            animation: none;
+        }
+
+        /* Pulse flash to draw attention */
+        @keyframes toggle-pulse {
+            0%, 100% { box-shadow: 0 2px 12px rgba(0,0,0,0.4); border-color: rgba(59, 130, 246, 0.35); }
+            50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); border-color: rgba(59, 130, 246, 0.8); }
+        }
+        #oni-anim-toggle[data-state="on"] {
+            animation: toggle-pulse 2s ease-in-out 3;
         }
 
         /* Tooltip */
@@ -1566,144 +1576,7 @@
             transform: translateY(0);
         }
 
-        /* BCI Mode toggle FAB (stacked above animation toggle) */
-        #oni-bci-toggle {
-            position: fixed;
-            bottom: calc(1.5rem + 44px + 0.75rem);
-            right: 1.5rem;
-            z-index: 10000;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            border: 1px solid rgba(34, 201, 151, 0.35);
-            background: rgba(10, 15, 26, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.4);
-            transition: border-color 0.3s, box-shadow 0.3s;
-            padding: 0;
-            outline: none;
-        }
-        #oni-bci-toggle:hover {
-            border-color: #22c997;
-            box-shadow: 0 0 16px rgba(34, 201, 151, 0.25);
-        }
-        #oni-bci-toggle:focus-visible {
-            outline: 2px solid #22c997;
-            outline-offset: 2px;
-        }
-        #oni-bci-toggle svg {
-            width: 22px;
-            height: 22px;
-            fill: none;
-            stroke: #22c997;
-            stroke-width: 1.8;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        #oni-bci-toggle[data-state="on"] {
-            border-color: #22c997;
-            box-shadow: 0 0 12px rgba(34, 201, 151, 0.2);
-        }
-        #oni-bci-toggle[data-state="off"] svg {
-            stroke: var(--text-dim);
-        }
-        #oni-bci-toggle[data-state="off"] {
-            border-color: rgba(71, 85, 105, 0.35);
-        }
-        /* BCI toggle tooltip */
-        #oni-bci-toggle::after {
-            content: attr(aria-label);
-            position: absolute;
-            bottom: calc(100% + 8px);
-            right: 0;
-            background: rgba(10, 15, 26, 0.95);
-            color: var(--text-secondary);
-            font-size: 0.7rem;
-            font-family: 'Inter', sans-serif;
-            padding: 4px 10px;
-            border-radius: 6px;
-            white-space: nowrap;
-            pointer-events: none;
-            opacity: 0;
-            transform: translateY(4px);
-            transition: opacity 0.2s, transform 0.2s;
-            border: 1px solid var(--border);
-        }
-        #oni-bci-toggle:hover::after {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Accessibility overlay prompt */
-        #oni-anim-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 10001;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            padding: 2rem;
-            background: rgba(5, 10, 20, 0.5);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease, visibility 0.4s ease;
-        }
-        #oni-anim-overlay.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        #oni-anim-overlay-card {
-            background: rgba(15, 23, 42, 0.95);
-            border: 1px solid rgba(59, 130, 246, 0.25);
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            max-width: 480px;
-            text-align: center;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-            transform: translateY(20px);
-            transition: transform 0.4s ease;
-        }
-        #oni-anim-overlay.visible #oni-anim-overlay-card {
-            transform: translateY(0);
-        }
-        #oni-anim-overlay-card p {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            line-height: 1.6;
-            margin: 0 0 1rem 0;
-            font-family: 'Inter', sans-serif;
-        }
-        #oni-anim-overlay-card button {
-            background: var(--accent-blue);
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 0.5rem 1.5rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        #oni-anim-overlay-card button:hover {
-            background: #2563eb;
-        }
-        #oni-anim-overlay-card button:focus-visible {
-            outline: 2px solid #fff;
-            outline-offset: 2px;
-        }
-
-        @media (max-width: 480px) {
-            #oni-anim-overlay { padding: 1rem; }
-            #oni-anim-overlay-card { padding: 1.25rem 1.25rem; }
-        }
+        /* (Animation overlay removed — pulse on toggle serves as hint) */
 
         /* ============================================
            BCI-FRIENDLY FEEDBACK MODAL
@@ -2349,46 +2222,29 @@
     <!-- =============================================
          BCI-FRIENDLY ANIMATION TOGGLE
          ============================================= -->
-    <!-- Accessibility overlay (shown once on first visit) -->
-    <div id="oni-anim-overlay" role="dialog" aria-labelledby="oni-anim-overlay-heading" aria-modal="true">
-        <div id="oni-anim-overlay-card">
-            <p id="oni-anim-overlay-heading">This site uses animations. For accessibility or BCI-compatible browsing, you can disable animations at any time using the toggle at the bottom of the screen.</p>
-            <button id="oni-anim-overlay-dismiss" type="button">Got it</button>
-        </div>
-    </div>
-
-    <!-- BCI-Friendly feedback modal (shown once when user enables reduced-motion) -->
+    <!-- BCI feedback modal (shown when user activates BCI mode) -->
     <div id="oni-bci-feedback-overlay" role="dialog" aria-labelledby="oni-bci-feedback-heading" aria-modal="true">
         <div id="oni-bci-feedback-card">
-            <h3 id="oni-bci-feedback-heading">Thank you for your interest</h3>
-            <p>We're building this project with accessibility and BCI-compatible browsing in mind — but we know there's always more to learn. If you use assistive technology or a brain-computer interface, we'd genuinely love to hear from you on how we can make this better.</p>
+            <h3 id="oni-bci-feedback-heading">BCI-Compatible Mode</h3>
+            <p>Animations paused. We&rsquo;re building a fully BCI-compatible version of this site &mdash; designed for neural interface users from the ground up. Check back soon.</p>
+            <p style="margin-top: 0; font-size: 0.8rem; color: var(--text-dim);">If you use assistive technology or a brain-computer interface, we&rsquo;d love to hear from you.</p>
             <div class="bci-feedback-actions">
                 <a href="https://github.com/qinnovates/mindloft/issues/new?labels=accessibility,bci-feedback&title=BCI+Accessibility+Feedback" target="_blank" rel="noopener">Share Feedback</a>
-                <button id="oni-bci-feedback-dismiss" type="button">Maybe later</button>
+                <button id="oni-bci-feedback-dismiss" type="button">Got it</button>
             </div>
         </div>
     </div>
 
-    <!-- BCI Mode toggle button -->
-    <button id="oni-bci-toggle" type="button" data-state="off" aria-label="Enable BCI-friendly mode" title="Toggle BCI-friendly mode">
-        <!-- Brain icon -->
-        <svg viewBox="0 0 24 24" aria-hidden="true">
+    <!-- BCI toggle (single button: pauses animations + shows BCI prompt) -->
+    <button id="oni-anim-toggle" type="button" data-state="on" aria-label="Enable BCI mode" title="BCI-friendly mode">
+        <!-- Brain icon (normal mode) -->
+        <svg id="oni-anim-icon-on" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 2C9.5 2 7.5 3.5 7 5.5C5.5 5.8 4.3 7 4 8.5C3.5 10.5 4.5 12.5 6 13.5V18c0 2.2 1.8 4 4 4h4c2.2 0 4-1.8 4-4v-4.5c1.5-1 2.5-3 2-5C19.7 7 18.5 5.8 17 5.5C16.5 3.5 14.5 2 12 2z"/>
             <path d="M12 2v20" opacity="0.3"/>
             <path d="M8 9c0 0 1.5 1 4 1s4-1 4-1" opacity="0.3"/>
             <path d="M9 13c0 0 1 1 3 1s3-1 3-1" opacity="0.3"/>
         </svg>
-    </button>
-
-    <!-- Floating toggle button -->
-    <button id="oni-anim-toggle" type="button" data-state="on" aria-label="Disable animations" title="Toggle animations">
-        <!-- Wave icon (animations ON) -->
-        <svg id="oni-anim-icon-on" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M2 12c1.5-3 4-5 6-5s3 1 4 3c1 2 2 3 4 3s4.5-2 6-5"/>
-            <path d="M2 17c1.5-3 4-5 6-5s3 1 4 3c1 2 2 3 4 3s4.5-2 6-5" opacity="0.4"/>
-            <path d="M2 7c1.5-3 4-5 6-5s3 1 4 3c1 2 2 3 4 3s4.5-2 6-5" opacity="0.4"/>
-        </svg>
-        <!-- Pause icon (animations OFF) -->
+        <!-- Pause icon (BCI mode active) -->
         <svg id="oni-anim-icon-off" viewBox="0 0 24 24" style="display:none;" aria-hidden="true">
             <line x1="8" y1="6" x2="8" y2="18"/>
             <line x1="16" y1="6" x2="16" y2="18"/>
@@ -2400,88 +2256,64 @@
     (function() {
         'use strict';
 
-        var STORAGE_KEY = 'oni-animations-enabled';
-        var OVERLAY_KEY = 'oni-anim-overlay-dismissed';
+        var STORAGE_KEY = 'oni-bci-mode';
 
-        // Detect OS-level reduced-motion preference
-        var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        // Always start with animations ON — the toggle lets users opt out.
-        // Only disable if user explicitly toggled off in a previous session.
-        var stored = localStorage.getItem(STORAGE_KEY);
-        var animationsEnabled = (stored !== 'false');
-
-        // Expose globally so the main IIFE can check it
-        window.__oniAnimationsEnabled = animationsEnabled;
-
-        // Apply reduced-motion class immediately (before paint)
-        if (!animationsEnabled) {
-            document.body.classList.add('reduced-motion');
-        }
+        // Always start with animations ON
+        var animationsEnabled = true;
+        window.__oniAnimationsEnabled = true;
 
         // Toggle button references
         var toggleBtn = document.getElementById('oni-anim-toggle');
         var iconOn = document.getElementById('oni-anim-icon-on');
         var iconOff = document.getElementById('oni-anim-icon-off');
-        var overlay = document.getElementById('oni-anim-overlay');
-        var dismissBtn = document.getElementById('oni-anim-overlay-dismiss');
+
+        // BCI feedback modal references
+        var bciFeedbackOverlay = document.getElementById('oni-bci-feedback-overlay');
+        var bciFeedbackDismiss = document.getElementById('oni-bci-feedback-dismiss');
 
         function updateToggleUI(enabled) {
             toggleBtn.setAttribute('data-state', enabled ? 'on' : 'off');
-            toggleBtn.setAttribute('aria-label', enabled ? 'Disable animations' : 'Enable animations');
+            toggleBtn.setAttribute('aria-label', enabled ? 'Enable BCI mode' : 'Exit BCI mode');
             iconOn.style.display = enabled ? '' : 'none';
             iconOff.style.display = enabled ? 'none' : '';
         }
 
         updateToggleUI(animationsEnabled);
 
-        // Show overlay on first visit (skip if OS prefers reduced motion or already dismissed)
-        var overlayDismissed = localStorage.getItem(OVERLAY_KEY) === 'true';
-        if (!overlayDismissed && !prefersReduced) {
-            // Small delay so page renders first
-            setTimeout(function() {
-                overlay.classList.add('visible');
-            }, 800);
-        }
+        // BCI toggle handler — freezes animations + shows BCI prompt
+        toggleBtn.addEventListener('click', function() {
+            animationsEnabled = !animationsEnabled;
+            window.__oniAnimationsEnabled = animationsEnabled;
+            updateToggleUI(animationsEnabled);
 
-        dismissBtn.addEventListener('click', function() {
-            overlay.classList.remove('visible');
-            localStorage.setItem(OVERLAY_KEY, 'true');
-        });
-
-        // Close overlay on backdrop click
-        overlay.addEventListener('click', function(e) {
-            if (e.target === overlay) {
-                overlay.classList.remove('visible');
-                localStorage.setItem(OVERLAY_KEY, 'true');
+            if (animationsEnabled) {
+                // Resume animations
+                document.body.classList.remove('reduced-motion');
+                if (window.__oniThreeAnimate) {
+                    window.__oniThreeAnimate();
+                }
+                if (window.ScrollTrigger) {
+                    ScrollTrigger.enable();
+                }
+            } else {
+                // Freeze animations + show BCI prompt
+                document.body.classList.add('reduced-motion');
+                if (window.ScrollTrigger) {
+                    ScrollTrigger.disable();
+                }
+                showBciFeedback();
             }
         });
 
-        // Close overlay on Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && overlay.classList.contains('visible')) {
-                overlay.classList.remove('visible');
-                localStorage.setItem(OVERLAY_KEY, 'true');
-            }
-        });
-
-        // BCI feedback modal references
-        var BCI_FEEDBACK_KEY = 'oni-bci-feedback-shown';
-        var bciFeedbackOverlay = document.getElementById('oni-bci-feedback-overlay');
-        var bciFeedbackDismiss = document.getElementById('oni-bci-feedback-dismiss');
-
+        // BCI feedback modal
         function showBciFeedback() {
-            var alreadyShown = localStorage.getItem(BCI_FEEDBACK_KEY) === 'true';
-            if (!alreadyShown) {
-                setTimeout(function() {
-                    bciFeedbackOverlay.classList.add('visible');
-                }, 300);
-            }
+            setTimeout(function() {
+                bciFeedbackOverlay.classList.add('visible');
+            }, 300);
         }
 
         function dismissBciFeedback() {
             bciFeedbackOverlay.classList.remove('visible');
-            localStorage.setItem(BCI_FEEDBACK_KEY, 'true');
         }
 
         bciFeedbackDismiss.addEventListener('click', dismissBciFeedback);
@@ -2498,90 +2330,10 @@
             }
         });
 
-        // Dismiss on feedback link click (they've engaged)
         var bciFeedbackLink = bciFeedbackOverlay.querySelector('a');
         if (bciFeedbackLink) {
-            bciFeedbackLink.addEventListener('click', function() {
-                localStorage.setItem(BCI_FEEDBACK_KEY, 'true');
-            });
+            bciFeedbackLink.addEventListener('click', dismissBciFeedback);
         }
-
-        // Toggle handler
-        toggleBtn.addEventListener('click', function() {
-            animationsEnabled = !animationsEnabled;
-            window.__oniAnimationsEnabled = animationsEnabled;
-            localStorage.setItem(STORAGE_KEY, String(animationsEnabled));
-            updateToggleUI(animationsEnabled);
-
-            if (animationsEnabled) {
-                document.body.classList.remove('reduced-motion');
-                // Re-enable Three.js rendering
-                if (window.__oniThreeAnimate) {
-                    window.__oniThreeAnimate();
-                }
-                // Re-enable GSAP ScrollTrigger
-                if (window.ScrollTrigger) {
-                    ScrollTrigger.enable();
-                }
-            } else {
-                document.body.classList.add('reduced-motion');
-                // Disable GSAP ScrollTrigger
-                if (window.ScrollTrigger) {
-                    ScrollTrigger.disable();
-                }
-                // Three.js will stop via the isVisible/reduced-motion check in animate()
-            }
-        });
-
-        // Also dismiss overlay if user directly clicks the toggle
-        toggleBtn.addEventListener('click', function() {
-            if (overlay.classList.contains('visible')) {
-                overlay.classList.remove('visible');
-                localStorage.setItem(OVERLAY_KEY, 'true');
-            }
-        });
-
-        // Listen for OS preference changes at runtime
-        if (window.matchMedia) {
-            window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', function(e) {
-                if (e.matches && animationsEnabled) {
-                    // OS just enabled reduced motion — respect it
-                    toggleBtn.click();
-                }
-            });
-        }
-
-        // =============================================
-        // BCI MODE TOGGLE
-        // =============================================
-        var BCI_MODE_KEY = 'oni-bci-mode-enabled';
-        var bciToggleBtn = document.getElementById('oni-bci-toggle');
-        var bciModeEnabled = localStorage.getItem(BCI_MODE_KEY) === 'true';
-
-        // Apply stored BCI mode on load
-        if (bciModeEnabled) {
-            document.body.classList.add('bci-mode');
-            bciToggleBtn.setAttribute('data-state', 'on');
-            bciToggleBtn.setAttribute('aria-label', 'Disable BCI-friendly mode');
-        }
-
-        bciToggleBtn.addEventListener('click', function() {
-            bciModeEnabled = !bciModeEnabled;
-            localStorage.setItem(BCI_MODE_KEY, String(bciModeEnabled));
-
-            if (bciModeEnabled) {
-                document.body.classList.add('bci-mode');
-                bciToggleBtn.setAttribute('data-state', 'on');
-                bciToggleBtn.setAttribute('aria-label', 'Disable BCI-friendly mode');
-
-                // Show feedback modal (once) when BCI mode is first enabled
-                showBciFeedback();
-            } else {
-                document.body.classList.remove('bci-mode');
-                bciToggleBtn.setAttribute('data-state', 'off');
-                bciToggleBtn.setAttribute('aria-label', 'Enable BCI-friendly mode');
-            }
-        });
     })();
     </script>
 

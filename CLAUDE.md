@@ -6,6 +6,20 @@
 
 ---
 
+## CRITICAL: ONI is Legacy — QIF is Active
+
+> **The ONI Framework (Open Neurosecurity Interoperability) is LEGACY.** Do not create new ONI content, do not update ONI-specific documents, do not reference ONI as the current framework. Leave existing ONI content as-is for historical preservation.
+>
+> **QIF (Quantum Indeterministic Framework for Neural Security)** is the active framework. All new work — whitepaper, equations, visualizations, publications — should reference QIF, not ONI.
+>
+> **ONI content preserved at:** `docs/legacy/` (website versions), `docs/legacy/whitepaper-oni/` (ONI whitepaper), `neurosecurity/legacy-core/` (original research)
+>
+> **QIF whitepaper:** `docs/whitepaper/` — interactive immersive experience (3D scroll, AI voiceover, BCI-adaptive). Content will be populated from QIF-WHITEPAPER.md draft.
+>
+> **When in doubt:** If a task references "the framework," "the whitepaper," or "the model" — it means QIF, not ONI.
+
+---
+
 ## Quick Reference
 
 | Resource | Location | Purpose |
