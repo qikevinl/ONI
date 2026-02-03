@@ -353,6 +353,41 @@
         .blog-card[data-color="pink"]::before { background: var(--accent-pink); }
         .blog-card[data-color="pink"]:hover { border-color: rgba(236, 72, 153, 0.3); box-shadow: 0 8px 30px rgba(236, 72, 153, 0.08), 0 4px 16px rgba(0,0,0,0.3); }
 
+        .blog-card[data-color="amber"]::before { background: linear-gradient(90deg, var(--accent-amber), #f59e0b, #fbbf24, #f59e0b); background-size: 200% 100%; animation: shimmer 3s ease infinite; }
+        .blog-card[data-color="amber"] { border-color: rgba(245, 158, 11, 0.25); }
+        .blog-card[data-color="amber"]:hover { border-color: rgba(245, 158, 11, 0.5); box-shadow: 0 8px 30px rgba(245, 158, 11, 0.12), 0 4px 16px rgba(0,0,0,0.3); }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .exclusive-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #fbbf24;
+            background: rgba(245, 158, 11, 0.12);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            padding: 3px 10px;
+            border-radius: 6px;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 4px rgba(245, 158, 11, 0.2); }
+            50% { box-shadow: 0 0 12px rgba(245, 158, 11, 0.4); }
+        }
+
+        .exclusive-badge::before {
+            content: '\2B50';
+            font-size: 0.7rem;
+        }
+
         .blog-card-header {
             display: flex;
             align-items: center;
@@ -392,6 +427,12 @@
             color: var(--accent-pink);
             background: rgba(236, 72, 153, 0.1);
             border: 1px solid rgba(236, 72, 153, 0.2);
+        }
+
+        .blog-card[data-color="amber"] .blog-card-category {
+            color: var(--accent-amber);
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.2);
         }
 
         .blog-card-date {
@@ -598,7 +639,8 @@
 
         <!-- Category filter tabs -->
         <div class="category-tabs" id="category-tabs">
-            <button class="category-tab active" data-filter="all">All<span class="tab-count">8</span></button>
+            <button class="category-tab active" data-filter="all">All<span class="tab-count">9</span></button>
+            <button class="category-tab" data-filter="journal">Journal<span class="tab-count">1</span></button>
             <button class="category-tab" data-filter="framework">Framework<span class="tab-count">1</span></button>
             <button class="category-tab" data-filter="security">Security<span class="tab-count">2</span></button>
             <button class="category-tab" data-filter="signal-processing">Signal Processing<span class="tab-count">2</span></button>
@@ -607,6 +649,24 @@
 
         <!-- Blog post list -->
         <div class="blog-list" id="blog-list">
+
+            <!-- Post 0: Field Journal -->
+            <article class="blog-card" data-category="journal" data-color="amber">
+                <div class="blog-card-header">
+                    <span class="blog-card-category">Journal</span>
+                    <span class="exclusive-badge">GitHub Exclusive</span>
+                    <span class="blog-card-date">Feb 3, 2026</span>
+                </div>
+                <h2 class="blog-card-title">
+                    <a href="https://github.com/qinnovates/mindloft/blob/main/neurosecurity/qif/QIF-FIELD-JOURNAL.md" target="_blank" rel="noopener">QIF Field Journal: Synesthesia, Neurodivergence &amp; the Experience of Thinking</a>
+                </h2>
+                <p class="blog-card-desc">A first-person research journal &mdash; real-time observations from inside a neurodivergent mind building a quantum framework. Raw, dated, append-only.</p>
+                <div class="blog-card-links">
+                    <a href="https://github.com/qinnovates/mindloft/blob/main/neurosecurity/qif/QIF-FIELD-JOURNAL.md" target="_blank" rel="noopener" class="blog-card-link primary">
+                        Read on GitHub <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </article>
 
             <!-- Post 1: Quantum Keys -->
             <article class="blog-card" data-category="quantum" data-color="pink">
@@ -622,7 +682,7 @@
                     <a href="https://cybersecuritywriteups.com/from-macroscopic-quantum-tunneling-to-quantum-keys-how-the-nobel-prize-will-secure-bcis-300f943faea1" target="_blank" rel="noopener" class="blog-card-link primary">
                         Read on Cybersecurity Writeups <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
-                    <a href="https://github.com/qinnovates/mindloft/blob/main/neurosecurity/legacy-core/publications/quantum-encryption/Blog-Quantum_Keys.md" target="_blank" rel="noopener" class="blog-card-link secondary">
+                    <a href="https://github.com/qinnovates/mindloft/blob/main/MAIN/legacy-core/publications/quantum-encryption/Blog-Quantum_Keys.md" target="_blank" rel="noopener" class="blog-card-link secondary">
                         View Source <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
                 </div>
@@ -635,11 +695,11 @@
                     <span class="blog-card-date">Jan 22, 2026</span>
                 </div>
                 <h2 class="blog-card-title">
-                    <a href="https://github.com/qinnovates/mindloft/blob/main/neurosecurity/legacy-core/publications/quantum-encryption/Blog-Tunneling_Traversal_Time.md" target="_blank" rel="noopener">The Liminal Phase: How Quantum Tunneling Time Could Secure Your Brain</a>
+                    <a href="https://github.com/qinnovates/mindloft/blob/main/MAIN/legacy-core/publications/quantum-encryption/Blog-Tunneling_Traversal_Time.md" target="_blank" rel="noopener">The Liminal Phase: How Quantum Tunneling Time Could Secure Your Brain</a>
                 </h2>
                 <p class="blog-card-desc">The liminal phase &mdash; a quantum security primitive hiding in plain sight.</p>
                 <div class="blog-card-links">
-                    <a href="https://github.com/qinnovates/mindloft/blob/main/neurosecurity/legacy-core/publications/quantum-encryption/Blog-Tunneling_Traversal_Time.md" target="_blank" rel="noopener" class="blog-card-link primary">
+                    <a href="https://github.com/qinnovates/mindloft/blob/main/MAIN/legacy-core/publications/quantum-encryption/Blog-Tunneling_Traversal_Time.md" target="_blank" rel="noopener" class="blog-card-link primary">
                         View on GitHub <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
                 </div>
@@ -659,7 +719,7 @@
                     <a href="https://cybersecuritywriteups.com/can-hackers-attack-quantum-computers-across-time-and-space-the-truth-is-far-more-terrifying-d74e41a2223a" target="_blank" rel="noopener" class="blog-card-link primary">
                         Read on Cybersecurity Writeups <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
-                    <a href="https://github.com/qinnovates/mindloft/blob/main/neurosecurity/legacy-core/publications/quantum-encryption/Blog-Quantum_Security.md" target="_blank" rel="noopener" class="blog-card-link secondary">
+                    <a href="https://github.com/qinnovates/mindloft/blob/main/MAIN/legacy-core/publications/quantum-encryption/Blog-Quantum_Security.md" target="_blank" rel="noopener" class="blog-card-link secondary">
                         View Source <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
                 </div>
@@ -679,7 +739,7 @@
                     <a href="https://medium.com/@qikevinl/the-hidden-equation-your-brain-runs-on-and-why-it-matters-5be5598eac1f" target="_blank" rel="noopener" class="blog-card-link primary">
                         Read on Medium <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
-                    <a href="https://github.com/qinnovates/mindloft/blob/main/neurosecurity/legacy-core/publications/scale-frequency/Blog-Scale_Frequency.md" target="_blank" rel="noopener" class="blog-card-link secondary">
+                    <a href="https://github.com/qinnovates/mindloft/blob/main/MAIN/legacy-core/publications/scale-frequency/Blog-Scale_Frequency.md" target="_blank" rel="noopener" class="blog-card-link secondary">
                         View Source <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
                 </div>
@@ -699,7 +759,7 @@
                     <a href="https://medium.com/@qikevinl/neural-ransomware-isnt-science-fiction-e3f9efe4ffb1" target="_blank" rel="noopener" class="blog-card-link primary">
                         Read on Medium <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
-                    <a href="https://github.com/qinnovates/mindloft/blob/main/neurosecurity/legacy-core/publications/neural-ransomware/Blog-Neural_Ransomware.md" target="_blank" rel="noopener" class="blog-card-link secondary">
+                    <a href="https://github.com/qinnovates/mindloft/blob/main/MAIN/legacy-core/publications/neural-ransomware/Blog-Neural_Ransomware.md" target="_blank" rel="noopener" class="blog-card-link secondary">
                         View Source <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
                 </div>
@@ -719,7 +779,7 @@
                     <a href="https://medium.com/@qikevinl/your-brain-has-a-spam-filter-can-we-reverse-engineer-it-799da714238e" target="_blank" rel="noopener" class="blog-card-link primary">
                         Read on Medium <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
-                    <a href="https://github.com/qinnovates/mindloft/blob/main/neurosecurity/legacy-core/publications/coherence-metric/Blog-Coherence_Metric.md" target="_blank" rel="noopener" class="blog-card-link secondary">
+                    <a href="https://github.com/qinnovates/mindloft/blob/main/MAIN/legacy-core/publications/coherence-metric/Blog-Coherence_Metric.md" target="_blank" rel="noopener" class="blog-card-link secondary">
                         View Source <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
                 </div>
@@ -739,7 +799,7 @@
                     <a href="https://medium.com/@qikevinl/your-brain-needs-a-firewall-heres-what-it-would-look-like-87b46d292219" target="_blank" rel="noopener" class="blog-card-link primary">
                         Read on Medium <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
-                    <a href="https://github.com/qinnovates/mindloft/blob/main/neurosecurity/legacy-core/publications/neural-firewall/Blog-Neural_Firewall.md" target="_blank" rel="noopener" class="blog-card-link secondary">
+                    <a href="https://github.com/qinnovates/mindloft/blob/main/MAIN/legacy-core/publications/neural-firewall/Blog-Neural_Firewall.md" target="_blank" rel="noopener" class="blog-card-link secondary">
                         View Source <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
                 </div>
@@ -759,7 +819,7 @@
                     <a href="https://medium.com/@qikevinl/the-osi-of-mind-securing-human-ai-interfaces-3ca381b95c29" target="_blank" rel="noopener" class="blog-card-link primary">
                         Read on Medium <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
-                    <a href="https://github.com/qinnovates/mindloft/blob/main/neurosecurity/legacy-core/publications/0-oni-framework/Blog-ONI_Framework.md" target="_blank" rel="noopener" class="blog-card-link secondary">
+                    <a href="https://github.com/qinnovates/mindloft/blob/main/MAIN/legacy-core/publications/0-oni-framework/Blog-ONI_Framework.md" target="_blank" rel="noopener" class="blog-card-link secondary">
                         View Source <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
                 </div>

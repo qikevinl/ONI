@@ -12,7 +12,7 @@
 >
 > **QIF (Quantum Indeterministic Framework for Neural Security)** is the active framework. All new work — whitepaper, equations, visualizations, publications — should reference QIF, not ONI.
 >
-> **ONI content preserved at:** `docs/legacy/` (website versions), `docs/legacy/whitepaper-oni/` (ONI whitepaper), `neurosecurity/legacy-core/` (original research)
+> **ONI content preserved at:** `docs/legacy/` (website versions), `docs/legacy/whitepaper-oni/` (ONI whitepaper), `MAIN/legacy-core/` (original research)
 >
 > **QIF whitepaper:** `docs/whitepaper/` — interactive immersive experience (3D scroll, AI voiceover, BCI-adaptive). Content will be populated from QIF-WHITEPAPER.md draft.
 >
@@ -24,36 +24,36 @@
 
 | Resource | Location | Purpose |
 |----------|----------|---------|
-| **Brand Constants** | `neurosecurity/legacy-core/resources/brand/brand.json` | **Single source of truth for ONI/TARA naming, slogans, versions, stats** |
+| **Brand Constants** | `MAIN/legacy-core/resources/brand/brand.json` | **Single source of truth for ONI/TARA naming, slogans, versions, stats** |
 | **Content Manifest** | `docs/content-manifest.json` | **Single source of truth for all documentation links — update paths here, not in HTML** |
 | **Website Stats** | `docs/index.html` | **Dynamic stats system - see "Website Stats System" section** |
-| **Main Wiki (INDEX)** | `neurosecurity/legacy-core/INDEX.md` | **Central hub - navigation, dependencies, cross-references** |
-| **Python Package** | `neurosecurity/legacy-core/oni-framework/` | **pip install oni-framework** |
-| **Transparency Statement** | `neurosecurity/qif/governance/TRANSPARENCY.md` | **Human-AI collaboration audit trail** |
-| **Neuroethics Alignment** | `neurosecurity/qif/governance/NEUROETHICS_ALIGNMENT.md` | **Framework-to-ethics principle mapping** |
-| **Research Verification** | `neurosecurity/legacy-core/resources/agents/RESEARCH_VERIFICATION_PROTOCOL.md` | **Anti-hallucination firewall for claims** |
-| **Personas** | `neurosecurity/legacy-core/resources/agents/PERSONAS.md` | **Agent personas for research verification** |
-| Topic README Template | `neurosecurity/legacy-core/resources/templates/README_TEMPLATE.md` | Template for topic-level overviews |
-| APA Template | `neurosecurity/legacy-core/resources/templates/TECHDOC_TEMPLATE_APA.md` | Formatting for technical documents |
-| Blog Template | `neurosecurity/legacy-core/resources/templates/BLOG_TEMPLATE.md` | Formatting for blog posts |
-| Publishing Instructions | `neurosecurity/legacy-core/project/processes/PUBLISHING_INSTRUCTIONS.md` | Step-by-step publishing workflow |
-| Research Monitor | `neurosecurity/legacy-core/resources/pipeline/scripts/research_monitor.py` | Fetch new academic papers |
-| Keywords File | `neurosecurity/legacy-core/resources/pipeline/scripts/keywords.json` | Research search terms |
-| Verified Claims | `neurosecurity/legacy-core/resources/pipeline/verified/` | Verified research claims with citations |
-| **Editor Agent** | `neurosecurity/legacy-core/resources/editor/EDITOR_AGENT.md` | **Automated quality & sync (run before commits)** |
+| **Main Wiki (INDEX)** | `MAIN/legacy-core/INDEX.md` | **Central hub - navigation, dependencies, cross-references** |
+| **Python Package** | `MAIN/legacy-core/oni-framework/` | **pip install oni-framework** |
+| **Transparency Statement** | `MAIN/qif/governance/TRANSPARENCY.md` | **Human-AI collaboration audit trail** |
+| **Neuroethics Alignment** | `MAIN/qif/governance/NEUROETHICS_ALIGNMENT.md` | **Framework-to-ethics principle mapping** |
+| **Research Verification** | `MAIN/legacy-core/resources/agents/RESEARCH_VERIFICATION_PROTOCOL.md` | **Anti-hallucination firewall for claims** |
+| **Personas** | `MAIN/legacy-core/resources/agents/PERSONAS.md` | **Agent personas for research verification** |
+| Topic README Template | `MAIN/legacy-core/resources/templates/README_TEMPLATE.md` | Template for topic-level overviews |
+| APA Template | `MAIN/legacy-core/resources/templates/TECHDOC_TEMPLATE_APA.md` | Formatting for technical documents |
+| Blog Template | `MAIN/legacy-core/resources/templates/BLOG_TEMPLATE.md` | Formatting for blog posts |
+| Publishing Instructions | `MAIN/legacy-core/project/processes/PUBLISHING_INSTRUCTIONS.md` | Step-by-step publishing workflow |
+| Research Monitor | `MAIN/legacy-core/resources/pipeline/scripts/research_monitor.py` | Fetch new academic papers |
+| Keywords File | `MAIN/legacy-core/resources/pipeline/scripts/keywords.json` | Research search terms |
+| Verified Claims | `MAIN/legacy-core/resources/pipeline/verified/` | Verified research claims with citations |
+| **Editor Agent** | `MAIN/legacy-core/resources/editor/EDITOR_AGENT.md` | **Automated quality & sync (run before commits)** |
 | **AGENTS.md** | `AGENTS.md` | **Ralph Loop learnings — read at session start** |
-| **Project Management** | `neurosecurity/legacy-core/project/PROJECT_MANAGEMENT.md` | **Master PM doc — scope, risks, priorities, metrics** |
-| **Kanban Board** | `neurosecurity/legacy-core/project/KANBAN.md` | **Visual task board — status at a glance** |
-| **prd.json** | `neurosecurity/legacy-core/project/prd.json` | **Task tracker with exit conditions** |
+| **Project Management** | `MAIN/legacy-core/project/PROJECT_MANAGEMENT.md` | **Master PM doc — scope, risks, priorities, metrics** |
+| **Kanban Board** | `MAIN/legacy-core/project/KANBAN.md` | **Visual task board — status at a glance** |
+| **prd.json** | `MAIN/legacy-core/project/prd.json` | **Task tracker with exit conditions** |
 | **Video Production** | `content/videos/demo/CLAUDE.md` | **Remotion video production pipeline & audio sync** |
-| **Sound Design** | `neurosecurity/legacy-core/resources/sound-engineering/ONI_VIDEO_SOUND_DESIGN.md` | **Audio psychology & specs** |
+| **Sound Design** | `MAIN/legacy-core/resources/sound-engineering/ONI_VIDEO_SOUND_DESIGN.md` | **Audio psychology & specs** |
 | This File | `CLAUDE.md` | Claude-specific instructions |
 
 ### Naming Convention: INDEX.md vs README.md
 
 | File | Location | Purpose |
 |------|----------|---------|
-| `INDEX.md` | `neurosecurity/legacy-core/` only | **Main wiki hub** — single source of truth for navigation, dependencies, roadmap |
+| `INDEX.md` | `MAIN/legacy-core/` only | **Main wiki hub** — single source of truth for navigation, dependencies, roadmap |
 | `README.md` | Each topic folder | **Topic overview** — auto-rendered by GitHub when browsing folders |
 
 > **Why this distinction?** `INDEX.md` is unique to the main wiki. Topic folders use `README.md` because GitHub automatically renders it when viewing folders, providing a better browsing experience.
@@ -77,7 +77,7 @@ mindloft/                               # Local folder (remote: github.com/qinno
 │   ├── workflows/                      # CI/CD pipelines (tests, publish, security, brand-sync)
 │   └── security-audit/                 # Security scanning tools
 │
-├── neurosecurity/                      # ═══ ALL NEUROSECURITY CONTENT ═══
+├── MAIN/                      # ═══ ALL NEUROSECURITY CONTENT ═══
 │   ├── README.md
 │   │
 │   ├── qif/                            # QIF — Quantum Indeterministic Framework (v2)
@@ -127,13 +127,13 @@ mindloft/                               # Local folder (remote: github.com/qinno
 ### Architecture
 
 ```
-neurosecurity/legacy-core/resources/brand/brand.json      ← EDIT THIS to change any brand value
+MAIN/legacy-core/resources/brand/brand.json      ← EDIT THIS to change any brand value
     │
     ├── oni/brand.py           ← Python API for ONI Framework
     ├── tara_mvp/_brand.py     ← Python API for TARA
     ├── oni_academy/_brand.py  ← Python API for ONI Academy
     │
-    └── neurosecurity/legacy-core/resources/brand/sync_brand.py  ← Syncs changes to README.md
+    └── MAIN/legacy-core/resources/brand/sync_brand.py  ← Syncs changes to README.md
 ```
 
 ### Brand Values
@@ -151,7 +151,7 @@ neurosecurity/legacy-core/resources/brand/brand.json      ← EDIT THIS to chang
 # Quick check - run from repo root
 python3 -c "
 import json
-with open('neurosecurity/legacy-core/resources/brand/brand.json') as f: b = json.load(f)
+with open('MAIN/legacy-core/resources/brand/brand.json') as f: b = json.load(f)
 print(f\"ONI: {b['oni']['full_name']}\")
 print(f\"TARA: {b['tara']['full_name']}\")
 print(f\"ONI v{b['oni']['version']} | TARA v{b['tara']['version']}\")
@@ -160,7 +160,7 @@ print(f\"ONI v{b['oni']['version']} | TARA v{b['tara']['version']}\")
 
 ### When to Update brand.json
 
-Update `neurosecurity/legacy-core/resources/brand/brand.json` when:
+Update `MAIN/legacy-core/resources/brand/brand.json` when:
 - Changing project name, acronym, or full name
 - Updating taglines, slogans, or mission statements
 - Bumping version numbers for releases
@@ -168,7 +168,7 @@ Update `neurosecurity/legacy-core/resources/brand/brand.json` when:
 
 ### After Updating brand.json
 
-1. **Run sync script:** `python neurosecurity/legacy-core/resources/brand/sync_brand.py`
+1. **Run sync script:** `python MAIN/legacy-core/resources/brand/sync_brand.py`
 2. **Verify Python loads correctly:** Test import from each package
 3. **Commit both brand.json and any synced files**
 4. **GitHub Action auto-syncs** README.md on push
@@ -227,7 +227,7 @@ print(TARA.tagline)  # "Protection for the neural frontier"
 
 ### Updating Manual Stats
 
-Edit `neurosecurity/legacy-core/resources/brand/brand.json`:
+Edit `MAIN/legacy-core/resources/brand/brand.json`:
 
 ```json
 {
@@ -326,8 +326,8 @@ The Editor Agent ensures consistency and accuracy across all documentation:
 ### How to Run
 
 ```
-1. Read: neurosecurity/legacy-core/resources/editor/EDITOR_AGENT.md
-2. Read relevant checks from: neurosecurity/legacy-core/resources/editor/checks/
+1. Read: MAIN/legacy-core/resources/editor/EDITOR_AGENT.md
+2. Read relevant checks from: MAIN/legacy-core/resources/editor/checks/
 3. Execute validation workflow
 4. Apply auto-fixes, report approval items
 ```
@@ -372,7 +372,7 @@ L9-L14: Biology (Ion Channel Encoding → Identity & Ethics)
 
 ## Persona System (Research Verification)
 
-> **Purpose:** Prevent AI hallucinations in academic research through domain-specific verification personas. See full documentation: `neurosecurity/legacy-core/resources/agents/PERSONAS.md`
+> **Purpose:** Prevent AI hallucinations in academic research through domain-specific verification personas. See full documentation: `MAIN/legacy-core/resources/agents/PERSONAS.md`
 
 ### Quick Reference
 
@@ -388,7 +388,7 @@ L9-L14: Biology (Ion Channel Encoding → Identity & Ethics)
 
 ### Research Verification Protocol
 
-> **CRITICAL:** All neuroscience, physics, and security claims must be verified before publication. See: `neurosecurity/legacy-core/resources/agents/RESEARCH_VERIFICATION_PROTOCOL.md`
+> **CRITICAL:** All neuroscience, physics, and security claims must be verified before publication. See: `MAIN/legacy-core/resources/agents/RESEARCH_VERIFICATION_PROTOCOL.md`
 
 #### Uncertainty Tags
 
@@ -430,7 +430,7 @@ Every claim gets tagged:
          ↓
 2. SOCRATES: Search for authoritative sources
          ↓
-3. Add source to neurosecurity/legacy-core/resources/pipeline/sources/
+3. Add source to MAIN/legacy-core/resources/pipeline/sources/
          ↓
 4. FARADAY/GÖDEL: Domain-specific validation
          ↓
@@ -450,10 +450,10 @@ Every claim gets tagged:
 ```
 1. Read CLAUDE.md (this file) — conventions and workflows
 2. Read AGENTS.md — learnings from previous iterations
-3. Read neurosecurity/legacy-core/project/prd.json — current task status and exit conditions
+3. Read MAIN/legacy-core/project/prd.json — current task status and exit conditions
 4. Execute tasks until exit condition met
 5. Update AGENTS.md with new learnings
-6. Update neurosecurity/legacy-core/project/prd.json with progress
+6. Update MAIN/legacy-core/project/prd.json with progress
 7. Commit changes (memory persists via git)
 ```
 
@@ -462,7 +462,7 @@ Every claim gets tagged:
 | File | Purpose | When to Update |
 |------|---------|----------------|
 | `AGENTS.md` | Learnings, patterns, gotchas | After every significant discovery |
-| `neurosecurity/legacy-core/project/prd.json` | Task tracking, exit conditions | After completing or adding tasks |
+| `MAIN/legacy-core/project/prd.json` | Task tracking, exit conditions | After completing or adding tasks |
 | `CLAUDE.md` | Conventions, workflows | When processes change |
 
 ### Ralph Loop Workflow
@@ -599,14 +599,14 @@ Then follow the Sunday Audit Checklist in PROPAGATION.md Section D.
 
 1. **Read the templates first:**
    ```
-   Read: neurosecurity/legacy-core/resources/templates/TECHDOC_TEMPLATE_APA.md
-   Read: neurosecurity/legacy-core/resources/templates/BLOG_TEMPLATE.md
-   Read: neurosecurity/legacy-core/project/processes/PUBLISHING_INSTRUCTIONS.md
+   Read: MAIN/legacy-core/resources/templates/TECHDOC_TEMPLATE_APA.md
+   Read: MAIN/legacy-core/resources/templates/BLOG_TEMPLATE.md
+   Read: MAIN/legacy-core/project/processes/PUBLISHING_INSTRUCTIONS.md
    ```
 
 2. **Create topic folder (if new topic):**
    ```bash
-   mkdir neurosecurity/legacy-core/publications/[topic-name]
+   mkdir MAIN/legacy-core/publications/[topic-name]
    ```
 
 3. **Create files with correct naming:**
@@ -633,7 +633,7 @@ Then follow the Sunday Audit Checklist in PROPAGATION.md Section D.
    - **Biological Terms** (5-8): Neuroscience terms
    - **Security Terms** (5-8): Cybersecurity terms
 
-2. Update `neurosecurity/legacy-core/resources/pipeline/scripts/keywords.json`:
+2. Update `MAIN/legacy-core/resources/pipeline/scripts/keywords.json`:
    ```json
    {
      "publications": {
@@ -653,7 +653,7 @@ Then follow the Sunday Audit Checklist in PROPAGATION.md Section D.
 ### When Running Research Monitor
 
 ```bash
-cd neurosecurity/legacy-core/resources/pipeline/scripts
+cd MAIN/legacy-core/resources/pipeline/scripts
 python research_monitor.py --days 7 --sources all
 ```
 
@@ -689,8 +689,8 @@ For each topic, maintain this format:
 
 | Document | Summary |
 |----------|----------|
-| [Blog-Topic_Name](neurosecurity/legacy-core/publications/topic-folder/Blog-Topic_Name.md) | *One-line description* |
-| [TechDoc-Topic_Name](neurosecurity/legacy-core/publications/topic-folder/TechDoc-Topic_Name.md) | *One-line description* |
+| [Blog-Topic_Name](MAIN/legacy-core/publications/topic-folder/Blog-Topic_Name.md) | *One-line description* |
+| [TechDoc-Topic_Name](MAIN/legacy-core/publications/topic-folder/TechDoc-Topic_Name.md) | *One-line description* |
 ```
 
 ### Step 3: Update Navigation Section (if needed)
@@ -700,7 +700,7 @@ If adding new navigation features or structural changes:
 
 | Start Here | Purpose |
 |------------|---------|
-| **[INDEX.md](neurosecurity/legacy-core/INDEX.md)** | Central hub — dependency map, cross-references, reading order, roadmap |
+| **[INDEX.md](MAIN/legacy-core/INDEX.md)** | Central hub — dependency map, cross-references, reading order, roadmap |
 | **This README** | Public overview — key concepts, quick reference, document list |
 ```
 
@@ -784,12 +784,12 @@ Use this text in all technical documents:
 
 | Document | Location | Purpose |
 |----------|----------|---------|
-| `TRANSPARENCY.md` | `neurosecurity/qif/governance/` | Audit trail of Human-AI cognitive boundary |
-| `NEUROETHICS_ALIGNMENT.md` | `neurosecurity/qif/governance/` | Maps framework components to ethical principles |
+| `TRANSPARENCY.md` | `MAIN/qif/governance/` | Audit trail of Human-AI cognitive boundary |
+| `NEUROETHICS_ALIGNMENT.md` | `MAIN/qif/governance/` | Maps framework components to ethical principles |
 
 ### When to Update TRANSPARENCY.md
 
-Update `neurosecurity/qif/governance/TRANSPARENCY.md` whenever:
+Update `MAIN/qif/governance/TRANSPARENCY.md` whenever:
 
 1. **New publications are added** — Add to contribution matrix if significant AI assistance used
 2. **Code changes with AI assistance** — Document any AI suggestions that were rejected/modified
@@ -819,7 +819,7 @@ When documenting significant AI interactions, use this format:
 
 ### NEUROETHICS_ALIGNMENT.md Updates
 
-Update `neurosecurity/qif/governance/NEUROETHICS_ALIGNMENT.md` when:
+Update `MAIN/qif/governance/NEUROETHICS_ALIGNMENT.md` when:
 
 1. **New framework components added** — Map to ethical principles
 2. **Security features modified** — Update ethical reasoning
@@ -889,7 +889,7 @@ Before committing, verify:
 - [ ] Document count updated in README.md footer
 - [ ] Date updated in README.md footer
 - [ ] **Topic README.md created** (for new topics — auto-rendered by GitHub)
-- [ ] **neurosecurity/legacy-core/INDEX.md updated** (main wiki: dependency map, tables, metrics)
+- [ ] **MAIN/legacy-core/INDEX.md updated** (main wiki: dependency map, tables, metrics)
 
 ### Package/Structure Changes (CRITICAL)
 - [ ] **INDEX.md Python Packages section updated** (versions, new modules)
@@ -920,7 +920,7 @@ Before committing, verify:
 7. **Extract keywords and update keywords.json**
 
 ### Convert Draft to TechDoc
-1. Apply `neurosecurity/legacy-core/resources/templates/TECHDOC_TEMPLATE_APA.md` structure
+1. Apply `MAIN/legacy-core/resources/templates/TECHDOC_TEMPLATE_APA.md` structure
 2. Add Abstract with keywords
 3. Number sections
 4. Format tables (bold numbers, italic titles)
@@ -932,13 +932,13 @@ Before committing, verify:
 
 **Step 1: Create topic folder**
 ```bash
-mkdir neurosecurity/legacy-core/publications/[topic-name]/
+mkdir MAIN/legacy-core/publications/[topic-name]/
 ```
 
 **Step 2: Create topic README.md**
-- Copy from `neurosecurity/legacy-core/resources/templates/README_TEMPLATE.md`
+- Copy from `MAIN/legacy-core/resources/templates/README_TEMPLATE.md`
 - Fill in: summary, dependencies, key concepts, related topics
-- Link back to `neurosecurity/legacy-core/INDEX.md` (main wiki)
+- Link back to `MAIN/legacy-core/INDEX.md` (main wiki)
 - **Note:** Use `README.md` (not INDEX.md) — GitHub auto-renders it when browsing folders
 
 **Step 3: Create publications**
@@ -958,10 +958,10 @@ mkdir neurosecurity/legacy-core/publications/[topic-name]/
 - Update document count in footer
 
 ### Process Pipeline Incoming Research
-1. Review files in `neurosecurity/legacy-core/resources/pipeline/incoming/`
+1. Review files in `MAIN/legacy-core/resources/pipeline/incoming/`
 2. Determine relevance to ONI Framework
 3. If relevant: Extract key findings, create summary
-4. Move processed file to `neurosecurity/legacy-core/resources/pipeline/processed/`
+4. Move processed file to `MAIN/legacy-core/resources/pipeline/processed/`
 5. Update publications if new content warranted
 
 ### Rename/Reorganize Files
@@ -986,7 +986,7 @@ mkdir neurosecurity/legacy-core/publications/[topic-name]/
 9. **Stale footer:** Always update document/topic counts and date in README.md footer
 
 ### If Unsure
-1. Read `neurosecurity/legacy-core/project/processes/PUBLISHING_INSTRUCTIONS.md`
+1. Read `MAIN/legacy-core/project/processes/PUBLISHING_INSTRUCTIONS.md`
 2. Check existing files for examples
 3. Ask user for clarification before proceeding
 

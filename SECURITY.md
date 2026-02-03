@@ -114,8 +114,8 @@ The following files require explicit maintainer approval to modify:
 ```
 .github/CODEOWNERS          # Self-protecting
 .github/workflows/          # CI/CD pipelines (prevents malicious publish)
-neurosecurity/legacy-core/resources/brand/brand.json   # Brand configuration
-neurosecurity/legacy-core/oni-framework/ONI_LAYERS.md  # Authoritative layer definitions
+MAIN/legacy-core/resources/brand/brand.json   # Brand configuration
+MAIN/legacy-core/oni-framework/ONI_LAYERS.md  # Authoritative layer definitions
 ```
 
 ### PyPI Publishing Security

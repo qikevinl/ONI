@@ -498,8 +498,8 @@ Traditional education assumes everyone learns the same way. Autodidact rejects t
 ## Related
 
 - [Mindloft](../) — The Mindloft project hub
-- [QIF Framework](../neurosecurity/qif/) — Quantum Indeterministic Framework for Neural Security
-- [TARA Platform](../neurosecurity/legacy-core/tara-nsec-platform/) — Security monitoring & simulation
+- [QIF Framework](../MAIN/qif/) — Quantum Indeterministic Framework for Neural Security
+- [TARA Platform](../MAIN/legacy-core/tara-nsec-platform/) — Security monitoring & simulation
 - [GitHub Pages](https://qinnovates.github.io/mindloft/) — Live interactive tools
 - [Autodidactive Demo](https://frontend-phi-seven-64.vercel.app) — Interactive learning platform
 

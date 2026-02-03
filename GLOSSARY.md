@@ -10,7 +10,7 @@
 
 ```
 mindloft/
-├── neurosecurity/
+├── MAIN/
 │   ├── qif/                  # Quantum Indeterminacy Framework
 │   │   ├── framework/        # 9 research documents
 │   │   └── governance/       # 9 ethics/compliance documents

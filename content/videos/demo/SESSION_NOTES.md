@@ -363,7 +363,7 @@ git push origin main
 - `src/scenes/CreditsScene.tsx` - Finale with voice-reactive waves
 - `src/data/oni-theme.ts` - Extended to 3:56 (7080 frames)
 - `src/data/script.ts` - Full script with frame timing
-- `neurosecurity/legacy-core/resources/sound-engineering/ONI_VIDEO_SOUND_DESIGN.md` - Complete docs
+- `MAIN/legacy-core/resources/sound-engineering/ONI_VIDEO_SOUND_DESIGN.md` - Complete docs
 - `content/videos/demo/CLAUDE.md` - Video production instructions (NEW)
 - `content/videos/demo/SESSION_NOTES.md` - This file
 

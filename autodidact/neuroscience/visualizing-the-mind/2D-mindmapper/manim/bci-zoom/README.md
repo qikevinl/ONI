@@ -139,8 +139,8 @@ manim -pqh --fps 60 scenes/bci_zoom_animation.py BCIZoomAnimation
 ## Integration with ONI Repository
 
 This visualization references:
-- `neurosecurity/legacy-core/oni-framework/ONI_LAYERS.md` - Layer definitions, timescale table
-- `neurosecurity/legacy-core/resources/brand/brand.json` - Brand colors (should sync with theme.py)
+- `MAIN/legacy-core/oni-framework/ONI_LAYERS.md` - Layer definitions, timescale table
+- `MAIN/legacy-core/resources/brand/brand.json` - Brand colors (should sync with theme.py)
 
 When ONI layer definitions change, update:
 1. `data/scales.json` - Scale mappings

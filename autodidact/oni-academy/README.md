@@ -146,7 +146,7 @@ No installation required — explore these in your browser:
 | Resource | Description |
 |----------|-------------|
 | [ONI Academy Guide](https://github.com/qinnovates/mindloft/blob/main/autodidact/oni-academy/ONI_ACADEMY.md) | Complete installation, learning paths, architecture |
-| [ONI Framework Wiki](https://github.com/qinnovates/mindloft/blob/main/neurosecurity/legacy-core/INDEX.md) | Central hub — navigation, dependencies, roadmap |
+| [ONI Framework Wiki](https://github.com/qinnovates/mindloft/blob/main/MAIN/legacy-core/INDEX.md) | Central hub — navigation, dependencies, roadmap |
 | [Interactive Demos](https://qinnovates.github.io/ONI/visualizations/) | Browser-based learning tools (no install required) |
 
 **Related packages:**

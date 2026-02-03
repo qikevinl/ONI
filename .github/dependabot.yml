@@ -2,7 +2,7 @@ version: 2
 updates:
   # Python dependencies (oni-framework, oni-tara)
   - package-ecosystem: "pip"
-    directory: "/neurosecurity/legacy-core/oni-framework"
+    directory: "/MAIN/legacy-core/oni-framework"
     schedule:
       interval: "weekly"
       day: "monday"
@@ -20,7 +20,7 @@ updates:
       - "automated"
 
   - package-ecosystem: "pip"
-    directory: "/neurosecurity/legacy-core/tara-nsec-platform"
+    directory: "/MAIN/legacy-core/tara-nsec-platform"
     schedule:
       interval: "weekly"
       day: "monday"

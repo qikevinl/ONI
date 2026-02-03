@@ -20,20 +20,20 @@ https://github.com/qinnovates/mindloft/releases/download/v1.0.0-demo/ONIDemoVide
 
 ## Pillars
 
-### [Neurosecurity](neurosecurity/) — BCI Security Research
+### [Neurosecurity](MAIN/) — BCI Security Research
 
 Brain-computer interfaces are being implanted in humans today. This pillar builds the security frameworks to protect them.
 
 | Component | Description |
 |-----------|-------------|
-| [QIF Framework](neurosecurity/qif/) | Quantum Indeterminacy Framework — 9 architectural docs + 9 governance docs |
-| [Legacy Core (ONI)](neurosecurity/legacy-core/) | 31 publications, Python packages, TARA platform |
+| [QIF Framework](MAIN/qif/) | Quantum Indeterminacy Framework — 9 architectural docs + 9 governance docs |
+| [Legacy Core (ONI)](MAIN/legacy-core/) | 31 publications, Python packages, TARA platform |
 | [Autodidact](autodidact/) | ONI Academy, learning visualizations, BCI fundamentals |
 
 **Key resources:**
-- [QIF Framework (9 docs)](neurosecurity/qif/framework/) — read in order, 01 through 09
-- [Governance (9 docs)](neurosecurity/qif/governance/) — neuroethics, regulatory compliance, consent
-- [Publications (31 papers)](neurosecurity/legacy-core/publications/) — coherence metric, neural firewall, quantum encryption
+- [QIF Framework (9 docs)](MAIN/qif/framework/) — read in order, 01 through 09
+- [Governance (9 docs)](MAIN/qif/governance/) — neuroethics, regulatory compliance, consent
+- [Publications (31 papers)](MAIN/legacy-core/publications/) — coherence metric, neural firewall, quantum encryption
 - [Interactive Visualizations (13+ tools)](docs/visualizations/) — web-based framework demos
 - [Whitepaper](docs/whitepaper/)
 
@@ -50,7 +50,7 @@ pip install oni-academy     # Educational modules
 
 ```
 mindloft/
-├── neurosecurity/                     # PILLAR 1: BCI/Neural Security
+├── MAIN/                     # PILLAR 1: BCI/Neural Security
 │   ├── qif/                           # Quantum Indeterminacy Framework
 │   │   ├── framework/                 # 9 architectural documents (v2)
 │   │   ├── governance/                # 9 neuroethics + compliance docs
@@ -143,7 +143,7 @@ Every version of this project is preserved. The journey from initial concept to 
 
 Kevin Qi — researching at the intersection of neuroscience, quantum security, and AI ethics.
 
-[Full bio →](ABOUT.md) | [Contributing →](neurosecurity/legacy-core/CONTRIBUTING.md) | [License →](LICENSE) (Apache 2.0)
+[Full bio →](ABOUT.md) | [Contributing →](MAIN/legacy-core/CONTRIBUTING.md) | [License →](LICENSE) (Apache 2.0)
 
 ---
 
