@@ -1,7 +1,6 @@
 # Mindloft
 
-> **Mindloft** is Qinnovate's future vision division — *"Let's Mind Our Way Home."*
-> The QIF (Quantum Indeterministic Framework) is Mindloft's flagship research.
+> *"Let's Mind Our Way."*
 >
 > **Direct link:** [qinnovate.com/QIF](https://qinnovate.com/QIF)
 
