@@ -1,6 +1,8 @@
-# ONI Framework Demo Video
+# ONI Framework Product Demo
 
-A 3:30 professional marketing video for the ONI (Open Neural Interface) Framework, built with [Remotion](https://www.remotion.dev/) - video as code.
+<video src="ONIDemoVideo.mp4" controls width="100%"></video>
+
+A 3:30 professional marketing video for the ONI (Open Neurosecurity Interoperability) Framework, built with [Remotion](https://www.remotion.dev/) — video as code.
 
 ## Quick Start
 

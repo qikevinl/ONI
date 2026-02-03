@@ -661,9 +661,9 @@ This invariant helps validate signals: violations may indicate attacks or malfun
 | File | Type | Contains |
 |------|------|----------|
 | `docs/index.html` | HTML | GitHub Pages visualization (14-layer animation) |
-| `content/videos/demo/src/components/LayerStack.tsx` | React/Remotion | Demo video layer stack component |
-| `content/videos/demo/src/data/oni-theme.ts` | TypeScript | Video theme colors and layer comments |
-| `content/videos/motion/src/theme.ts` | TypeScript | Motion Canvas video theme |
+| `MAIN/legacy-core/oni-product-demo/src/components/LayerStack.tsx` | React/Remotion | Demo video layer stack component |
+| `MAIN/legacy-core/oni-product-demo/src/data/oni-theme.ts` | TypeScript | Video theme colors and layer comments |
+| `autodidact/motion/src/theme.ts` | TypeScript | Motion Canvas video theme |
 | `MAIN/legacy-core/tara-nsec-platform/tara_mvp/visualization/themes/oni_theme.py` | Python | TARA dashboard visualization |
 | `MAIN/legacy-core/resources/editor/checks/layer_validation.md` | Markdown | Editor Agent validation rules |
 | `MAIN/legacy-core/oni-framework/oni/layers.py` | Python | ONI Framework Python API |
@@ -754,7 +754,7 @@ These implementations render the 14-layer model and must stay synchronized with 
 | Implementation | Location | Purpose |
 |----------------|----------|---------|
 | **brand.json** | [`MAIN/legacy-core/resources/brand/brand.json`](../resources/brand/brand.json) | Single source of truth for layer data (names, colors, zones) |
-| **Video Animation** | [`content/videos/demo/src/components/LayerStack.tsx`](../../content/videos/demo/src/components/LayerStack.tsx) | Remotion video layer stack with cascade animation |
+| **Video Animation** | [`MAIN/legacy-core/oni-product-demo/src/components/LayerStack.tsx`](../oni-product-demo/src/components/LayerStack.tsx) | Remotion video layer stack with cascade animation |
 | **GitHub Pages** | [`docs/index.html`](../../docs/index.html) | Website scroll-reveal animation with L8 expansion effect |
 | **Python API - Layers** | [`oni/layers.py`](oni/layers.py) | Programmatic layer access, attack surfaces, defenses |
 | **Python API - Neuroscience** | [`oni/neuromapping.py`](oni/neuromapping.py) | Brain regions, neurotransmitters, functions, citations |

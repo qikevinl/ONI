@@ -21,8 +21,7 @@ mindloft/
 │   │   ├── project/          # Project management
 │   │   └── resources/        # Templates, brand, pipeline
 │   └── autodidact/           # Educational content
-├── docs/                     # GitHub Pages website
-└── content/videos/           # Video production
+└── docs/                     # GitHub Pages website
 ```
 
 ---

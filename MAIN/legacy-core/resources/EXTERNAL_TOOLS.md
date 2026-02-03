@@ -148,7 +148,7 @@ The ONI Framework sits at the intersection of neuroscience, signal processing, c
 | **License** | Business Source License (BSL) — free for individuals and small businesses |
 | **Website** | [remotion.dev](https://remotion.dev/) |
 | **GitHub** | [remotion-dev/remotion](https://github.com/remotion-dev/remotion) |
-| **Status** | **Integrated** — `content/videos/demo/` contains the ONI demo video project |
+| **Status** | **Integrated** — `MAIN/legacy-core/oni-product-demo/` contains the ONI demo video project |
 
 ### Streamlit
 
@@ -268,7 +268,7 @@ These are not software dependencies but scientific foundations that ONI equation
 | **What** | AI voice generation platform |
 | **Why ONI** | Voiceover for ONI demo video — psychology-backed voice selection |
 | **License** | Proprietary (API-based) |
-| **Status** | **Integrated** — used in `content/videos/demo/` production pipeline |
+| **Status** | **Integrated** — used in `MAIN/legacy-core/oni-product-demo/` production pipeline |
 
 ---
 
