@@ -4,7 +4,7 @@
 
 > **Ultimate Goal:** Build a self-directed learning system that adapts to how each individual learns — making complex knowledge accessible through personalized visualizations, pacing, and pathways. Eventually delivered through BCI technology.
 
-The `autodidact` module is the educational arm of the ONI Framework. It's not just documentation — it's a living system for learning and teaching neurosecurity concepts, built on the principle that **education should adapt to the learner, not the other way around**.
+The `autodidact` module is the educational arm of Mindloft. It's not just documentation — it's a living system for learning and teaching neurosecurity concepts, built on the principle that **education should adapt to the learner, not the other way around**.
 
 ---
 
@@ -12,27 +12,27 @@ The `autodidact` module is the educational arm of the ONI Framework. It's not ju
 
 **[Autodidactive](https://frontend-phi-seven-64.vercel.app)** is the public-facing web application built on this research. It's a demo of what adaptive AI-driven learning can look like.
 
-### Relationship to ONI
+### Relationship to QIF
 
 | Project | Purpose | Audience |
 |---------|---------|----------|
-| **ONI Framework** | BCI security research, 14-layer model, academic publications | Researchers, academics, security professionals |
+| **QIF Framework** | BCI security research, hourglass architecture, academic publications | Researchers, academics, security professionals |
 | **Autodidactive** | Interactive learning platform, AI-generated content, knowledge graphs | Learners, students, curious minds |
 
-**Key distinction:** ONI is the *research foundation*. Autodidactive is an *application* that demonstrates how ONI concepts can be taught interactively. They're related but serve different purposes.
+**Key distinction:** QIF is the *research foundation*. Autodidactive is an *application* that demonstrates how QIF concepts can be taught interactively. They're related but serve different purposes.
 
 ### Why the Separation Matters
 
-Academics visiting the ONI Framework expect rigorous security research — threat models, formal methods, peer-reviewed concepts. They shouldn't be confused by a learning platform.
+Academics visiting the QIF Framework expect rigorous security research — threat models, formal methods, peer-reviewed concepts. They shouldn't be confused by a learning platform.
 
 Learners visiting Autodidactive want to explore topics interactively — click around, expand nodes, watch generated videos. They don't need the full academic depth upfront.
 
-**Autodidactive showcases ONI. ONI doesn't depend on Autodidactive.**
+**Autodidactive showcases QIF. QIF doesn't depend on Autodidactive.**
 
 ### Current Features (Demo)
 
 - **Interactive Knowledge Graphs** — Click nodes to explore topics
-- **ONI Framework Courses** — Pre-built curriculum (no API key needed)
+- **QIF Framework Courses** — Pre-built curriculum (no API key needed)
 - **Browser AI Mode** — Run LLMs directly in your browser using WebGPU (no API key needed!)
 - **Explore Any Topic** — AI-generated graphs for any subject (Browser AI or bring your own API key)
 - **Interactive Animations** — Manim-like educational animations generated in the browser
@@ -63,7 +63,7 @@ The platform now includes **browser-based AI** using WebLLM:
 
 ## The BCI Vision
 
-This is where it all connects to the larger ONI mission.
+This is where it all connects to the larger Mindloft mission.
 
 ### The Future: Learning Through BCIs
 
@@ -101,8 +101,8 @@ This is where it all connects to the larger ONI mission.
 │   │       ↓                                                         │   │
 │   │  Learning optimized for YOUR neural patterns                    │   │
 │   │                                                                 │   │
-│   │  ⚠️  SECURED BY ONI FRAMEWORK                                   │   │
-│   │  • 14-layer security model protects neural data                 │   │
+│   │  ⚠️  SECURED BY QIF FRAMEWORK                                   │   │
+│   │  • Hourglass architecture protects neural data                  │   │
 │   │  • Coherence metric validates signal integrity                  │   │
 │   │  • Neural firewall prevents unauthorized access                 │   │
 │   └─────────────────────────────────────────────────────────────────┘   │
@@ -110,11 +110,11 @@ This is where it all connects to the larger ONI mission.
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
-### How This Enhances ONI
+### How This Enhances QIF
 
-| ONI Component | How Autodidactive Uses It | Future BCI Application |
+| QIF Component | How Autodidactive Uses It | Future BCI Application |
 |---------------|---------------------------|------------------------|
-| **14-Layer Model** | Teaches users the security layers | Validates learning content at each layer |
+| **Hourglass Architecture** | Teaches users the security layers | Validates learning content at each layer |
 | **Coherence Metric (Cₛ)** | Explains signal integrity | Monitors neural signal quality during learning |
 | **Neural Firewall** | Interactive demo of threat detection | Protects learner's brain from malicious content |
 | **Scale-Frequency Invariant** | Visualizes f × S ≈ k | Optimizes content delivery across neural scales |
@@ -122,15 +122,15 @@ This is where it all connects to the larger ONI mission.
 ### The Feedback Loop
 
 ```
-ONI Research → Autodidactive Content → User Learning Data → Better ONI Research
+QIF Research → Autodidactive Content → User Learning Data → Better QIF Research
      ↑                                                              │
      └──────────────────────────────────────────────────────────────┘
 ```
 
-1. **ONI defines** how to secure brain-computer interfaces
+1. **QIF defines** how to secure brain-computer interfaces
 2. **Autodidactive demonstrates** these concepts through interactive learning
 3. **User engagement** reveals which explanations work best
-4. **Insights feed back** into ONI research (e.g., how people understand neural security)
+4. **Insights feed back** into QIF research (e.g., how people understand neural security)
 
 ---
 
@@ -142,7 +142,7 @@ Autodidact leverages AI and automation to accelerate content creation and person
 |-----------|-------------------|
 | **LearnViz** | LLM-powered concept → visualization pipeline |
 | **Autodidactive Web** | AI-generated knowledge graphs and explanations |
-| **ONI Academy** | Pre-built modules from research notes |
+| **QIF Academy** | Pre-built modules from research notes |
 | **Research Synthesis** | AI-assisted paper summarization and knowledge extraction |
 | **Content Pipeline** | Automated rendering, publishing, and cross-linking |
 
@@ -197,7 +197,7 @@ This isn't AI replacing learning — it's AI **enabling** self-directed learning
 
 **Current (v0.1 Demo):**
 - Interactive knowledge graph exploration
-- Pre-built ONI Framework courses
+- Pre-built QIF Framework courses
 - AI-generated content for any topic (with API key)
 - React Flow visualization
 - Next.js + Vercel deployment
@@ -241,12 +241,12 @@ python learnviz.py "Explain binary search" --render
 
 ---
 
-### 3. ONI Academy — Structured Curriculum
+### 3. QIF Academy — Structured Curriculum
 
 **Purpose:** Provide structured learning paths for neurosecurity concepts, from basics to advanced.
 
 **What it offers:**
-- Learning modules (14-layer model, coherence metric, neural firewall, etc.)
+- Learning modules (hourglass architecture, coherence metric, neural firewall, etc.)
 - Interactive web tools (no installation required)
 - Python API for programmatic access
 - CLI for quick exploration
@@ -265,9 +265,9 @@ oni-academy ui
 ```
 
 **Web Tools (no install):**
-- [Coherence Metric Playground](https://qinnovates.github.io/ONI/visualizations/01-coherence-metric-playground.html)
-- [ONI Layer Explorer](https://qinnovates.github.io/ONI/visualizations/02-oni-layer-explorer.html)
-- [NSAM Checkpoint Simulator](https://qinnovates.github.io/ONI/visualizations/04-nsam-checkpoint-simulator.html)
+- [Coherence Metric Playground](https://qinnovates.github.io/mindloft/visualizations/01-coherence-metric-playground.html)
+- [Layer Explorer](https://qinnovates.github.io/mindloft/visualizations/02-oni-layer-explorer.html)
+- [NSAM Checkpoint Simulator](https://qinnovates.github.io/mindloft/visualizations/04-nsam-checkpoint-simulator.html)
 
 ---
 
@@ -283,7 +283,7 @@ oni-academy ui
 
 **Location:** [`neuroscience-bci/`](./neuroscience-bci/)
 
-**Why it matters:** You can't secure what you don't understand. This research feeds directly into ONI Academy content and LearnViz visualizations.
+**Why it matters:** You can't secure what you don't understand. This research feeds directly into QIF Academy content and LearnViz visualizations.
 
 ---
 
@@ -302,7 +302,7 @@ oni-academy ui
 │   └────────────┬───────────────┘                                 │
 │                │ (research matures into curriculum)              │
 │                ▼                                                 │
-│   ONI ACADEMY + AUTODIDACTIVE                                    │
+│   QIF ACADEMY + AUTODIDACTIVE                                    │
 │   ┌────────────────────────────┐                                 │
 │   │ • Structured modules       │                                 │
 │   │ • Interactive web platform │                                 │
@@ -333,7 +333,7 @@ oni-academy ui
 
 ### 1. Separation of Concerns
 
-- **ONI** = Security research (for academics)
+- **QIF** = Security research (for academics)
 - **Autodidactive** = Learning application (for everyone)
 - **LearnViz** = Visualization engine (for content creation)
 
@@ -356,10 +356,10 @@ Web (today) → AR Glasses (near-term) → Direct BCI (long-term)
 
 The same content works across delivery mechanisms. Start with screens, add spatial computing, eventually integrate neural interfaces.
 
-### 4. Security-First (ONI Integration)
+### 4. Security-First (QIF Integration)
 
-All future BCI learning features are secured by the ONI Framework:
-- Content validated through 14-layer model
+All future BCI learning features are secured by the QIF Framework:
+- Content validated through the hourglass architecture
 - Signal integrity via Coherence Metric
 - Unauthorized access blocked by Neural Firewall
 
@@ -368,14 +368,14 @@ All future BCI learning features are secured by the ONI Framework:
 ## Roadmap
 
 ### Phase 1: Foundation ✅
-- [x] ONI Academy pip package with learning modules
+- [x] QIF Academy pip package with learning modules
 - [x] Interactive web tools (browser-based)
 - [x] Neuroscience research repository structure
 - [x] LearnViz v0.1 (concept → video pipeline)
 
 ### Phase 2: Autodidactive Web Platform ← **CURRENT**
 - [x] Knowledge graph visualization (React Flow)
-- [x] Pre-built ONI courses
+- [x] Pre-built QIF courses
 - [x] AI-powered topic exploration
 - [x] Browser-based AI (WebLLM - no API key needed)
 - [x] Browser-based animation engine (Manim-like)
@@ -384,7 +384,7 @@ All future BCI learning features are secured by the ONI Framework:
 
 ### Phase 3: Content Expansion
 - [ ] More LearnViz templates (graphs, recursion, physics)
-- [ ] Expanded ONI Academy modules
+- [ ] Expanded QIF Academy modules
 - [ ] Brain region deep dives (motor cortex → full)
 - [ ] Cross-linking between components
 
@@ -405,7 +405,7 @@ All future BCI learning features are secured by the ONI Framework:
 - [ ] Comprehension detection from neural signals
 - [ ] Real-time difficulty adjustment
 - [ ] Direct visual cortex rendering (far future)
-- [ ] Full ONI security integration
+- [ ] Full QIF security integration
 
 ---
 
@@ -447,10 +447,10 @@ autodidact/
 
 Visit **[Autodidactive](https://frontend-phi-seven-64.vercel.app)** — no installation required.
 
-### For ONI Academy (pip install)
+### For QIF Academy (pip install)
 
 ```bash
-# Install ONI Academy
+# Install QIF Academy
 pip install oni-academy
 
 # Explore modules
@@ -458,7 +458,7 @@ oni-academy list
 oni-academy ui
 ```
 
-Or just use the [web tools](https://qinnovates.github.io/ONI/visualizations/) — no installation required.
+Or just use the [web tools](https://qinnovates.github.io/mindloft/visualizations/) — no installation required.
 
 ### For Creating Visualizations
 
@@ -489,7 +489,7 @@ Traditional education assumes everyone learns the same way. Autodidact rejects t
 
 **The BCI connection:** Eventually, we won't need to infer learning styles from clicks and watch time. BCIs will provide direct neural feedback — confusion, comprehension, engagement — enabling truly adaptive education.
 
-**But security comes first.** That's why ONI exists. Before we pipe learning content directly to brains, we need robust security frameworks. Autodidactive demonstrates the learning system; ONI secures it.
+**But security comes first.** That's why QIF exists. Before we pipe learning content directly to brains, we need robust security frameworks. Autodidactive demonstrates the learning system; QIF secures it.
 
 **The ultimate goal:** Anyone, anywhere, can learn any topic at their own pace, in their own style, eventually through direct neural interfaces — safely.
 
@@ -497,13 +497,14 @@ Traditional education assumes everyone learns the same way. Autodidact rejects t
 
 ## Related
 
-- [ONI Framework](../) — The security framework that protects neural interfaces
+- [Mindloft](../) — The Mindloft project hub
+- [QIF Framework](../neurosecurity/qif/) — Quantum Indeterministic Framework for Neural Security
 - [TARA Platform](../neurosecurity/legacy-core/tara-nsec-platform/) — Security monitoring & simulation
-- [GitHub Pages](https://qinnovates.github.io/ONI/) — Live interactive tools
+- [GitHub Pages](https://qinnovates.github.io/mindloft/) — Live interactive tools
 - [Autodidactive Demo](https://frontend-phi-seven-64.vercel.app) — Interactive learning platform
 
 ---
 
-*Part of the ONI Framework*
+*Part of [Mindloft](https://github.com/qinnovates/mindloft)*
 
 > *"Autodidact: Learn how you learn, then learn faster. Eventually, learn through thought."*
