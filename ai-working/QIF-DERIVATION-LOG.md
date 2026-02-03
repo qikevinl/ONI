@@ -23,6 +23,7 @@
 
 | Date | Event | Link |
 |------|-------|------|
+| 2026-02-02 ~late night | Immersive UX: Kokoro TTS, hourglass scroll, Field Notes | [Entry 17](#entry-17-immersive-whitepaper-ux--audio-hourglass-scroll-field-notes) |
 | 2026-02-02 ~late night | Independent AI Peer Review (Gemini 2.5) — cross-AI validation | [Entry 16](#entry-16-independent-ai-peer-review-gemini-25--critical-assessment) |
 | 2026-02-02 ~late night | Validation pipeline formalized (PROPAGATION.md updated) | [Entry 16 action items](#entry-16-independent-ai-peer-review-gemini-25--critical-assessment) |
 | 2026-02-02 ~night | QIF v3.1 — 7-band symmetric (3-1-3), 102 research sources | [Entry 15](#entry-15-qif-v31--7-band-symmetric-model-validated-by-external-research) |
@@ -1047,8 +1048,61 @@ None of these are framework-breaking. They're presentation and rigor improvement
 
 ---
 
-*Document version: 1.2*
+## Entry 17: Immersive Whitepaper UX — Audio, Hourglass Scroll, Field Notes
+
+**Date:** 2026-02-02, ~late night (continued session)
+**Context:** After the framework redesign (Entries 14-16) and Gemini peer review, Kevin pivoted to making the whitepaper an immersive experience. This entry documents the UX implementation decisions and the creation of QIF Field Notes as a new living document.
+**Builds on:** Entries 14-16 (whitepaper as-code architecture)
+**Status:** Complete — all features deployed to GitHub Pages
+
+### AI Transparency Note
+
+All implementation work was done by Claude (Opus 4.5) based on Kevin's direction. Kevin provided the creative vision (hourglass scroll, audio narration, field notes concept); Claude researched TTS options, implemented the code, and handled deployment. Kevin tested in browser and provided iterative feedback (e.g., "I don't like the diagonal tilt" → hourglass redesign).
+
+### What Was Built
+
+1. **Kokoro TTS Audio Narration** — Pre-generated per-section audio using Kokoro TTS (Apache 2.0, 82M params, af_heart voice). 16 sections, 9.1 minutes total. Audio player UI embedded in whitepaper with play/pause, progress bar, section title, and scroll-linked auto-advance via IntersectionObserver. Choice of Kokoro over alternatives (Piper, XTTS, Chatterbox) was based on: Apache license, CPU-friendly, best quality-to-size ratio, sub-0.3s generation latency. `generate_audio.py` extracts readable text from rendered HTML using BeautifulSoup (strips code, tables, math, figures via clone+decompose pattern).
+
+2. **Hourglass Scroll Effect** — Replaced the original whole-page `rotateY` curved monitor effect (which Kevin found uncomfortable — "tilts diagonally") with per-section `rotateX` based on viewport position. Content at the top/bottom edges of the viewport fans outward (max ±3deg) while content in the center stays flat. Uses `getBoundingClientRect()` per section, quadratic easing (`t*t`), subtle scale-down (min 0.982), and `translateZ` push-back (max -12px). The "hourglass" name connects to the framework's architectural metaphor.
+
+3. **Collapsible Callouts** — All Quarto `.callout` boxes (like the AI Transparency Disclosure) now click-to-expand/collapse. CSS `max-height` transitions for smooth animation, arrow rotation indicator, and dynamic "click to expand/collapse" hint text. Boxes start collapsed to reduce visual noise.
+
+4. **QIF Field Notes Journal** — Kevin had a significant personal breakthrough during this session: noticing that his synesthesia for geometry and shapes was changing as he created QIF visualizations. This led to creating `QIF-FIELD-NOTES.md` — a first-person research journal for epiphanies, synesthesia observations, and neurodivergent experiences. Entry 001 documents the synesthesia breakthrough. Published to both drafts and main repo (public). A Claude reminder protocol was added: "Anything surprise you about your own thinking lately?" at natural pause points.
+
+5. **Dynamic Roadmap** — GitHub Pages landing page now fetches prd.json from GitHub raw URL and renders a live progress bar, stat counters, and recent completions. All DOM construction via `createElement` (zero `innerHTML`).
+
+6. **Makefile Build Pipeline** — `make whitepaper` chains: quarto render → generate_audio.py → ffmpeg WAV→MP3. `make deploy` copies output to GitHub Pages. Voice configurable via `VOICE=` variable.
+
+### Why This Matters for QIF
+
+The immersive features aren't cosmetic — they serve the framework's goals:
+- **Audio narration** makes the whitepaper accessible to people who can't read dense academic text (aligns with BCI accessibility mission)
+- **Hourglass scroll** physically embodies the framework's architectural metaphor in the reading experience
+- **Collapsible callouts** let readers choose their depth of engagement
+- **Field Notes** creates a first-person data stream that could itself become a QIF case study (neurodivergent researcher documenting changes in their own neural processing while studying neural processing)
+
+### Files Created/Modified
+
+| File | Action | Purpose |
+|------|--------|---------|
+| `qif-lab/whitepaper/generate_audio.py` | NEW | Kokoro TTS audio generation from rendered HTML |
+| `qif-lab/whitepaper/Makefile` | NEW | One-command build pipeline |
+| `qif-lab/whitepaper/qif-immersive.css` | MODIFIED | Audio player styles, collapsible callout styles |
+| `qif-lab/whitepaper/qif-immersive.js` | MODIFIED | Hourglass scroll, audio player, collapsible callouts |
+| `QIF-FIELD-NOTES.md` | NEW | First-person research journal (drafts + main) |
+| `docs/index.html` | MODIFIED | Dynamic roadmap progress tracker |
+| `docs/whitepaper/audio/*` | NEW | 16 MP3 files + manifest.json |
+
+### Dependencies Added
+
+- `pip install kokoro soundfile beautifulsoup4` (for audio generation)
+- `brew install ffmpeg` (for WAV→MP3 conversion)
+- No new browser dependencies (Audio API, IntersectionObserver are native)
+
+---
+
+*Document version: 1.3*
 *Created: 2026-02-02*
-*Last entry: #16 (2026-02-02)*
+*Last entry: #17 (2026-02-02)*
 *Maintainer: Quantum Intelligence (Kevin Qi + Claude, Opus 4.5)*
 *Location: qinnovates/mindloft/drafts/ai-working/QIF-DERIVATION-LOG.md*
