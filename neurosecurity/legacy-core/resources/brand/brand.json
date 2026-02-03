@@ -64,6 +64,11 @@
     "threat_signatures": 46,
     "learning_portals": 1
   },
+  "mindloft": {
+    "name": "Mindloft",
+    "slogan": "Let's mind our way.",
+    "tagline": "A Safe Space With You In Mind"
+  },
   "_meta": {
     "last_updated": "2026-02-01",
     "location": "neurosec-research/resources/brand/brand.json",
