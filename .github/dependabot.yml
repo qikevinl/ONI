@@ -4,9 +4,8 @@ updates:
   - package-ecosystem: "pip"
     directory: "/MAIN/legacy-core/oni-framework"
     schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 10
+      interval: "monthly"
+    open-pull-requests-limit: 5
     commit-message:
       prefix: "deps(oni)"
     groups:
@@ -22,9 +21,8 @@ updates:
   - package-ecosystem: "pip"
     directory: "/MAIN/legacy-core/tara-nsec-platform"
     schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 10
+      interval: "monthly"
+    open-pull-requests-limit: 5
     commit-message:
       prefix: "deps(tara)"
     groups:
@@ -41,7 +39,7 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
     commit-message:
       prefix: "ci"
     labels:
@@ -52,9 +50,8 @@ updates:
   - package-ecosystem: "npm"
     directory: "/oni-demo-video"
     schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 5
+      interval: "monthly"
+    open-pull-requests-limit: 3
     commit-message:
       prefix: "deps(video)"
     labels:
