@@ -135,8 +135,8 @@ Incident response and recovery for neural security breaches. What happens after 
 | Initiative | Description |
 |-----------|-------------|
 | **Multi-AI CI/CD Validation** | Incorporate cross-AI review (Gemini, Claude, others) into CI/CD pipeline as automated consistency checks — validating that changes to one model propagate correctly to both Classical and Quantum frameworks. A feedback cycle that also surfaces the work to external AI systems for broader review. |
-| **STRIDE Threat Matrix** | Shared `threat-matrix.json` mapping STRIDE categories (Spoofing, Tampering, Repudiation, Information Disclosure, DoS, Elevation of Privilege) to both Classical 14-layer and Quantum 7-band models. Single source of truth for cross-model threat analysis. |
-| **Classical-Quantum Bridge** | Architecture ensuring changes to shared concepts (threats, defenses, neurorights) propagate between both models automatically while maintaining consistency and accuracy — validating both frameworks against each other. |
+| **STRIDE Threat Matrix** | Extend `shared/threat-matrix.json` with STRIDE categories (Spoofing, Tampering, Repudiation, Information Disclosure, DoS, Elevation of Privilege) mapped to both models. |
+| ~~**Classical-Quantum Bridge**~~ | ✅ **Done.** `MAIN/shared/threat-matrix.json` + `bridge.py` — 9 tactics, 34 techniques, 6 defenses, 4 neurorights mapped to both models. `config.py` loads from shared source. |
 | **Recover Function** | Incident response and recovery playbooks for neural security breaches. |
 
 **Python packages:**
@@ -154,6 +154,10 @@ pip install oni-academy     # Autodidactive — self-adaptive learning
 mindloft/
 ├── MAIN/                              # IDENTIFY + PROTECT: Map & build defenses
 │   ├── governance/                    # 9 neuroethics + compliance docs (GOVERN)
+│   ├── shared/                        # BRIDGE: Classical-Quantum shared data
+│   │   ├── threat-matrix.json         # Single source of truth for threats (both models)
+│   │   ├── bridge.py                  # Validation + consistency checker
+│   │   └── README.md                  # Bridge documentation
 │   ├── qif/                           # QUANTUM: QIF Framework (active, v3.1)
 │   │   ├── framework/                 # 9 architectural documents (IDENTIFY)
 │   │   ├── qif-lab/                   # Equation code, tests, Quarto whitepaper

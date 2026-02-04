@@ -280,6 +280,28 @@
       ]
     },
     {
+      "id": "bridge",
+      "title": "Classical-Quantum Bridge",
+      "color": "emerald",
+      "model": "bridge",
+      "documents": [
+        {
+          "id": "threat-matrix",
+          "title": "Shared Threat Matrix",
+          "description": "Single source of truth mapping threats to both Classical (14-Layer) and Quantum (7-Band) models. 9 tactics, 34 techniques, 6 defenses, 4 neurorights.",
+          "badge": "reference",
+          "path": "MAIN/shared/threat-matrix.json"
+        },
+        {
+          "id": "bridge-validator",
+          "title": "Bridge Validator",
+          "description": "Validation script ensuring consistency between Classical and Quantum threat mappings.",
+          "badge": "code",
+          "path": "MAIN/shared/bridge.py"
+        }
+      ]
+    },
+    {
       "id": "governance-ethics",
       "title": "Governance & Ethics",
       "color": "emerald",

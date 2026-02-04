@@ -186,7 +186,7 @@ V2_TO_V3_MIGRATION = {
     "L11": "N2",   # Cognitive Transport → Sensorimotor Processing
     "L12": "N3",   # Cognitive Session → Cognitive Integration
     "L13": "N3",   # Semantic Layer → Cognitive Integration
-    "L14": "N3",   # Identity Layer → Integrative Association (merged)
+    "L14": "N3",   # Cognitive Sovereignty → Integrative Association (merged)
 }
 
 # DEPRECATED v2.0 — kept for migration reference only. Do NOT use in new code.
@@ -311,24 +311,50 @@ DEFAULT_C2_PARAMS = {
 }
 
 # ──────────────────────────────────────────────
-# Threat Model
+# Threat Model — loaded from shared/threat-matrix.json
 # ──────────────────────────────────────────────
+# Single source of truth: MAIN/shared/threat-matrix.json
+# This computed view maintains backward compatibility.
 
-THREAT_MODEL = [
-    {"attack": "Signal injection",            "bands": "I0–N1",  "classical": "Yes",     "quantum": "Enhanced (coherence metric)"},
-    {"attack": "Neural ransomware",           "bands": "N3",     "classical": "Partial",  "quantum": "Yes (QI score drop)"},
-    {"attack": "Eavesdropping",               "bands": "I0–N1",  "classical": "No",       "quantum": "Yes (Heisenberg disturbance)"},
-    {"attack": "Man-in-the-middle",           "bands": "I0",     "classical": "Partial",  "quantum": "Yes (no-cloning + Bell test)"},
-    {"attack": "Quantum tunneling exploit",   "bands": "I0–N1",  "classical": "No",       "quantum": "Yes (tunneling profile anomaly)"},
-    {"attack": "Davydov soliton attack",      "bands": "I0–N1",  "classical": "No",       "quantum": "Yes (tunneling term Qtunnel)"},
-    {"attack": "Harvest-now-decrypt-later",   "bands": "S3",     "classical": "No",       "quantum": "Prevented (QKD)"},
-    {"attack": "Identity spoofing",           "bands": "N3",     "classical": "Partial",  "quantum": "Yes (quantum biometric)"},
-    # v3.1 additions — cybersecurity agent recommendations (2026-02-02)
-    {"attack": "BLE/RF side-channel",         "bands": "S1–S2",  "classical": "Yes",     "quantum": "Enhanced (signal correlation)"},
-    {"attack": "Supply chain compromise",     "bands": "S2–S3",  "classical": "Yes",     "quantum": "Enhanced (firmware attestation)"},
-    {"attack": "Cloud infrastructure attack",  "bands": "S3",     "classical": "Yes",     "quantum": "Enhanced (QKD for data-in-transit)"},
-    {"attack": "Neural data privacy breach",  "bands": "N1–S3",  "classical": "Yes",     "quantum": "Enhanced (cross-band encryption)"},
-]
+import json as _json
+from pathlib import Path as _Path
+
+
+def _load_threat_model():
+    """Load THREAT_MODEL from shared threat-matrix.json."""
+    matrix_path = _Path(__file__).parent.parent.parent.parent / "shared" / "threat-matrix.json"
+    try:
+        with open(matrix_path) as f:
+            matrix = _json.load(f)
+        result = []
+        for tactic in matrix.get("tactics", []):
+            for tech in tactic.get("techniques", []):
+                quantum = tech.get("quantum", {})
+                classical = tech.get("classical", {})
+                bands = quantum.get("target_bands", [])
+                bands_str = ", ".join(bands) if len(bands) <= 2 else f"{bands[0]}–{bands[-1]}"
+
+                # Determine classical detection capability
+                c_detect = classical.get("classical_detection")
+                if c_detect is None:
+                    if classical.get("detection") or classical.get("mitigations"):
+                        c_detect = "Yes"
+                    else:
+                        c_detect = "No"
+
+                result.append({
+                    "attack": tech["name"],
+                    "bands": bands_str,
+                    "classical": c_detect,
+                    "quantum": quantum.get("detection", "Unknown"),
+                })
+        return result
+    except (FileNotFoundError, KeyError):
+        # Fallback if threat-matrix.json is not available
+        return []
+
+
+THREAT_MODEL = _load_threat_model()
 
 # ──────────────────────────────────────────────
 # Limitations & Open Questions (Ch. 14)

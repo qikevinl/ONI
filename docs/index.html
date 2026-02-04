@@ -164,7 +164,7 @@
         }
 
         .label-classical h2 {
-            color: #c084fc;
+            color: #22d3ee;
         }
 
         .label-quantum {
@@ -173,7 +173,7 @@
         }
 
         .label-quantum h2 {
-            color: #22d3ee;
+            color: #c084fc;
         }
 
         .label-center {
@@ -392,7 +392,7 @@
             <p class="subtitle">Securing tomorrow's neural frontier</p>
         </a>
 
-        <a href="quantum/#scene-governance" class="sphere-label label-center" id="label-center">
+        <a href="documentation/#bridge" class="sphere-label label-center" id="label-center">
             <span class="tooltip">Bridging both worlds through neuroethics and security by design</span>
             <h3>Neuroethics</h3>
             <p class="subtitle">The foundation that makes both models trustworthy</p>
@@ -428,13 +428,13 @@
         keyLight.position.set(3, 5, 5);
         scene.add(keyLight);
 
-        var purpleLight = new THREE.PointLight(0x8b5cf6, 1.2, 15);
-        purpleLight.position.set(-3, 0, 3);
-        scene.add(purpleLight);
-
         var cyanLight = new THREE.PointLight(0x06b6d4, 1.2, 15);
-        cyanLight.position.set(3, 0, 3);
+        cyanLight.position.set(-3, 0, 3);
         scene.add(cyanLight);
+
+        var purpleLight = new THREE.PointLight(0x8b5cf6, 1.2, 15);
+        purpleLight.position.set(3, 0, 3);
+        scene.add(purpleLight);
 
         var centerLight = new THREE.PointLight(0xffffff, 0.6, 8);
         centerLight.position.set(0, 0, 4);
@@ -454,9 +454,10 @@
             '}'
         ].join('\n');
 
-        // L14 Identity Shader — soap bubble with thin-film interference + heartbeat (purple/pink)
-        var classicalFrag = [
+        // Soap bubble shader with thin-film interference + heartbeat (shared by both spheres)
+        var bubbleFrag = [
             'uniform vec3 uColor;',
+            'uniform vec3 uInnerGlow;',
             'uniform float uOpacity;',
             'uniform float uTime;',
             'uniform float uActiveGlow;',
@@ -496,47 +497,14 @@
             '  alpha *= (0.85 + heartbeat * 0.15);',
             '  alpha += uActiveGlow * rim * 0.4;',
             '',
-            '  // Purple inner glow',
-            '  float purplePulse = 0.5 + 0.5 * sin(uTime * 0.5 + vWorldPos.y * 2.0);',
-            '  vec3 purpleGlow = vec3(0.85, 0.15, 0.95) * purplePulse * (1.0 - fresnel) * 0.6;',
-            '  bubbleCol += purpleGlow;',
+            '  // Inner glow driven by uInnerGlow uniform',
+            '  float glowPulse = 0.5 + 0.5 * sin(uTime * 0.5 + vWorldPos.y * 2.0);',
+            '  vec3 innerGlow = uInnerGlow * glowPulse * (1.0 - fresnel) * 0.6;',
+            '  bubbleCol += innerGlow;',
             '',
             '  bubbleCol *= (1.0 + rim * uGlowIntensity * 0.3 + heartbeat * 0.2);',
             '',
             '  gl_FragColor = vec4(bubbleCol, alpha);',
-            '}'
-        ].join('\n');
-
-        // L8 Gateway Shader — cyan/amber scanning with electric pool effect
-        var quantumFrag = [
-            'uniform vec3 uColor;',
-            'uniform float uOpacity;',
-            'uniform float uTime;',
-            'uniform float uActiveGlow;',
-            'varying vec3 vNormal;',
-            'varying vec3 vViewPos;',
-            'varying vec3 vWorldPos;',
-            'void main() {',
-            '  vec3 vd = normalize(vViewPos);',
-            '  float fresnel = pow(1.0 - abs(dot(vd, vNormal)), 2.5);',
-            '  float pulse = 0.6 + 0.4 * sin(uTime * 3.0);',
-            '  float energy = fresnel * pulse;',
-            '  float scan = 0.5 + 0.5 * sin(vNormal.y * 20.0 + uTime * 4.0);',
-            '  energy += scan * 0.15 * fresnel;',
-            '',
-            '  float ripple1 = sin(vWorldPos.x * 3.0 + uTime * 0.6) * cos(vWorldPos.z * 2.5 + uTime * 0.4);',
-            '  float ripple2 = sin(vWorldPos.x * 5.0 - uTime * 0.35 + 2.1) * cos(vWorldPos.z * 4.0 + uTime * 0.3);',
-            '  float poolEffect = 0.5 + 0.3 * ripple1 + 0.2 * ripple2;',
-            '  float electricPool = mix(1.0, poolEffect * 1.6 + 0.2, uActiveGlow);',
-            '',
-            '  float outerGlow = pow(fresnel, 1.0) * uActiveGlow;',
-            '  vec3 glowColor = mix(uColor, vec3(1.0, 0.95, 0.85), outerGlow * 0.5);',
-            '',
-            '  energy *= electricPool;',
-            '  energy += outerGlow * 0.4;',
-            '  vec3 col = glowColor * (1.0 + energy * 2.0 + outerGlow * 2.0);',
-            '',
-            '  gl_FragColor = vec4(col, energy * uOpacity + outerGlow * 0.3);',
             '}'
         ].join('\n');
 
@@ -619,7 +587,7 @@
 
                 if (distToClassical < classicalRadius && distToQuantum < quantumRadius) {
                     // Overlap region — neuroethics
-                    window.location.href = 'quantum/#scene-governance';
+                    window.location.href = 'documentation/#bridge';
                 } else if (hit === classicalSphere) {
                     window.location.href = 'classical/';
                 } else if (hit === quantumSphere) {
