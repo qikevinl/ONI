@@ -10,12 +10,6 @@ Where we discover AND secure the frontier of mind — a Purple Team approach to 
 [![Tests](https://github.com/qinnovates/mindloft/actions/workflows/tests.yml/badge.svg)](https://github.com/qinnovates/mindloft/actions/workflows/tests.yml)
 [![Security](https://github.com/qinnovates/mindloft/actions/workflows/security.yml/badge.svg)](https://github.com/qinnovates/mindloft/actions/workflows/security.yml)
 
-<div align="center">
-
-https://github.com/qinnovates/mindloft/releases/download/v1.0.0-demo/ONIDemoVideo.mp4
-
-</div>
-
 ## Table of Contents
 
 - [Two Models. One Mission.](#two-models-one-mission)
