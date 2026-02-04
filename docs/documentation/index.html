@@ -446,6 +446,7 @@
         section.className = 'category';
         section.style.setProperty('--cat-color', color);
         section.dataset.catId = cat.id;
+        section.id = cat.id;
 
         const header = document.createElement('div');
         header.className = 'category-header';

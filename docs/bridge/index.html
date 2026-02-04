@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Bridge - Classical + Quantum | Mindloft</title>
+<meta name="description" content="Interactive bridge between ONI Classical 14-Layer and QIF Quantum 7-Band models. Shared threat matrix, defense mappings, and neurorights.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --bg: #050a14;
+    --bg-card: rgba(255,255,255,0.03);
+    --bg-card-hover: rgba(255,255,255,0.06);
+    --border: rgba(255,255,255,0.08);
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --text-bright: #f8fafc;
+    --emerald: #10b981;
+    --emerald-dim: rgba(16,185,129,0.15);
+    --cyan: #06b6d4;
+    --cyan-dim: rgba(6,182,212,0.1);
+    --purple: #8b5cf6;
+    --purple-dim: rgba(139,92,246,0.1);
+    --red: #ef4444;
+    --amber: #f59e0b;
+    --green: #10b981;
+    --nav-height: 64px;
+}
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+a { color: var(--emerald); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ─── NAV ─── */
+nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(5,10,20,0.75);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    height: var(--nav-height);
+}
+.nav-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 100%;
+}
+.nav-logo { color: var(--text-bright); font-weight: 700; font-size: 1.1rem; }
+.nav-logo:hover { text-decoration: none; }
+.nav-links { list-style: none; display: flex; gap: 1.5rem; align-items: center; }
+.nav-links a { color: var(--text-dim); font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text-bright); text-decoration: none; }
+.nav-links a.active { color: var(--emerald); }
+.nav-github svg { width: 18px; height: 18px; fill: currentColor; vertical-align: middle; }
+.hamburger {
+    display: none; background: none; border: none; cursor: pointer;
+    width: 28px; height: 20px; position: relative;
+}
+.hamburger span {
+    display: block; width: 100%; height: 2px; background: var(--text);
+    position: absolute; left: 0; transition: 0.3s;
+}
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 9px; }
+.hamburger span:nth-child(3) { top: 18px; }
+.hamburger.open span:nth-child(1) { transform: rotate(45deg); top: 9px; }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg); top: 9px; }
+.mobile-menu {
+    display: none; position: fixed; top: var(--nav-height); left: 0; right: 0;
+    background: rgba(5,10,20,0.95); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border); padding: 1rem 1.5rem;
+}
+.mobile-menu.open { display: block; }
+.mobile-menu a {
+    display: block; padding: 0.75rem 0; color: var(--text-dim);
+    font-size: 0.95rem; border-bottom: 1px solid var(--border);
+}
+.mobile-menu a.active { color: var(--emerald); }
+
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: block; }
+}
+
+/* ─── HERO ─── */
+.hero {
+    padding: calc(var(--nav-height) + 4rem) 1.5rem 3rem;
+    text-align: center; max-width: 800px; margin: 0 auto;
+}
+.hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800;
+    background: linear-gradient(135deg, var(--cyan), var(--emerald), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; margin-bottom: 1rem;
+}
+.hero .tagline { font-size: 1.25rem; color: var(--text-dim); margin-bottom: 1.5rem; font-style: italic; }
+.hero .description { color: var(--text-dim); max-width: 600px; margin: 0 auto 2rem; line-height: 1.7; }
+.stats-bar {
+    display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
+    padding: 1.5rem; border-radius: 12px;
+    background: var(--bg-card); border: 1px solid var(--border);
+}
+.stat { text-align: center; }
+.stat-value { font-size: 1.75rem; font-weight: 700; color: var(--emerald); }
+.stat-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* ─── SECTIONS ─── */
+section { max-width: 1200px; margin: 0 auto; padding: 3rem 1.5rem; }
+section h2 {
+    font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-bright);
+}
+section .section-desc { color: var(--text-dim); margin-bottom: 2rem; }
+
+/* ─── MIGRATION DIAGRAM ─── */
+#migration { overflow-x: auto; }
+.migration-svg { display: block; margin: 0 auto; max-width: 100%; }
+.migration-svg text { font-family: 'Inter', sans-serif; }
+.migration-svg .layer-box, .migration-svg .band-box { cursor: pointer; transition: opacity 0.2s; }
+.migration-svg .flow-path { fill: none; stroke-width: 2; opacity: 0.3; transition: opacity 0.2s, stroke-width 0.2s; }
+.migration-svg .flow-path.highlight { opacity: 0.9; stroke-width: 3; }
+.migration-svg .layer-box.dim, .migration-svg .band-box.dim { opacity: 0.2; }
+.migration-svg .layer-box.highlight rect, .migration-svg .band-box.highlight rect { stroke-width: 2.5; }
+@media (max-width: 768px) { #migration { display: none; } }
+
+/* ─── VIEW TOGGLE ─── */
+.controls { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 1.5rem; }
+.view-toggle { display: inline-flex; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+.view-toggle button {
+    background: transparent; border: none; color: var(--text-dim);
+    padding: 0.5rem 1.25rem; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+    transition: 0.2s; font-family: inherit;
+}
+.view-toggle button.active { background: var(--emerald); color: #000; }
+.view-toggle button:hover:not(.active) { background: rgba(255,255,255,0.05); }
+
+/* Filters */
+.filter-group { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+.filter-select {
+    background: var(--bg-card); border: 1px solid var(--border); color: var(--text);
+    padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 0.8rem; font-family: inherit;
+}
+.filter-select option { background: #0f172a; }
+.severity-btn {
+    background: transparent; border: 1px solid var(--border); color: var(--text-dim);
+    padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.75rem; cursor: pointer;
+    font-family: inherit; transition: 0.2s;
+}
+.severity-btn.active-critical { background: rgba(239,68,68,0.2); border-color: var(--red); color: var(--red); }
+.severity-btn.active-high { background: rgba(245,158,11,0.2); border-color: var(--amber); color: var(--amber); }
+.severity-btn.active-medium { background: rgba(16,185,129,0.2); border-color: var(--green); color: var(--green); }
+.search-input {
+    background: var(--bg-card); border: 1px solid var(--border); color: var(--text);
+    padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 0.8rem; font-family: inherit;
+    width: 180px;
+}
+.search-input::placeholder { color: var(--text-dim); }
+
+/* ─── THREAT TABLE ─── */
+.threat-table-wrap { overflow-x: auto; }
+.threat-table {
+    width: 100%; border-collapse: collapse; font-size: 0.85rem;
+}
+.threat-table th {
+    text-align: left; padding: 0.75rem; color: var(--text-dim);
+    font-weight: 600; font-size: 0.7rem; text-transform: uppercase;
+    letter-spacing: 0.05em; border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+}
+.threat-table td {
+    padding: 0.75rem; border-bottom: 1px solid var(--border);
+    vertical-align: top;
+}
+.threat-table tr { cursor: pointer; transition: background 0.15s; }
+.threat-table tbody tr:hover { background: rgba(255,255,255,0.03); }
+.threat-table .col-classical { background: var(--cyan-dim); }
+.threat-table .col-quantum { background: var(--purple-dim); }
+.threat-table th.col-classical { color: var(--cyan); }
+.threat-table th.col-quantum { color: var(--purple); }
+.severity-badge {
+    display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px;
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+}
+.severity-critical { background: rgba(239,68,68,0.15); color: var(--red); }
+.severity-high { background: rgba(245,158,11,0.15); color: var(--amber); }
+.severity-medium { background: rgba(16,185,129,0.15); color: var(--green); }
+.cia-badges { display: flex; gap: 0.25rem; }
+.cia-badge {
+    font-size: 0.65rem; padding: 0.1rem 0.3rem; border-radius: 3px;
+    font-weight: 600; background: rgba(255,255,255,0.05);
+}
+.cia-high { color: var(--red); }
+.cia-medium { color: var(--amber); }
+.cia-low { color: var(--text-dim); }
+
+/* Expanded row */
+.expand-row { display: none; }
+.expand-row.open { display: table-row; }
+.expand-content {
+    padding: 1rem 0.75rem; background: rgba(16,185,129,0.03);
+}
+.expand-content h4 { font-size: 0.8rem; color: var(--emerald); margin: 0.75rem 0 0.25rem; }
+.expand-content h4:first-child { margin-top: 0; }
+.expand-content ul { padding-left: 1.25rem; }
+.expand-content li { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.2rem; }
+.expand-content .qi-tag {
+    display: inline-block; padding: 0.1rem 0.4rem; margin: 0.1rem;
+    background: var(--purple-dim); border: 1px solid rgba(139,92,246,0.3);
+    border-radius: 4px; font-size: 0.7rem; color: var(--purple);
+    font-family: 'Courier New', monospace;
+}
+.expand-content .qa-text { font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; }
+.expand-content .nr-tag {
+    display: inline-block; padding: 0.1rem 0.4rem; margin: 0.1rem;
+    background: var(--emerald-dim); border: 1px solid rgba(16,185,129,0.3);
+    border-radius: 4px; font-size: 0.7rem; color: var(--emerald);
+}
+
+/* No results */
+.no-results { text-align: center; padding: 3rem 1rem; color: var(--text-dim); }
+
+/* ─── MOBILE CARDS (replaces table) ─── */
+.threat-cards { display: none; }
+@media (max-width: 768px) {
+    .threat-table-wrap { display: none; }
+    .threat-cards { display: block; }
+}
+.threat-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem;
+    cursor: pointer; transition: border-color 0.2s;
+}
+.threat-card:hover { border-color: var(--emerald); }
+.threat-card-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem; }
+.threat-card-id { font-size: 0.7rem; color: var(--text-dim); font-family: monospace; }
+.threat-card-name { font-weight: 600; font-size: 0.95rem; color: var(--text-bright); }
+.threat-card-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+.threat-card-layers, .threat-card-bands {
+    font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px;
+}
+.threat-card-layers { background: var(--cyan-dim); color: var(--cyan); }
+.threat-card-bands { background: var(--purple-dim); color: var(--purple); }
+.threat-card-expand { display: none; padding-top: 0.75rem; border-top: 1px solid var(--border); margin-top: 0.75rem; }
+.threat-card-expand.open { display: block; }
+
+/* ─── DEFENSE & NEURORIGHT CARDS ─── */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; }
+.def-card, .nr-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem; transition: border-color 0.2s;
+}
+.def-card:hover, .nr-card:hover { border-color: var(--emerald); }
+.def-card h3, .nr-card h3 { font-size: 1rem; font-weight: 600; color: var(--text-bright); margin-bottom: 0.5rem; }
+.def-card .def-desc, .nr-card .nr-desc { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.75rem; }
+.def-side { margin-bottom: 0.5rem; }
+.def-side-label {
+    font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    margin-bottom: 0.15rem;
+}
+.def-side-label.classical { color: var(--cyan); }
+.def-side-label.quantum { color: var(--purple); }
+.def-side-text { font-size: 0.8rem; color: var(--text-dim); }
+.def-threshold {
+    display: inline-block; margin-top: 0.5rem; font-size: 0.75rem;
+    padding: 0.2rem 0.5rem; border-radius: 4px;
+    background: var(--emerald-dim); color: var(--emerald);
+}
+.nr-list { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.25rem; }
+.nr-list-label { font-size: 0.7rem; color: var(--text-dim); font-weight: 600; margin-top: 0.5rem; }
+
+/* ─── FOOTER ─── */
+footer {
+    max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem;
+    border-top: 1px solid var(--border); text-align: center;
+    color: var(--text-dim); font-size: 0.8rem;
+}
+footer .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap; }
+footer a { color: var(--text-dim); }
+footer a:hover { color: var(--text-bright); }
+
+/* Fade-in */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <a href="../" class="nav-logo">Mindloft</a>
+        <ul class="nav-links">
+            <li><a href="../classical/">Classical</a></li>
+            <li><a href="./" class="active">Bridge</a></li>
+            <li><a href="../quantum/">Quantum</a></li>
+            <li><a href="../documentation/">Docs</a></li>
+            <li><a href="../about/">About</a></li>
+            <li><a href="https://github.com/qinnovates/mindloft" class="nav-github" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            </a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+    <a href="../classical/">Classical</a>
+    <a href="./" class="active">Bridge</a>
+    <a href="../quantum/">Quantum</a>
+    <a href="../documentation/">Docs</a>
+    <a href="../about/">About</a>
+    <a href="https://github.com/qinnovates/mindloft" target="_blank" rel="noopener">GitHub</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>The Bridge</h1>
+    <p class="tagline">Same threats. Two perspectives. One mission.</p>
+    <p class="description">Every threat in the BCI landscape maps to both the Classical 14-Layer model and the Quantum 7-Band Hourglass. This is the bridge between them &mdash; a shared threat matrix, unified defenses, and the neurorights they protect.</p>
+    <div class="stats-bar">
+        <div class="stat"><div class="stat-value" id="stat-techniques">--</div><div class="stat-label">Techniques</div></div>
+        <div class="stat"><div class="stat-value" id="stat-defenses">--</div><div class="stat-label">Defenses</div></div>
+        <div class="stat"><div class="stat-value" id="stat-neurorights">--</div><div class="stat-label">Neurorights</div></div>
+        <div class="stat"><div class="stat-value" id="stat-tactics">--</div><div class="stat-label">Tactics</div></div>
+    </div>
+</div>
+
+<!-- MIGRATION DIAGRAM -->
+<section id="migration" class="fade-in">
+    <h2>Layer &harr; Band Migration</h2>
+    <p class="section-desc">How ONI's 14 classical layers map onto QIF's 7 quantum bands. Hover to trace connections. Click to filter the threat matrix.</p>
+    <svg class="migration-svg" viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg">
+        <!-- Classical layers (left) -->
+        <g class="layer-box" data-layers="L1,L2,L3,L4,L5,L6,L7" data-band="S3">
+            <rect x="30" y="20" width="180" height="52" rx="8" fill="rgba(6,182,212,0.1)" stroke="#06b6d4" stroke-width="1.5"/>
+            <text x="120" y="42" fill="#06b6d4" font-size="12" font-weight="700" text-anchor="middle">L1 - L7</text>
+            <text x="120" y="58" fill="#94a3b8" font-size="9" text-anchor="middle">Silicon Stack</text>
+        </g>
+        <g class="layer-box" data-layers="L8" data-band="I0">
+            <rect x="30" y="92" width="180" height="52" rx="8" fill="rgba(245,158,11,0.1)" stroke="#f59e0b" stroke-width="1.5"/>
+            <text x="120" y="114" fill="#f59e0b" font-size="12" font-weight="700" text-anchor="middle">L8</text>
+            <text x="120" y="130" fill="#94a3b8" font-size="9" text-anchor="middle">Neural Gateway</text>
+        </g>
+        <g class="layer-box" data-layers="L9" data-band="I0,N1">
+            <rect x="30" y="164" width="180" height="52" rx="8" fill="rgba(245,158,11,0.1)" stroke="#f59e0b" stroke-width="1.5"/>
+            <text x="120" y="186" fill="#f59e0b" font-size="12" font-weight="700" text-anchor="middle">L9</text>
+            <text x="120" y="202" fill="#94a3b8" font-size="9" text-anchor="middle">Ion Channel Encoding</text>
+        </g>
+        <g class="layer-box" data-layers="L10,L11" data-band="N1,N2">
+            <rect x="30" y="236" width="180" height="52" rx="8" fill="rgba(16,185,129,0.1)" stroke="#10b981" stroke-width="1.5"/>
+            <text x="120" y="258" fill="#10b981" font-size="12" font-weight="700" text-anchor="middle">L10 - L11</text>
+            <text x="120" y="274" fill="#94a3b8" font-size="9" text-anchor="middle">Signal Processing</text>
+        </g>
+        <g class="layer-box" data-layers="L12,L13,L14" data-band="N3">
+            <rect x="30" y="308" width="180" height="52" rx="8" fill="rgba(16,185,129,0.1)" stroke="#10b981" stroke-width="1.5"/>
+            <text x="120" y="330" fill="#10b981" font-size="12" font-weight="700" text-anchor="middle">L12 - L14</text>
+            <text x="120" y="346" fill="#94a3b8" font-size="9" text-anchor="middle">Cognitive / Identity</text>
+        </g>
+
+        <!-- Quantum bands (right) -->
+        <g class="band-box" data-band="S3" data-layers="L1,L2,L3,L4,L5,L6,L7">
+            <rect x="690" y="20" width="180" height="52" rx="8" fill="rgba(6,182,212,0.1)" stroke="#06b6d4" stroke-width="1.5"/>
+            <text x="780" y="42" fill="#06b6d4" font-size="12" font-weight="700" text-anchor="middle">S3</text>
+            <text x="780" y="58" fill="#94a3b8" font-size="9" text-anchor="middle">Silicon Outer</text>
+        </g>
+        <g class="band-box" data-band="I0" data-layers="L8,L9">
+            <rect x="690" y="128" width="180" height="52" rx="8" fill="rgba(245,158,11,0.1)" stroke="#f59e0b" stroke-width="1.5"/>
+            <text x="780" y="150" fill="#f59e0b" font-size="12" font-weight="700" text-anchor="middle">I0</text>
+            <text x="780" y="166" fill="#94a3b8" font-size="9" text-anchor="middle">Interface Core</text>
+        </g>
+        <g class="band-box" data-band="N1" data-layers="L9,L10">
+            <rect x="690" y="200" width="180" height="52" rx="8" fill="rgba(16,185,129,0.08)" stroke="#10b981" stroke-width="1.5"/>
+            <text x="780" y="222" fill="#10b981" font-size="12" font-weight="700" text-anchor="middle">N1</text>
+            <text x="780" y="238" fill="#94a3b8" font-size="9" text-anchor="middle">Neural Inner</text>
+        </g>
+        <g class="band-box" data-band="N2" data-layers="L10,L11">
+            <rect x="690" y="272" width="180" height="52" rx="8" fill="rgba(16,185,129,0.1)" stroke="#10b981" stroke-width="1.5"/>
+            <text x="780" y="294" fill="#10b981" font-size="12" font-weight="700" text-anchor="middle">N2</text>
+            <text x="780" y="310" fill="#94a3b8" font-size="9" text-anchor="middle">Neural Mid</text>
+        </g>
+        <g class="band-box" data-band="N3" data-layers="L12,L13,L14">
+            <rect x="690" y="344" width="180" height="52" rx="8" fill="rgba(16,185,129,0.12)" stroke="#10b981" stroke-width="1.5"/>
+            <text x="780" y="366" fill="#10b981" font-size="12" font-weight="700" text-anchor="middle">N3</text>
+            <text x="780" y="382" fill="#94a3b8" font-size="9" text-anchor="middle">Neural Outer</text>
+        </g>
+
+        <!-- Flow paths -->
+        <path class="flow-path" data-from="L1,L2,L3,L4,L5,L6,L7" data-to="S3" d="M210,46 C400,46 500,46 690,46" stroke="#06b6d4"/>
+        <path class="flow-path" data-from="L8" data-to="I0" d="M210,118 C380,118 500,154 690,154" stroke="#f59e0b"/>
+        <path class="flow-path" data-from="L9" data-to="I0" d="M210,190 C350,190 500,160 690,158" stroke="#f59e0b" stroke-dasharray="6 3"/>
+        <path class="flow-path" data-from="L9" data-to="N1" d="M210,190 C380,190 500,226 690,226" stroke="#10b981" stroke-dasharray="6 3"/>
+        <path class="flow-path" data-from="L10,L11" data-to="N1" d="M210,258 C350,258 500,230 690,228" stroke="#10b981" stroke-dasharray="6 3"/>
+        <path class="flow-path" data-from="L10,L11" data-to="N2" d="M210,266 C400,266 520,298 690,298" stroke="#10b981"/>
+        <path class="flow-path" data-from="L12,L13,L14" data-to="N3" d="M210,334 C400,340 520,370 690,370" stroke="#10b981"/>
+
+        <!-- Labels -->
+        <text x="450" y="408" fill="#475569" font-size="10" text-anchor="middle" font-style="italic">Hover to trace &bull; Click to filter threat matrix</text>
+    </svg>
+</section>
+
+<!-- THREAT MATRIX -->
+<section id="threat-matrix" class="fade-in">
+    <h2>Shared Threat Matrix</h2>
+    <p class="section-desc">Every technique mapped to both models. Toggle view, filter by tactic or severity, or search.</p>
+
+    <div class="controls">
+        <div class="view-toggle">
+            <button data-view="classical">Classical</button>
+            <button data-view="bridge" class="active">Bridge</button>
+            <button data-view="quantum">Quantum</button>
+        </div>
+        <div class="filter-group">
+            <select class="filter-select" id="tacticFilter">
+                <option value="">All Tactics</option>
+            </select>
+            <button class="severity-btn" data-severity="Critical">Critical</button>
+            <button class="severity-btn" data-severity="High">High</button>
+            <button class="severity-btn" data-severity="Medium">Medium</button>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search techniques...">
+        </div>
+    </div>
+
+    <div class="threat-table-wrap">
+        <table class="threat-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Technique</th>
+                    <th class="col-classical classical-col">Layers</th>
+                    <th class="col-quantum quantum-col">Bands</th>
+                    <th>Severity</th>
+                    <th>CIA</th>
+                </tr>
+            </thead>
+            <tbody id="threatBody"></tbody>
+        </table>
+    </div>
+    <div class="threat-cards" id="threatCards"></div>
+    <div class="no-results" id="noResults" style="display:none;">No techniques match the current filters.</div>
+</section>
+
+<!-- DEFENSES -->
+<section id="defenses" class="fade-in">
+    <h2>Unified Defenses</h2>
+    <p class="section-desc">6 defenses that span both models &mdash; each with a classical mechanism and quantum enhancement.</p>
+    <div class="card-grid" id="defenseGrid"></div>
+</section>
+
+<!-- NEURORIGHTS -->
+<section id="neurorights" class="fade-in">
+    <h2>Neurorights at Stake</h2>
+    <p class="section-desc">The fundamental cognitive rights these threats endanger and these defenses protect.</p>
+    <div class="card-grid" id="neurorightGrid"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-links">
+        <a href="../classical/">Classical Model</a>
+        <a href="../quantum/">Quantum Model</a>
+        <a href="../documentation/">Documentation</a>
+        <a href="../">Home</a>
+    </div>
+    <p>&copy; 2026 Mindloft &mdash; Quantum Intelligence (QI). All rights reserved.</p>
+</footer>
+
+<script>
+(function() {
+    'use strict';
+
+    // ── State ──
+    var data = null;
+    var currentView = 'bridge';
+    var activeSeverities = [];
+    var activeTactic = '';
+    var searchQuery = '';
+    var activeLayerFilter = null;
+    var activeBandFilter = null;
+
+    // ── DOM ──
+    var hamburger = document.getElementById('hamburger');
+    var mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+    });
+
+    // ── Fetch Data ──
+    fetch('../MAIN/shared/threat-matrix.json')
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+            data = d;
+            init();
+        })
+        .catch(function(err) {
+            console.error('Failed to load threat-matrix.json:', err);
+            document.getElementById('threatBody').innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--red)">Failed to load threat data.</td></tr>';
+        });
+
+    function init() {
+        populateStats();
+        populateTacticFilter();
+        renderThreats();
+        renderDefenses();
+        renderNeurorights();
+        setupViewToggle();
+        setupSeverityFilters();
+        setupSearch();
+        setupMigration();
+        setupFadeIn();
+    }
+
+    // ── Stats ──
+    function populateStats() {
+        var techCount = 0;
+        data.tactics.forEach(function(t) { techCount += t.techniques.length; });
+        document.getElementById('stat-techniques').textContent = techCount;
+        document.getElementById('stat-defenses').textContent = data.defenses.length;
+        document.getElementById('stat-neurorights').textContent = data.neurorights.length;
+        document.getElementById('stat-tactics').textContent = data.tactics.length;
+    }
+
+    // ── Tactic Filter ──
+    function populateTacticFilter() {
+        var sel = document.getElementById('tacticFilter');
+        data.tactics.forEach(function(t) {
+            var opt = document.createElement('option');
+            opt.value = t.id;
+            opt.textContent = t.name;
+            sel.appendChild(opt);
+        });
+        sel.addEventListener('change', function() {
+            activeTactic = this.value;
+            renderThreats();
+        });
+    }
+
+    // ── Flatten techniques ──
+    function getAllTechniques() {
+        var all = [];
+        data.tactics.forEach(function(tactic) {
+            tactic.techniques.forEach(function(tech) {
+                all.push({ tactic: tactic, technique: tech });
+            });
+        });
+        return all;
+    }
+
+    function filterTechniques() {
+        return getAllTechniques().filter(function(item) {
+            var t = item.technique;
+            if (activeTactic && item.tactic.id !== activeTactic) return false;
+            if (activeSeverities.length && activeSeverities.indexOf(t.classical.severity) === -1) return false;
+            if (searchQuery) {
+                var q = searchQuery.toLowerCase();
+                if (t.name.toLowerCase().indexOf(q) === -1 &&
+                    t.id.toLowerCase().indexOf(q) === -1 &&
+                    t.description.toLowerCase().indexOf(q) === -1) return false;
+            }
+            if (activeLayerFilter) {
+                var match = false;
+                t.classical.target_layers.forEach(function(l) {
+                    if (activeLayerFilter.indexOf(l) !== -1) match = true;
+                });
+                if (!match) return false;
+            }
+            if (activeBandFilter) {
+                var bmatch = false;
+                t.quantum.target_bands.forEach(function(b) {
+                    if (b.indexOf(activeBandFilter) !== -1) bmatch = true;
+                });
+                if (!bmatch) return false;
+            }
+            return true;
+        });
+    }
+
+    // ── Render Threats ──
+    function renderThreats() {
+        var items = filterTechniques();
+        var tbody = document.getElementById('threatBody');
+        var cards = document.getElementById('threatCards');
+        var noRes = document.getElementById('noResults');
+        tbody.innerHTML = '';
+        cards.innerHTML = '';
+
+        if (!items.length) {
+            noRes.style.display = 'block';
+            return;
+        }
+        noRes.style.display = 'none';
+
+        items.forEach(function(item, idx) {
+            var t = item.technique;
+            var s = t.shared;
+            var sevClass = 'severity-' + t.classical.severity.toLowerCase();
+
+            // Table row
+            var tr = document.createElement('tr');
+            tr.innerHTML =
+                '<td style="font-family:monospace;font-size:0.75rem;color:var(--text-dim)">' + t.id + '</td>' +
+                '<td><strong style="color:var(--text-bright)">' + t.name + '</strong></td>' +
+                '<td class="col-classical classical-col">' + t.classical.target_layers.join(', ') + '</td>' +
+                '<td class="col-quantum quantum-col">' + t.quantum.target_bands.join(', ') + '</td>' +
+                '<td><span class="severity-badge ' + sevClass + '">' + t.classical.severity + '</span></td>' +
+                '<td>' + renderCIA(s.cia_impact) + '</td>';
+            tr.addEventListener('click', function() { toggleExpand('expand-' + idx); });
+            tbody.appendChild(tr);
+
+            // Expand row
+            var exTr = document.createElement('tr');
+            exTr.className = 'expand-row';
+            exTr.id = 'expand-' + idx;
+            var exTd = document.createElement('td');
+            exTd.colSpan = 6;
+            exTd.innerHTML = '<div class="expand-content">' + buildExpandContent(t) + '</div>';
+            exTr.appendChild(exTd);
+            tbody.appendChild(exTr);
+
+            // Mobile card
+            var card = document.createElement('div');
+            card.className = 'threat-card';
+            card.innerHTML =
+                '<div class="threat-card-header">' +
+                    '<div><span class="threat-card-id">' + t.id + '</span><div class="threat-card-name">' + t.name + '</div></div>' +
+                    '<span class="severity-badge ' + sevClass + '">' + t.classical.severity + '</span>' +
+                '</div>' +
+                '<div class="threat-card-meta">' +
+                    '<span class="threat-card-layers classical-col">' + t.classical.target_layers.join(', ') + '</span>' +
+                    '<span class="threat-card-bands quantum-col">' + t.quantum.target_bands.join(', ') + '</span>' +
+                    '<span>' + renderCIA(s.cia_impact) + '</span>' +
+                '</div>' +
+                '<div class="threat-card-expand" id="card-expand-' + idx + '">' + buildExpandContent(t) + '</div>';
+            card.addEventListener('click', function() {
+                var exp = document.getElementById('card-expand-' + idx);
+                exp.classList.toggle('open');
+            });
+            cards.appendChild(card);
+        });
+
+        applyViewColumns();
+    }
+
+    function renderCIA(cia) {
+        return '<div class="cia-badges">' +
+            '<span class="cia-badge cia-' + cia.C.toLowerCase() + '">C:' + cia.C[0] + '</span>' +
+            '<span class="cia-badge cia-' + cia.I.toLowerCase() + '">I:' + cia.I[0] + '</span>' +
+            '<span class="cia-badge cia-' + cia.A.toLowerCase() + '">A:' + cia.A[0] + '</span>' +
+        '</div>';
+    }
+
+    function buildExpandContent(t) {
+        var html = '';
+        // Description
+        html += '<p class="qa-text" style="margin-bottom:0.5rem">' + t.description + '</p>';
+
+        // Mitigations
+        if (t.classical.mitigations && t.classical.mitigations.length) {
+            html += '<h4>Mitigations</h4><ul>';
+            t.classical.mitigations.forEach(function(m) { html += '<li>' + m + '</li>'; });
+            html += '</ul>';
+        }
+
+        // Detection
+        if (t.classical.detection && t.classical.detection.length) {
+            html += '<h4>Detection</h4><ul>';
+            t.classical.detection.forEach(function(d) { html += '<li>' + d + '</li>'; });
+            html += '</ul>';
+        }
+
+        // QI Terms
+        if (t.quantum.qi_terms && t.quantum.qi_terms.length) {
+            html += '<h4>QI Terms</h4>';
+            t.quantum.qi_terms.forEach(function(q) { html += '<span class="qi-tag">' + q + '</span> '; });
+        }
+
+        // Quantum advantage
+        if (t.quantum.quantum_advantage) {
+            html += '<h4>Quantum Advantage</h4><p class="qa-text">' + t.quantum.quantum_advantage + '</p>';
+        }
+
+        // Neurorights
+        if (t.shared.neurorights_impact && t.shared.neurorights_impact.length) {
+            html += '<h4>Neurorights Impact</h4>';
+            t.shared.neurorights_impact.forEach(function(nr) {
+                html += '<span class="nr-tag">' + nr.replace(/_/g, ' ') + '</span> ';
+            });
+        }
+
+        // Kohno type
+        if (t.shared.kohno_type) {
+            html += '<h4>Kohno Type</h4><p class="qa-text">' + t.shared.kohno_type + '</p>';
+        }
+
+        return html;
+    }
+
+    function toggleExpand(id) {
+        var row = document.getElementById(id);
+        if (row) row.classList.toggle('open');
+    }
+
+    // ── View Toggle ──
+    function setupViewToggle() {
+        document.querySelectorAll('.view-toggle button').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.view-toggle button').forEach(function(b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                currentView = btn.dataset.view;
+                applyViewColumns();
+            });
+        });
+    }
+
+    function applyViewColumns() {
+        var classicalCols = document.querySelectorAll('.classical-col');
+        var quantumCols = document.querySelectorAll('.quantum-col');
+        classicalCols.forEach(function(el) {
+            el.style.display = (currentView === 'quantum') ? 'none' : '';
+        });
+        quantumCols.forEach(function(el) {
+            el.style.display = (currentView === 'classical') ? 'none' : '';
+        });
+    }
+
+    // ── Severity Filters ──
+    function setupSeverityFilters() {
+        document.querySelectorAll('.severity-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var sev = btn.dataset.severity;
+                var idx = activeSeverities.indexOf(sev);
+                if (idx === -1) {
+                    activeSeverities.push(sev);
+                    btn.classList.add('active-' + sev.toLowerCase());
+                } else {
+                    activeSeverities.splice(idx, 1);
+                    btn.classList.remove('active-' + sev.toLowerCase());
+                }
+                renderThreats();
+            });
+        });
+    }
+
+    // ── Search ──
+    function setupSearch() {
+        var input = document.getElementById('searchInput');
+        var timer;
+        input.addEventListener('input', function() {
+            clearTimeout(timer);
+            timer = setTimeout(function() {
+                searchQuery = input.value;
+                renderThreats();
+            }, 200);
+        });
+    }
+
+    // ── Migration Diagram ──
+    function setupMigration() {
+        var svg = document.querySelector('.migration-svg');
+        if (!svg) return;
+        var layers = svg.querySelectorAll('.layer-box');
+        var bands = svg.querySelectorAll('.band-box');
+        var paths = svg.querySelectorAll('.flow-path');
+        var allBoxes = svg.querySelectorAll('.layer-box, .band-box');
+
+        function clearHighlights() {
+            allBoxes.forEach(function(b) { b.classList.remove('highlight', 'dim'); });
+            paths.forEach(function(p) { p.classList.remove('highlight'); });
+        }
+
+        function highlightConnections(targetBands, sourceLayers) {
+            allBoxes.forEach(function(b) { b.classList.add('dim'); });
+            // Highlight matching layer boxes
+            layers.forEach(function(lb) {
+                var lLayers = lb.dataset.layers.split(',');
+                var match = false;
+                if (sourceLayers) {
+                    sourceLayers.forEach(function(s) { if (lLayers.indexOf(s) !== -1) match = true; });
+                }
+                if (targetBands) {
+                    var lBands = lb.dataset.band.split(',');
+                    targetBands.forEach(function(tb) { if (lBands.indexOf(tb) !== -1) match = true; });
+                }
+                if (match) { lb.classList.remove('dim'); lb.classList.add('highlight'); }
+            });
+            // Highlight matching band boxes
+            bands.forEach(function(bb) {
+                var bBand = bb.dataset.band;
+                var match = false;
+                if (targetBands && targetBands.indexOf(bBand) !== -1) match = true;
+                if (sourceLayers) {
+                    var bLayers = bb.dataset.layers.split(',');
+                    sourceLayers.forEach(function(sl) { if (bLayers.indexOf(sl) !== -1) match = true; });
+                }
+                if (match) { bb.classList.remove('dim'); bb.classList.add('highlight'); }
+            });
+            // Highlight paths
+            paths.forEach(function(p) {
+                var pFrom = p.dataset.from.split(',');
+                var pTo = p.dataset.to;
+                var match = false;
+                if (targetBands && targetBands.indexOf(pTo) !== -1) match = true;
+                if (sourceLayers) {
+                    sourceLayers.forEach(function(sl) { if (pFrom.indexOf(sl) !== -1) match = true; });
+                }
+                if (match) p.classList.add('highlight');
+            });
+        }
+
+        layers.forEach(function(lb) {
+            lb.addEventListener('mouseenter', function() {
+                var bds = lb.dataset.band.split(',');
+                var lrs = lb.dataset.layers.split(',');
+                highlightConnections(bds, lrs);
+            });
+            lb.addEventListener('mouseleave', clearHighlights);
+            lb.addEventListener('click', function() {
+                activeLayerFilter = lb.dataset.layers.split(',');
+                activeBandFilter = null;
+                renderThreats();
+                document.getElementById('threat-matrix').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        bands.forEach(function(bb) {
+            bb.addEventListener('mouseenter', function() {
+                var bds = [bb.dataset.band];
+                var lrs = bb.dataset.layers.split(',');
+                highlightConnections(bds, lrs);
+            });
+            bb.addEventListener('mouseleave', clearHighlights);
+            bb.addEventListener('click', function() {
+                activeBandFilter = bb.dataset.band;
+                activeLayerFilter = null;
+                renderThreats();
+                document.getElementById('threat-matrix').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    }
+
+    // ── Defenses ──
+    function renderDefenses() {
+        var grid = document.getElementById('defenseGrid');
+        data.defenses.forEach(function(def) {
+            var card = document.createElement('div');
+            card.className = 'def-card';
+            var threshold = def.shared.threshold !== null
+                ? '<div class="def-threshold">Threshold: ' + def.shared.threshold + ' &mdash; ' + def.shared.decision + '</div>'
+                : '<div class="def-threshold" style="background:transparent;border:1px solid var(--border);color:var(--text-dim)">' + def.shared.decision + '</div>';
+            card.innerHTML =
+                '<h3>' + def.name + '</h3>' +
+                '<p class="def-desc">' + def.description + '</p>' +
+                '<div class="def-side">' +
+                    '<div class="def-side-label classical">Classical &mdash; ' + def.classical.layer + '</div>' +
+                    '<div class="def-side-text">' + def.classical.mechanism + '</div>' +
+                '</div>' +
+                '<div class="def-side">' +
+                    '<div class="def-side-label quantum">Quantum &mdash; ' + def.quantum.band + '</div>' +
+                    '<div class="def-side-text">' + def.quantum.mechanism +
+                        (def.quantum.qi_term ? ' <span class="qi-tag" style="margin-left:0.25rem">' + def.quantum.qi_term + '</span>' : '') +
+                    '</div>' +
+                '</div>' +
+                threshold;
+            grid.appendChild(card);
+        });
+    }
+
+    // ── Neurorights ──
+    function renderNeurorights() {
+        var grid = document.getElementById('neurorightGrid');
+        data.neurorights.forEach(function(nr) {
+            var card = document.createElement('div');
+            card.className = 'nr-card';
+            card.innerHTML =
+                '<h3>' + nr.name + '</h3>' +
+                '<p class="nr-desc">' + nr.description + '</p>' +
+                '<div class="nr-list-label">Threatened by</div>' +
+                '<div class="nr-list">' + nr.threatened_by.map(function(id) {
+                    return '<span class="nr-tag" style="background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.3);color:var(--red)">' + id + '</span>';
+                }).join('') + '</div>' +
+                '<div class="nr-list-label">Protected by</div>' +
+                '<div class="nr-list">' + nr.protected_by.map(function(id) {
+                    return '<span class="nr-tag">' + id + '</span>';
+                }).join('') + '</div>';
+            grid.appendChild(card);
+        });
+    }
+
+    // ── Fade-in on scroll ──
+    function setupFadeIn() {
+        var els = document.querySelectorAll('.fade-in');
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        els.forEach(function(el) { observer.observe(el); });
+    }
+
+})();
+</script>
+</body>
+</html>

@@ -293,6 +293,13 @@
           "path": "MAIN/shared/threat-matrix.json"
         },
         {
+          "id": "bridge-explorer",
+          "title": "Bridge Explorer (Interactive)",
+          "description": "Interactive visualization: layer-band migration, filterable threat matrix, defense and neurorights mappings.",
+          "badge": "live",
+          "url": "../bridge/"
+        },
+        {
           "id": "bridge-validator",
           "title": "Bridge Validator",
           "description": "Validation script ensuring consistency between Classical and Quantum threat mappings.",

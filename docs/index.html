@@ -389,16 +389,16 @@
             <p class="subtitle">Securing today's neural frontier</p>
         </a>
 
-        <a href="quantum/" class="sphere-label label-quantum" id="label-quantum">
+        <a href="#" class="sphere-label label-quantum" id="label-quantum" onclick="event.preventDefault(); if(window.startPortalTransition) window.startPortalTransition('quantum/');">
             <span class="tooltip">Quantum Model for Neurosecurity</span>
             <h2>Quantum Model</h2>
             <p class="subtitle">Securing tomorrow's neural frontier</p>
         </a>
 
-        <a href="documentation/#bridge" class="sphere-label label-center" id="label-center">
-            <span class="tooltip">Bridging both worlds through neuroethics and security by design</span>
-            <h3>Neuroethics</h3>
-            <p class="subtitle">The foundation that makes both models trustworthy</p>
+        <a href="bridge/" class="sphere-label label-center" id="label-center">
+            <span class="tooltip">The Bridge — shared threat matrix across both models</span>
+            <h3>The Bridge</h3>
+            <p class="subtitle">Same threats. Two perspectives. One mission.</p>
         </a>
     </div>
 
@@ -593,7 +593,7 @@
 
                 if (distToClassical < classicalRadius && distToQuantum < quantumRadius) {
                     // Overlap region — neuroethics
-                    window.location.href = 'documentation/#bridge';
+                    window.location.href = 'bridge/';
                 } else if (hit === classicalSphere) {
                     window.location.href = 'classical/';
                 } else if (hit === quantumSphere) {
