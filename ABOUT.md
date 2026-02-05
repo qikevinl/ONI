@@ -8,7 +8,7 @@ I'm an independent security researcher with an incurable curiosity for how compl
 
 ## The Origin
 
-My obsession with "how things work" started in middle school, the moment we got our first Packard Bell computer. By 11, I had built my first website—teaching myself through the vast, unlimited knowledge of the early internet. I created a community of 3,000+ members where I shared Photoshop tutorials, creating abstract art when the internet first became a thing, inspired by strangers who freely shared their knowledge with a curious kid asking too many questions.
+My obsession with "how things work" started in middle school, the moment we got our first Packard Bell computer. By 11, I had built my first website—teaching myself through the vast, unlimited knowledge of the early internet. I created a community of 3,000+ members where I shared Photoshop tutorials, creating abstract digital art when the internet first became a thing, inspired by strangers who freely shared their knowledge with a curious kid asking too many questions.
 
 That experience shaped me. Mindloft is how I pay it forward—a vision I hope can inspire others in this emerging field.
 
