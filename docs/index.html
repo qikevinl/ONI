@@ -644,6 +644,92 @@
             color: var(--text-muted);
             opacity: 0.6;
         }
+
+        /* Ambient Music Player */
+        .music-toggle {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            background: rgba(5, 10, 20, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .music-toggle:hover {
+            background: rgba(15, 25, 40, 0.9);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .music-toggle.playing {
+            border-color: rgba(139, 92, 246, 0.4);
+        }
+
+        .music-icon {
+            width: 18px;
+            height: 18px;
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+
+        .music-toggle.playing .music-icon {
+            color: var(--accent-purple);
+        }
+
+        .music-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 14px;
+        }
+
+        .music-bar {
+            width: 3px;
+            background: var(--text-muted);
+            border-radius: 1px;
+            transition: background 0.3s;
+        }
+
+        .music-toggle.playing .music-bar {
+            background: var(--accent-purple);
+            animation: music-pulse 0.8s ease-in-out infinite;
+        }
+
+        .music-bar:nth-child(1) { height: 6px; animation-delay: 0s; }
+        .music-bar:nth-child(2) { height: 10px; animation-delay: 0.2s; }
+        .music-bar:nth-child(3) { height: 8px; animation-delay: 0.4s; }
+        .music-bar:nth-child(4) { height: 12px; animation-delay: 0.1s; }
+
+        .music-toggle:not(.playing) .music-bar {
+            animation: none;
+        }
+
+        @keyframes music-pulse {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.5); }
+        }
+
+        .music-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .music-toggle.playing .music-label {
+            color: var(--text-secondary);
+        }
+
+        #sc-player {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -814,6 +900,24 @@
             </a>
         </div>
     </main>
+
+    <!-- Ambient Music Player -->
+    <div class="music-toggle" id="music-toggle" title="Toggle ambient music">
+        <div class="music-bars">
+            <div class="music-bar"></div>
+            <div class="music-bar"></div>
+            <div class="music-bar"></div>
+            <div class="music-bar"></div>
+        </div>
+        <span class="music-label">Music</span>
+    </div>
+
+    <!-- SoundCloud Widget (hidden) -->
+    <iframe id="sc-player"
+        width="100%" height="166"
+        scrolling="no" frameborder="no"
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/keviano/kulhi-loach&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false">
+    </iframe>
 
     <footer class="site-footer">
         <div class="footer-links">
@@ -1003,6 +1107,88 @@
             } catch (err) {
                 console.log('Threat matrix not loaded:', err.message);
             }
+        })();
+    </script>
+
+    <!-- Wave Hero: Reusable Three.js with WebGL → CSS3D → CSS fallback -->
+    <script src="js/wave-hero.js"></script>
+    <script>
+        WaveHero.init({
+            preset: 'waves',           // 'waves', 'particles', 'grid', 'nebula', 'quantum'
+            container: 'webgl-bg',
+            fallbackId: 'css-bg'
+        });
+    </script>
+
+    <!-- SoundCloud Widget API -->
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+    <script>
+        (function() {
+            const toggle = document.getElementById('music-toggle');
+            const iframe = document.getElementById('sc-player');
+            let widget = null;
+            let isPlaying = false;
+            let hasInteracted = false;
+
+            // Initialize widget when API loads
+            function initWidget() {
+                if (typeof SC === 'undefined' || !SC.Widget) {
+                    setTimeout(initWidget, 100);
+                    return;
+                }
+
+                widget = SC.Widget(iframe);
+
+                widget.bind(SC.Widget.Events.READY, function() {
+                    // Set volume to comfortable level
+                    widget.setVolume(40);
+
+                    // Auto-play after first user interaction anywhere on page
+                    if (!hasInteracted) {
+                        document.addEventListener('click', function autoPlay() {
+                            if (!hasInteracted) {
+                                hasInteracted = true;
+                                widget.play();
+                                isPlaying = true;
+                                toggle.classList.add('playing');
+                                document.removeEventListener('click', autoPlay);
+                            }
+                        }, { once: false });
+                    }
+                });
+
+                widget.bind(SC.Widget.Events.PLAY, function() {
+                    isPlaying = true;
+                    toggle.classList.add('playing');
+                });
+
+                widget.bind(SC.Widget.Events.PAUSE, function() {
+                    isPlaying = false;
+                    toggle.classList.remove('playing');
+                });
+
+                widget.bind(SC.Widget.Events.FINISH, function() {
+                    // Loop the track
+                    widget.seekTo(0);
+                    widget.play();
+                });
+            }
+
+            // Toggle button click
+            toggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (!widget) return;
+
+                if (isPlaying) {
+                    widget.pause();
+                } else {
+                    widget.play();
+                    hasInteracted = true;
+                }
+            });
+
+            // Start initialization
+            initWidget();
         })();
     </script>
 

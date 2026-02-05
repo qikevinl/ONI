@@ -1,0 +1,104 @@
+{
+  "voice": "Kokoro TTS (Apache 2.0)",
+  "model": "Kokoro-82M",
+  "sample_rate": 24000,
+  "sections": [
+    {
+      "id": "abstract",
+      "title": "Abstract",
+      "file": "00_abstract.mp3",
+      "duration": 194.9
+    },
+    {
+      "id": "introduction-the-quantum-blind-spot",
+      "title": "Introduction: The Quantum Blind Spot",
+      "file": "01_introduction-the-quantum-blind-spot.mp3",
+      "duration": 46.2
+    },
+    {
+      "id": "the-bci-revolution",
+      "title": "The BCI Revolution",
+      "file": "02_the-bci-revolution.mp3",
+      "duration": 23.1
+    },
+    {
+      "id": "the-security-gap",
+      "title": "The Security Gap",
+      "file": "03_the-security-gap.mp3",
+      "duration": 21.7
+    },
+    {
+      "id": "why-classical-security-is-not-enough",
+      "title": "Why Classical Security Is Not Enough",
+      "file": "04_why-classical-security-is-not-enough.mp3",
+      "duration": 36.7
+    },
+    {
+      "id": "the-davydov-soliton-attack-novel-threat",
+      "title": "The Davydov Soliton Attack (Novel Threat)",
+      "file": "05_the-davydov-soliton-attack-novel-threat.mp3",
+      "duration": 29.9
+    },
+    {
+      "id": "what-we-know-and-what-we-dont",
+      "title": "What We Know and What We Don\u2019t",
+      "file": "06_what-we-know-and-what-we-dont.mp3",
+      "duration": 18.1
+    },
+    {
+      "id": "the-qif-layer-architecture-v3.0-hourglass",
+      "title": "The QIF Layer Architecture (v3.0 \u2014 Hourglass)",
+      "file": "07_the-qif-layer-architecture-v3.0-hourglass.mp3",
+      "duration": 25.9
+    },
+    {
+      "id": "the-classical-foundation",
+      "title": "The Classical Foundation",
+      "file": "08_the-classical-foundation.mp3",
+      "duration": 11.5
+    },
+    {
+      "id": "the-qi-equation-two-complementary-views",
+      "title": "The QI Equation: Two Complementary Views",
+      "file": "09_the-qi-equation-two-complementary-views.mp3",
+      "duration": 13.3
+    },
+    {
+      "id": "novel-contributions",
+      "title": "Novel Contributions",
+      "file": "10_novel-contributions.mp3",
+      "duration": 30.0
+    },
+    {
+      "id": "quantum-tunneling-as-biometric",
+      "title": "Quantum Tunneling as Biometric",
+      "file": "11_quantum-tunneling-as-biometric.mp3",
+      "duration": 24.6
+    },
+    {
+      "id": "the-decoherence-spectrum",
+      "title": "The Decoherence Spectrum",
+      "file": "12_the-decoherence-spectrum.mp3",
+      "duration": 9.4
+    },
+    {
+      "id": "security-analysis",
+      "title": "Security Analysis",
+      "file": "13_security-analysis.mp3",
+      "duration": 9.0
+    },
+    {
+      "id": "conclusion",
+      "title": "Conclusion",
+      "file": "14_conclusion.mp3",
+      "duration": 29.7
+    },
+    {
+      "id": "references",
+      "title": "References",
+      "file": "15_references.mp3",
+      "duration": 24.8
+    }
+  ],
+  "format": "mp3"
+}
