@@ -584,7 +584,7 @@
     {
       "id": "future-l11-l14-standards-development",
       "title": "L11-L14 Standards Development",
-      "description": "Develop governance and standards alignment for Layers 11-14 (Cognitive Transport, Cognitive Session, Semantic Layer, Identity Layer). Unlike L1-L7 (IEEE, IETF) and L8-L10 (IEC 62443, FDA guidance), no established standards currently exist for cognitive and identity-layer security. Requires collaboration with Subject Matter Experts (neuroethicists, cognitive scientists, BCI researchers) and engagement with governing agencies (FDA, EU MDR, IEEE emerging working groups, UNESCO/OECD neuroethics initiatives).",
+      "description": "Develop governance and standards alignment for Layers 11-14 (Cognitive Transport, Cognitive Session, Semantic Layer, Identity Layer). Unlike L1-L7 (IEEE, IETF, NIST SP 800) and L8-L10 (IEC 62443, FDA guidance, NIST CSF), no established standards currently exist for cognitive and identity-layer security. Requires collaboration with Subject Matter Experts (neuroethicists, cognitive scientists, BCI researchers) and engagement with governing agencies (FDA, EU MDR, IEEE emerging working groups, NIST, UNESCO/OECD neuroethics initiatives).",
       "rationale": "ONI_LAYERS.md Section 4 'Standards Alignment' notes L11-L14 depend on 'Emerging neuroethics frameworks' which are not yet mature. Framework adoption requires actionable standards at all layers.",
       "feasibility": "blocked-external",
       "blockers": [
@@ -603,12 +603,14 @@
           "FDA (neural device guidance evolution)",
           "EU MDR (medical device regulation)",
           "IEEE (emerging neural interface standards)",
+          "NIST (Cybersecurity Framework, AI RMF, Privacy Framework)",
           "UNESCO (neurorights and neuroethics)",
           "OECD (responsible AI/neural interface principles)"
         ]
       },
       "actions_when_unblocked": [
-        "Monitor emerging neuroethics frameworks from UNESCO, OECD, IEEE",
+        "Monitor emerging neuroethics frameworks from UNESCO, OECD, IEEE, NIST",
+        "Align L1-L10 with NIST CSF (Identify, Protect, Detect, Respond, Recover) and NIST AI RMF",
         "Engage with standards bodies when L11-L14 guidelines emerge",
         "Contribute ONI framework principles to standards development efforts",
         "Map ONI L11-L14 to emerging standards as they mature"

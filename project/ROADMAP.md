@@ -1,7 +1,7 @@
 # Roadmap
 
 > **Auto-generated from [prd.json](prd.json)** — do not edit directly.
-> Last updated: 2026-02-04 22:44
+> Last updated: 2026-02-04 22:51
 
 ## Progress
 
@@ -81,7 +81,7 @@ Go back and update all existing blog posts and technical papers with corrected O
 
 ### 📋 L11-L14 Standards Development
 
-Develop governance and standards alignment for Layers 11-14 (Cognitive Transport, Cognitive Session, Semantic Layer, Identity Layer). Unlike L1-L7 (IEEE, IETF) and L8-L10 (IEC 62443, FDA guidance), no established standards currently exist for cognitive and identity-layer security. Requires collaboration with Subject Matter Experts (neuroethicists, cognitive scientists, BCI researchers) and engagement with governing agencies (FDA, EU MDR, IEEE emerging working groups, UNESCO/OECD neuroethics initiatives).
+Develop governance and standards alignment for Layers 11-14 (Cognitive Transport, Cognitive Session, Semantic Layer, Identity Layer). Unlike L1-L7 (IEEE, IETF, NIST SP 800) and L8-L10 (IEC 62443, FDA guidance, NIST CSF), no established standards currently exist for cognitive and identity-layer security. Requires collaboration with Subject Matter Experts (neuroethicists, cognitive scientists, BCI researchers) and engagement with governing agencies (FDA, EU MDR, IEEE emerging working groups, NIST, UNESCO/OECD neuroethics initiatives).
 
 **Rationale:** ONI_LAYERS.md Section 4 'Standards Alignment' notes L11-L14 depend on 'Emerging neuroethics frameworks' which are not yet mature. Framework adoption requires actionable standards at all layers.
 
