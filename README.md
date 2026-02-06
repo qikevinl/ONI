@@ -127,6 +127,65 @@ Mindloft implements the **QIF Framework** developed by Qinnovate:
 
 ---
 
+## 🔄 Our Development Lifecycle: CIV
+
+**Continuous Iteration & Validation** — How we build BCI security technology
+
+Mindloft operates on the **CIV (Continuous Iteration & Validation)** lifecycle, bridging academic R&D rigor with modern software delivery speed. Unlike traditional CI/CD which optimizes for "time-to-market," our process optimizes for **"time-to-truth"** — building technology that's scientifically validated before deployment.
+
+### How We Work: The Lab-to-Standards-to-Products Flow
+
+**1. 🔬 Ideation & Research (Mindloft Lab)**
+- Field research and BCI experimentation
+- QIF-FIELD-NOTES.md: Raw discoveries and observations
+- Hypothesis formulation based on real-world neural signal data
+
+**2. 🛠️ Proof-of-Concept & Development (Mindloft Lab)**
+- Building testable security models
+- **POC exploit development in controlled laboratory environments**
+- Draft frameworks and equation validation in qif-lab
+- QIF-WHITEPAPER.md: Formalizing findings
+
+**Critical:** All POC exploit testing occurs **exclusively in isolated lab environments** under strict ethical research constraints. We never deploy exploits against production systems or real-world targets.
+
+**3. ✅ Validation & Feedback (Qinnovate Standards)**
+- Submit findings to Qinnovate for peer review
+- Committee validation and ethics vetting
+- NIST/IEEE alignment check
+- When our lab POC validates a vulnerability, Qinnovate peer-reviews the finding and updates the official standard
+
+**4. 📦 Standards Publication (Qinnovate)**
+- Qinnovate publishes validated research to qif-framework/
+- QIF-TRUTH.md becomes the canonical source
+- Standards disseminated to the broader community
+
+**5. 🚀 Implementation (Mindloft Products)**
+- Build Mindloft Core, SDK, and Cloud products
+- Implement the newly validated standards
+- Deploy QIF-compliant security tools
+
+**6. 📊 Real-World Operations (Mindloft)**
+- Live deployment at mindloft.org
+- Monitor security metrics and threat intelligence
+- Gather field data from actual BCI usage
+
+**7. 🔁 Synthesis & Iteration**
+- Field intelligence feeds back into Phase 1
+- New threats or discoveries trigger the next research cycle
+- The loop continues — perpetual improvement
+
+### Why This Matters
+
+When we discover a vulnerability through lab POC testing, we don't just patch it — we work with Qinnovate to ensure the entire BCI security community benefits from the finding. The vulnerability becomes a **validated data point** that strengthens the standard for everyone.
+
+**Our role:** The hands-on lab and product builder
+**Qinnovate's role:** The governing body that validates and standardizes our findings
+**The result:** Products built on continuously improving, peer-reviewed standards
+
+This is how we ensure Mindloft products aren't just secure today — they're built on a foundation that evolves with the threat landscape.
+
+---
+
 ## 🗺️ Product Roadmap
 
 ### Phase 1: Foundation (2024-2025)
