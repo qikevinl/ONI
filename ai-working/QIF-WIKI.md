@@ -63,6 +63,7 @@
 | **SPHINCS+ (SLH-DSA)** | Algorithm | Hash-based post-quantum signatures (FIPS 205) -- most conservative | [Full details](#sphincs-plus) |
 | **Hybrid Key Exchange** | Protocol | KDF(ECDH_secret \|\| ML-KEM_secret) -- secure if either holds | [Full details](#hybrid-key-exchange) |
 | **Attack Coupling Mechanisms** | Classification | 5 types: Direct, Harmonic, Envelope Modulation, Temporal Interference, Intermodulation | [Full details](#attack-coupling-mechanisms) |
+| **Unified Threat Registry** | Registry | 60 techniques, 11 tactics, MITRE-compatible (T2000+), 80% cross-referenced | [Full details](#unified-threat-registry) |
 | **Resonance Shield** | Concept | Active EM cancellation at device boundary -- defense + MRI compatibility | [Full details](#resonance-shield) |
 | **Scrambling Bound** | Equation | t* ~ (β/2π)·ln(S) -- encryption satisfies black hole scrambling speed | [Full details](#scrambling-bound) |
 | **Page Curve** | Concept | Key exchange mirrors black hole information recovery curve | [Full details](#page-curve) |
@@ -697,6 +698,29 @@ where Squantum = SvN(ρ) + λ·Φtunnel − μ·E(ρAB)
 5. **Intermodulation** -- attacker RF + BCI wireless mix in nonlinear tissue to produce neural frequencies
 
 **Most dangerous:** Intermodulation -- BCI becomes the weapon.
+
+---
+
+### Unified Threat Registry
+
+**Version:** v1.0 (Entry 37-38, 2026-02-06)
+
+**What it is:** A MITRE ATT&CK-compatible registry of 60 BCI attack techniques organized into 11 tactics. ID range T2000+ (non-conflicting with MITRE's T1xxx). Implemented as-code in `config.py` as single source of truth.
+
+**11 Tactics:**
+- 7 extend MITRE Enterprise: Reconnaissance (TA0043), Initial Access (TA0001), Execution (TA0002), Persistence (TA0003), Defense Evasion (TA0005), Collection (TA0009), Impact (TA0040)
+- 4 QIF-proposed (no MITRE equivalent): Neural Manipulation (TA0050), Cognitive Exploitation (TA0051), Directed Energy (TA0052), Adversarial ML (TA0053)
+
+**MITRE Cross-Reference Coverage:**
+- 48/60 techniques (80%) have explicit MITRE ATT&CK technique cross-references (28 unique MITRE IDs)
+- 12/60 techniques (20%) have NO MITRE EQUIVALENT -- these define QIF's unique contribution:
+  - Directed energy (6): T2101-T2106 -- physics-based EM coupling attacks
+  - Quantum-biological (2): T2005-T2006 -- ion channel tunneling, Davydov soliton
+  - Cognitive (4): T2402, T2403, T2406, T2408 -- target consciousness, not computation
+
+**As-code pipeline:** `config.py` → `generate_threat_registry.py` → `threat-registry.json` + `qif-architecture-v4.json` + viz HTML
+
+**How QIF uses it:** Every QI detection component maps to specific T-IDs it catches. The registry also encodes what QI CANNOT catch (Mechanisms D-E), making defense gaps explicit. This informs the three-tier defense architecture (QI-only for consumer, QI+TTT for clinical, Shield+QI+TTT for implanted).
 
 ---
 

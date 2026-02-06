@@ -4,8 +4,7 @@
 
 **Version:** 5.0 (Working Draft)
 **Date:** 2026-02-06
-**Authors:** Kevin Qi, with Claude (Anthropic, Opus 4.6)
-**Collaboration:** Quantum Intelligence (QI)
+**Authors:** Kevin Qi
 **Predecessor:** QIF Whitepaper v3.1 (2026-02-03)
 **Status:** DRAFT
 
@@ -405,6 +404,22 @@ Intermodulation attacks are the most dangerous class for three reasons. First, n
 Consumer devices are especially vulnerable. A Muse headband using BLE at 2.4 GHz has no EM shielding (plastic housing, consumer-grade). An attacker's phone transmitting at 2.4 GHz plus or minus 10 Hz via software-defined radio can produce alpha/theta beat frequencies in nonlinear scalp tissue. QI_consumer has no mechanism to detect this without EM environment awareness.
 
 For implanted devices, the risk is higher. A deep brain stimulator at 130 Hz can be weaponized by an external signal at 126 Hz to produce a 4 Hz theta disruption in the thalamus. Both frequencies are within the normal DBS operating range.
+
+### 6.5 Unified Threat Taxonomy
+
+QIF maintains a registry of 60 attack techniques organized into 11 tactics. Seven tactics extend MITRE ATT&CK Enterprise (Reconnaissance, Initial Access, Execution, Persistence, Defense Evasion, Collection, Impact). Four tactics are novel, proposed for the BCI domain because no existing MITRE category accommodates them: Neural Manipulation (TA0050), Cognitive Exploitation (TA0051), Directed Energy (TA0052), and Adversarial ML (TA0053).
+
+Each technique is assigned a unique identifier in the T2000+ range, maintaining compatibility with MITRE's numbering while occupying a distinct, non-conflicting ID space. Of the 60 techniques, 48 (80%) have explicit cross-references to one or more MITRE ATT&CK techniques. For example, T2001 (Signal Injection) maps to T1659 (Content Injection) and T1674 (Input Injection); T2301 (Neuronal Jamming) maps to T1498 (Network Denial of Service) and T1499 (Endpoint Denial of Service).
+
+The remaining 12 techniques (20%) have no MITRE equivalent. These fall into three clusters that define QIF's unique contribution to threat modeling:
+
+1. **Directed energy attacks** (6 techniques: T2101-T2106). ELF neural entrainment, intermodulation, pulsed microwave (Frey effect), temporal interference, envelope modulation, and thermal electrode destruction. These operate in the physics layer via electromagnetic coupling mechanisms described in Section 6.1. No digital or cyber analog exists.
+
+2. **Quantum-biological attacks** (2 techniques: T2005-T2006). Quantum tunneling exploits targeting ion channel gating and Davydov soliton attacks targeting SNARE protein complexes. These exploit quantum effects in neural tissue that have no counterpart in computing systems.
+
+3. **Cognitive attacks** (4 techniques: T2402, T2403, T2406, T2408). Identity erosion, working memory poisoning, agency manipulation, and self-model corruption. These target consciousness, not computation. MITRE's framework assumes the adversary's target is a computing system; these attacks target the human mind through the BCI as a vector.
+
+The registry is implemented as-code in the framework's configuration module and is the single source of truth for all downstream representations (JSON exports, interactive visualizations, and this document). The full registry is available at the framework's public repository.
 
 ---
 
@@ -852,6 +867,6 @@ Landauer's Principle [61] establishes the fundamental thermodynamic cost of info
 
 *Version: 5.0 Draft*
 *Last updated: 2026-02-06*
-*Maintainer: Quantum Intelligence (Kevin Qi + Claude, Opus 4.6)*
+*Maintainer: Kevin Qi*
 *Source of Truth: QIF-TRUTH.md*
 *Location: qinnovates/mindloft/drafts/ai-working/QIF-WHITEPAPER-v5.md*

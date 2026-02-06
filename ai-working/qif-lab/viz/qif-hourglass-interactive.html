@@ -581,8 +581,60 @@ main {
 .attack-item.selected { background: rgba(248,81,73,0.1); border-color: rgba(248,81,73,0.3); }
 
 .attack-item .attack-name { font-weight: 600; color: var(--text); }
+.attack-item .attack-id { color: var(--orange); font-family: monospace; font-size: 0.6rem; margin-right: 0.3rem; }
 .attack-item .attack-bands { color: var(--text-dim); font-size: 0.65rem; margin-top: 0.15rem; }
 .attack-item .attack-coupling { color: var(--red); font-size: 0.6rem; }
+
+.attack-category-header {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--orange);
+  margin-top: 0.75rem;
+  margin-bottom: 0.3rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid rgba(210,153,34,0.2);
+}
+.attack-category-header:first-child { margin-top: 0; }
+
+.attack-status {
+  display: inline-block;
+  font-size: 0.55rem;
+  padding: 0.05rem 0.3rem;
+  border-radius: 3px;
+  margin-left: 0.3rem;
+  vertical-align: middle;
+}
+.attack-status.confirmed { background: rgba(63,185,80,0.15); color: var(--green); }
+.attack-status.demonstrated { background: rgba(210,153,34,0.15); color: var(--orange); }
+.attack-status.theoretical { background: rgba(188,140,255,0.15); color: #bc8cff; }
+.attack-status.emerging { background: rgba(121,192,255,0.15); color: #79c0ff; }
+
+.detail-attack-id {
+  font-family: monospace;
+  color: var(--orange);
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-right: 0.3rem;
+}
+
+.detail-attack-category {
+  display: inline-block;
+  font-size: 0.6rem;
+  padding: 0.05rem 0.3rem;
+  border-radius: 3px;
+  background: rgba(210,153,34,0.1);
+  color: var(--orange);
+  margin-left: 0.3rem;
+}
+
+.detail-mitre-ref {
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  margin-top: 0.15rem;
+}
+.detail-mitre-ref a { color: #79c0ff; text-decoration: none; }
+.detail-mitre-ref a:hover { text-decoration: underline; }
 
 /* ── Device Info Panel ── */
 .device-info {
@@ -663,28 +715,80 @@ const QIF_DATA = {
     {id:"S3",name:"Radio / Wireless / DE",zone:"silicon",description:"RF, wireless links, directed energy, application layer (1 GHz+)",brain_regions:[],dominant_freq_hz:"1 GHz+",L_m:[3e-5,0.3],determinacy:"Deterministic",severity:"N/A (silicon)",severity_description:"RF hijack, directed energy, cloud compromise, supply chain attack",qi_range:[0.0,0.0],hourglass_width:1.0,bci_devices:["BLE/WiFi consumer, satellite links, DE weapons"]},
   ],
 
+  // Threat Taxonomy v4.0 — MITRE ATT&CK-compatible (60 techniques, 11 tactics)
+  // Source of truth: config.py THREAT_MODEL. Generated 2026-02-06 (Entry 37+38, MITRE gap analysis).
   threat_model: [
-    // ── Classical attacks (v3.1 core) ──
-    {attack:"Signal injection",bands_str:"I0\u2013N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (coherence metric)",notes:"Inject false signals at electrode-tissue boundary. Classical detection via impedance anomaly. QI coherence metric flags phase/timing inconsistency."},
-    {attack:"Neural ransomware",bands_str:"N3",band_ids:["N3","N7","N6"],coupling:null,access:null,classical:"Partial",quantum:"Yes (QI score drop)",notes:"Disrupt or lock neural function via stimulation manipulation. Closed-loop devices (RNS, DBS) most vulnerable. QI detects anomalous coherence collapse."},
-    {attack:"Eavesdropping",bands_str:"I0\u2013N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (Heisenberg disturbance)",notes:"Passive interception of neural signals at I0. Classically undetectable. Quantum: measurement disturbs state \u2014 detectable via QI anomaly."},
-    {attack:"Man-in-the-middle",bands_str:"I0",band_ids:["I0"],coupling:null,access:null,classical:"Partial",quantum:"Yes (no-cloning + Bell test)",notes:"Intercept and modify signals at I0 boundary. No-cloning theorem prevents perfect copy of quantum neural states. Bell test detects entanglement disruption."},
-    {attack:"Quantum tunneling exploit",bands_str:"I0\u2013N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (tunneling profile anomaly)",notes:"Exploit ion channel quantum tunneling to inject false synaptic events. Detectable via Q_tunnel term anomaly in QI equation."},
-    {attack:"Davydov soliton attack",bands_str:"I0\u2013N1",band_ids:["I0","N1"],coupling:null,access:null,classical:"No",quantum:"Yes (tunneling term Q_tunnel)",notes:"Use THz stimulation to trigger Davydov solitons in SNARE protein complexes, causing false neurotransmitter release at I0."},
-    {attack:"Identity spoofing",bands_str:"N3\u2013N7",band_ids:["N3","N7","N6"],coupling:null,access:null,classical:"Partial",quantum:"Yes (quantum biometric)",notes:"Replicate user's neural signature to bypass authentication. Classical biometrics partially spoofable. Quantum neural signatures (if proven) are physically unclonable."},
-    // ── Silicon / cyber attacks (v3.1 additions) ──
-    {attack:"BLE/RF side-channel",bands_str:"S1\u2013S2",band_ids:["S1","S2"],coupling:null,access:"PUBLIC",classical:"Yes",quantum:"Enhanced (signal correlation)",notes:"Extract neural data from BLE/RF emissions via timing, power, or EM side-channels. All wireless BCIs vulnerable. Consumer devices (Muse, EMOTIV) transmit unencrypted. QI cross-band correlation detects exfiltration patterns."},
-    {attack:"Supply chain compromise",bands_str:"S2\u2013S3",band_ids:["S2","S3"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (firmware attestation)",notes:"Tamper with BCI hardware/firmware during manufacturing or distribution. Firmware rootkits persist across updates. Affects all device classes. QI-enhanced firmware attestation detects unauthorized modifications."},
-    {attack:"Cloud infrastructure attack",bands_str:"S3",band_ids:["S3"],coupling:null,access:"PUBLIC",classical:"Yes",quantum:"Enhanced (QKD for data-in-transit)",notes:"Compromise cloud services processing neural data (EMOTIV Cortex API, Neuralink cloud). Data exfiltration, model poisoning, API manipulation. PQC/QKD protects data in transit."},
-    {attack:"Neural data privacy breach",bands_str:"N1\u2013S3",band_ids:["N1","S1","S2","S3"],coupling:null,access:null,classical:"Yes",quantum:"Enhanced (cross-band encryption)",notes:"Unauthorized access to recorded neural data across any band. Harvest raw EEG from consumer devices, decode intent/emotion. GDPR Article 9 (special category data). NSP end-to-end encryption from I0 to cloud."},
-    {attack:"Harvest-now-decrypt-later",bands_str:"S3",band_ids:["S3"],coupling:null,access:null,classical:"No",quantum:"Prevented (QKD/PQC)",notes:"Record encrypted BCI traffic now, decrypt when quantum computers arrive (2030-2035). Neural data is permanently sensitive \u2014 can't change your brain like a password. PQC (ML-KEM/Kyber) prevents. 10-20 year implant lifetime > quantum arrival."},
-    // ── Frequency-domain attacks (v3.2 Entry 28) ──
-    {attack:"ELF neural entrainment",bands_str:"S1\u2192N4\u2013N7",band_ids:["S1","N4","N5","N6","N7"],coupling:"DIRECT",access:"RESTRICTED",classical:"Yes",quantum:"Enhanced (Dsf anomaly detection)",notes:"3-76 Hz government-restricted. IS neural frequency. Penetrates globally. Direct gamma/alpha/theta cortical entrainment. US Navy operated at 76 Hz (Clam Lake) and 45 Hz (Republic). Russia, China maintain capability."},
-    {attack:"Intermodulation (BCI weaponized)",bands_str:"S2\u2192N4\u2013N6",band_ids:["S2","N4","N5","N6"],coupling:"INTERMODULATION",access:"RESTRICTED",classical:"Yes",quantum:"Enhanced (coherence + Dsf)",notes:"UHF-Mil (225-400 MHz) + MICS (402 MHz) = neural-range beat frequency. BCI's own telemetry signal becomes part of the attack. 398 MHz mil + 402 MHz BCI = 4 Hz \u2192 theta \u2192 N4 thalamus. Most dangerous coupling mechanism."},
-    {attack:"Pulsed microwave (Frey effect)",bands_str:"S3\u2192N2,N7",band_ids:["S3","N2","N7"],coupling:"ENVELOPE",access:"RESTRICTED",classical:"Yes",quantum:"Enhanced (temporal coherence)",notes:"S-band (2-4 GHz) pulsed microwave. Thermoelastic expansion \u2192 cochlea perceives as sound. 'Havana Syndrome' model. PRF selects neural target: 40 Hz \u2192 N7 gamma, 10 Hz \u2192 N6 alpha, 4 Hz \u2192 N4 theta, 1 Hz \u2192 N2 delta."},
-    {attack:"Temporal interference (deep targeting)",bands_str:"S2\u2192N4\u2013N6",band_ids:["S2","N4","N5","N6"],coupling:"TEMPORAL_INTERFERENCE",access:"LICENSED",classical:"Yes",quantum:"Enhanced (beat frequency detection)",notes:"Two kHz+ signals create neural-range beat frequency at tissue intersection. Can target deep brain structures non-invasively. Grossman et al. 2017, Cell. Licensed frequencies \u2014 lower barrier than restricted."},
-    {attack:"Envelope modulation (stealth carrier)",bands_str:"S1\u2013S2\u2192any N",band_ids:["S1","S2","N1","N2","N3","N4","N5","N6","N7"],coupling:"ENVELOPE",access:"PUBLIC",classical:"Yes",quantum:"Enhanced (demodulation detection)",notes:"Any carrier frequency modulated at neural frequency. Tissue demodulates the envelope. Stealth: carrier looks normal, attack is in the modulation. Lowest barrier to entry \u2014 PUBLIC access. tACS therapeutic principle weaponized."},
-    {attack:"Directed energy (thermal I0 damage)",bands_str:"S3\u2192I0",band_ids:["S3","I0"],coupling:null,access:"CLASSIFIED",classical:"Yes",quantum:"N/A (physical damage, not signal)",notes:"mm-wave/ADS (95 GHz) directed energy. Excites water molecules in top 0.4mm of skin. For surface implants: electrode heating, tissue damage at I0 boundary. Destroys interface integrity. Nation-state only."},
+    // -- TA0002: Execution --
+    {"id": "T2001", "attack": "Signal injection", "category": "TA0002", "category_name": "Execution", "bands_str": "I0–N1", "band_ids": ["I0", "N1"], "coupling": null, "access": null, "classical": "Yes", "quantum": "Enhanced (coherence metric)", "mitre_techniques": ["T1659", "T1674"], "status": "CONFIRMED", "notes": "Inject crafted signals mimicking legitimate brain activity at electrode-tissue boundary. Classical detection via impedance anomaly. QI coherence metric flags phase/timing inconsistency."},
+    {"id": "T2005", "attack": "Quantum tunneling exploit", "category": "TA0002", "category_name": "Execution", "bands_str": "I0–N1", "band_ids": ["I0", "N1"], "coupling": null, "access": null, "classical": "No", "quantum": "Yes (tunneling profile anomaly)", "mitre_techniques": [], "status": "THEORETICAL", "notes": "Exploit ion channel quantum tunneling to inject false synaptic events. Detectable via Q_tunnel term anomaly in QI equation. Requires understanding of target's ion channel tunneling profile."},
+    {"id": "T2006", "attack": "Davydov soliton attack", "category": "TA0002", "category_name": "Execution", "bands_str": "I0–N1", "band_ids": ["I0", "N1"], "coupling": null, "access": null, "classical": "No", "quantum": "Yes (tunneling term Q_tunnel)", "mitre_techniques": [], "status": "THEORETICAL", "notes": "THz stimulation triggers Davydov solitons in SNARE protein complexes, causing false neurotransmitter release at I0. Exploits energy transport in alpha-helix protein structures."},
+    {"id": "T2007", "attack": "Protocol manipulation", "category": "TA0002", "category_name": "Execution", "bands_str": "S1–S2", "band_ids": ["S1", "S2"], "coupling": null, "access": null, "classical": "Yes", "quantum": "Enhanced (protocol integrity via QI)", "mitre_techniques": ["T1565", "T1565.002"], "status": "DEMONSTRATED", "notes": "Exploit weaknesses in BCI data protocols to inject commands or alter data formatting, bypassing security controls. Targets the digital decoding/telemetry pipeline."},
+    {"id": "T2008", "attack": "Command hijacking", "category": "TA0002", "category_name": "Execution", "bands_str": "S2–N7", "band_ids": ["S2", "N7", "N6", "N5"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (intent verification via QI)", "mitre_techniques": ["T1557", "T1565.002"], "status": "THEORETICAL", "notes": "Intercept and modify motor commands or cognitive instructions in transit through the BCI system. Targets closed-loop stimulation devices. Intent verification detects command-intent mismatch."},
+    // -- TA0040: Impact --
+    {"id": "T2002", "attack": "Neural ransomware", "category": "TA0040", "category_name": "Impact", "bands_str": "N3–N7", "band_ids": ["N3", "N7", "N6"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Yes (QI score drop)", "mitre_techniques": ["T1486", "T1489"], "status": "THEORETICAL", "notes": "Disrupt or lock neural function via stimulation manipulation. Closed-loop devices (RNS, DBS) most vulnerable. QI detects anomalous coherence collapse. Distinct from Neural DoS: ransomware implies conditional restoration."},
+    {"id": "T2301", "attack": "Neuronal jamming", "category": "TA0040", "category_name": "Impact", "bands_str": "I0→N2–N7", "band_ids": ["I0", "N2", "N3", "N4", "N5", "N6", "N7"], "coupling": null, "access": null, "classical": "Yes", "quantum": "Enhanced (coherence collapse detection)", "mitre_techniques": ["T1498", "T1499"], "status": "DEMONSTRATED", "notes": "Overwhelm targeted neurons via continuous high-frequency stimulation through compromised electrodes. Prevents normal neural signaling. Analogous to radio jamming. Implanted BCIs with stimulation capability."},
+    {"id": "T2302", "attack": "Neuronal flooding", "category": "TA0040", "category_name": "Impact", "bands_str": "I0→N4–N7", "band_ids": ["I0", "N4", "N5", "N6", "N7"], "coupling": null, "access": null, "classical": "Yes", "quantum": "Enhanced (rate anomaly via QI)", "mitre_techniques": ["T1498", "T1499"], "status": "THEORETICAL", "notes": "Flood neural tissue with maximum stimulation across all available electrodes simultaneously. Unlike jamming (targeted), flooding is broad-area saturation. Can trigger seizures. Emergency shutoff required."},
+    {"id": "T2305", "attack": "Neural DoS (stimulation flood)", "category": "TA0040", "category_name": "Impact", "bands_str": "I0→N4–N7", "band_ids": ["I0", "N4", "N5", "N6", "N7"], "coupling": null, "access": null, "classical": "Yes", "quantum": "Enhanced (QI rate limiting)", "mitre_techniques": ["T1498"], "status": "DEMONSTRATED", "notes": "Overwhelm neural pathways with excessive stimulation or signal flooding causing temporary dysfunction or distress. Rate limiting at I0 and emergency shutdown are primary defenses."},
+    {"id": "T2506", "attack": "Mass BCI compromise (platform attack)", "category": "TA0040", "category_name": "Impact", "bands_str": "S2–S3", "band_ids": ["S2", "S3"], "coupling": null, "access": null, "classical": "Yes", "quantum": "Enhanced (decentralized key management via NSP)", "mitre_techniques": ["T1072", "T1498"], "status": "EMERGING", "notes": "Coordinated attack exploiting standardized BCI platforms affecting millions simultaneously. Yale Digital Ethics Center worst-case scenario. Monoculture risk: one vulnerability, all devices. Merges ONI-T024 (Mass Neural Manipulation)."},
+    {"id": "T2605", "attack": "BCI cognitive warfare", "category": "TA0040", "category_name": "Impact", "bands_str": "S3→N4–N7", "band_ids": ["S3", "N4", "N5", "N6", "N7"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (multi-band anomaly via QI)", "mitre_techniques": ["T1498", "T1565"], "status": "EMERGING", "notes": "State-level exploitation of BCI infrastructure for cognitive warfare: mass influence, decision degradation, combat effectiveness reduction. Combines multiple techniques (T2101-T2106, T2506). Military BCI programs (DARPA N3, BrainSTORMS) as targets."},
+    // -- TA0009: Collection --
+    {"id": "T2003", "attack": "Eavesdropping / signal interception", "category": "TA0009", "category_name": "Collection", "bands_str": "I0–S3", "band_ids": ["I0", "N1", "S1", "S2", "S3"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Yes (Heisenberg disturbance at I0)", "mitre_techniques": ["T1040"], "status": "CONFIRMED", "notes": "Passive interception of neural signals. At I0: quantum measurement disturbs state (detectable). At S1-S3: classical RF interception, most consumer BCIs transmit unencrypted. Merges ONI-T001 (Signal Profiling), ONI-T023 (Unencrypted Data Interception)."},
+    {"id": "T2004", "attack": "Man-in-the-middle", "category": "TA0009", "category_name": "Collection", "bands_str": "I0–S2", "band_ids": ["I0", "S1", "S2"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Yes (no-cloning + Bell test)", "mitre_techniques": ["T1557"], "status": "DEMONSTRATED", "notes": "Intercept and modify signals at I0 boundary or BCI telemetry. No-cloning theorem prevents perfect copy of quantum neural states. Bell test detects entanglement disruption."},
+    {"id": "T2504", "attack": "Harvest-now-decrypt-later", "category": "TA0009", "category_name": "Collection", "bands_str": "S3", "band_ids": ["S3"], "coupling": null, "access": null, "classical": "No", "quantum": "Prevented (PQC/QKD)", "mitre_techniques": ["T1557", "T1530"], "status": "CONFIRMED", "notes": "Record encrypted BCI traffic now, decrypt when quantum computers arrive (2030-2035). Neural data is permanently sensitive -- can't change your brain like a password. PQC (ML-KEM/Kyber) prevents. 10-20 year implant lifetime > quantum arrival."},
+    {"id": "T2601", "attack": "Neural data privacy breach", "category": "TA0009", "category_name": "Collection", "bands_str": "N1–S3", "band_ids": ["N1", "S1", "S2", "S3"], "coupling": null, "access": null, "classical": "Yes", "quantum": "Enhanced (cross-band encryption via NSP)", "mitre_techniques": ["T1005"], "status": "CONFIRMED", "notes": "Unauthorized access to recorded neural data across any band. Harvest raw EEG from consumer devices, decode intent/emotion. GDPR Article 9 (special category data). NSP end-to-end encryption from I0 to cloud."},
+    {"id": "T2602", "attack": "ERP harvesting", "category": "TA0009", "category_name": "Collection", "bands_str": "N6–N7", "band_ids": ["N6", "N7"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (ERP privacy filter via QI)", "mitre_techniques": ["T1119"], "status": "DEMONSTRATED", "notes": "Extract event-related potentials (P300, N170, N400) that reveal cognitive states, recognition, and decision-making processes. BCI apps can embed covert stimulus-response protocols."},
+    {"id": "T2603", "attack": "Cognitive state capture", "category": "TA0009", "category_name": "Collection", "bands_str": "N6–N7", "band_ids": ["N6", "N7"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (cognitive privacy filter)", "mitre_techniques": ["T1119", "T1005"], "status": "CONFIRMED", "notes": "Record patterns that reveal attention, emotion, fatigue, or other cognitive states without user awareness. Consumer BCI apps routinely over-collect. Attention-tracking in workplace BCIs."},
+    {"id": "T2604", "attack": "Memory extraction", "category": "TA0009", "category_name": "Collection", "bands_str": "N6–N7", "band_ids": ["N6", "N7"], "coupling": null, "access": null, "classical": "No", "quantum": "Enhanced (hippocampal signal encryption via NSP)", "mitre_techniques": ["T1005"], "status": "THEORETICAL", "notes": "Extract memory-related neural patterns revealing personal experiences, knowledge, or intentions. Targets hippocampal activity. High-density implants (Neuralink, Utah Array) approach memory-trace resolution."},
+    {"id": "T2606", "attack": "Neuro-surveillance", "category": "TA0009", "category_name": "Collection", "bands_str": "N6–N7→S3", "band_ids": ["N6", "N7", "S3"], "coupling": null, "access": null, "classical": "Yes", "quantum": "Enhanced (NSP end-to-end encryption)", "mitre_techniques": ["T1119", "T1557"], "status": "EMERGING", "notes": "Systematic collection of neural data from consumer BCI populations for surveillance purposes. Workplace attention monitoring, law enforcement lie detection, social credit via neural markers. Neurorights: mental privacy."},
+    // -- TA0050: Neural Manipulation --
+    {"id": "T2009", "attack": "RF false brainwave injection", "category": "TA0050", "category_name": "Neural Manipulation", "bands_str": "S1–S2→N4–N7", "band_ids": ["S1", "S2", "N4", "N5", "N6", "N7"], "coupling": "DIRECT", "access": "PUBLIC", "classical": "Partial", "quantum": "Enhanced (Dsf + coherence)", "mitre_techniques": ["T1659", "T1200"], "status": "EMERGING", "notes": "Inject RF signals calibrated to neural frequencies through BCI's own antenna or nearby transmitter. Synthetic brainwave patterns bypass analog front-end filters designed for biological signals."},
+    {"id": "T2304", "attack": "Neural selective forwarding", "category": "TA0050", "category_name": "Neural Manipulation", "bands_str": "I0–S1", "band_ids": ["I0", "S1"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (completeness check via QI)", "mitre_techniques": ["T1565.002"], "status": "THEORETICAL", "notes": "Compromised BCI firmware selectively drops or forwards neural signals based on content. Filter out specific cognitive states while passing others. Subtle censorship of neural output."},
+    {"id": "T2306", "attack": "Motor hijacking", "category": "TA0050", "category_name": "Neural Manipulation", "bands_str": "I0→N5–N7", "band_ids": ["I0", "N5", "N6", "N7"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (intent-command coherence via QI)", "mitre_techniques": ["T1565"], "status": "THEORETICAL", "notes": "Force involuntary motor actions by injecting false motor commands through compromised BCI motor interfaces. Intent verification compares commands against detected cognitive intent. Physical safety interlocks required."},
+    // -- TA0052: Directed Energy --
+    {"id": "T2101", "attack": "ELF neural entrainment", "category": "TA0052", "category_name": "Directed Energy", "bands_str": "S1→N4–N7", "band_ids": ["S1", "N4", "N5", "N6", "N7"], "coupling": "DIRECT", "access": "RESTRICTED", "classical": "Yes", "quantum": "Enhanced (Dsf anomaly detection)", "mitre_techniques": [], "status": "CONFIRMED", "notes": "3-76 Hz government-restricted. IS neural frequency. Penetrates globally. Direct gamma/alpha/theta cortical entrainment. US Navy operated at 76 Hz (Clam Lake) and 45 Hz (Republic). Russia, China maintain capability."},
+    {"id": "T2102", "attack": "Intermodulation (BCI signal weaponized)", "category": "TA0052", "category_name": "Directed Energy", "bands_str": "S2→N4–N6", "band_ids": ["S2", "N4", "N5", "N6"], "coupling": "INTERMODULATION", "access": "RESTRICTED", "classical": "Yes", "quantum": "Enhanced (coherence + Dsf)", "mitre_techniques": [], "status": "THEORETICAL", "notes": "UHF-Mil (225-400 MHz) + MICS (402 MHz) = neural-range beat frequency. BCI's own telemetry signal becomes part of the attack. 398 MHz mil + 402 MHz BCI = 4 Hz theta. Most dangerous coupling mechanism. QI CANNOT detect from signal data alone -- requires resonance shield."},
+    {"id": "T2103", "attack": "Pulsed microwave (Frey effect)", "category": "TA0052", "category_name": "Directed Energy", "bands_str": "S3→N2,N7", "band_ids": ["S3", "N2", "N7"], "coupling": "ENVELOPE", "access": "RESTRICTED", "classical": "Yes", "quantum": "Enhanced (temporal coherence)", "mitre_techniques": [], "status": "CONFIRMED", "notes": "S-band (2-4 GHz) pulsed microwave. Thermoelastic expansion causes cochlea to perceive as sound. Havana Syndrome model. PRF selects neural target: 40 Hz gamma, 10 Hz alpha, 4 Hz theta, 1 Hz delta."},
+    {"id": "T2104", "attack": "Temporal interference (deep targeting)", "category": "TA0052", "category_name": "Directed Energy", "bands_str": "S2→N4–N6", "band_ids": ["S2", "N4", "N5", "N6"], "coupling": "TEMPORAL_INTERFERENCE", "access": "LICENSED", "classical": "Yes", "quantum": "Enhanced (beat frequency detection)", "mitre_techniques": [], "status": "DEMONSTRATED", "notes": "Two kHz+ signals create neural-range beat frequency at tissue intersection. Can target deep brain structures non-invasively. Licensed frequencies -- lower barrier than restricted."},
+    {"id": "T2105", "attack": "Envelope modulation (stealth carrier)", "category": "TA0052", "category_name": "Directed Energy", "bands_str": "S1–S2→any N", "band_ids": ["S1", "S2", "N1", "N2", "N3", "N4", "N5", "N6", "N7"], "coupling": "ENVELOPE", "access": "PUBLIC", "classical": "Yes", "quantum": "Enhanced (demodulation detection)", "mitre_techniques": [], "status": "DEMONSTRATED", "notes": "Any carrier frequency modulated at neural frequency. Tissue demodulates the envelope. Stealth: carrier looks normal, attack is in the modulation. Lowest barrier to entry (PUBLIC access). tACS therapeutic principle weaponized."},
+    {"id": "T2106", "attack": "Directed energy (thermal I0 damage)", "category": "TA0052", "category_name": "Directed Energy", "bands_str": "S3→I0", "band_ids": ["S3", "I0"], "coupling": null, "access": "CLASSIFIED", "classical": "Yes", "quantum": "N/A (physical damage, not signal)", "mitre_techniques": [], "status": "CONFIRMED", "notes": "mm-wave/ADS (95 GHz) directed energy. Excites water molecules in top 0.4mm of skin. For surface implants: electrode heating, tissue damage at I0 boundary. Destroys interface integrity. Nation-state only."},
+    // -- TA0053: Adversarial ML --
+    {"id": "T2201", "attack": "Professor X backdoor (training-time)", "category": "TA0053", "category_name": "Adversarial ML", "bands_str": "S2", "band_ids": ["S2"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (QI decoder integrity check)", "mitre_techniques": ["T1195.002"], "status": "DEMONSTRATED", "notes": "Backdoor injected during BCI decoder training. Trigger pattern in EEG input activates attacker-chosen output. Model performs normally on clean inputs. Demonstrated on P300, MI, SSVEP paradigms."},
+    {"id": "T2202", "attack": "Transfer learning backdoor", "category": "TA0053", "category_name": "Adversarial ML", "bands_str": "S2", "band_ids": ["S2"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (QI decoder integrity check)", "mitre_techniques": ["T1195.002"], "status": "DEMONSTRATED", "notes": "Backdoor persists through transfer learning from pre-trained BCI models. Attacker poisons upstream model, downstream users inherit the backdoor. Common in EEG foundation model paradigm."},
+    {"id": "T2203", "attack": "Adversarial filter attack", "category": "TA0053", "category_name": "Adversarial ML", "bands_str": "S1–S2", "band_ids": ["S1", "S2"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (signal integrity via Dsf)", "mitre_techniques": ["T1565.001"], "status": "DEMONSTRATED", "notes": "Craft minimal perturbations that pass through BCI analog/digital filters but flip decoder output. Exploits gap between what filters remove and what classifiers rely on."},
+    {"id": "T2204", "attack": "Universal adversarial perturbation (UAP)", "category": "TA0053", "category_name": "Adversarial ML", "bands_str": "S1–S2", "band_ids": ["S1", "S2"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (coherence detects non-biological patterns)", "mitre_techniques": ["T1565.001"], "status": "DEMONSTRATED", "notes": "Single perturbation pattern that fools BCI decoder regardless of input. Works across subjects and sessions. Pre-computed offline, applied in real-time. Lower sophistication than targeted attacks."},
+    {"id": "T2205", "attack": "Membership inference on neural data", "category": "TA0053", "category_name": "Adversarial ML", "bands_str": "S2–S3", "band_ids": ["S2", "S3"], "coupling": null, "access": null, "classical": "Yes", "quantum": "Enhanced (differential privacy via QI noise)", "mitre_techniques": ["T1005", "T1530"], "status": "EMERGING", "notes": "Determine if a specific person's neural data was used to train a BCI model. Reveals participation in clinical trials, neurological conditions. GDPR Article 9 implications."},
+    {"id": "T2206", "attack": "Federated gradient leakage", "category": "TA0053", "category_name": "Adversarial ML", "bands_str": "S2–S3", "band_ids": ["S2", "S3"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (gradient encryption via PQC)", "mitre_techniques": ["T1530"], "status": "EMERGING", "notes": "Reconstruct individual neural data from shared gradients in federated BCI training. Multi-site clinical trials share model updates. Gradient inversion recovers raw EEG with high fidelity."},
+    {"id": "T2207", "attack": "Neurofeedback falsification", "category": "TA0053", "category_name": "Adversarial ML", "bands_str": "S2→N7", "band_ids": ["S2", "N7"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (closed-loop coherence monitoring)", "mitre_techniques": ["T1565.002"], "status": "EMERGING", "notes": "Manipulate neurofeedback display or stimulation parameters in closed-loop BCIs. User adapts brain state to false feedback, causing maladaptive neuroplasticity. Therapeutic BCIs (ADHD, depression) most vulnerable."},
+    {"id": "T2208", "attack": "Closed-loop perturbation cascade", "category": "TA0053", "category_name": "Adversarial ML", "bands_str": "S2→I0→N5–N7", "band_ids": ["S2", "I0", "N5", "N6", "N7"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (QI detects cascade divergence)", "mitre_techniques": ["T1565.002"], "status": "EMERGING", "notes": "Small adversarial perturbation injected into closed-loop BCI amplifies through feedback cycle. Each loop iteration increases deviation until system destabilizes. NeuroPace RNS, DBS with LFP sensing vulnerable."},
+    // -- TA0043: Reconnaissance --
+    {"id": "T2303", "attack": "Neuronal scanning", "category": "TA0043", "category_name": "Reconnaissance", "bands_str": "I0→N4–N7", "band_ids": ["I0", "N4", "N5", "N6", "N7"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (Heisenberg disturbance reveals probing)", "mitre_techniques": ["T1595"], "status": "THEORETICAL", "notes": "Systematically probe neural tissue via low-amplitude stimulation pulses to map functional connectivity, identify responsive regions, and characterize individual neural signatures. Prerequisite for targeted attacks."},
+    {"id": "T2501", "attack": "BLE/RF side-channel", "category": "TA0043", "category_name": "Reconnaissance", "bands_str": "S1–S2", "band_ids": ["S1", "S2"], "coupling": null, "access": "PUBLIC", "classical": "Yes", "quantum": "Enhanced (signal correlation)", "mitre_techniques": ["T1040"], "status": "CONFIRMED", "notes": "Extract neural data from BLE/RF emissions via timing, power, or EM side-channels. All wireless BCIs vulnerable. Consumer devices (Muse, EMOTIV) transmit unencrypted. Merges ONI-T002 (Side-Channel Analysis)."},
+    {"id": "T2701", "attack": "Network mapping (BCI topology)", "category": "TA0043", "category_name": "Reconnaissance", "bands_str": "S2–S3", "band_ids": ["S2", "S3"], "coupling": null, "access": null, "classical": "Yes", "quantum": "Enhanced (quantum-aware network segmentation)", "mitre_techniques": ["T1046"], "status": "CONFIRMED", "notes": "Discover topology of BCI networks: communication pathways between electrodes, processing units, and external interfaces. Prerequisite for targeted attacks. Deploy honeypot nodes and dynamic addressing."},
+    // -- TA0051: Cognitive Exploitation --
+    {"id": "T2401", "attack": "Identity spoofing (neural biometric)", "category": "TA0051", "category_name": "Cognitive Exploitation", "bands_str": "N3–N7", "band_ids": ["N3", "N7", "N6"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Yes (quantum biometric unforgeable if proven)", "mitre_techniques": ["T1078"], "status": "EMERGING", "notes": "Replicate user's neural signature to bypass BCI authentication. Classical biometrics (ERP templates, brainprint) are partially spoofable. If quantum neural signatures exist, no-cloning makes them physically unclonable."},
+    {"id": "T2402", "attack": "Identity erosion (long-term personality drift)", "category": "TA0051", "category_name": "Cognitive Exploitation", "bands_str": "N6–N7", "band_ids": ["N6", "N7"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (longitudinal QI baseline tracking)", "mitre_techniques": [], "status": "THEORETICAL", "notes": "Long-term subtle manipulation of cognitive patterns leading to gradual personality changes or identity confusion. Targets L14 (Identity/Cognitive Sovereignty). Detectable via longitudinal QI baseline comparison. Neurorights: psychological continuity."},
+    {"id": "T2403", "attack": "Working memory poisoning", "category": "TA0051", "category_name": "Cognitive Exploitation", "bands_str": "N6–N7", "band_ids": ["N6", "N7"], "coupling": null, "access": null, "classical": "No", "quantum": "Enhanced (hippocampal coherence anomaly)", "mitre_techniques": [], "status": "THEORETICAL", "notes": "Inject false information into working memory circuits via targeted hippocampal/PFC stimulation. User perceives false memories or corrupted working memory contents as genuine. Closed-loop memory BCIs most vulnerable."},
+    {"id": "T2404", "attack": "P300 interrogation", "category": "TA0051", "category_name": "Cognitive Exploitation", "bands_str": "N7", "band_ids": ["N7"], "coupling": null, "access": null, "classical": "Yes", "quantum": "Enhanced (ERP privacy filter via QI)", "mitre_techniques": ["T1119"], "status": "DEMONSTRATED", "notes": "Present stimuli designed to elicit P300 ERP responses revealing private knowledge (PINs, faces, locations). BCI app stores could embed interrogation stimuli in games. Demonstrated on consumer EEG (EMOTIV, NeuroSky)."},
+    {"id": "T2405", "attack": "Thought decoding (covert speech)", "category": "TA0051", "category_name": "Cognitive Exploitation", "bands_str": "N7", "band_ids": ["N7"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (neural data encryption via NSP)", "mitre_techniques": ["T1119", "T1005"], "status": "EMERGING", "notes": "Decode inner speech from neural signals without user consent. High-density arrays (Neuralink, Utah) approach word-level accuracy. Consumer EEG at phoneme level. Merges with 'Covert Speech Decoding' from 2024-2026 research."},
+    {"id": "T2406", "attack": "Agency manipulation", "category": "TA0051", "category_name": "Cognitive Exploitation", "bands_str": "N5–N7", "band_ids": ["N5", "N6", "N7"], "coupling": null, "access": null, "classical": "No", "quantum": "Enhanced (agency coherence via QI)", "mitre_techniques": [], "status": "THEORETICAL", "notes": "Manipulate sense of agency -- user believes externally triggered actions are self-initiated, or vice versa. Targets basal ganglia (motor selection) and PFC (executive control). Neurorights: cognitive liberty."},
+    {"id": "T2407", "attack": "Brainprint theft", "category": "TA0051", "category_name": "Cognitive Exploitation", "bands_str": "N6–N7", "band_ids": ["N6", "N7"], "coupling": null, "access": null, "classical": "Yes", "quantum": "Enhanced (quantum biometric if proven)", "mitre_techniques": ["T1003"], "status": "EMERGING", "notes": "Extract the user's unique brainprint (ERP template, spectral fingerprint) for later replay/spoofing. Unlike passwords, neural biometrics cannot be changed. Permanent compromise if extracted."},
+    {"id": "T2408", "attack": "Self-model corruption", "category": "TA0051", "category_name": "Cognitive Exploitation", "bands_str": "N6–N7", "band_ids": ["N6", "N7"], "coupling": null, "access": null, "classical": "No", "quantum": "Enhanced (identity baseline via QI)", "mitre_techniques": [], "status": "THEORETICAL", "notes": "Corrupt the neural representation of self (body ownership, self-other boundary, autobiographical memory). Targets insula, TPJ, mPFC. Could cause depersonalization, dissociation, or false self-recognition. Neurorights: mental integrity."},
+    {"id": "T2409", "attack": "Neurophishing", "category": "TA0051", "category_name": "Cognitive Exploitation", "bands_str": "S3→N7", "band_ids": ["S3", "N7"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (stimulus-response coherence via QI)", "mitre_techniques": ["T1566"], "status": "EMERGING", "notes": "Present carefully designed visual/auditory/haptic stimuli through BCI applications to elicit specific neural responses (P300, SSVEP, emotional) that reveal private information or prime the brain for subsequent attack. BCI app store is the attack surface."},
+    {"id": "T2410", "attack": "Cognitive biometric inference", "category": "TA0051", "category_name": "Cognitive Exploitation", "bands_str": "N6–N7→S3", "band_ids": ["N6", "N7", "S3"], "coupling": null, "access": null, "classical": "Yes", "quantum": "Enhanced (data minimization via QI privacy filter)", "mitre_techniques": ["T1119", "T1005"], "status": "DEMONSTRATED", "notes": "Infer sensitive personal attributes (health conditions, sexual orientation, political beliefs, cognitive decline) from BCI usage metadata and neural signal statistics without decoding content. Side-channel on cognition."},
+    // -- TA0001: Initial Access --
+    {"id": "T2502", "attack": "Supply chain compromise (firmware backdoor)", "category": "TA0001", "category_name": "Initial Access", "bands_str": "S2–S3", "band_ids": ["S2", "S3"], "coupling": null, "access": null, "classical": "Yes", "quantum": "Enhanced (firmware attestation)", "mitre_techniques": ["T1195", "T1195.001", "T1195.002"], "status": "CONFIRMED", "notes": "Tamper with BCI hardware/firmware during manufacturing or distribution. Firmware rootkits persist across updates. Merges ONI-T006 (Firmware Backdoor). QI-enhanced firmware attestation detects unauthorized modifications."},
+    {"id": "T2503", "attack": "Cloud infrastructure attack", "category": "TA0001", "category_name": "Initial Access", "bands_str": "S3", "band_ids": ["S3"], "coupling": null, "access": "PUBLIC", "classical": "Yes", "quantum": "Enhanced (QKD/PQC for data-in-transit)", "mitre_techniques": ["T1190"], "status": "CONFIRMED", "notes": "Compromise cloud services processing neural data (EMOTIV Cortex API, Neuralink cloud). Data exfiltration, model poisoning, API manipulation. PQC/QKD protects data in transit."},
+    {"id": "T2507", "attack": "Electrode compromise (physical tamper)", "category": "TA0001", "category_name": "Initial Access", "bands_str": "I0", "band_ids": ["I0"], "coupling": null, "access": null, "classical": "Yes", "quantum": "Enhanced (impedance + coherence anomaly at I0)", "mitre_techniques": ["T1200"], "status": "DEMONSTRATED", "notes": "Physical manipulation or replacement of neural electrodes to inject malicious signals or intercept legitimate neural data. Impedance monitoring detects electrode tampering. Tamper-evident seals for implants."},
+    {"id": "T2508", "attack": "Wireless authentication bypass", "category": "TA0001", "category_name": "Initial Access", "bands_str": "S2–S3", "band_ids": ["S2", "S3"], "coupling": null, "access": "PUBLIC", "classical": "Yes", "quantum": "Enhanced (quantum-resistant auth via NSP)", "mitre_techniques": ["T1078"], "status": "CONFIRMED", "notes": "Exploit weak or absent authentication on BCI wireless interfaces. Many consumer and older clinical devices assume connection implies authorization. No pairing, no encryption, no auth."},
+    // -- TA0003: Persistence --
+    {"id": "T2505", "attack": "OTA firmware weaponization", "category": "TA0003", "category_name": "Persistence", "bands_str": "S2–S3", "band_ids": ["S2", "S3"], "coupling": null, "access": null, "classical": "Yes", "quantum": "Enhanced (signed update + attestation)", "mitre_techniques": ["T1195.002"], "status": "EMERGING", "notes": "Compromise OTA firmware update mechanism to push malicious updates to implanted BCIs. Update channel becomes persistent backdoor. Secure boot + cryptographic attestation + rollback protection required."},
+    {"id": "T2801", "attack": "Calibration poisoning", "category": "TA0003", "category_name": "Persistence", "bands_str": "S1–S2", "band_ids": ["S1", "S2"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (calibration integrity via QI baseline)", "mitre_techniques": ["T1565.001", "T1546"], "status": "DEMONSTRATED", "notes": "Subtly corrupt BCI calibration data to maintain influence over signal interpretation across device resets. Cryptographically signed calibration data prevents. Recalibration audits detect drift."},
+    {"id": "T2802", "attack": "Pattern lock (learned pathway persistence)", "category": "TA0003", "category_name": "Persistence", "bands_str": "S1–S2→N7", "band_ids": ["S1", "S2", "N7"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (pattern integrity via QI)", "mitre_techniques": ["T1546"], "status": "THEORETICAL", "notes": "Embed recurring attack patterns that survive system resets by exploiting learned neural pathways or stored calibration data. Leverages neuroplasticity -- brain adapts to malicious patterns, making them harder to remove."},
+    {"id": "T2803", "attack": "Memory implant (cross-session persistence)", "category": "TA0003", "category_name": "Persistence", "bands_str": "N6–N7", "band_ids": ["N6", "N7"], "coupling": null, "access": null, "classical": "No", "quantum": "Enhanced (cognitive state verification via QI)", "mitre_techniques": ["T1546"], "status": "THEORETICAL", "notes": "Persistent modification of neural pathway configurations or cognitive associations that survive across BCI sessions. Targets long-term potentiation mechanisms. Session isolation prevents cross-session contamination."},
+    // -- TA0005: Defense Evasion --
+    {"id": "T2804", "attack": "Coherence mimicry", "category": "TA0005", "category_name": "Defense Evasion", "bands_str": "I0–S1", "band_ids": ["I0", "S1"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (multi-factor beyond coherence)", "mitre_techniques": ["T1036"], "status": "THEORETICAL", "notes": "Craft malicious signals that maintain legitimate coherence scores (Cs) to bypass QI metric. Directly attacks QIF's detection mechanism. Defense: multi-factor signal validation, behavioral analysis beyond coherence, ensemble detection."},
+    {"id": "T2805", "attack": "Gradual drift (slow parameter shift)", "category": "TA0005", "category_name": "Defense Evasion", "bands_str": "S1→N7", "band_ids": ["S1", "N7"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (long-term baseline tracking via QI)", "mitre_techniques": ["T1027"], "status": "THEORETICAL", "notes": "Slowly modify neural parameters below detection thresholds to accumulate significant changes over time. Exploit adaptive baseline algorithms. Cumulative change detection and trend analysis are primary defenses."},
+    {"id": "T2806", "attack": "Noise injection (detection masking)", "category": "TA0005", "category_name": "Defense Evasion", "bands_str": "I0–S1", "band_ids": ["I0", "S1"], "coupling": null, "access": null, "classical": "Partial", "quantum": "Enhanced (noise-resilient QI + multi-channel cross-validation)", "mitre_techniques": ["T1027"], "status": "THEORETICAL", "notes": "Add carefully calibrated noise to mask malicious signal components from detection algorithms. Targets QI's sigma-phi (phase) and sigma-gamma (amplitude) terms. Multi-channel cross-validation detects inconsistent noise patterns."},
   ],
 
   bci_device_classes: {
@@ -1031,7 +1135,11 @@ class BandDetailView {
           <h3>Attack Vectors (${attacks.length})</h3>
           ${attacks.map(a => `
             <div class="detail-attack-row">
-              <div class="detail-attack-name">${a.attack}</div>
+              <div class="detail-attack-name">
+                <span class="detail-attack-id">${a.id}</span>${a.attack}
+                <span class="attack-status ${(a.status || '').toLowerCase()}">${a.status || ''}</span>
+                ${a.category_name ? `<span class="detail-attack-category">${a.category_name}</span>` : ''}
+              </div>
               <div class="detail-attack-meta">
                 Bands: ${a.bands_str}
                 ${a.coupling ? ' \u00b7 Coupling: <strong>' + a.coupling + '</strong>' : ''}
@@ -1041,6 +1149,9 @@ class BandDetailView {
                 Classical detection: <span style="color:${a.classical === 'Yes' ? 'var(--green)' : a.classical === 'Partial' ? 'var(--orange)' : 'var(--red)'}">${a.classical || 'N/A'}</span>
                 \u00b7 Quantum detection: <span style="color:var(--purple)">${a.quantum || 'N/A'}</span>
               </div>
+              ${a.mitre_techniques && a.mitre_techniques.length > 0
+                ? `<div class="detail-mitre-ref">MITRE: ${a.mitre_techniques.map(t => '<a href="https://attack.mitre.org/techniques/' + t + '/" target="_blank">' + t + '</a>').join(', ')}</div>`
+                : ''}
               ${a.notes ? `<div class="detail-attack-meta" style="color:var(--text);margin-top:0.2rem;">${a.notes}</div>` : ''}
             </div>
           `).join('')}
@@ -1087,29 +1198,46 @@ class AttackSimulator {
   render() {
     this.listEl = document.createElement('div');
     this.listEl.className = 'attack-list';
-    this.listEl.innerHTML = `<h3>Attack Simulator</h3>`;
+    this.listEl.innerHTML = `<h3>Attack Simulator <span style="font-size:0.6rem;color:var(--text-dim);font-weight:400;">(${this.data.threat_model.length} techniques)</span></h3>`;
 
+    // Group attacks by category
+    const grouped = {};
     for (const atk of this.data.threat_model) {
-      const item = document.createElement('div');
-      item.className = 'attack-item';
-      item.innerHTML = `
-        <div class="attack-name">${atk.attack}</div>
-        <div class="attack-bands">${atk.bands_str}</div>
-        ${atk.coupling ? `<div class="attack-coupling">${atk.coupling}${atk.access ? ' \u00b7 ' + atk.access : ''}</div>` : ''}
-      `;
-      item.addEventListener('click', () => {
-        if (this.selectedAttack === atk) {
-          this.selectedAttack = null;
-          item.classList.remove('selected');
-          this.onAttackSelect?.(null);
-        } else {
-          this.listEl.querySelectorAll('.attack-item').forEach(i => i.classList.remove('selected'));
-          this.selectedAttack = atk;
-          item.classList.add('selected');
-          this.onAttackSelect?.(atk);
-        }
-      });
-      this.listEl.appendChild(item);
+      const cat = atk.category_name || 'Uncategorized';
+      if (!grouped[cat]) grouped[cat] = [];
+      grouped[cat].push(atk);
+    }
+
+    for (const [category, attacks] of Object.entries(grouped)) {
+      const header = document.createElement('div');
+      header.className = 'attack-category-header';
+      header.textContent = `${category} (${attacks.length})`;
+      this.listEl.appendChild(header);
+
+      for (const atk of attacks) {
+        const item = document.createElement('div');
+        item.className = 'attack-item';
+        item.innerHTML = `
+          <div class="attack-name"><span class="attack-id">${atk.id}</span> ${atk.attack}
+            <span class="attack-status ${(atk.status || '').toLowerCase()}">${atk.status || ''}</span>
+          </div>
+          <div class="attack-bands">${atk.bands_str}</div>
+          ${atk.coupling ? `<div class="attack-coupling">${atk.coupling}${atk.access ? ' \u00b7 ' + atk.access : ''}</div>` : ''}
+        `;
+        item.addEventListener('click', () => {
+          if (this.selectedAttack === atk) {
+            this.selectedAttack = null;
+            item.classList.remove('selected');
+            this.onAttackSelect?.(null);
+          } else {
+            this.listEl.querySelectorAll('.attack-item').forEach(i => i.classList.remove('selected'));
+            this.selectedAttack = atk;
+            item.classList.add('selected');
+            this.onAttackSelect?.(atk);
+          }
+        });
+        this.listEl.appendChild(item);
+      }
     }
 
     this.el.appendChild(this.listEl);
